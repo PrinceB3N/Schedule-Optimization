@@ -1,0 +1,2 @@
+Martin Zhao 3rd year computer science. My hoppies are basketball, league of legends and reading. 
+So basically my idea for the schedule application is that for instance, when the app got the user's schedule,(to say a class schedule), it will automatically fit into a weekly schedule for the user. And beyonds that, the app will send out notification for important events upcoming. And based on the user's schedule, the app will provides some health suggestions. Such as arranging time for exercise or suggest the time for sleep, etc. 

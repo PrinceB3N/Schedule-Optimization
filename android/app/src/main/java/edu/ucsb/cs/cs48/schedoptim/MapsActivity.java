@@ -3,6 +3,7 @@ package edu.ucsb.cs.cs48.schedoptim;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,6 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -23,6 +25,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        final LatLng ucsb = new LatLng(34.412936, -119.846063);
+
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mMap.addMarker(new MarkerOptions().position(ucsb).title("Hello World!"));
+//
+//            }
+//        });
     }
 
 
@@ -41,7 +54,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        LatLng ucsb = new LatLng(34.412936, -119.846063);
+
+        // Add a marker in UCSB and move the camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
+        mMap.addMarker(new MarkerOptions().position(ucsb).title("Hello World!"));
+
     }
 }

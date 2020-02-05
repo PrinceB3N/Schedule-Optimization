@@ -2,38 +2,39 @@ package edu.ucsb.cs.cs48.schedoptim;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
-//public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-public class MapsActivity extends FragmentActivity{
+import java.util.ArrayList;
+import java.util.List;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
-
+    private JSONUtils util;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_maps);
         setContentView(R.layout.hello_world);
-        setText("Hello World");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        */
-
+        //Initialize Utilities class
+        util=new JSONUtils();
     }
-    public void setText(String text){
-        TextView textView = (TextView) findViewById(R.id.text_hello_world);
-        textView.setText(text);
-    }
-
 
     /**
      * Manipulates the map once available.
@@ -44,19 +45,108 @@ public class MapsActivity extends FragmentActivity{
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    /*
+
+    private static final LatLng BOUND1 = new LatLng(44.5017123, -78.5672184);
+    private static final LatLng BOUND2 = new LatLng(43.6532565,-79.38303979999999);
+
+
+
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap){
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker in montreal and toronto, and move the camera
+        //TODO: implement dynamic marker placement from JSON file
+        LatLng montreal = new LatLng(45.5017123, -73.5672184);
+        LatLng toronto = new LatLng(43.6532565,-79.38303979999999);
+        mMap.addMarker(new MarkerOptions().position(montreal).title("Marker in Montreal"));
+        mMap.addMarker(new MarkerOptions().position(toronto).title("Marker in Toronto"));
+        //Enter two LatLng bounds and padding to move the camera there
+        moveCameraToWantedArea(BOUND1,BOUND2,16);                            //<--Test camera by changing bounds
+
+        //Storing locations to be passed into drawPolyLines
+        //USE THIS TO TEST LOCATIONS
+        //FOLLOW BELOW FORMAT
+        List<String> locations = new ArrayList<>();
+        locations.add("Ontario+Science+Centre+Don+Mills+Road+North+York+ON+Canada");        //<--Test routes by adding locations
+        locations.add("Toronto+ON+Canada");
+
+        //Set travel mode
+        String travel_mode = "bicycling";                                                   //<--Test travel mode by changing this
+
+        //Get polylines from thread
+        drawAllPolyLinesThread thread = new drawAllPolyLinesThread(this,locations,travel_mode);
+        thread.start();
+        try {
+            thread.join();
+        }catch(Exception e){
+            Log.e(MapsActivity.class.getName(),"",e);
+        }
+        //Finally draw routes on Map
+        thread.drawPolyLines();
     }
-    */
 
 
+    /**
+     * Method to move camera to wanted area.
+     */
+    private void moveCameraToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+        final LatLng BOUND1 = bound1;
+        final LatLng BOUND2 = bound2;
+        final int BOUNDS_PADDING = bound_padding;
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                // Set up the bounds coordinates for the area we want the user's viewpoint to be.
+                LatLngBounds bounds = new LatLngBounds.Builder()
+                        .include(BOUND1)
+                        .include(BOUND2)
+                        .build();
+                // Move the camera now.
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, BOUNDS_PADDING));//0=BOUNDS_PADDING
+            }
+        });
 
+    }
+    //Add all location markers
+    private void placeMakers(List<LatLng> list){
+        for(LatLng x:list) {
+            mMap.addMarker((new MarkerOptions().position(x)));
+        }
+    }
+    /**
+     * Method to draw all poly lines. This will manually draw polylines one by one on the map by calling
+     * addPolyline(PolylineOptions) on a map instance. The parameter passed in is a new PolylineOptions
+     * object which can be configured with details such as line color, line width, clickability, and
+     * a list of coordinates values.
+     */
+    private class drawAllPolyLinesThread extends Thread{
+        Context context;
+        List<String> locations;
+        String travel_mode;
+        List<LatLng> poly;
+        public drawAllPolyLinesThread(Context context,List<String> locations, String travel_mode){
+            this.context=context;
+            this.locations=locations;
+            this.travel_mode=travel_mode;
+        }
+        @Override
+        public void run(){
+            drawAllPolyLines(context,locations,travel_mode);
+        }
+        private void drawAllPolyLines(Context context,List<String> locations, String travel_mode) {
+            poly = util.getRouteFromNewLocations(context,locations,"bicycling");
+
+        }
+        public void drawPolyLines(){
+            mMap.addPolyline(new PolylineOptions()
+                    //.color(getResources().getColor(R.color.colorPolyLineBlue)) // Line color
+                    .color(0xff000000)
+                    //.width(POLYLINE_WIDTH) // Line width.
+                    .width(12)
+                    .clickable(false)// Able to click or not.
+                    .addAll(util.getStoredRoute(context)));
+        }
+    }
 
 }

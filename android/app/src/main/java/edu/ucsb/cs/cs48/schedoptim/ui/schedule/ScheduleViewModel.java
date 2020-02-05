@@ -16,4 +16,5 @@ public class ScheduleViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+    public void setmText(String s) {mText.setValue(s);}
 }

@@ -1,4 +1,9 @@
-Attendance: Maynic(Leader), Maria, Ben(scribe), Martin, Samuel
+Mentor: Connor Daly
+Meeting time: Lec09, 2/5/2020
+Meeting type: Scrum
+Leader: Maynic
+Scribe: Benjamin
+Attendance: Maynic, Maria, Benjamin, Martin, Samuel
 
 Maria: UI, found way to swap buttons on UI. 
   Roadblock: crashes when duplicate buttons are created.

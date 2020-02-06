@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.File;
@@ -39,6 +41,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+    }
+
 
         //store program's internal read/write storage directory path
         file_dir = this.getFilesDir().toString();
@@ -69,6 +74,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap){
         mMap = googleMap;
+
+
+        LatLng ucsb = new LatLng(34.412936, -119.846063);
+
+        // Add a marker in UCSB and move the camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
 
         // Add a marker in montreal and toronto, and move the camera
         //TODO: implement dynamic marker placement from JSON file

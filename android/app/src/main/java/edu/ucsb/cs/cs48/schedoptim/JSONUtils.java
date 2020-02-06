@@ -1,9 +1,12 @@
 package edu.ucsb.cs.cs48.schedoptim;
 
 import android.content.Context;
+import android.util.JsonWriter;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import com.google.maps.android.PolyUtil;
 
 import org.json.JSONArray;
@@ -11,8 +14,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,26 +28,23 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.google.gson.Gson;
 
 public class JSONUtils {
     private static String logname= MapsActivity.class.getName();
     //JSON file path which stores json from google directions https request
-    private String jsonfile_path = "locations.json";
-    public JSONUtils(){
-
-    }
+    private final static String jsonfile_path = "/locations.json";
     /**
      * This gives the route from supposedly new locations. Also, updates locations.json file.
      * DON'T use if locations have not been updated, use "getRouteFromLocations()" instead.
      */
-    public List<LatLng> getRouteFromNewLocations(Context context, List<String> locations, String travel_mode){
+    public static List<LatLng> getRouteFromNewLocations(String file_dir, List<String> locations, String travel_mode){
         List<LatLng> latLngList = new ArrayList<>();
         try {
             //Https request to google directions API, which stores JSON as a JSONObject
             JSONObject jsonobject = getJSONFrom(getStreamFromUrl(locations,travel_mode));
             //Also updates stored json file
-            saveToJSONFile(jsonobject, context);
+            saveToJSONFile(jsonobject, file_dir);
             //grabs encoded route from the json object
             String encoded_route = getKeywordFromJson(jsonobject);
             //adds all the decoded points to the list
@@ -56,13 +58,10 @@ public class JSONUtils {
         }
         return null;
     }
-    public List<LatLng> getStoredRoute(Context context){
+    public static List<LatLng> getStoredRoute(String file_dir){
         List<LatLng> latLngList = new ArrayList<>();
         try {
-            //InputStream is = new FileInputStream (new File(jsonfile_path));
-            //InputStream is = context.openFileInput(jsonfile_path);
-            //InputStream is = new FileInputStream(new File(context.getFilesDir(),jsonfile_path));
-            File file = new File(context.getFilesDir()+"/"+jsonfile_path);
+            File file = new File(file_dir+jsonfile_path);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -98,8 +97,8 @@ public class JSONUtils {
     /**
      * Takes a JSONObject and stores it in jsonfile's path
      */
-    private void saveToJSONFile(JSONObject j, Context context) throws IOException, JSONException{
-        File file = new File(context.getFilesDir()+"/"+jsonfile_path);
+    private static void saveToJSONFile(JSONObject j, String file_dir) throws IOException, JSONException{
+        File file = new File(file_dir+jsonfile_path);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -108,19 +107,19 @@ public class JSONUtils {
             filewriter.close();
     }
     //Helper function: gets InputStream from https request JSON output
-    private InputStream getStreamFromUrl(List<String> locations,String mode) throws MalformedURLException, IOException {
+    private static InputStream getStreamFromUrl(List<String> locations,String mode) throws MalformedURLException, IOException {
         return new URL(new JSONUtils().placesToUrl(locations, mode)).openStream();
     }
     /**
      * Gets JSON object from inputstream
      */
-    private JSONObject getJSONFrom(InputStream is) throws IOException, JSONException {
+    private static JSONObject getJSONFrom(InputStream is) throws IOException, JSONException {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);  //reader outpurs full json text
             return new JSONObject(jsonText);
     }
     //Helper function for file reading
-    private String readAll(Reader rd) throws IOException {
+    private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
         while ((cp = rd.read()) != -1) {
@@ -133,7 +132,7 @@ public class JSONUtils {
      *      then formats it into https request string
      *  Format:   json?origin=____&destination=_____&waypoints=4 ______|___|____|___&key=______
      */
-    private String placesToUrl(List<String> locations, String travel_mode){
+    private static String placesToUrl(List<String> locations, String travel_mode){
         if(locations.size()<2 || travel_mode==null)
             return "";
         StringBuilder sb = new StringBuilder();
@@ -152,5 +151,47 @@ public class JSONUtils {
             sb.append("|").append(locations.get(i));
         }
         return sb.append(end_url).toString();
+    }
+    public static Object getObjectFromJSON(Class c, String file_dir,String file_path){
+        Gson gson = new Gson();
+        try {
+            File file = new File(file_dir+file_path);
+            FileReader rd = new FileReader(file);
+            StringBuilder sb = new StringBuilder();
+            int cp;
+            while ((cp = rd.read()) != -1) {
+                sb.append((char) cp);
+            }
+            Log.d(logname,"No String?:"+sb.toString());
+            return gson.fromJson(new FileReader(file), c);
+        }
+        catch(Exception e){
+            Log.e(logname, "Can't get object from JSON:",e);
+        }
+        return null;
+    }
+    public static void storeObjectAsJSON(Schedule s, String file_dir, String file_path){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        File file = new File(file_dir+file_path);
+        try{
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter filewriter = new FileWriter(file);
+            filewriter.write(gson.toJson(s));
+            filewriter.flush();
+            filewriter.close();
+            Log.d(logname,gson.toJson(s));
+        }catch(Exception e){
+            Log.e(logname,"",e);
+        }
+    }
+    public static String objToJSONString(Schedule s){
+        try{
+            return new Gson().toJson(s);
+        }catch(Exception e){
+            Log.e(logname,"",e);
+        }
+        return "";
     }
 }

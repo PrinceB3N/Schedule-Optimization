@@ -6,15 +6,26 @@ import androidx.lifecycle.ViewModel;
 
 public class ScheduleViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String> allTasks;
+    private MutableLiveData<String> taskId;
+    private MutableLiveData<String> taskTitle;
 
     public ScheduleViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is schedule fragment");
+        allTasks = new MutableLiveData<>();
+        taskId = new MutableLiveData<>();
+        taskTitle = new MutableLiveData<>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getAllTasks() {
+        return allTasks;
     }
-    public void setmText(String s) {mText.setValue(s);}
+    public void setAllTasks(String s) { allTasks.setValue(s); }
+    public LiveData<String> getTaskId() {
+        return taskId;
+    }
+    public void setTaskId(String s) { taskId.setValue(s); }
+    public LiveData<String> getTaskTitle() {
+        return taskTitle;
+    }
+    public void setTaskTitle(String s) { taskTitle.setValue(s); }
 }

@@ -3,8 +3,11 @@ package edu.ucsb.cs.cs48.schedoptim;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,27 +18,39 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getRouteFromNewLocations;
+import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getStoredRoute;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
-    private JSONUtils util;
+    private String file_dir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hello_world);
+        //Sets xml layout view to be used first
+        setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //Initialize Utilities class
-        util=new JSONUtils();
-    }
 
+        //store program's internal read/write storage directory path
+        file_dir = this.getFilesDir().toString();
+
+        Button b = (Button) findViewById(R.id.button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRequestAndDrawRoutes();
+            }
+        });
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -67,6 +82,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Storing locations to be passed into drawPolyLines
         //USE THIS TO TEST LOCATIONS
         //FOLLOW BELOW FORMAT
+
+        //TEST SCHEDULE
+        new Schedule().testJSONToGSON(this.getFilesDir().toString(), "/test.json");
+    }
+    public void onClickRequestAndDrawRoutes(){
         List<String> locations = new ArrayList<>();
         locations.add("Ontario+Science+Centre+Don+Mills+Road+North+York+ON+Canada");        //<--Test routes by adding locations
         locations.add("Toronto+ON+Canada");
@@ -75,7 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String travel_mode = "bicycling";                                                   //<--Test travel mode by changing this
 
         //Get polylines from thread
-        drawAllPolyLinesThread thread = new drawAllPolyLinesThread(this,locations,travel_mode);
+        drawAllPolyLinesThread thread = new drawAllPolyLinesThread(locations,travel_mode);
         thread.start();
         try {
             thread.join();
@@ -83,10 +103,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e(MapsActivity.class.getName(),"",e);
         }
         //Finally draw routes on Map
+        //thread.drawPolyLines();
         thread.drawPolyLines();
     }
-
-
     /**
      * Method to move camera to wanted area.
      */
@@ -121,22 +140,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * a list of coordinates values.
      */
     private class drawAllPolyLinesThread extends Thread{
-        Context context;
         List<String> locations;
         String travel_mode;
         List<LatLng> poly;
-        public drawAllPolyLinesThread(Context context,List<String> locations, String travel_mode){
-            this.context=context;
+        public drawAllPolyLinesThread(List<String> locations, String travel_mode){
             this.locations=locations;
             this.travel_mode=travel_mode;
         }
         @Override
         public void run(){
-            drawAllPolyLines(context,locations,travel_mode);
+            //drawAllPolyLines(file_dir,locations,travel_mode);
+            drawAllStoredPolyLines(file_dir,locations,travel_mode);
         }
-        private void drawAllPolyLines(Context context,List<String> locations, String travel_mode) {
-            poly = util.getRouteFromNewLocations(context,locations,"bicycling");
 
+        private void drawAllPolyLines(String file_dir,List<String> locations, String travel_mode) {
+            poly = getRouteFromNewLocations(file_dir,locations,"bicycling");
+
+        }
+        public void drawAllStoredPolyLines(String file_dir,List<String> locations, String travel_mode){
+            poly = getStoredRoute(file_dir);
         }
         public void drawPolyLines(){
             mMap.addPolyline(new PolylineOptions()
@@ -145,7 +167,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     //.width(POLYLINE_WIDTH) // Line width.
                     .width(12)
                     .clickable(false)// Able to click or not.
-                    .addAll(util.getStoredRoute(context)));
+                    .addAll(getStoredRoute(file_dir)));
         }
     }
 

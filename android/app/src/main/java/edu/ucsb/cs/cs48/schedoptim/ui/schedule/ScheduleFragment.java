@@ -38,7 +38,7 @@ public class ScheduleFragment extends Fragment {
         Button bt = root.findViewById(R.id.button2);
 
         final TaskDatabase db = Room.databaseBuilder(getContext(),
-                TaskDatabase.class, "database-name")
+                TaskDatabase.class, "database-task")
                 .allowMainThreadQueries()
                 .build();
 
@@ -50,7 +50,7 @@ public class ScheduleFragment extends Fragment {
                 String title = edit.getText().toString();
 
                 Task t = new Task();
-                t.setId(id);
+//                t.setId(id);
                 t.setTitle(title);
                 db.taskDao().insert(t);
 
@@ -61,9 +61,7 @@ public class ScheduleFragment extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ids = editText.getText().toString();
-                int id = Integer.valueOf(ids);
-                scheduleViewModel.setmText(db.taskDao().findById(id).getTitle());
+                scheduleViewModel.setmText(db.taskDao().getAll().toString());
             }
 
         });

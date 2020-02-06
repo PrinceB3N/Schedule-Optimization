@@ -89,14 +89,18 @@ public class Task {
 //        this.lastName = lastName;
 //        this.age = age;
 //    }
-//    @Override
-//    public String toString() {
-//        return "Task{" +
-//                "id=" + id +
-//                ", title='" + title + '\'' +
-//                ", location='" + location + '\'' +
-//                ", note='" + note + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "\n" + "Task{ " +
+                "id = " + id +
+                ", title = " + title  +
+                ", type = " + type  +
+                ", location = " + location +
+                ", begin_time = " + begin_time +
+                ", end_time = " + end_time +
+                ", days = " + days +
+                ", note = " + note +
+                " }";
+    }
 
 }

@@ -5,6 +5,10 @@ import android.graphics.Color;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.PolyUtil;
@@ -81,6 +85,64 @@ class Route{
         return polylines;
     }
 
+    public Location getStart() {
+        return start;
+    }
+
+    public Location getEnd() {
+        return end;
+    }
+
+    public String getLine_color() {
+        return line_color;
+    }
+
+    public float getLength() {
+        return length;
+    }
+
+    public String getTravel_mode() {
+        return travel_mode;
+    }
+
+    public float getTime() {
+        return time;
+    }
+
+    public boolean isNeedsChange() {
+        return needsChange;
+    }
+
+    public void setPolylines(List<LatLng> polylines){
+        this.polylines=polylines;
+    }
+    public void setStart(Location start){
+        this.start=start;
+    }
+
+    public void setEnd(Location end) {
+        this.end = end;
+    }
+
+    public void setTravel_mode(String travel_mode) {
+        this.travel_mode = travel_mode;
+    }
+
+    public void setLine_color(String line_color) {
+        this.line_color = line_color;
+    }
+
+    public void setLength(float length) {
+        this.length = length;
+    }
+
+    public void setNeedsChange(boolean needsChange) {
+        this.needsChange = needsChange;
+    }
+    public void setTime(float time){
+        this.time=time;
+    }
+
     public boolean equals(Route r){
         if(r==null)
             return false;
@@ -89,8 +151,10 @@ class Route{
                 travel_mode.equals(r.travel_mode);
     }
 }
+
 public class Schedule {
 
+    private int id;
     private ArrayList<Location> locations;
     private ArrayList<Route> routes;
     private LatLng map_bound1;
@@ -107,6 +171,7 @@ public class Schedule {
     }
     //DEFAULT TEST CASE
     public Schedule(){
+        id=12345;
         locations=new ArrayList<>();
         Location l1=new Location(new LatLng(45.5017123, -73.5672184),"Toronto");
         Location l2=new Location(new LatLng(43.6532565,-79.38303979999999),"Science Center");
@@ -148,7 +213,16 @@ public class Schedule {
     public String getDay() {
         return day;
     }
+    public int getId(){
+        return id;
+    }
+    public void setLocations(ArrayList<Location> locations){
+        this.locations=locations;
+    }
 
+    public void setRoutes(ArrayList<Route> routes) {
+        this.routes = routes;
+    }
     public void setMap_bound1(LatLng map_bound1) {
         this.map_bound1 = map_bound1;
     }
@@ -157,6 +231,9 @@ public class Schedule {
     }
     public void setDay(String day) {
         this.day = day;
+    }
+    public void setId(int id){
+        this.id=id;
     }
 
     public String getScheduleJSONString(){

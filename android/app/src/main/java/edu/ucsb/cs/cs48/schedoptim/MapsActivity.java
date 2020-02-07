@@ -17,7 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+//import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.File;
@@ -42,7 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-    }
+
 
 
         //store program's internal read/write storage directory path
@@ -93,9 +93,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Storing locations to be passed into drawPolyLines
         //USE THIS TO TEST LOCATIONS
         //FOLLOW BELOW FORMAT
-
-        //TEST SCHEDULE
-        new Schedule().testJSONToGSON(this.getFilesDir().toString(), "/test.json");
     }
     public void onClickRequestAndDrawRoutes(){
         List<String> locations = new ArrayList<>();
@@ -161,7 +158,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void run(){
             //drawAllPolyLines(file_dir,locations,travel_mode);
-            drawAllStoredPolyLines(file_dir,locations,travel_mode);
+            drawAllPolyLines(file_dir,locations,travel_mode);
         }
 
         private void drawAllPolyLines(String file_dir,List<String> locations, String travel_mode) {

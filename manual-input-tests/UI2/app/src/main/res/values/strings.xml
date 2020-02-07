@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UI2</string>
+    <string name="loc">Enter a location</string>
+    <string name="enter">Enter</string>
+</resources>

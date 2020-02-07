@@ -1,0 +1,25 @@
+Index: app/src/main/java/com/example/ui/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ui/MainActivity.java	(date 1580716076000)
++++ app/src/main/java/com/example/ui/MainActivity.java	(date 1580716076000)
+@@ -22,7 +22,7 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+     }
+-
++/*
+     public void addLoc(View view) {
+         numWP++;
+         ConstraintLayout rootView = findViewById(R.id.rootLayout);
+@@ -33,7 +33,7 @@
+         myEditText.setId(numWP);
+         rootView.addView(myEditText);
+         fixSpaces();
+-    }
++    }*/
+ 
+     public void send(View view) {
+         EditText locationA = findViewById(R.id.p0);

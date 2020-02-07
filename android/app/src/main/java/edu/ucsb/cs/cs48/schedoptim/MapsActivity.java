@@ -42,13 +42,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-    }
+
 
 
         //store program's internal read/write storage directory path
         file_dir = this.getFilesDir().toString();
 
-        Button b = (Button) findViewById(R.id.button);
+        Button b = findViewById(R.id.button);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,7 +161,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void run(){
             //drawAllPolyLines(file_dir,locations,travel_mode);
-            drawAllStoredPolyLines(file_dir,locations,travel_mode);
+            drawAllPolyLines(file_dir,locations,travel_mode);
         }
 
         private void drawAllPolyLines(String file_dir,List<String> locations, String travel_mode) {

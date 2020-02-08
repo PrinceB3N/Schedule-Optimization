@@ -58,7 +58,7 @@ class Location{
 
 class Route{
     private String line_color;
-    private List<LatLng> polylines;
+    private String encoded_polylines;
     private Location start;
     private Location end;
     private String travel_mode;
@@ -67,10 +67,10 @@ class Route{
     boolean needsChange=false;
     //private Alarm alarm
 
-    public Route(String line_color, List<LatLng> polylines, Location start,
+    public Route(String line_color, String encoded_polylines, Location start,
                  Location end, String travel_mode, float length, float time){
         this.line_color=line_color;
-        this.polylines= new ArrayList<LatLng>(polylines);
+        this.encoded_polylines= encoded_polylines;
         this.start=new Location(start);
         this.end=new Location(end);
         this.travel_mode=travel_mode;
@@ -78,11 +78,11 @@ class Route{
         this.time=time;
     }
     public Route(Route r){
-        this(r.line_color,r.polylines,r.start,r.end,r.travel_mode,r.length,r.time);
+        this(r.line_color,r.encoded_polylines,r.start,r.end,r.travel_mode,r.length,r.time);
     }
 
-    public List<LatLng> getPolylines() {
-        return polylines;
+    public String getEncoded_polylines() {
+        return encoded_polylines;
     }
 
     public Location getStart() {
@@ -113,9 +113,10 @@ class Route{
         return needsChange;
     }
 
-    public void setPolylines(List<LatLng> polylines){
-        this.polylines=polylines;
+    public void setEncoded_polylines(String encoded_polylines) {
+        this.encoded_polylines = encoded_polylines;
     }
+
     public void setStart(Location start){
         this.start=start;
     }
@@ -151,7 +152,9 @@ class Route{
                 travel_mode.equals(r.travel_mode);
     }
 }
-
+//TODO: file storage handler class that takes care of pathing by mapping unique ids and keeps track of how many schedules there are.
+//TODO: learn about google calender, WARNING: may invalidate everything we did
+//TODO: implement delete, swap, add features for locations. + if someone changed this.
 public class Schedule {
 
     private int id;
@@ -180,9 +183,8 @@ public class Schedule {
 
         routes=new ArrayList<Route>();
         ArrayList<LatLng> polylines = new ArrayList<>();
-        polylines.addAll(PolyUtil.decode("vmexE`a}lYQj@QXGR?JHX{@v@c@Xa@PKBcDv@uB\\\\s@FkADMBQESEiIkAyDs@?@A@A@C@E?GEAE@C?AoBc@gDy@cD}A{E}B?@A@A@C@IACK?E@Cq@u@sAcBaDwGU]SYA@ABG?ECAI@C[a@oFiG{BeCg@]eCqAiAs@?@?@A@C@GC?Kk@c@wB{BuHwIm@m@cD_CwB{AA@A@EBEAGI@M?AqGwEy@k@qAmA{@w@[QMMC?C?AAMHMNm@pAe@pAY`@KHKDg@HqBKi@?sCh@qAf@i@ZaCfCwFfEsAcCoAwAa@a@sAkAi@y@_@m@y@mCo@gBEIOIIOWa@Yi@g@{@KEEKAOBKFKHE`AuC|@gCLi@BQFc@NDDDDDJT`@jBl@~B@V?J?K?Mo@iCa@kBGMIMEEOEGb@CPCNa@pAe@nAg@~A?RCd@@@BDDVCLGJTn@v@pARj@n@fBx@lC^l@h@x@rAjA`@`@nAvArAbCvDlInAjCdC~DPb@DZb@hElD|\\\\lBhRJ\\\\Tj@OLc@PcAHUJSPQ\\\\a@~@`At@nFpDbNhJhJlGdAp@dGiFx@s@lGoFjC}BrIqHhK}I~EeEzBsBpDaDfDx@nBb@?A@CBCD?FBBJABxDr@fIfAj@@l@Hx@EvCe@fDw@XM^SnAeAI]?KP]Xw@"
-                ));
-        Route r1 = new Route("BLUE",polylines,l1,l2, "bicycling", 13.0f, 4.0f);
+        String encoded = "vmexE`a}lYQj@QXGR?JHX{@v@c@Xa@PKBcDv@uB\\\\s@FkADMBQESEiIkAyDs@?@A@A@C@E?GEAE@C?AoBc@gDy@cD}A{E}B?@A@A@C@IACK?E@Cq@u@sAcBaDwGU]SYA@ABG?ECAI@C[a@oFiG{BeCg@]eCqAiAs@?@?@A@C@GC?Kk@c@wB{BuHwIm@m@cD_CwB{AA@A@EBEAGI@M?AqGwEy@k@qAmA{@w@[QMMC?C?AAMHMNm@pAe@pAY`@KHKDg@HqBKi@?sCh@qAf@i@ZaCfCwFfEsAcCoAwAa@a@sAkAi@y@_@m@y@mCo@gBEIOIIOWa@Yi@g@{@KEEKAOBKFKHE`AuC|@gCLi@BQFc@NDDDDDJT`@jBl@~B@V?J?K?Mo@iCa@kBGMIMEEOEGb@CPCNa@pAe@nAg@~A?RCd@@@BDDVCLGJTn@v@pARj@n@fBx@lC^l@h@x@rAjA`@`@nAvArAbCvDlInAjCdC~DPb@DZb@hElD|\\\\lBhRJ\\\\Tj@OLc@PcAHUJSPQ\\\\a@~@`At@nFpDbNhJhJlGdAp@dGiFx@s@lGoFjC}BrIqHhK}I~EeEzBsBpDaDfDx@nBb@?A@CBCD?FBBJABxDr@fIfAj@@l@Hx@EvCe@fDw@XM^SnAeAI]?KP]Xw@";
+        Route r1 = new Route("BLUE",encoded,l1,l2, "bicycling", 13.0f, 4.0f);
         routes.add(r1);
         map_bound1= new LatLng(44.5017123, -78.5672184);
         map_bound2 = new LatLng(43.6532565,-79.38303979999999);
@@ -216,13 +218,11 @@ public class Schedule {
     public int getId(){
         return id;
     }
+
     public void setLocations(ArrayList<Location> locations){
         this.locations=locations;
     }
-
-    public void setRoutes(ArrayList<Route> routes) {
-        this.routes = routes;
-    }
+    public void setRoutes(ArrayList<Route> routes) { this.routes = routes; }
     public void setMap_bound1(LatLng map_bound1) {
         this.map_bound1 = map_bound1;
     }

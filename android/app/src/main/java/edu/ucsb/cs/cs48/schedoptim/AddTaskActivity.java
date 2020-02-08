@@ -61,8 +61,8 @@ public class AddTaskActivity extends Activity {
                 Location l = new Location(new LatLng(lat, lng),input_name.getText().toString());
 
                 Schedule s = (Schedule)getObjectFromJSON(Schedule.class,file_dir, file_path);
-                s.getLocations().add(l);
-                s.storeSchedule(file_dir, file_path);
+                //s.getLocations().add(l);
+                //s.storeSchedule(file_dir, file_path);
                 Intent c = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(c);
             }

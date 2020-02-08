@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import com.google.maps.android.PolyUtil;
 
@@ -27,6 +29,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.google.gson.Gson;
 
@@ -34,6 +37,9 @@ public class JSONUtils {
     private static String logname= MapsActivity.class.getName();
     //JSON file path which stores json from google directions https request
     private final static String jsonfile_path = "/locations.json";
+    //Keeps track of all paths filled
+    private static List<String> used_paths;
+
     /**
      * This gives the route from supposedly new locations. Also, updates locations.json file.
      * DON'T use if locations have not been updated, use "getRouteFromLocations()" instead.
@@ -84,7 +90,60 @@ public class JSONUtils {
         }
         return latLngList;
     }
+    //TODO: go through each route again to get the locations. Also, to find largest dimensions of camera to encompass all routes.
 
+    public Schedule getScheduleFromLocations(List<String> locations, List<String> travel_mode) throws Exception{
+        ArrayList<Route> routes=new ArrayList<>();
+        for(int i=0;i<travel_mode.size()-1;i++){
+            InputStream is = getStreamFromUrl(Arrays.asList(locations.get(i), locations.get(i + 1)),travel_mode.get(i));
+            Reader reader = new InputStreamReader(is, "UTF-8");
+            routes.add(parseToRoute(new Gson().fromJson(reader,JsonObject.class)));
+        }
+    }
+    //TODO: add camera bounds field to Route
+    private Route parseToRoute(JsonObject json){
+        JsonObject routes = json.getAsJsonArray("routes").get(0).getAsJsonObject();
+
+        //Get camera bounds
+        JsonObject bounds = routes.getAsJsonObject("bounds");
+        double ne_lat = bounds.getAsJsonObject("northeast").get("lat").getAsDouble();
+        double ne_lng  = bounds.getAsJsonObject("northeast").get("lng").getAsDouble();
+        LatLng northeast = new LatLng(ne_lat,ne_lng);
+        double sw_lat = bounds.getAsJsonObject("southwest").get("lat").getAsDouble();
+        double sw_lng  = bounds.getAsJsonObject("southwest").get("lng").getAsDouble();
+        LatLng southwest = new LatLng(sw_lat,sw_lng);
+
+        JsonObject legs = routes.getAsJsonArray("legs").get(0).getAsJsonObject();
+        //Get total distance
+        int meters = legs.getAsJsonObject("distance").get("value").getAsInt();
+
+        //Get total time
+        int seconds = legs.getAsJsonObject("duration").get("value").getAsInt();
+
+        //Get addresses
+        JsonObject start_location = legs.getAsJsonObject("start_location");
+        double start_lat = start_location.get("lat").getAsDouble();
+        double start_lng = start_location.get("lng").getAsDouble();
+        LatLng start = new LatLng(start_lat,start_lng);
+        String start_address = legs.get("start_address").getAsString();
+        Location starting = new Location(start,start_address);
+
+        JsonObject end_location = legs.getAsJsonObject("end_location");
+        double end_lat = end_location.get("lat").getAsDouble();
+        double end_lng = end_location.get("lng").getAsDouble();
+        LatLng end = new LatLng(end_lat,end_lng);
+        String end_address = legs.get("end_address").getAsString();
+        Location ending = new Location(end, end_address);
+
+        //Get overview polyline encoding
+        String encoded = routes.getAsJsonObject("overview_polyline").get("points").getAsString();
+
+        //Get travel_mode
+        String travel_mode = legs.getAsJsonArray("steps").get(0).getAsJsonObject().get("travel_mode").getAsString();
+
+        //return Schedule
+        return new Route("BLUE",encoded,starting,ending,travel_mode,meters,seconds);
+    }
 
     /***
      *      PRIVATE HELPER METHODS BELOW-----------------------------------------------------------------
@@ -108,7 +167,7 @@ public class JSONUtils {
     }
     //Helper function: gets InputStream from https request JSON output
     private static InputStream getStreamFromUrl(List<String> locations,String mode) throws MalformedURLException, IOException {
-        return new URL(new JSONUtils().placesToUrl(locations, mode)).openStream();
+        return new URL(placesToUrl(locations, mode)).openStream();
     }
     /**
      * Gets JSON object from inputstream

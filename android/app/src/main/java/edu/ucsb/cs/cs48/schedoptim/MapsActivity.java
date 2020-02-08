@@ -136,7 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
     //Add all location markers
-    private void placeMakers(List<LatLng> list){
+    private void placeMarkers(List<LatLng> list){
         for(LatLng x:list) {
             mMap.addMarker((new MarkerOptions().position(x)));
         }

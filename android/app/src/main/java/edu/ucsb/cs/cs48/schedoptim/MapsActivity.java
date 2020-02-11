@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
@@ -40,6 +41,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //store program's internal read/write storage directory path
         file_dir = this.getFilesDir().toString();
+
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addLoc = new Intent(getApplicationContext(), AddTaskActivity.class);
+                addLoc.putExtra("path", file_dir);
+                startActivity(addLoc);
+            }
+        });
+
+        Button b = findViewById(R.id.button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRequestAndDrawRoutes();
+            }
+        });
 
     }
     /**

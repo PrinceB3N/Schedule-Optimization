@@ -7,15 +7,15 @@
 
     <fragment
     android:id="@+id/navigation_home"
-    android:name="edu.ucsb.cs.cs48.schedoptim.ui.schedule.ScheduleFragment"
+    android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarFragment"
     android:label="@string/title_home"
-    tools:layout="@layout/fragment_schedule" />
+    tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="edu.ucsb.cs.cs48.schedoptim.ui.dashboard.DashboardFragment"
+        android:name="edu.ucsb.cs.cs48.schedoptim.ui.locationInput.LocationInputFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/location_input_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"

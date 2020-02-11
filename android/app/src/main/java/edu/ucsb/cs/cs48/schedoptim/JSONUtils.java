@@ -1,10 +1,12 @@
 package edu.ucsb.cs.cs48.schedoptim;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.JsonWriter;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -28,9 +30,16 @@ import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+
 import com.google.gson.Gson;
 
 public class JSONUtils {
@@ -40,68 +49,34 @@ public class JSONUtils {
     //Keeps track of all paths filled
     private static List<String> used_paths;
 
-    /**
-     * This gives the route from supposedly new locations. Also, updates locations.json file.
-     * DON'T use if locations have not been updated, use "getRouteFromLocations()" instead.
-     */
-    public static List<LatLng> getRouteFromNewLocations(String file_dir, List<String> locations, String travel_mode){
-        List<LatLng> latLngList = new ArrayList<>();
-        try {
-            //Https request to google directions API, which stores JSON as a JSONObject
-            JSONObject jsonobject = getJSONFrom(getStreamFromUrl(locations,travel_mode));
-            //Also updates stored json file
-            saveToJSONFile(jsonobject, file_dir);
-            //grabs encoded route from the json object
-            String encoded_route = getKeywordFromJson(jsonobject);
-            //adds all the decoded points to the list
-            latLngList.addAll((PolyUtil.decode(encoded_route)));
-
-            return latLngList;
-        }
-
-        catch(Exception e){
-            Log.e(logname,"Error",e);
-        }
-        return null;
-    }
-    public static List<LatLng> getStoredRoute(String file_dir){
-        List<LatLng> latLngList = new ArrayList<>();
-        try {
-            File file = new File(file_dir+jsonfile_path);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            InputStream is = new FileInputStream(file);
-
-            JSONObject jsonobject = getJSONFrom(is);
-            is.close();
-            //grabs encoded route from the json object
-            String encoded_route = getKeywordFromJson(jsonobject);
-            //adds all the decoded points to the list
-            latLngList.addAll((PolyUtil.decode(encoded_route)));
-
-            return latLngList;
-        }
-        catch(IOException e){
-            Log.e(logname,"IO",e);
-        }
-        catch(JSONException e){
-            Log.d(logname,"JSON reading error",e);
-        }
-        return latLngList;
-    }
-    //TODO: go through each route again to get the locations. Also, to find largest dimensions of camera to encompass all routes.
-
-    public Schedule getScheduleFromLocations(List<String> locations, List<String> travel_mode) throws Exception{
+    public static Schedule getScheduleFromLocations(List<String> locations, List<String> travel_mode) throws Exception{
         ArrayList<Route> routes=new ArrayList<>();
-        for(int i=0;i<travel_mode.size()-1;i++){
+        ArrayList<Location> marks = new ArrayList<>();
+        LatLngBounds bounds=null;
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        Locale loc = new Locale("en", "US");
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
+        String date = dateFormat.format(new Date());
+
+        for(int i=0;i<travel_mode.size();i++){
             InputStream is = getStreamFromUrl(Arrays.asList(locations.get(i), locations.get(i + 1)),travel_mode.get(i));
             Reader reader = new InputStreamReader(is, "UTF-8");
             routes.add(parseToRoute(new Gson().fromJson(reader,JsonObject.class)));
+            //Add to locations
+            if(i==0)
+                marks.add(routes.get(i).getStart());
+            marks.add(routes.get(i).getEnd());
+            //add top and bot corners
+            builder.include(routes.get(i).getBounds().northeast);
+            builder.include(routes.get(i).getBounds().southwest);
         }
+        //Finally compare the top and bot corners to get maximum bounds
+        bounds = builder.build();
+        Schedule s = new Schedule(marks,routes,bounds,date);
+        return s;
     }
-    //TODO: add camera bounds field to Route
-    private Route parseToRoute(JsonObject json){
+
+    private static Route parseToRoute(JsonObject json){
         JsonObject routes = json.getAsJsonArray("routes").get(0).getAsJsonObject();
 
         //Get camera bounds
@@ -113,6 +88,7 @@ public class JSONUtils {
         double sw_lng  = bounds.getAsJsonObject("southwest").get("lng").getAsDouble();
         LatLng southwest = new LatLng(sw_lat,sw_lng);
 
+        LatLngBounds cam_bounds = new LatLngBounds(southwest,northeast);
         JsonObject legs = routes.getAsJsonArray("legs").get(0).getAsJsonObject();
         //Get total distance
         int meters = legs.getAsJsonObject("distance").get("value").getAsInt();
@@ -142,49 +118,20 @@ public class JSONUtils {
         String travel_mode = legs.getAsJsonArray("steps").get(0).getAsJsonObject().get("travel_mode").getAsString();
 
         //return Schedule
-        return new Route("BLUE",encoded,starting,ending,travel_mode,meters,seconds);
+        return new Route(Color.BLUE,encoded,starting,ending,cam_bounds,travel_mode,meters,seconds);
     }
 
     /***
      *      PRIVATE HELPER METHODS BELOW-----------------------------------------------------------------
      */
 
-    private static String getKeywordFromJson(JSONObject json) throws JSONException{
-        JSONArray ja = json.getJSONArray("routes");
-        return ja.getJSONObject(0).getJSONObject("overview_polyline").getString("points");
-    }
-    /**
-     * Takes a JSONObject and stores it in jsonfile's path
-     */
-    private static void saveToJSONFile(JSONObject j, String file_dir) throws IOException, JSONException{
-        File file = new File(file_dir+jsonfile_path);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileWriter filewriter = new FileWriter(file);
-            filewriter.write(j.toString(2));
-            filewriter.close();
-    }
     //Helper function: gets InputStream from https request JSON output
     private static InputStream getStreamFromUrl(List<String> locations,String mode) throws MalformedURLException, IOException {
         return new URL(placesToUrl(locations, mode)).openStream();
     }
-    /**
-     * Gets JSON object from inputstream
-     */
-    private static JSONObject getJSONFrom(InputStream is) throws IOException, JSONException {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);  //reader outpurs full json text
-            return new JSONObject(jsonText);
-    }
-    //Helper function for file reading
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
+
+    private static String formatLocation(String location){
+        return location.replaceAll(" ","+").replaceAll(",","");
     }
     /**
      *  Helper function that takes locations and travel mode
@@ -192,6 +139,10 @@ public class JSONUtils {
      *  Format:   json?origin=____&destination=_____&waypoints=4 ______|___|____|___&key=______
      */
     private static String placesToUrl(List<String> locations, String travel_mode){
+        //Formats String for URL input
+        for(int i=0;i<locations.size();i++){
+            locations.set(i,formatLocation(locations.get(i)));
+        }
         if(locations.size()<2 || travel_mode==null)
             return "";
         StringBuilder sb = new StringBuilder();
@@ -221,7 +172,6 @@ public class JSONUtils {
             while ((cp = rd.read()) != -1) {
                 sb.append((char) cp);
             }
-            Log.d(logname,"No String?:"+sb.toString());
             return gson.fromJson(new FileReader(file), c);
         }
         catch(Exception e){

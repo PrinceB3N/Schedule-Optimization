@@ -17,15 +17,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-//import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.gms.maps.model.PolylineOptions;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getRouteFromNewLocations;
-import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getStoredRoute;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
@@ -48,13 +41,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //store program's internal read/write storage directory path
         file_dir = this.getFilesDir().toString();
 
-        Button b = (Button) findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRequestAndDrawRoutes();
-            }
-        });
     }
     /**
      * Manipulates the map once available.
@@ -90,9 +76,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Enter two LatLng bounds and padding to move the camera there
         moveCameraToWantedArea(BOUND1,BOUND2,16);                            //<--Test camera by changing bounds
 
-        //Storing locations to be passed into drawPolyLines
-        //USE THIS TO TEST LOCATIONS
-        //FOLLOW BELOW FORMAT
+        //Set up button to draw routes
+        Button b = (Button) findViewById(R.id.button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickRequestAndDrawRoutes();
+            }
+        });
     }
     public void onClickRequestAndDrawRoutes(){
         List<String> locations = new ArrayList<>();
@@ -100,19 +91,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         locations.add("Toronto+ON+Canada");
 
         //Set travel mode
-        String travel_mode = "bicycling";                                                   //<--Test travel mode by changing this
-
-        //Get polylines from thread
-        drawAllPolyLinesThread thread = new drawAllPolyLinesThread(locations,travel_mode);
-        thread.start();
-        try {
-            thread.join();
-        }catch(Exception e){
-            Log.e(MapsActivity.class.getName(),"",e);
-        }
-        //Finally draw routes on Map
-        //thread.drawPolyLines();
-        thread.drawPolyLines();
+        List<String> travel_modes = new ArrayList<>();
+        travel_modes.add("bicycling");                                                   //<--Test travel mode by changing this
+        RouteDrawer draw = new RouteDrawer(locations,travel_modes, mMap);
+        draw.execute();
     }
     /**
      * Method to move camera to wanted area.
@@ -139,43 +121,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void placeMarkers(List<LatLng> list){
         for(LatLng x:list) {
             mMap.addMarker((new MarkerOptions().position(x)));
-        }
-    }
-    /**
-     * Method to draw all poly lines. This will manually draw polylines one by one on the map by calling
-     * addPolyline(PolylineOptions) on a map instance. The parameter passed in is a new PolylineOptions
-     * object which can be configured with details such as line color, line width, clickability, and
-     * a list of coordinates values.
-     */
-    private class drawAllPolyLinesThread extends Thread{
-        List<String> locations;
-        String travel_mode;
-        List<LatLng> poly;
-        public drawAllPolyLinesThread(List<String> locations, String travel_mode){
-            this.locations=locations;
-            this.travel_mode=travel_mode;
-        }
-        @Override
-        public void run(){
-            //drawAllPolyLines(file_dir,locations,travel_mode);
-            drawAllPolyLines(file_dir,locations,travel_mode);
-        }
-
-        private void drawAllPolyLines(String file_dir,List<String> locations, String travel_mode) {
-            poly = getRouteFromNewLocations(file_dir,locations,"bicycling");
-
-        }
-        public void drawAllStoredPolyLines(String file_dir,List<String> locations, String travel_mode){
-            poly = getStoredRoute(file_dir);
-        }
-        public void drawPolyLines(){
-            mMap.addPolyline(new PolylineOptions()
-                    //.color(getResources().getColor(R.color.colorPolyLineBlue)) // Line color
-                    .color(0xff000000)
-                    //.width(POLYLINE_WIDTH) // Line width.
-                    .width(12)
-                    .clickable(false)// Able to click or not.
-                    .addAll(getStoredRoute(file_dir)));
         }
     }
 

@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getObjectFromJSON;
-import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getRouteFromNewLocations;
-import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getStoredRoute;
 
 public class AddTaskActivity extends Activity {
 

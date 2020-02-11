@@ -190,7 +190,6 @@ public class JSONUtils {
             filewriter.write(gson.toJson(s));
             filewriter.flush();
             filewriter.close();
-            Log.d(logname,gson.toJson(s));
         }catch(Exception e){
             Log.e(logname,"",e);
         }

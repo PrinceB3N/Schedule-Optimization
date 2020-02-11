@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.maps.android.PolyUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getObjectFromJSON;
@@ -57,7 +58,6 @@ class Route{
     private String travel_mode;
     private float length;
     private float time;
-    boolean needsChange=false;
     //private Alarm alarm
 
     public Route(int line_color, String encoded_polylines, Location start,
@@ -110,10 +110,6 @@ class Route{
         return time;
     }
 
-    public boolean isNeedsChange() {
-        return needsChange;
-    }
-
     public void setEncoded_polylines(String encoded_polylines) {
         this.encoded_polylines = encoded_polylines;
     }
@@ -138,9 +134,6 @@ class Route{
         this.length = length;
     }
 
-    public void setNeedsChange(boolean needsChange) {
-        this.needsChange = needsChange;
-    }
     public void setTime(float time){
         this.time=time;
     }
@@ -163,6 +156,7 @@ public class Schedule {
     private ArrayList<Route> routes;
     private LatLngBounds bounds;
     private String day;
+    private boolean update = false;
 
     public Schedule(ArrayList<Location> locations, ArrayList<Route> routes,
                     LatLngBounds bounds, String day){
@@ -183,7 +177,6 @@ public class Schedule {
         LatLng corner2=new LatLng(43.6532565,-79.38303979999999);
         LatLngBounds bounds = new LatLngBounds(corner1,corner2);
         routes=new ArrayList<Route>();
-        ArrayList<LatLng> polylines = new ArrayList<>();
         String encoded = "vmexE`a}lYQj@QXGR?JHX{@v@c@Xa@PKBcDv@uB\\\\s@FkADMBQESEiIkAyDs@?@A@A@C@E?GEAE@C?AoBc@gDy@cD}A{E}B?@A@A@C@IACK?E@Cq@u@sAcBaDwGU]SYA@ABG?ECAI@C[a@oFiG{BeCg@]eCqAiAs@?@?@A@C@GC?Kk@c@wB{BuHwIm@m@cD_CwB{AA@A@EBEAGI@M?AqGwEy@k@qAmA{@w@[QMMC?C?AAMHMNm@pAe@pAY`@KHKDg@HqBKi@?sCh@qAf@i@ZaCfCwFfEsAcCoAwAa@a@sAkAi@y@_@m@y@mCo@gBEIOIIOWa@Yi@g@{@KEEKAOBKFKHE`AuC|@gCLi@BQFc@NDDDDDJT`@jBl@~B@V?J?K?Mo@iCa@kBGMIMEEOEGb@CPCNa@pAe@nAg@~A?RCd@@@BDDVCLGJTn@v@pARj@n@fBx@lC^l@h@x@rAjA`@`@nAvArAbCvDlInAjCdC~DPb@DZb@hElD|\\\\lBhRJ\\\\Tj@OLc@PcAHUJSPQ\\\\a@~@`At@nFpDbNhJhJlGdAp@dGiFx@s@lGoFjC}BrIqHhK}I~EeEzBsBpDaDfDx@nBb@?A@CBCD?FBBJABxDr@fIfAj@@l@Hx@EvCe@fDw@XM^SnAeAI]?KP]Xw@";
         Route r1 = new Route(Color.BLUE,encoded,l1,l2, bounds,"bicycling", 13.0f, 4.0f);
         routes.add(r1);
@@ -202,9 +195,8 @@ public class Schedule {
     public void storeSchedule(String file_dir, String json_path){
         storeObjectAsJSON(this,file_dir,json_path);
     }
-
     public ArrayList<Location> getLocations() {
-        return locations;
+        return new ArrayList<Location>(locations);
     }
     public ArrayList<Route> getRoutes() {
         return routes;
@@ -217,14 +209,6 @@ public class Schedule {
         return id;
     }
 
-    public void setLocations(ArrayList<Location> locations){
-        this.locations=locations;
-    }
-    public void setRoutes(ArrayList<Route> routes) { this.routes = routes; }
-    public void setBounds(LatLngBounds bounds) { this.bounds=bounds; }
-    public void setDay(String day) {
-        this.day = day;
-    }
     public void setId(int id){
         this.id=id;
     }

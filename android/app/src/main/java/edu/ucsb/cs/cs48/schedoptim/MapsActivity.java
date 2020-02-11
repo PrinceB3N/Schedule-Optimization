@@ -18,6 +18,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +37,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
 
         //store program's internal read/write storage directory path
         file_dir = this.getFilesDir().toString();
@@ -106,20 +105,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
     public void onClickRequestAndDrawRoutes(){
-        List<String> locations = new ArrayList<>();
-        locations.add("Ontario+Science+Centre+Don+Mills+Road+North+York+ON+Canada");        //<--Test routes by adding locations
-        locations.add("Toronto+ON+Canada");
+//        List<String> locations = new ArrayList<>();
+//        locations.add("Ontario+Science+Centre+Don+Mills+Road+North+York+ON+Canada");        //<--Test routes by adding locations
+//        locations.add("Toronto+ON+Canada");
+//
+//        //Set travel mode
+//        List<String> travel_modes = new ArrayList<>();
+//        travel_modes.add("bicycling");                                                          //<--Test travel mode by changing this
 
-        //Set travel mode
-        List<String> travel_modes = new ArrayList<>();
-        travel_modes.add("bicycling");                                                   //<--Test travel mode by changing this
-        RouteDrawer draw = new RouteDrawer(locations,travel_modes, mMap);
-        draw.execute();
+        //Controller class with drawing
+        MapsController control = new MapsController(mMap,file_dir,"/test.json");
+        control.drawRoutes();
     }
     /**
      * Method to move camera to wanted area.
      */
-    private void moveCameraToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+    public void moveCameraToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
         final LatLng BOUND1 = bound1;
         final LatLng BOUND2 = bound2;
         final int BOUNDS_PADDING = bound_padding;

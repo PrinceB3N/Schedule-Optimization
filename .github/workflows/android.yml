@@ -13,5 +13,5 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      working-directory: ~/android/app
+      working-directory: ~/android/
       run: ./gradlew build

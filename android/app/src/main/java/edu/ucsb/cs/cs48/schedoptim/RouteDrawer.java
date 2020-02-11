@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
@@ -43,8 +45,15 @@ public class RouteDrawer extends AsyncTask<Void,Void,Schedule> {
                     .width(12)
                     .clickable(false)// Able to click or not.
                     .addAll(r.getDecoded_polylines()));
-        }
 
+        }
+        //Place all markers based on locations
+        placeMarkers(result.getLocations());
+    }
+    public void placeMarkers(List<Location> locals){
+        for(Location local:locals){
+            map.addMarker((new MarkerOptions().position(local.getLocation())));
+        }
     }
 
 }

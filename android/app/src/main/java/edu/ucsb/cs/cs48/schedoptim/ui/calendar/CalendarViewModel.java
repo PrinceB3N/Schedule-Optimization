@@ -1,16 +1,16 @@
-package edu.ucsb.cs.cs48.schedoptim.ui.schedule;
+package edu.ucsb.cs.cs48.schedoptim.ui.calendar;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ScheduleViewModel extends ViewModel {
+public class CalendarViewModel extends ViewModel {
 
     private MutableLiveData<String> allTasks;
     private MutableLiveData<String> taskId;
     private MutableLiveData<String> taskTitle;
 
-    public ScheduleViewModel() {
+    public CalendarViewModel() {
         allTasks = new MutableLiveData<>();
         taskId = new MutableLiveData<>();
         taskTitle = new MutableLiveData<>();

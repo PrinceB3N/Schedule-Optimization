@@ -190,7 +190,17 @@ public class Schedule {
 
      */
     public Schedule (Schedule s){
-        this(s.locations, s.routes, s.bounds, s.day);
+        if(s==null){
+            this.locations=null;
+            this.routes=null;
+            this.bounds=null;
+            this.day=null;
+            return;
+        }
+        this.locations=s.locations;
+        this.routes=s.routes;
+        this.bounds=s.bounds;
+        this.day=s.day;
     }
 
     public Schedule(String file_dir, String json_path){

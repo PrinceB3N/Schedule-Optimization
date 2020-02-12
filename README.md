@@ -45,7 +45,6 @@ Note: The app stores your locations after you do #6, so if you reboot the app, y
 **Known Problems**
 - No options to store a subset of locations, nor advanced modification.
 - Can only store one Schedule at a time.
-- Horrendous UI
 - No way to only display locations, nor change their color.
 - No way to customize these locations and routes.
 - Accidentally putting a wrong address will mean you have to restart the process.

@@ -60,7 +60,9 @@ public class JSONUtils {
         String date = dateFormat.format(new Date());
 
         for(int i=0;i<travel_mode.size();i++){
-            InputStream is = getStreamFromUrl(Arrays.asList(locations.get(i), locations.get(i + 1)),travel_mode.get(i));
+            InputStream is = new URL(placesToUrl(Arrays.asList(
+                            locations.get(i), locations.get(i + 1)),travel_mode.get(i)))
+                            .openStream();
             Reader reader = new InputStreamReader(is, "UTF-8");
             routes.add(parseToRoute(new Gson().fromJson(reader,JsonObject.class)));
             //Add to locations
@@ -125,11 +127,6 @@ public class JSONUtils {
     /***
      *      PRIVATE HELPER METHODS BELOW-----------------------------------------------------------------
      */
-
-    //Helper function: gets InputStream from https request JSON output
-    private static InputStream getStreamFromUrl(List<String> locations,String mode) throws MalformedURLException, IOException {
-        return new URL(placesToUrl(locations, mode)).openStream();
-    }
 
     private static String formatLocation(String location){
         return location.replaceAll(" ","+").replaceAll(",","");

@@ -62,6 +62,8 @@ public class MapsController{
         final LatLng BOUND1 = bound1;
         final LatLng BOUND2 = bound2;
         final int BOUNDS_PADDING = bound_padding;
+        if(map==null)
+            return;
         map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
@@ -164,10 +166,13 @@ public class MapsController{
 
         @Override
         protected Schedule doInBackground(Void... voids) {
-            Log.d(MainActivity.class.getName(), "update:"+need_update);
             if (!need_update) {
-                Log.d(MainActivity.class.getName(),"GO UPDATE");
-                return new Schedule(dir, path);
+                try {
+                    return new Schedule(dir, path);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                return null;
             }
             try {
                 return JSONUtils.getScheduleFromLocations(locations, travel_modes);
@@ -180,6 +185,9 @@ public class MapsController{
         protected void onPostExecute(Schedule result) {
             if(result==null) {
                 Log.d(MainActivity.class.getName(),"SCHEDULE IS NULL IN DRAW");
+                return;
+            }
+            if(result.getRoutes()==null){
                 return;
             }
             Log.d(MainActivity.class.getName(),"In post execute");

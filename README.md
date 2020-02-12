@@ -1,6 +1,6 @@
 # 5pm-schedule-optimization
 
-**Schedule Optimization/n
+**Schedule Optimization  
 Project summary**
 
 This Android app helps you get and store the fastest route between all the locations you need to go to in a given day!
@@ -15,7 +15,7 @@ __**Dependencies**__
 
 Google Maps API: Performs map based actions like displaying, drawing, and moving.
 Google Directions API: Allows for app to send https requests and grab directions to be displayed on the map.
-GSON: Convert between Classes and Json files./n
+GSON: Convert between Classes and Json files.  
 
 __**Installation Steps**__
 **TODO:** Describe the installation process (making sure you give complete instructions to get your project going from scratch). Instructions need to be such that a user can just copy/paste the commands to get things set up and running. Note that with the use of GitHub Actions, these instructions can eventually be fully automated (e.g. with act, you can run GitHub Actions locally).
@@ -23,7 +23,7 @@ __**Installation Steps**__
 1. Download the latest version of Android Studio here: https://developer.android.com/studio
 2. Run Android Studio
 3. Import project using this project's Github SSH
-/n
+  
 **Functionality**
 
 1. Run the app on an emulator or real Android device.
@@ -34,7 +34,7 @@ __**Installation Steps**__
 6. Click the button under the map and the map will move to your routes and locations.
 7. Done!
 Note: The app stores your locations after you do #6, so if you reboot the app, you may jump to #6.
-/n
+  
 **Known Problems**
 - No options to store a subset of locations, nor advanced modification.
 - Can only store one Schedule at a time.
@@ -44,7 +44,7 @@ Note: The app stores your locations after you do #6, so if you reboot the app, y
 - Accidentally putting a wrong address will mean you have to restart the process.
 - File management: Views must specify the file locations + Multiple instances of the Controller which store those file locations 
   might mean bad news if we decide to store more Schedules...
-/n
+  
 **Contributing**
 
 Fork it!
@@ -52,7 +52,7 @@ Create your feature branch: git checkout -b my-new-feature
 Commit your changes: git commit -am 'Add some feature'
 Push to the branch: git push origin my-new-feature
 Submit a pull request :D
-/n
+  
 **License**
 https://choosealicense.com/licenses/mit/
 

@@ -1,6 +1,5 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.maps;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
@@ -43,7 +42,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.activity_maps, container, false);
+        View root = inflater.inflate(R.layout.fragment_maps, container, false);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -74,11 +73,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return root;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(MapsViewModel.class);
-        // TODO: Use the ViewModel
     }
     /**
      * Manipulates the map once available.

@@ -1,6 +1,6 @@
 # 5pm-schedule-optimization
 
-Schedule Optimization\n
+Schedule Optimization/n
 Project summary
 
 This Android app helps you get and store the fastest route between all the locations you need to go to in a given day!
@@ -11,19 +11,23 @@ If you are a user that is new to the area, forgetful, or just want to optimize y
 Installation
 Prerequisites
 
-1. Download the latest version of Android Studio here: https://developer.android.com/studio
-2. Run Android Studio
-3. Import project using this project's Github SSH
-
 Dependencies
-TODO: List which libraries / add-ons you added to the project, and the purpose each of those add-ons serves in your app.
+
+Google Maps API: Performs map based actions like displaying, drawing, and moving.
+Google Directions API: Allows for app to send https requests and grab directions to be displayed on the map.
+GSON: Convert between Classes and Json files.
 
 Installation Steps
 TODO: Describe the installation process (making sure you give complete instructions to get your project going from scratch). Instructions need to be such that a user can just copy/paste the commands to get things set up and running. Note that with the use of GitHub Actions, these instructions can eventually be fully automated (e.g. with act, you can run GitHub Actions locally).
 
-Functionality
-TODO: Write usage instructions. Structuring it as a walkthrough can help structure this section, and showcase your features.
+1. Download the latest version of Android Studio here: https://developer.android.com/studio
+2. Run Android Studio
+3. Import project using this project's Github SSH
 
+Functionality
+
+1. Run the app on an emulator or real Android device.
+2. Click 
 Known Problems
 TODO: Describe any known issues, bugs, odd behaviors or code smells. Provide steps to reproduce the problem and/or name a file or a function where the problem lives.
 

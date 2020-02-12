@@ -8,13 +8,13 @@
     <fragment
     android:id="@+id/navigation_left"
     android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarFragment"
-    android:label="@string/title_center"
+    android:label="@string/title_left"
     tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/navigation_center"
         android:name="edu.ucsb.cs.cs48.schedoptim.ui.maps.MapsFragment"
-        android:label="@string/title_left"
+        android:label="@string/title_center"
         tools:layout="@layout/fragment_maps" />
 
     <fragment

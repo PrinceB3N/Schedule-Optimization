@@ -7,10 +7,12 @@ This Android app helps you get and store the fastest route between all the locat
 
 __**Additional information about the project**__
 
-If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply type in the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display it again!__
-__**Installation
-Prerequisites**
+If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply type in the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display it again!
 
+__**Installation Prerequisites**__
+
+Your Android devices/emulator must run on Android Marshmallow/6.0 (API 23) or newer.
+  
 __**Dependencies**__
 
 Google Maps API: Performs map based actions like displaying, drawing, and moving.
@@ -18,8 +20,13 @@ Google Directions API: Allows for app to send https requests and grab directions
 GSON: Convert between Classes and Json files.  
 
 __**Installation Steps**__
-**TODO:** Describe the installation process (making sure you give complete instructions to get your project going from scratch). Instructions need to be such that a user can just copy/paste the commands to get things set up and running. Note that with the use of GitHub Actions, these instructions can eventually be fully automated (e.g. with act, you can run GitHub Actions locally).
 
+Running on real devices or standalone emulator (not in Android Studio):  
+1. Download the latest version of our APK file from `GitHub release` or 'Google Drive link`
+2. Find the APK file in Download application
+3. Click it and follow the system instruction
+
+Running on development environment (Android Studio):
 1. Download the latest version of Android Studio here: https://developer.android.com/studio
 2. Run Android Studio
 3. Import project using this project's Github SSH

@@ -7,9 +7,9 @@ This Android app helps you get and store the fastest route between all the locat
 
 __**Additional information about the project**__
 
-If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply type in the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display it again!
+If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply type in the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display it again!__
 __**Installation
-Prerequisites**__
+Prerequisites**
 
 __**Dependencies**__
 

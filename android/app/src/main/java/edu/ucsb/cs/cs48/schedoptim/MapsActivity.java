@@ -84,16 +84,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng ucsb = new LatLng(34.412936, -119.846063);
 
         // Add a marker in UCSB and move the camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
 
         // Add a marker in montreal and toronto, and move the camera
         //TODO: implement dynamic marker placement from JSON file
         LatLng montreal = new LatLng(45.5017123, -73.5672184);
         LatLng toronto = new LatLng(43.6532565,-79.38303979999999);
-        mMap.addMarker(new MarkerOptions().position(montreal).title("Marker in Montreal"));
-        mMap.addMarker(new MarkerOptions().position(toronto).title("Marker in Toronto"));
-        //Enter two LatLng bounds and padding to move the camera there
-        moveCameraToWantedArea(BOUND1,BOUND2,16);                            //<--Test camera by changing bounds
+        //mMap.addMarker(new MarkerOptions().position(montreal).title("Marker in Montreal"));
+        //mMap.addMarker(new MarkerOptions().position(toronto).title("Marker in Toronto"));
 
         //Set up button to draw routes
         Button b = (Button) findViewById(R.id.button);
@@ -103,15 +101,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 onClickRequestAndDrawRoutes();
             }
         });
+
+        //Schedule s = new Schedule();
+        //s.testJSONToGSON(file_dir, "/test.json");
     }
-    public void onClickRequestAndDrawRoutes(){
-//        List<String> locations = new ArrayList<>();
-//        locations.add("Ontario+Science+Centre+Don+Mills+Road+North+York+ON+Canada");        //<--Test routes by adding locations
-//        locations.add("Toronto+ON+Canada");
-//
-//        //Set travel mode
-//        List<String> travel_modes = new ArrayList<>();
-//        travel_modes.add("bicycling");                                                          //<--Test travel mode by changing this
+    public void onClickRequestAndDrawRoutes(){         //<--Test travel mode by changing this
 
         //Controller class with drawing
         MapsController control = new MapsController(mMap,file_dir,"/test.json");

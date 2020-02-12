@@ -48,7 +48,7 @@ public class AddTaskActivity extends Activity {
         final TextInputEditText input_lng = findViewById(R.id.textInput_lng);
         final String travel_mode = "bicycling";
         Intent i = getIntent();
-        final String file_dir = i.getStringExtra("path");
+        final String file_dir = this.getFilesDir().toString();
         final String file_path = "/test.json";
 
         add.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package edu.ucsb.cs.cs48.schedoptim;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,7 +20,7 @@ public class MapsController{
     private static List<String> travel_modes = new ArrayList<String>();
     private static String dir;
     private static String path;
-    private static boolean need_update=true;
+    private static boolean need_update=false;
 
     public MapsController(GoogleMap map, String dir, String path){
         this.map=map;
@@ -32,6 +33,7 @@ public class MapsController{
     }
     //DRAW ROUTES FUNCTIONS, CALL THESE TO UPDATE MAPS VIEW
     public void drawRoutes(List<String> locations, List<String> travel_modes){
+        need_update=true;
         this.locations=locations;
         this.travel_modes=travel_modes;
         RouteDrawer rd = new RouteDrawer();
@@ -49,6 +51,7 @@ public class MapsController{
     }
     public void placeMarkers(List<Location> locals) {
         for (Location local : locals) {
+            Log.d(MapsActivity.class.getName(),local.getName());
             map.addMarker((new MarkerOptions().position(local.getLocation())));
         }
     }
@@ -77,6 +80,7 @@ public class MapsController{
     public boolean addToRequestList(String location, String travel_mode){
         if(locations.size()==0) {
             locations.add(location);
+            need_update=true;
             return true;
         }
         locations.add(location);
@@ -132,7 +136,7 @@ public class MapsController{
         travel_modes.set(index1+1,travel_modes.get(index2+1));
         travel_modes.set(index2+1,tmp2);
 
-        need_update=false;
+        need_update=true;
         return true;
     }
     public List<String> getRequestList(){
@@ -160,8 +164,11 @@ public class MapsController{
 
         @Override
         protected Schedule doInBackground(Void... voids) {
-            if (locations == null || travel_modes == null || !need_update)
+            Log.d(MapsActivity.class.getName(), "update:"+need_update);
+            if (!need_update) {
+                Log.d(MapsActivity.class.getName(),"GO UPDATE");
                 return new Schedule(dir, path);
+            }
             try {
                 return JSONUtils.getScheduleFromLocations(locations, travel_modes);
             } catch (Exception e) {
@@ -171,9 +178,11 @@ public class MapsController{
         }
 
         protected void onPostExecute(Schedule result) {
-            if(result==null)
+            if(result==null) {
+                Log.d(MapsActivity.class.getName(),"SCHEDULE IS NULL IN DRAW");
                 return;
-            //draw all routes
+            }
+            Log.d(MapsActivity.class.getName(),"In post execute");
             for (Route r : result.getRoutes()) {
                 map.addPolyline(new PolylineOptions()
                         .color(r.getLine_color())
@@ -187,7 +196,7 @@ public class MapsController{
             //move camera
             moveCameraToWantedArea(result.getBounds().southwest,result.getBounds().northeast,16);
             //store new Schedule into the JSON
-            JSONUtils.storeObjectAsJSON(result,dir,path);
+            result.storeSchedule(dir, path);
             //update flag
             need_update=false;
         }

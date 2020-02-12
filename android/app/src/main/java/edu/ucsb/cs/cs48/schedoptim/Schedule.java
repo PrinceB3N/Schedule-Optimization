@@ -58,7 +58,6 @@ class Route{
     private String travel_mode;
     private float length;
     private float time;
-    //private Alarm alarm
 
     public Route(int line_color, String encoded_polylines, Location start,
                  Location end, LatLngBounds bounds, String travel_mode, float length, float time){
@@ -151,12 +150,11 @@ class Route{
 //TODO: implement delete, swap, add features for locations. + if someone changed this.
 public class Schedule {
 
-    private int id;
+    //private int id;
     private ArrayList<Location> locations;
     private ArrayList<Route> routes;
     private LatLngBounds bounds;
     private String day;
-    private boolean update = false;
 
     public Schedule(ArrayList<Location> locations, ArrayList<Route> routes,
                     LatLngBounds bounds, String day){
@@ -166,8 +164,9 @@ public class Schedule {
         this.day=day;
     }
     //DEFAULT TEST CASE
+    /*
     public Schedule(){
-        id=12345;
+        //id=12345;
         locations=new ArrayList<>();
         Location l1=new Location(new LatLng(45.5017123, -73.5672184),"Toronto");
         Location l2=new Location(new LatLng(43.6532565,-79.38303979999999),"Science Center");
@@ -175,16 +174,21 @@ public class Schedule {
         locations.add(l2);
         LatLng corner1=new LatLng(45.5017123, -73.5672184);
         LatLng corner2=new LatLng(43.6532565,-79.38303979999999);
-        LatLngBounds bounds = new LatLngBounds(corner1,corner2);
+        LatLngBounds bounds = new LatLngBounds(corner2,corner1);
         routes=new ArrayList<Route>();
         String encoded = "vmexE`a}lYQj@QXGR?JHX{@v@c@Xa@PKBcDv@uB\\\\s@FkADMBQESEiIkAyDs@?@A@A@C@E?GEAE@C?AoBc@gDy@cD}A{E}B?@A@A@C@IACK?E@Cq@u@sAcBaDwGU]SYA@ABG?ECAI@C[a@oFiG{BeCg@]eCqAiAs@?@?@A@C@GC?Kk@c@wB{BuHwIm@m@cD_CwB{AA@A@EBEAGI@M?AqGwEy@k@qAmA{@w@[QMMC?C?AAMHMNm@pAe@pAY`@KHKDg@HqBKi@?sCh@qAf@i@ZaCfCwFfEsAcCoAwAa@a@sAkAi@y@_@m@y@mCo@gBEIOIIOWa@Yi@g@{@KEEKAOBKFKHE`AuC|@gCLi@BQFc@NDDDDDJT`@jBl@~B@V?J?K?Mo@iCa@kBGMIMEEOEGb@CPCNa@pAe@nAg@~A?RCd@@@BDDVCLGJTn@v@pARj@n@fBx@lC^l@h@x@rAjA`@`@nAvArAbCvDlInAjCdC~DPb@DZb@hElD|\\\\lBhRJ\\\\Tj@OLc@PcAHUJSPQ\\\\a@~@`At@nFpDbNhJhJlGdAp@dGiFx@s@lGoFjC}BrIqHhK}I~EeEzBsBpDaDfDx@nBb@?A@CBCD?FBBJABxDr@fIfAj@@l@Hx@EvCe@fDw@XM^SnAeAI]?KP]Xw@";
         Route r1 = new Route(Color.BLUE,encoded,l1,l2, bounds,"bicycling", 13.0f, 4.0f);
         routes.add(r1);
        LatLng map_bound1= new LatLng(44.5017123, -78.5672184);
        LatLng map_bound2 = new LatLng(43.6532565,-79.38303979999999);
-       this.bounds=new LatLngBounds(map_bound1,map_bound2);
+       LatLngBounds.Builder build = new LatLngBounds.Builder();
+       build.include(map_bound1);
+       build.include(map_bound2);
+       this.bounds=build.build();
         day = "Friday";
     }
+
+     */
     public Schedule (Schedule s){
         this(s.locations, s.routes, s.bounds, s.day);
     }
@@ -196,7 +200,7 @@ public class Schedule {
         storeObjectAsJSON(this,file_dir,json_path);
     }
     public ArrayList<Location> getLocations() {
-        return new ArrayList<Location>(locations);
+        return locations;
     }
     public ArrayList<Route> getRoutes() {
         return routes;
@@ -205,13 +209,15 @@ public class Schedule {
     public String getDay() {
         return day;
     }
-    public int getId(){
+    /*public int getId(){
         return id;
     }
 
     public void setId(int id){
         this.id=id;
     }
+
+     */
 
     public String getScheduleJSONString(){
         return objToJSONString(this);

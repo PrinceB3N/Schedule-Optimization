@@ -44,12 +44,13 @@ import com.google.gson.Gson;
 
 public class JSONUtils {
     private static String logname= MapsActivity.class.getName();
-    //JSON file path which stores json from google directions https request
-    private final static String jsonfile_path = "/locations.json";
     //Keeps track of all paths filled
     private static List<String> used_paths;
 
     public static Schedule getScheduleFromLocations(List<String> locations, List<String> travel_mode) throws Exception{
+        if(locations.size()<2 || travel_mode.size()==0 || locations.size()-1!=travel_mode.size())
+            return null;
+
         ArrayList<Route> routes=new ArrayList<>();
         ArrayList<Location> marks = new ArrayList<>();
         LatLngBounds bounds=null;

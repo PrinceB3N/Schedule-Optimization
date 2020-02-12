@@ -1,5 +1,7 @@
 package edu.ucsb.cs.cs48.schedoptim;
 
+import android.util.Log;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -14,4 +16,10 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+    @Test
+    public void testtest(){
+        System.out.println(JSONUtils.getObjectFromJSON(Schedule.class,"~/data/data/edu.ucsb.cs.cs48.schedoptim/files","test.json"));
+
+    }
+
 }

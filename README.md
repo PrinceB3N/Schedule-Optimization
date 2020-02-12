@@ -27,12 +27,24 @@ TODO: Describe the installation process (making sure you give complete instructi
 Functionality
 
 1. Run the app on an emulator or real Android device.
-2. Click 
+2. Add new locations that you want routes between by clicking on the (+) button.
+3. Enter the address of the place in the top text box.
+4. Click "Add" to add the location, and "Cancel" to just go back to the map.
+5. Repeat 2,3, and 4 as necessary.
+6. Click the button under the map and the map will move to your routes and locations.
+7. Done!
+Note: The app stores your locations after you do #6, so if you reboot the app, you may jump to #6.
 Known Problems
-TODO: Describe any known issues, bugs, odd behaviors or code smells. Provide steps to reproduce the problem and/or name a file or a function where the problem lives.
+- No options to store a subset of locations, nor advanced modification.
+- Can only store one Schedule at a time.
+- Horrendous UI
+- No way to only display locations, nor change their color.
+- No way to customize these locations and routes.
+- Accidentally putting a wrong address will mean you have to restart the process.
+- File management: Views must specify the file locations + Multiple instances of the Controller which store those file locations 
+  might mean bad news if we decide to store more Schedules...
 
 Contributing
-TODO: Leave the steps below if you want others outside your team to contribute to your project.
 
 Fork it!
 Create your feature branch: git checkout -b my-new-feature
@@ -40,7 +52,7 @@ Commit your changes: git commit -am 'Add some feature'
 Push to the branch: git push origin my-new-feature
 Submit a pull request :D
 License
-If you haven't already, add a file called LICENSE.txt with the text of the appropriate license. We recommend using the MIT license: https://choosealicense.com/licenses/mit/
+https://choosealicense.com/licenses/mit/
 
 Main Google Map API key: `AIzaSyBOosE3N-P47nolpIZoNjN43y1mQq5uIhw`  
 Backup key: `AIzaSyDPK90I_k-x7Yq5Y5Q3lupXDcWQ7s_h1K0`  

@@ -1,10 +1,17 @@
-package edu.ucsb.cs.cs48.schedoptim;
+package edu.ucsb.cs.cs48.schedoptim.ui.maps;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,36 +22,47 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
+import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
+import edu.ucsb.cs.cs48.schedoptim.MapsController;
+import edu.ucsb.cs.cs48.schedoptim.R;
+
+
+
+public class MapsFragment extends Fragment implements OnMapReadyCallback {
+
+    private MapsViewModel mViewModel;
+
+    public static MapsFragment newInstance() {
+        return new MapsFragment();
+    }
+
     private GoogleMap mMap;
     private String file_dir;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        //Sets xml layout view to be used first
-        setContentView(R.layout.fragment_maps);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_maps, container, false);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         //store program's internal read/write storage directory path
-        file_dir = this.getFilesDir().toString();
+        file_dir = getContext().getFilesDir().toString();
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addLoc = new Intent(getApplicationContext(), AddTaskActivity.class);
+                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
                 addLoc.putExtra("path", file_dir);
                 startActivity(addLoc);
             }
         });
 
-        Button b = findViewById(R.id.button);
+        Button b = root.findViewById(R.id.button);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +70,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        return root;
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = ViewModelProviders.of(this).get(MapsViewModel.class);
     }
     /**
      * Manipulates the map once available.
@@ -86,7 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.addMarker(new MarkerOptions().position(toronto).title("Marker in Toronto"));
 
         //Set up button to draw routes
-        Button b = (Button) findViewById(R.id.button);
+        Button b = (Button) getView().findViewById(R.id.button);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

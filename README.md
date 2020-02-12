@@ -1,6 +1,6 @@
 # 5pm-schedule-optimization
 
-Schedule Optimization
+Schedule Optimization\n
 Project summary
 
 This Android app helps you get and store the fastest route between all the locations you need to go to in a given day!

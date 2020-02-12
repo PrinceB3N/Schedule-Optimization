@@ -21,7 +21,7 @@ android {
 task wrapper(type: Wrapper) {
     gradleVersion = '5.4.1'
 }
-repositories{
+repositories {
     mavenCentral()
 }
 dependencies {

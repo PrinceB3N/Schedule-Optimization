@@ -43,7 +43,7 @@ import java.util.Locale;
 import com.google.gson.Gson;
 
 public class JSONUtils {
-    private static String logname= MapsActivity.class.getName();
+    private static String logname= MainActivity.class.getName();
     //Keeps track of all paths filled
     private static List<String> used_paths;
 

@@ -51,7 +51,7 @@ public class MapsController{
     }
     public void placeMarkers(List<Location> locals) {
         for (Location local : locals) {
-            Log.d(MapsActivity.class.getName(),local.getName());
+            Log.d(MainActivity.class.getName(),local.getName());
             map.addMarker((new MarkerOptions().position(local.getLocation())));
         }
     }
@@ -164,9 +164,9 @@ public class MapsController{
 
         @Override
         protected Schedule doInBackground(Void... voids) {
-            Log.d(MapsActivity.class.getName(), "update:"+need_update);
+            Log.d(MainActivity.class.getName(), "update:"+need_update);
             if (!need_update) {
-                Log.d(MapsActivity.class.getName(),"GO UPDATE");
+                Log.d(MainActivity.class.getName(),"GO UPDATE");
                 return new Schedule(dir, path);
             }
             try {
@@ -179,10 +179,10 @@ public class MapsController{
 
         protected void onPostExecute(Schedule result) {
             if(result==null) {
-                Log.d(MapsActivity.class.getName(),"SCHEDULE IS NULL IN DRAW");
+                Log.d(MainActivity.class.getName(),"SCHEDULE IS NULL IN DRAW");
                 return;
             }
-            Log.d(MapsActivity.class.getName(),"In post execute");
+            Log.d(MainActivity.class.getName(),"In post execute");
             for (Route r : result.getRoutes()) {
                 map.addPolyline(new PolylineOptions()
                         .color(r.getLine_color())

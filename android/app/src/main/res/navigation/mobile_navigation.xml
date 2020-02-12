@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="edu.ucsb.cs.cs48.schedoptim.ui.locationInput.LocationInputFragment"
+        android:name="edu.ucsb.cs.cs48.schedoptim.ui.maps.MapsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/location_input_fragment" />
+        tools:layout="@layout/activity_maps" />
 
     <fragment
         android:id="@+id/navigation_notifications"

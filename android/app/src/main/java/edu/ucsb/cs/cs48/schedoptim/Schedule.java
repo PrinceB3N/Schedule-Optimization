@@ -226,12 +226,12 @@ public class Schedule {
     public void testDefaultConstructorGSONReadAndWrite(String file_dir){
         this.storeSchedule(file_dir, "/test.json");
         //Checks to see if JSON file was created, found, written to, read from, and casted into Schedule successfully.
-        Log.d(MapsActivity.class.getName(),this.getScheduleJSONString());
+        Log.d(MainActivity.class.getName(),this.getScheduleJSONString());
     }
     public void testJSONToGSON(String file_dir, String file_path){
         this.storeSchedule(file_dir, file_path);
         Schedule test = (Schedule)getObjectFromJSON(Schedule.class,file_dir, file_path);
         //Log.d(MapsActivity.class.getName(),test.getClass().toString());
-        Log.d(MapsActivity.class.getName(),"TESTGETSTOREDROUTE"+test.getRoutes().get(0).getEncoded_polylines().toString());
+        Log.d(MainActivity.class.getName(),"TESTGETSTOREDROUTE"+test.getRoutes().get(0).getEncoded_polylines().toString());
     }
 }

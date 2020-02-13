@@ -102,7 +102,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         LatLng ucsb = new LatLng(34.412936, -119.846063);
 
         // Add a marker in UCSB and move the camera
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
 
         // Add a marker in montreal and toronto, and move the camera
         //TODO: implement dynamic marker placement from JSON file

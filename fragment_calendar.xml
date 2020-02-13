@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="Time"
+                    android:textColor="#000"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="notification"
+                    android:textColor="#000"
+                    android:textSize="5dp" />
+
+            </TableRow>
+
+            <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="8AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+             <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity1"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+         </TableRow>
+            <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="9AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity2"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+         </TableRow>
+         <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="10AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity3"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            </TableRow>
+         <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="11AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="12PM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+             <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="1PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="2PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="3PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitv"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="4PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="5PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="6PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="7PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity10"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+
+         </TableLayout>
+    </LinearLayout>
+</ScrollView>

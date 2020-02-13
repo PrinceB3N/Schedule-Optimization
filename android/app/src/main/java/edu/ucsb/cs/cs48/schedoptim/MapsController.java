@@ -95,6 +95,10 @@ public class MapsController{
         need_update=true;
         return false;
     }
+    public void clearRequestList(){
+        locations.clear();
+        travel_modes.clear();
+    }
     public boolean swapRequestOrder(String order1, String order2){
         if(!locations.contains(order1) || !locations.contains(order2))
             return false;

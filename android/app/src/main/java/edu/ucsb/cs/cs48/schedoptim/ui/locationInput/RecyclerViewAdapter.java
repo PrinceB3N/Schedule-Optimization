@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Collections;
 import java.util.List;
 
+import edu.ucsb.cs.cs48.schedoptim.MapsController;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.ui.locationInput.helper.ItemTouchHelperAdapter;
 import edu.ucsb.cs.cs48.schedoptim.ui.locationInput.helper.ItemTouchHelperViewHolder;
@@ -26,6 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Context mContext;
     View mView;
     ViewHolder mViewHolder;
+    //MapsController mControl;
 
     private final OnStartDragListener mDragStartListener;
 
@@ -33,6 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         mDragStartListener = dragStartListener;
         mDataset = data;
         mContext = context;
+        //mControl = control;
     }
     public static class ViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder {

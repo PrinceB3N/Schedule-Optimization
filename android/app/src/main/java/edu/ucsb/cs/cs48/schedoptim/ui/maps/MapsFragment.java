@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.MapsController;
 import edu.ucsb.cs.cs48.schedoptim.R;
-
+import edu.ucsb.cs.cs48.schedoptim.ui.locationInput.LocationInputActivity;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
@@ -51,12 +51,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //store program's internal read/write storage directory path
         file_dir = getContext().getFilesDir().toString();
 
-
         FloatingActionButton fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
+                Intent addLoc = new Intent(getContext(), LocationInputActivity.class);
                 addLoc.putExtra("path", file_dir);
                 startActivity(addLoc);
             }

@@ -23,7 +23,7 @@ __**Installation Steps**__
 
 Running on real devices or standalone emulator (not in Android Studio):  
 1. Download the latest version of our APK file from  
-`GitHub release`  
+`GitHub release:`https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/releases/tag/Alpha  
 or  
 `Google Drive link:` https://drive.google.com/open?id=10MfhRckwyJCeOagAWYM_lPNlEgulmgbT
 2. Find the APK file in Download application

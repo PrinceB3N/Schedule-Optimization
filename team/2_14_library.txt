@@ -1,5 +1,7 @@
+
+
 Samuel: 
-  Figured out nitifications, using services, even when app is killed
+  Figured out notifications, using services, even when app is killed
   Next time: implement everything
 Martin:
   --

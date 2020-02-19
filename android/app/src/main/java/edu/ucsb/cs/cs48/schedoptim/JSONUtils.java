@@ -42,10 +42,14 @@ import java.util.Locale;
 
 import com.google.gson.Gson;
 
+/*
 public class JSONUtils {
     private static String logname= MainActivity.class.getName();
     //Keeps track of all paths filled
     private static List<String> used_paths;
+    public static Schedule getScheduleFromLocations(List<String> locations, List<String> travel_mode) {
+        return null;
+    }
 
     public static Schedule getScheduleFromLocations(List<String> locations, List<String> travel_mode) throws Exception{
         if(locations.size()<2 || travel_mode.size()==0 || locations.size()-1!=travel_mode.size())
@@ -78,6 +82,8 @@ public class JSONUtils {
         Schedule s = new Schedule(marks,routes,bounds,date);
         return s;
     }
+
+
 
     private static Route parseToRoute(JsonObject json){
         JsonObject routes = json.getAsJsonArray("routes").get(0).getAsJsonObject();
@@ -121,21 +127,16 @@ public class JSONUtils {
         String travel_mode = legs.getAsJsonArray("steps").get(0).getAsJsonObject().get("travel_mode").getAsString();
 
         //return Schedule
-        return new Route(Color.BLUE,encoded,starting,ending,cam_bounds,travel_mode,meters,seconds);
+        return null;
+
+        // return new Route(Color.BLUE,encoded,starting,ending,cam_bounds,travel_mode,meters,seconds);
     }
 
-    /***
-     *      PRIVATE HELPER METHODS BELOW-----------------------------------------------------------------
-     */
 
     private static String formatLocation(String location){
         return location.replaceAll(" ","+").replaceAll(",","");
     }
-    /**
-     *  Helper function that takes locations and travel mode
-     *      then formats it into https request string
-     *  Format:   json?origin=____&destination=_____&waypoints=4 ______|___|____|___&key=______
-     */
+
     private static String placesToUrl(List<String> locations, String travel_mode){
         //Formats String for URL input
         for(int i=0;i<locations.size();i++){
@@ -201,3 +202,4 @@ public class JSONUtils {
         return "";
     }
 }
+*/

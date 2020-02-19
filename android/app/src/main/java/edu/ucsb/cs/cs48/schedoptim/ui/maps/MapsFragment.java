@@ -1,6 +1,6 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.maps;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,24 +26,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.MapsController;
 import edu.ucsb.cs.cs48.schedoptim.R;
-
+import edu.ucsb.cs.cs48.schedoptim.RouteDatabase;
+import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
-
     private MapsViewModel mViewModel;
+    private GoogleMap mMap;
+    private String file_dir;
 
     public static MapsFragment newInstance() {
         return new MapsFragment();
     }
 
-    private GoogleMap mMap;
-    private String file_dir;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_maps, container, false);
+
+        mViewModel =
+                new ViewModelProvider(this).get(MapsViewModel.class);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -77,7 +80,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MapsViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MapsViewModel.class);
     }
     /**
      * Manipulates the map once available.
@@ -112,22 +115,31 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //mMap.addMarker(new MarkerOptions().position(toronto).title("Marker in Toronto"));
 
         //Set up button to draw routes
-        Button b = (Button) getView().findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button drawroutes = (Button) getView().findViewById(R.id.button);
+
+        //Schedule s = new Schedule();
+        //s.testJSONToGSON(file_dir, "/test.json");
+        final RouteDatabase db = Room.databaseBuilder(getContext(),
+                RouteDatabase.class, "database-task")
+                .allowMainThreadQueries()
+                .build();
+
+        mViewModel.setAllRoutes(db.getrouteDao().getAll().toString());
+        mViewModel.setRouteId("ID(int)");
+        mViewModel.setRouteTitle("Title(String)");
+
+        drawroutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickRequestAndDrawRoutes();
             }
         });
-
-        //Schedule s = new Schedule();
-        //s.testJSONToGSON(file_dir, "/test.json");
     }
     public void onClickRequestAndDrawRoutes(){         //<--Test travel mode by changing this
 
         //Controller class with drawing
         MapsController control = new MapsController(mMap,file_dir,"/test.json");
-        control.drawRoutes();
+        //control.drawRoutes();
     }
     /**
      * Method to move camera to wanted area.

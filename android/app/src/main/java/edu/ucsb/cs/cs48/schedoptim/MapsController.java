@@ -31,6 +31,7 @@ public class MapsController{
         this.dir=dir;
         this.path=path;
     }
+    /*
     //DRAW ROUTES FUNCTIONS, CALL THESE TO UPDATE MAPS VIEW
     public void drawRoutes(List<String> locations, List<String> travel_modes){
         need_update=true;
@@ -49,12 +50,17 @@ public class MapsController{
         RouteDrawer rd = new RouteDrawer();
         rd.execute();
     }
+
+     */
+    /*
     public void placeMarkers(List<Location> locals) {
         for (Location local : locals) {
             Log.d(MainActivity.class.getName(),local.getName());
             map.addMarker((new MarkerOptions().position(local.getLocation())));
         }
     }
+
+     */
     /**
      * Method to move camera to wanted area.
      */
@@ -141,6 +147,7 @@ public class MapsController{
         need_update=true;
         return true;
     }
+    /*
     public List<String> getRequestList(){
         return locations;
     }
@@ -153,6 +160,9 @@ public class MapsController{
         }
         return arr;
     }
+
+     */
+    /*
     //Helper for getting route travel_modes
     private List<String> getTravelModes(Schedule s){
         ArrayList<String> travel= new ArrayList<>();
@@ -161,6 +171,9 @@ public class MapsController{
         }
         return travel;
     }
+
+     */
+    /*
     //INNER CLASSES
     private class RouteDrawer extends AsyncTask<Void,Void,Schedule> {
 
@@ -169,7 +182,7 @@ public class MapsController{
             if (!need_update) {
                 try {
                     return new Schedule(dir, path);
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return null;
@@ -182,6 +195,9 @@ public class MapsController{
             return null;
         }
 
+     */
+
+/*
         protected void onPostExecute(Schedule result) {
             if(result==null) {
                 Log.d(MainActivity.class.getName(),"SCHEDULE IS NULL IN DRAW");
@@ -208,5 +224,9 @@ public class MapsController{
             //update flag
             need_update=false;
         }
+        */
     }
-}
+
+
+
+

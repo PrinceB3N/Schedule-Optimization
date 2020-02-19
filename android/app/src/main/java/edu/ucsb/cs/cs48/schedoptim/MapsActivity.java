@@ -101,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Controller class with drawing
         MapsController control = new MapsController(mMap,file_dir,"/test.json");
-        control.drawRoutes();
+        //control.drawRoutes();
     }
     /**
      * Method to move camera to wanted area.

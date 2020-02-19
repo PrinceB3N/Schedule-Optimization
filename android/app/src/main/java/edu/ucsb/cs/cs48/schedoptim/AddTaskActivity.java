@@ -32,7 +32,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getObjectFromJSON;
+//import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getObjectFromJSON;
 
 public class AddTaskActivity extends Activity {
 
@@ -49,7 +49,7 @@ public class AddTaskActivity extends Activity {
         final String travel_mode = "bicycling";
         final String file_dir = this.getFilesDir().toString();
         final String file_path = "/test.json";
-
+        /*
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +69,9 @@ public class AddTaskActivity extends Activity {
                 AddTaskActivity.this.finish();
             }
         });
-
+    */
     }
+
+
 
 }

@@ -34,7 +34,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private MapsViewModel mViewModel;
     private GoogleMap mMap;
     private String file_dir;
-
+    private RouteDatabase routeDatabase;
     public static MapsFragment newInstance() {
         return new MapsFragment();
     }
@@ -72,6 +72,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 onClickRequestAndDrawRoutes();
             }
         });
+
+        routeDatabase = Room.databaseBuilder(getContext(),
+                RouteDatabase.class, "database-task")
+                .allowMainThreadQueries()
+                .build();
+
+        mViewModel.setAllRoutes(routeDatabase.getrouteDao().getAll().toString());
 
         return root;
     }
@@ -114,31 +121,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //mMap.addMarker(new MarkerOptions().position(montreal).title("Marker in Montreal"));
         //mMap.addMarker(new MarkerOptions().position(toronto).title("Marker in Toronto"));
 
-        //Set up button to draw routes
-        Button drawroutes = (Button) getView().findViewById(R.id.button);
-
-        //Schedule s = new Schedule();
-        //s.testJSONToGSON(file_dir, "/test.json");
-        final RouteDatabase db = Room.databaseBuilder(getContext(),
-                RouteDatabase.class, "database-task")
-                .allowMainThreadQueries()
-                .build();
-
-        mViewModel.setAllRoutes(db.getrouteDao().getAll().toString());
-        mViewModel.setRouteId("ID(int)");
-        mViewModel.setRouteTitle("Title(String)");
-
-        drawroutes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRequestAndDrawRoutes();
-            }
-        });
     }
     public void onClickRequestAndDrawRoutes(){         //<--Test travel mode by changing this
 
         //Controller class with drawing
-        MapsController control = new MapsController(mMap,file_dir,"/test.json");
+        MapsController control = new MapsController(mMap,routeDatabase.getscheduleDao(),routeDatabase.getrouteDao());
         //control.drawRoutes();
     }
     /**

@@ -25,7 +25,7 @@ import java.util.List;
 public class Schedule {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int id;
+    private long id;
     @ColumnInfo(name = "swlat")
     private double swlat;
     @ColumnInfo(name = "swlong")
@@ -65,7 +65,7 @@ public class Schedule {
         this.day=s.day;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
     public double getSwlat() { return swlat; }
@@ -78,7 +78,7 @@ public class Schedule {
     }
     public String getDay() { return day; }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     public void setSwlat(double swlat) {
@@ -124,7 +124,6 @@ public class Schedule {
     public void testJSONToGSON(String file_dir, String file_path){
         this.storeSchedule(file_dir, file_path);
         Schedule test = (Schedule)getObjectFromJSON(Schedule.class,file_dir, file_path);
-        //Log.d(MapsActivity.class.getName(),test.getClass().toString());
         Log.d(MainActivity.class.getName(),"TESTGETSTOREDROUTE"+test.getRoutes().get(0).getEncoded_polylines().toString());
     }
     

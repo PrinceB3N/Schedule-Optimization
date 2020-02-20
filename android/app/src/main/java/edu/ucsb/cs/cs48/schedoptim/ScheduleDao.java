@@ -13,6 +13,8 @@ import java.util.List;
 @Dao
 public interface ScheduleDao {
 
+    @Query("SELECT * FROM schedule WHERE id = :schedule_id")
+    Schedule findByScheduleId(long schedule_id);
     //-----------------------insert----------------------
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insert(Schedule schedule);

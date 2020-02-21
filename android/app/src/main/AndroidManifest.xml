@@ -46,9 +46,6 @@
         <activity
             android:name=".AddTaskActivity">
         </activity>
-        <activity
-            android:name=".ui.locationInput.LocationInputActivity">
-        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

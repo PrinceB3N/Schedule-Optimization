@@ -55,7 +55,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addLoc = new Intent(getContext(), LocationInputActivity.class);
+                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
                 addLoc.putExtra("path", file_dir);
                 startActivity(addLoc);
             }

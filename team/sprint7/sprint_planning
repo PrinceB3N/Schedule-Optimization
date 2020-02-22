@@ -1,0 +1,64 @@
+Review new user stories, work on forming final product
+
+As a new user, I want to know what the app does so that I can easily use it.
+Split into smaller stories
+-make examples for our app
+-As a new user I want to see a few examples of how to use the app
+-As a new user I want to have some visual cues to help me use the app
+label buttons 
+
+As a user, I want buttons to be labeled so that I know what they do.
+
+As a user, I want pins and routes to be labeled so that it is easy to tell what place they are.
+-color code routes, label pins, 
+-dropdown menu/scrolling menu with clickables, 
+
+As a recurring user, I want to be able to clear routes so that I can easily draw some new routes.
+-dropdown menu, remove specific tasks, clear all routes button
+-in the calendar 
+
+
+As a user new to the area, I want addresses to be autofilled so that I don't have to look up the exact address on Google.
+-important feature, 
+
+As a user new to the area, I want my location displayed so that I know where I am relative to where I want to go.
+-access GPS location, display on map
+-manifest file 
+
+As a driver, I want the app to show English directions so that I know when to turn quickly.
+-not important, not enough time to include non-essentials, scrap
+
+MOST IMPORTANT:
+Map view and calendar view, make it as intuitive and working as possible
+
+Spring Cleaning:
+Archived events/memories
+Archived parking lot 
+Archived bike racks
+Scrapped GOLD access
+Free time scheduling -- novel feature
+Adding friends/social tasks -- low priority
+Alarm feature -- done
+Calendar to easily change and manipulate schedule -- in progress
+Get routes - done
+Zoom in and out -- done
+Accurate routes -- can't do more than what google maps provides
+Store multiple routes for one day -- archived
+Edit and remember tasks/calendar -- in progress
+All routes and pins numbered or labeled -- archived, split into 
+Specify different travel mode -- done
+New user experience -- split into 2, use examples, lead users through features, labeled buttons
+ -- on load --> send to calendar view to prompt user to start adding tasks to calendar/menu
+
+
+Use places autocomplete api for search bar
+Work on labels for each of the tasks 
+
+Acceptance criteria:
+-working
+-integrates
+-test code
+
+High priority items:
+Data manipulation --> how its used --> UI elements
+

@@ -13,13 +13,15 @@ import java.util.List;
 @Dao
 public interface TaskDao {
 
-    //所有的CURD根据primary key进行匹配
     //------------------------query------------------------
     @Query("SELECT * FROM task")
-    List<Task> getAll();
+    List<Task> loadAllTasks();
 
     @Query("SELECT * FROM task WHERE id IN (:taskIds)")
     List<Task> loadAllByIds(int[] taskIds);
+
+    @Query("SELECT * FROM task WHERE date = :taskDate")
+    List<Task> loadAllByDate(int taskDate);
 
 //    @Query("SELECT * FROM task WHERE first_name LIKE :first AND "
 //            + "last_name LIKE :last LIMIT 1")

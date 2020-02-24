@@ -15,136 +15,136 @@ import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getObjectFromJSON;
 import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.objToJSONString;
 import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.storeObjectAsJSON;
 
-class Location{
-    private LatLng location;
-    private String name;
+// class Location{
+//    private LatLng location;
+//    private String name;
+//
+//    public Location(LatLng l, String n){
+//        this.location=l;
+//        this.name=n;
+//    }
+//    public Location(Location l){
+//        this(l.location,l.name);
+//    }
+//    public boolean equals(Location l1) {
+//        if(l1==null)
+//            return false;
+//        return this.location.equals(l1.location)
+//                && this.name.equals(l1.name);
+//    }
+//    public LatLng getLocation() {
+//        return location;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setLocation(LatLng location) {
+//        this.location = location;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+// }
 
-    public Location(LatLng l, String n){
-        this.location=l;
-        this.name=n;
-    }
-    public Location(Location l){
-        this(l.location,l.name);
-    }
-    public boolean equals(Location l1) {
-        if(l1==null)
-            return false;
-        return this.location.equals(l1.location)
-                && this.name.equals(l1.name);
-    }
-    public LatLng getLocation() {
-        return location;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setLocation(LatLng location) {
-        this.location = location;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}
-
-class Route{
-    private int line_color;
-    private String encoded_polylines;
-    private Location start;
-    private Location end;
-    private LatLngBounds bounds;
-    private String travel_mode;
-    private float length;
-    private float time;
-
-    public Route(int line_color, String encoded_polylines, Location start,
-                 Location end, LatLngBounds bounds, String travel_mode, float length, float time){
-        this.line_color=line_color;
-        this.encoded_polylines= encoded_polylines;
-        this.start=new Location(start);
-        this.end=new Location(end);
-        this.bounds=bounds;
-        this.travel_mode=travel_mode;
-        this.length=length;
-        this.time=time;
-    }
-    public Route(Route r){
-        this(r.line_color,r.encoded_polylines,r.start,r.end,r.bounds,r.travel_mode,r.length,r.time);
-    }
-
-    public String getEncoded_polylines() {
-        return encoded_polylines;
-    }
-
-    public Location getStart() {
-        return start;
-    }
-
-    public Location getEnd() {
-        return end;
-    }
-
-    public LatLngBounds getBounds() {
-        return bounds;
-    }
-
-    public int getLine_color() {
-        return line_color;
-    }
-
-    public List<LatLng>getDecoded_polylines(){
-        return PolyUtil.decode(encoded_polylines);
-    }
-    public float getLength() {
-        return length;
-    }
-
-    public String getTravel_mode() {
-        return travel_mode;
-    }
-
-    public float getTime() {
-        return time;
-    }
-
-    public void setEncoded_polylines(String encoded_polylines) {
-        this.encoded_polylines = encoded_polylines;
-    }
-
-    public void setStart(Location start){
-        this.start=start;
-    }
-
-    public void setEnd(Location end) {
-        this.end = end;
-    }
-
-    public void setTravel_mode(String travel_mode) {
-        this.travel_mode = travel_mode;
-    }
-
-    public void setLine_color(int line_color) {
-        this.line_color = line_color;
-    }
-
-    public void setLength(float length) {
-        this.length = length;
-    }
-
-    public void setTime(float time){
-        this.time=time;
-    }
-
-    public boolean equals(Route r){
-        if(r==null)
-            return false;
-        return start.equals(r.start) &&
-                end.equals(r.end) &&
-                travel_mode.equals(r.travel_mode);
-    }
-}
+//class Route{
+//    private int line_color;
+//    private String encoded_polylines;
+//    private Location start;
+//    private Location end;
+//    private LatLngBounds bounds;
+//    private String travel_mode;
+//    private float length;
+//    private float time;
+//
+//    public Route(int line_color, String encoded_polylines, Location start,
+//                 Location end, LatLngBounds bounds, String travel_mode, float length, float time){
+//        this.line_color=line_color;
+//        this.encoded_polylines= encoded_polylines;
+//        this.start=new Location(start);
+//        this.end=new Location(end);
+//        this.bounds=bounds;
+//        this.travel_mode=travel_mode;
+//        this.length=length;
+//        this.time=time;
+//    }
+//    public Route(Route r){
+//        this(r.line_color,r.encoded_polylines,r.start,r.end,r.bounds,r.travel_mode,r.length,r.time);
+//    }
+//
+//    public String getEncoded_polylines() {
+//        return encoded_polylines;
+//    }
+//
+//    public Location getStart() {
+//        return start;
+//    }
+//
+//    public Location getEnd() {
+//        return end;
+//    }
+//
+//    public LatLngBounds getBounds() {
+//        return bounds;
+//    }
+//
+//    public int getLine_color() {
+//        return line_color;
+//    }
+//
+//    public List<LatLng>getDecoded_polylines(){
+//        return PolyUtil.decode(encoded_polylines);
+//    }
+//    public float getLength() {
+//        return length;
+//    }
+//
+//    public String getTravel_mode() {
+//        return travel_mode;
+//    }
+//
+//    public float getTime() {
+//        return time;
+//    }
+//
+//    public void setEncoded_polylines(String encoded_polylines) {
+//        this.encoded_polylines = encoded_polylines;
+//    }
+//
+//    public void setStart(Location start){
+//        this.start=start;
+//    }
+//
+//    public void setEnd(Location end) {
+//        this.end = end;
+//    }
+//
+//    public void setTravel_mode(String travel_mode) {
+//        this.travel_mode = travel_mode;
+//    }
+//
+//    public void setLine_color(int line_color) {
+//        this.line_color = line_color;
+//    }
+//
+//    public void setLength(float length) {
+//        this.length = length;
+//    }
+//
+//    public void setTime(float time){
+//        this.time=time;
+//    }
+//
+//    public boolean equals(Route r){
+//        if(r==null)
+//            return false;
+//        return start.equals(r.start) &&
+//                end.equals(r.end) &&
+//                travel_mode.equals(r.travel_mode);
+//    }
+//}
 //TODO: file storage handler class that takes care of pathing by mapping unique ids and keeps track of how many schedules there are.
 //TODO: learn about google calender, WARNING: may invalidate everything we did
 //TODO: implement delete, swap, add features for locations. + if someone changed this.

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Schedule Optimization</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_center">Route</string>
+    <string name="title_left">Calendar</string>
+    <string name="title_right">Social</string>
+</resources>

@@ -1,12 +1,12 @@
 package edu.ucsb.cs.cs48.schedoptim;
 
 // https://github.com/HoldMyOwn/RoomDemo
+// Monitoring: https://github.com/amitshekhariitbhu/Android-Debug-Database
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import edu.ucsb.cs.cs48.schedoptim.Schedule;
 
 
 @Entity(tableName = "task", indices = {})
@@ -20,7 +20,7 @@ public class Task {
     private String title;
 
     @ColumnInfo(name = "type")
-    private String type;
+    private String type; // class
 
     @ColumnInfo(name = "location")
     private String location;
@@ -31,11 +31,23 @@ public class Task {
     @ColumnInfo(name = "end_time")
     private int end_time;
 
-    @ColumnInfo(name = "days")
-    private String days;
+    @ColumnInfo(name = "date")
+    private int date;
 
     @ColumnInfo(name = "note")
     private String note;
+
+    @ColumnInfo(name = "color")
+    private String color;
+
+    @ColumnInfo(name = "importance")
+    private int importance;
+
+    @ColumnInfo(name = "notification")
+    private int notiTime;
+
+    @ColumnInfo(name = "calRoute")
+    private boolean calRoute;
 
     // Getters and setters are ignored for brevity,
     // but they're required for Room to work.
@@ -54,10 +66,18 @@ public class Task {
     public void setBegin_time (int begin_time) { this.begin_time = begin_time; }
     public int getEnd_time () { return  end_time; }
     public void setEnd_time (int end_time) { this.end_time = end_time; }
-    public String getDays () { return days; }
-    public void setDays (String days) { this.days = days; }
+    public int getDate() { return date; }
+    public void setDate(int date) { this.date = date; }
     public String getNote () { return note; }
     public void setNote (String note) {this.note = note; }
+    public String getColor () { return color; }
+    public void setColor (String color) {this.color = color; }
+    public int getImportance () { return  importance; }
+    public void setImportance (int importance) { this.importance = importance; }
+    public int getNotiTime () { return  notiTime; }
+    public void setNotiTime (int time) { this.notiTime = time; }
+    public boolean getCalRoute () { return  calRoute; }
+    public void setCalRoute (boolean calRoute) { this.calRoute = calRoute; }
 
     @Ignore
     public Task(String title, String location) {
@@ -99,7 +119,7 @@ public class Task {
                 ", location = " + location +
                 ", begin_time = " + begin_time +
                 ", end_time = " + end_time +
-                ", days = " + days +
+                ", date = " + date +
                 ", note = " + note +
                 " }";
     }

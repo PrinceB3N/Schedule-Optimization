@@ -61,13 +61,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        Button b = root.findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRequestAndDrawRoutes();
-            }
-        });
 
         return root;
     }
@@ -99,10 +92,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
 
         LatLng ucsb = new LatLng(34.412936, -119.846063);
+        onClickRequestAndDrawRoutes();
 
         // Add a marker in UCSB and move the camera
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ucsb, 15.1f));
+        onClickRequestAndDrawRoutes();
         // Add a marker in montreal and toronto, and move the camera
         //TODO: implement dynamic marker placement from JSON file
         LatLng montreal = new LatLng(45.5017123, -73.5672184);

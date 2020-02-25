@@ -16,7 +16,7 @@ import java.util.List;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "route", indices = {})
-class Route{
+public class Route{
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "route_id")
     private long route_id;

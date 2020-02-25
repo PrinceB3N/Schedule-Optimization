@@ -38,6 +38,7 @@ public class CalendarFragment extends Fragment {
         final TaskDatabase db = Room.databaseBuilder(getContext(),
                 TaskDatabase.class, "database-task")
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build();
 
         calendarViewModel.setAllTasks(db.taskDao().getAll().toString());

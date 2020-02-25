@@ -87,16 +87,6 @@ public class JSONUtils {
         //return schedule
         return routes;
     }
-    public static LatLngBounds getCameraBounds(ArrayList<Route> routes){
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for(Route route: routes) {
-            //add corners to camera bounds builder
-            builder.include(new LatLng(route.getStart_lat(), route.getStart_long()));
-            builder.include(new LatLng(route.getEnd_lat(), route.getEnd_long()));
-        }
-        //Finally build the bounds
-        return builder.build();
-    }
     private static Route parseToRoute(JsonObject json){
         JsonObject routes = json.getAsJsonArray("routes").get(0).getAsJsonObject();
 

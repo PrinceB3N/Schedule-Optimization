@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -48,48 +49,54 @@ import com.google.gson.Gson;
 public class JSONUtils {
     private static String logname = MainActivity.class.getName();
 
-    public static Schedule getScheduleFromLocations(List<String> locations, List<String> travel_mode, RouteDao rDao, ScheduleDao sDao) throws Exception {
-        if (locations.size() < 2 || travel_mode.size() == 0 || locations.size() - 1 != travel_mode.size())
+    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_mode, RouteDao rDao) throws Exception {
+        if (locations.size() < 2 || travel_mode.size() == 0 || locations.size() - 1 != travel_mode.size()) {
             return null;
-        LatLngBounds bounds = null;
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        }
         Locale loc = new Locale("en", "US");
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, loc);
         String date = dateFormat.format(new Date());
 
-        Schedule s = new Schedule(bounds, date);
-        long schedule_id = sDao.insert(s);
+        ArrayList<Route> routes = new ArrayList<>();
 
         for (int i = 0; i < travel_mode.size(); i++) {
-            InputStream is = new URL(placesToUrl(Arrays.asList(
-                    locations.get(i), locations.get(i + 1)), travel_mode.get(i)))
-                    .openStream();
-            Reader reader = new InputStreamReader(is, "UTF-8");
-            //Get and store route
-            Route route = parseToRoute(new Gson().fromJson(reader, JsonObject.class));
-            route.setSchedule_id(schedule_id);
-            rDao.insert(route);
-
-            //add corners to camera bounds builder
-            builder.include(new LatLng(route.getStart_lat(),route.getStart_long()));
-            builder.include(new LatLng(route.getEnd_lat(),route.getEnd_long()));
-            //Finish up
-            is.close();
-            reader.close();
+            //Format the location String
+            String start_address = formatLocation(locations.get(i));
+            String end_address = formatLocation(locations.get(i+1));
+            //Try getting exisiting route
+            Route route = rDao.findRouteByFields(start_address,end_address,travel_mode.get(i));
+            if(route!=null){
+                routes.add(route);
+                continue;
+            }
+            else {
+                InputStream is = new URL(placesToUrl(Arrays.asList(
+                        locations.get(i), locations.get(i + 1)), travel_mode.get(i)))
+                        .openStream();
+                Reader reader = new InputStreamReader(is, "UTF-8");
+                //Get and store new route in database and list
+                route = parseToRoute(new Gson().fromJson(reader, JsonObject.class));
+                rDao.insert(route);
+                routes.add(route);
+                //Finish up
+                is.close();
+                reader.close();
+            }
         }
-        //Finally compare the top and bot corners to get maximum bounds
-        bounds = builder.build();
 
-        s.setNelat(bounds.northeast.latitude);
-        s.setNelong(bounds.northeast.longitude);
-        s.setSwlat(bounds.southwest.latitude);
-        s.setSwlong(bounds.southwest.longitude);
-        //Store the schedule
-        sDao.update(s);
         //return schedule
-        return s;
+        return routes;
     }
-
+    public static LatLngBounds getCameraBounds(ArrayList<Route> routes){
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for(Route route: routes) {
+            //add corners to camera bounds builder
+            builder.include(new LatLng(route.getStart_lat(), route.getStart_long()));
+            builder.include(new LatLng(route.getEnd_lat(), route.getEnd_long()));
+        }
+        //Finally build the bounds
+        return builder.build();
+    }
     private static Route parseToRoute(JsonObject json){
         JsonObject routes = json.getAsJsonArray("routes").get(0).getAsJsonObject();
 
@@ -102,10 +109,14 @@ public class JSONUtils {
         int seconds = legs.getAsJsonObject("duration").get("value").getAsInt();
 
         //Get addresses
+        String start_address = legs.get("start_address").getAsString();
+
         JsonObject start_location = legs.getAsJsonObject("start_location");
         double start_lat = start_location.get("lat").getAsDouble();
         double start_lng = start_location.get("lng").getAsDouble();
         LatLng start = new LatLng(start_lat,start_lng);
+
+        String end_address = legs.get("end_address").getAsString();
 
         JsonObject end_location = legs.getAsJsonObject("end_location");
         double end_lat = end_location.get("lat").getAsDouble();
@@ -119,7 +130,7 @@ public class JSONUtils {
         String travel_mode = legs.getAsJsonArray("steps").get(0).getAsJsonObject().get("travel_mode").getAsString();
 
         //return Schedule
-        return new Route(Color.BLUE,encoded,start,end,travel_mode,meters,seconds);
+        return new Route(Color.BLUE,encoded,start,start_address,end,end_address,travel_mode,meters,seconds);
     }
 
     public static String formatLocation(String location){
@@ -168,7 +179,7 @@ public class JSONUtils {
         }
         return null;
     }
-    public static void storeObjectAsJSON(Schedule s, String file_dir, String file_path){
+    public static void storeObjectAsJSON(Object s, String file_dir, String file_path){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         File file = new File(file_dir+file_path);
         try{
@@ -183,7 +194,7 @@ public class JSONUtils {
             Log.e(logname,"",e);
         }
     }
-    public static String objToJSONString(Schedule s){
+    public static String objToJSONString(Object s){
         try{
             return new Gson().toJson(s);
         }catch(Exception e){

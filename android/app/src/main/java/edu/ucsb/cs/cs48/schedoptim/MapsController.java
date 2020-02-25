@@ -16,17 +16,17 @@ import java.util.List;
 
 public class MapsController {
     private GoogleMap map = null;
-    private ScheduleDao sDao = null;
     private RouteDao rDao = null;
     private static List<String> locations = new ArrayList<String>();
     private static List<String> travel_modes = new ArrayList<String>();
 
-    public MapsController(GoogleMap map, ScheduleDao sDao, RouteDao rDao) {
+    public MapsController(GoogleMap map, RouteDao rDao) {
         this.map = map;
-        this.sDao = sDao;
         this.rDao = rDao;
     }
+    public MapsController(){
 
+    }
     //DRAW ROUTES FUNCTIONS, CALL THESE TO UPDATE MAPS VIEW
     public void drawRoutes(List<String> locations, List<String> travel_modes){
         this.locations=locations;
@@ -34,15 +34,37 @@ public class MapsController {
         RouteDrawer rd = new RouteDrawer();
         rd.execute();
     }
-    public void drawRoutes(Long schedule_id){
-        RouteDrawer rd = new RouteDrawer();
-        rd.execute(schedule_id);
-    }
     public void drawRoutes(){
         RouteDrawer rd = new RouteDrawer();
         rd.execute();
     }
+    public void drawRoutes(ArrayList<Route> routes) {
+        if (routes == null) {
+            Log.d(MainActivity.class.getName(), "SCHEDULE IS NULL IN DRAW");
+            return;
+        }
 
+        for (int i = 0; i < routes.size(); i++) {
+            //Draw routes
+            map.addPolyline(new PolylineOptions()
+                    .color(routes.get(i).getLine_color())
+                    .width(12)
+                    .clickable(false)// Able to click or not.
+                    .addAll(routes.get(i).getDecoded_polylines()));
+        }
+    }
+    public void drawMarkers(ArrayList<Route> routes) {
+        if (routes == null) {
+            Log.d(MainActivity.class.getName(), "SCHEDULE IS NULL IN DRAW");
+            return;
+        }
+        //Add starting marker
+        map.addMarker(new MarkerOptions().position(new LatLng(routes.get(0).getStart_lat(), routes.get(0).getStart_long())));
+        for (Route r : routes) {
+            //Place location markers
+            map.addMarker(new MarkerOptions().position(new LatLng(r.getEnd_lat(), r.getEnd_long())));
+        }
+    }
     /**
      * Method to move camera to wanted area.
      */
@@ -66,7 +88,10 @@ public class MapsController {
         });
 
     }
-
+    public void clearRequests(){
+        locations.clear();
+        travel_modes.clear();
+    }
     //Location address list manipulating functions
     public boolean addToRequestList(String location, String travel_mode) {
         if (locations.size() == 0) {
@@ -75,16 +100,17 @@ public class MapsController {
         }
         locations.add(location);
         travel_modes.add(travel_mode);
-
-        ;
         return true;
     }
-
-    public boolean removeFromRequestList() {
-        ;
+    //TODO
+    public boolean removeFromRequestList(String location, String travel_mode) {
         return false;
     }
-
+    //TODO
+    private int findRequest(String location, String travel_mode){
+        return -1;
+    }
+    //TODO
     public boolean swapRequestOrder(String order1, String order2) {
         if (!locations.contains(order1) || !locations.contains(order2))
             return false;
@@ -129,72 +155,30 @@ public class MapsController {
 
         return true;
     }
-    /*
-    public List<String> getRequestList(){
-        return locations;
-    }
-    //Helper for storing only addresses
-    private List<String> getLocationsNames(Schedule s){
-        ArrayList<Location> locations = s.getLocations();
-        ArrayList<String> arr= new ArrayList<>();
-        for(Location l:locations){
-            arr.add(l.getName());
-        }
-        return arr;
-    }
-
-     */
-    /*
-    //Helper for getting route travel_modes
-    private List<String> getTravelModes(Schedule s){
-        ArrayList<String> travel= new ArrayList<>();
-        for(Route r:s.getRoutes()){
-            travel.add(r.getTravel_mode());
-        }
-        return travel;
-    }
-
-     */
-
     //INNER CLASSES
-    private class RouteDrawer extends AsyncTask<Long, Void, Schedule> {
+    private class RouteDrawer extends AsyncTask<Void, Void, ArrayList<Route>> {
 
         @Override
-        protected Schedule doInBackground(Long... longs) {
+        protected ArrayList<Route> doInBackground(Void... voids) {
             try {
-                return sDao.findByScheduleId(longs[0]);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                return JSONUtils.getScheduleFromLocations(locations,travel_modes,rDao,sDao);
-            } catch (Exception e) {
-                e.printStackTrace();
+                return JSONUtils.getRoutesFrom(locations,travel_modes,rDao);
+            }catch(Exception e){
+                Log.e(MainActivity.class.getName(),"Async Error",e);
             }
             return null;
         }
 
-        protected void onPostExecute(Schedule result) {
-            if (result == null) {
-                Log.d(MainActivity.class.getName(), "SCHEDULE IS NULL IN DRAW");
-                return;
-            }
-            List<Route> routes = rDao.findRoutesForSchedule(result.getId());
-            //Add starting marker
-            map.addMarker(new MarkerOptions().position(new LatLng(routes.get(0).getStart_lat(), routes.get(0).getStart_long())));
-
-            for (int i = 0; i < routes.size(); i++) {
-                //Draw routes
-                map.addPolyline(new PolylineOptions()
-                        .color(routes.get(i).getLine_color())
-                        .width(12)
-                        .clickable(false)// Able to click or not.
-                        .addAll(routes.get(i).getDecoded_polylines()));
-                //Place location markers
-                map.addMarker(new MarkerOptions().position(new LatLng(routes.get(i).getEnd_lat(), routes.get(i).getEnd_long())));
-            }
-            //move camera
-            moveCameraToWantedArea(new LatLng(result.getSwlat(), result.getSwlong()), new LatLng(result.getNelat(), result.getNelong()), 16);
+        protected void onPostExecute(ArrayList<Route> routes) {
+            //Clear map
+            map.clear();
+            //Get camera bounds
+            LatLngBounds bounds = JSONUtils.getCameraBounds(routes);
+            //Move camera
+            moveCameraToWantedArea(bounds.southwest, bounds.northeast, 16);
+            //draw Routes
+            drawRoutes(routes);
+            //draw Markers
+            drawMarkers(routes);
         }
     }
 }

@@ -47,17 +47,14 @@ public class AddTaskActivity extends Activity {
         final TextInputEditText input_lat= findViewById(R.id.textInput_lat);
         final TextInputEditText input_lng = findViewById(R.id.textInput_lng);
         final String travel_mode = "bicycling";
-        final String file_dir = this.getFilesDir().toString();
-        final String file_path = "/test.json";
-        /*
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 double lat = Double.valueOf(input_lat.getText().toString());
                 double lng = Double.valueOf(input_lng.getText().toString());
-                Location l = new Location(new LatLng(lat, lng),input_name.getText().toString());
 
-                MapsController control = new MapsController(file_dir,file_path);
+                MapsController control = new MapsController();
                 control.addToRequestList(input_name.getText().toString(),travel_mode);
                 AddTaskActivity.this.finish();
             }
@@ -69,7 +66,7 @@ public class AddTaskActivity extends Activity {
                 AddTaskActivity.this.finish();
             }
         });
-    */
+
     }
 
 

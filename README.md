@@ -15,14 +15,17 @@ Your Android devices/emulator must run on Android Marshmallow/6.0 (API 23) or ne
   
 __**Dependencies**__
 
-Google Maps API: Performs map based actions like displaying, drawing, and moving.
-Google Directions API: Allows for app to send https requests and grab directions to be displayed on the map.
-GSON: Convert between Classes and Json files.  
+Google Maps API: Performs map based actions like displaying, drawing, and moving.  
+Google Directions API: Allows for app to send https requests and grab directions to be displayed on the map.  
+GSON: Convert between Classes and Json files.    
 
 __**Installation Steps**__
 
 Running on real devices or standalone emulator (not in Android Studio):  
-1. Download the latest version of our APK file from `GitHub release` or 'Google Drive link`
+1. Download the latest version of our APK file from  
+`GitHub release:`https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/releases/tag/Alpha  
+or  
+`Google Drive link:` https://drive.google.com/open?id=10MfhRckwyJCeOagAWYM_lPNlEgulmgbT
 2. Find the APK file in Download application
 3. Click it and follow the system instruction
 

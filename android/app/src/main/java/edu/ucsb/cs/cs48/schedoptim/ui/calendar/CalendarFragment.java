@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import edu.ucsb.cs.cs48.schedoptim.R;
@@ -26,7 +26,7 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         calendarViewModel =
-                ViewModelProviders.of(this).get(CalendarViewModel.class);
+                new ViewModelProvider(this).get(CalendarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
         final TextView print = root.findViewById(R.id.text_print);
         final EditText idText = root.findViewById(R.id.text_id);

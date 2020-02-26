@@ -1,17 +1,21 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.maps;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.ui.IconGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +29,18 @@ import edu.ucsb.cs.cs48.schedoptim.RouteDao;
 import edu.ucsb.cs.cs48.schedoptim.RouteDatabase;
 
 public class MapsViewModel extends ViewModel{
-    private GoogleMap map = null;
+    private final static int BOUNDS_PADDING = 64;
+    private static GoogleMap map = null;
     private RouteDatabase rdb = null;
+    private static IconGenerator iconGenerator;
     private static List<String> locations = new ArrayList<String>();
     private static List<String> travel_modes = new ArrayList<String>();
-    private static ArrayList<Route> routes = new ArrayList<>();
+    private static MutableLiveData<ArrayList<Route>> routes = new MutableLiveData(new ArrayList<Route>(0));
     private static LatLngBounds bounds;
-    public MapsViewModel(GoogleMap map, RouteDatabase rdb) {
+    public MapsViewModel(GoogleMap map, RouteDatabase rdb, IconGenerator iconGenerator) {
         this.map = map;
         this.rdb = rdb;
+        this.iconGenerator=iconGenerator;
     }
     public MapsViewModel(){
 
@@ -41,9 +48,12 @@ public class MapsViewModel extends ViewModel{
     public GoogleMap getGoogleMap(){
         return this.map;
     }
-    public RouteDatabase getRouteDatabase(){
-        return this.rdb;
-    }
+    public RouteDatabase getRouteDatabase(){ return this.rdb; }
+    public MutableLiveData<ArrayList<Route>> getObservableRoutes(){ return routes; }
+
+    public void setMap(GoogleMap map){ this.map=map; }
+    public void setRdb(RouteDatabase rdb){ this.rdb=rdb; }
+    public void setIconGenerator(IconGenerator iconGenerator) { this.iconGenerator=iconGenerator;}
     //DRAW ROUTES FUNCTIONS, CALL THESE TO UPDATE MAPS VIEW
     public void drawRoutes(List<String> locations, List<String> travel_modes){
         this.locations=locations;
@@ -55,8 +65,8 @@ public class MapsViewModel extends ViewModel{
         RouteDrawer rd = new RouteDrawer();
         rd.execute();
     }
-    public void drawRoutes(ArrayList<Route> routes) {
-        if (routes == null) {
+    public static void drawRoutes(ArrayList<Route> routes) {
+        if (routes == null || map==null) {
             return;
         }
 
@@ -69,21 +79,61 @@ public class MapsViewModel extends ViewModel{
                     .addAll(routes.get(i).getDecoded_polylines()));
         }
     }
-    public void drawMarkers(ArrayList<Route> routes) {
-        if (routes == null) {
+    public static void drawMarkers(ArrayList<Route> routes) {
+        if (routes==null || map==null) {
             return;
         }
         //Add starting marker
-        map.addMarker(new MarkerOptions().position(new LatLng(routes.get(0).getStart_lat(), routes.get(0).getStart_long())));
-        for (Route r : routes) {
+        Bitmap bitmap = iconGenerator.makeIcon("1");
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(routes.get(0).getStart_lat(), routes.get(0).getStart_long()))
+                .title(routes.get(0).getStart_address())
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+
+        for (int i=0;i<routes.size();i++) {
             //Place location markers
-            map.addMarker(new MarkerOptions().position(new LatLng(r.getEnd_lat(), r.getEnd_long())));
+            bitmap = iconGenerator.makeIcon(""+(i+2));
+            map.addMarker(new MarkerOptions()
+                    .position(new LatLng(routes.get(i).getEnd_lat(), routes.get(i).getEnd_long()))
+                    .title(routes.get(i).getEnd_address())
+                    .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
         }
+    }
+    public static void drawRoute(Route route){
+        if(map==null)
+            return;
+
+        map.addPolyline(new PolylineOptions()
+                .color(route.getLine_color())
+                .width(12)
+                .clickable(false)// Able to click or not.
+                .addAll(route.getDecoded_polylines()));
+    }
+    public static void resetMap(){
+        if(map==null)
+            return;
+        map.clear();
+    }
+    public static void drawMarkers(Route route){
+        if(map==null)
+            return;
+
+        map.addMarker(new MarkerOptions().position(new LatLng(route.getStart_lat(), route.getStart_long())));
+        map.addMarker(new MarkerOptions().position(new LatLng(route.getEnd_lat(), route.getEnd_long())));
+    }
+    public static void moveCameraToWantedArea(Route route){
+        if(map==null)
+            return;
+        else if(bounds==null)
+            moveCameraToWantedArea(new LatLng(route.getStart_lat(),route.getStart_long()),
+                    new LatLng(route.getEnd_lat(),route.getEnd_long()),BOUNDS_PADDING);
+        else
+            moveCameraToWantedArea(bounds.southwest,bounds.northeast,BOUNDS_PADDING);
     }
     /**
      * Method to move camera to wanted area.
      */
-    public void moveCameraToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+    public static void moveCameraToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
         final LatLng BOUND1 = bound1;
         final LatLng BOUND2 = bound2;
         final int BOUNDS_PADDING = bound_padding;
@@ -187,7 +237,10 @@ public class MapsViewModel extends ViewModel{
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                routes = JSONUtils.getRoutesFrom(locations,travel_modes,rdb.getrouteDao());
+                ArrayList<Route> tmp_routes = JSONUtils.getRoutesFrom(locations,travel_modes,rdb.getrouteDao());
+                if(tmp_routes==null)
+                    return null;
+                routes.postValue(tmp_routes);
             }catch(Exception e){
                 Log.e(MainActivity.class.getName(),"Async Error",e);
             }
@@ -198,16 +251,22 @@ public class MapsViewModel extends ViewModel{
             if(routes==null){
                 return;
             }
+            if(routes.getValue()==null) {
+                return;
+            }
+            if(routes.getValue().isEmpty()){
+                return;
+            }
             //Clear map
-            map.clear();
+            resetMap();
             //Get camera bounds
-            bounds = getCameraBounds(routes);
+            bounds = getCameraBounds(routes.getValue());
             //Move camera
-            moveCameraToWantedArea(bounds.southwest, bounds.northeast, 16);
+            moveCameraToWantedArea(bounds.southwest, bounds.northeast, BOUNDS_PADDING);
             //draw Routes
-            drawRoutes(routes);
+            drawRoutes(routes.getValue());
             //draw Markers
-            drawMarkers(routes);
+            drawMarkers(routes.getValue());
         }
     }
 }

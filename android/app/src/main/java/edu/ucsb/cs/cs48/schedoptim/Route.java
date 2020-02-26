@@ -47,6 +47,14 @@ public class Route{
 
     }
     @Ignore
+    public Route(String start_address, String end_address,String travel_mode, float length, float time){
+        this.start_address=start_address;
+        this.end_address=end_address;
+        this.travel_mode=travel_mode;
+        this.length=length;
+        this.time=time;
+    }
+    @Ignore
     public Route(int line_color, String encoded_polylines, LatLng start,
                  String start_address, LatLng end, String end_address, String travel_mode, float length, float time){
         this.line_color=line_color;

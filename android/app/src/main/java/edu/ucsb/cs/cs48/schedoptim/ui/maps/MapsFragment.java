@@ -1,13 +1,18 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.maps;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.view.LayoutInflater;
@@ -19,33 +24,63 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.maps.android.ui.IconGenerator;
+
+import java.util.ArrayList;
 
 import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
+import edu.ucsb.cs.cs48.schedoptim.Route;
 import edu.ucsb.cs.cs48.schedoptim.RouteDatabase;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private RouteDatabase routeDatabase;
+    private IconGenerator iconGenerator;
     private MapsViewModel mapsViewModel;
+    private RecyclerView rvRoutes;
+    private RoutesAdapter adapter;
     public static MapsFragment newInstance() {
         return new MapsFragment();
     }
 
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_maps, container, false);
-
+        mapsViewModel = new ViewModelProvider(this).get(MapsViewModel.class);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //Obtain RecyclerView for routes
+        rvRoutes = (RecyclerView) root.findViewById(R.id.mapList);
+        // Create adapter passing in the sample user data
+        adapter = new RoutesAdapter(mapsViewModel.getObservableRoutes().getValue());
+        // Attach the adapter to the recyclerview to populate items
+        rvRoutes.setAdapter(adapter);
+        // Set layout manager to position the items
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        rvRoutes.setLayoutManager(layoutManager);
+        //Set dividers between elements in list
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvRoutes.getContext(),
+                layoutManager.getOrientation());
+        rvRoutes.addItemDecoration(dividerItemDecoration);
+
+        // Create the observer which updates the UI.
+        final Observer<ArrayList<Route>> nameObserver = new Observer<ArrayList<Route>>() {
+            @Override
+            public void onChanged(@Nullable final ArrayList<Route> routes) {
+                adapter.update(routes);
+            }
+        };
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        mapsViewModel.getObservableRoutes().observe(getViewLifecycleOwner(), nameObserver);
+
+        //Setup IconGenerator for markers
+        iconGenerator=new IconGenerator(this.getContext());
         //Create buttons
         FloatingActionButton fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +101,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         return root;
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -91,10 +125,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
-        mapsViewModel = new ViewModelProvider(this, new MapsViewModelFactory(mMap, routeDatabase)).get(MapsViewModel.class);
+        mapsViewModel.setMap(mMap);
+        mapsViewModel.setRdb(routeDatabase);
+        mapsViewModel.setIconGenerator(iconGenerator);
     }
-    public void onClickRequestAndDrawRoutes(){         //<--Test travel mode by changing this
+    public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();
+        adapter.notifyDataSetChanged();
     }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){

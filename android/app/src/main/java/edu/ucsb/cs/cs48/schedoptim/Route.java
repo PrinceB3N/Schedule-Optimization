@@ -61,43 +61,6 @@ class Route{
         this.length=length;
         this.time=time;
     }
-<<<<<<< HEAD
-    public Route(Route r){
-        this(r.line_color,r.encoded_polylines,r.start,r.end,r.bounds,r.travel_mode,r.length,r.time);
-    }
-
-    public String getEncoded_polylines() {
-        return encoded_polylines;
-    }
-
-    public Location getStart() {
-        return start;
-    }
-
-    public Location getEnd() {
-        return end;
-    }
-
-    public LatLngBounds getBounds() {
-        return bounds;
-    }
-
-    public int getLine_color() {
-        return line_color;
-    }
-
-    public List<LatLng> getDecoded_polylines(){
-        return PolyUtil.decode(encoded_polylines);
-    }
-    public float getLength() {
-        return length;
-    }
-
-    public String getTravel_mode() {
-        return travel_mode;
-    }
-
-=======
     @Ignore
     public Route(Route r){
         this.line_color=r.line_color;
@@ -133,49 +96,10 @@ class Route{
     public String getTravel_mode() {
         return travel_mode;
     }
->>>>>>> 8b9bb6763a951e972be81b9efc01e1b024675a93
     public float getTime() {
         return time;
     }
 
-<<<<<<< HEAD
-    public void setEncoded_polylines(String encoded_polylines) {
-        this.encoded_polylines = encoded_polylines;
-    }
-
-    public void setStart(Location start){
-        this.start=start;
-    }
-
-    public void setEnd(Location end) {
-        this.end = end;
-    }
-
-    public void setTravel_mode(String travel_mode) {
-        this.travel_mode = travel_mode;
-    }
-
-    public void setLine_color(int line_color) {
-        this.line_color = line_color;
-    }
-
-    public void setLength(float length) {
-        this.length = length;
-    }
-
-    public void setTime(float time){
-        this.time=time;
-    }
-
-    public boolean equals(Route r){
-        if(r==null)
-            return false;
-        return start.equals(r.start) &&
-                end.equals(r.end) &&
-                travel_mode.equals(r.travel_mode);
-    }
-}
-=======
     public void setRoute_id(long route_id) { this.route_id = route_id; }
     public void setEncoded_polylines(String encoded_polylines) { this.encoded_polylines = encoded_polylines; }
     public void setStart_lat(double start_lat) { this.start_lat = start_lat; }
@@ -191,4 +115,3 @@ class Route{
         this.time=time;
     }
 }
->>>>>>> 8b9bb6763a951e972be81b9efc01e1b024675a93

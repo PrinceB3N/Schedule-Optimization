@@ -15,26 +15,26 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         tools:layout_editor_absoluteX="0dp" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInput_lat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="151dp"
-        android:hint="Lat"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_name" />
+<!--    <com.google.android.material.textfield.TextInputEditText-->
+<!--        android:id="@+id/textInput_lat"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="151dp"-->
+<!--        android:hint="Lat"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/guideline5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textInput_name" />-->
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInput_lng"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:hint="Lng"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textInput_lat"
-        app:layout_constraintTop_toBottomOf="@+id/textInput_name" />
+<!--    <com.google.android.material.textfield.TextInputEditText-->
+<!--        android:id="@+id/textInput_lng"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="152dp"-->
+<!--        android:hint="Lng"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/textInput_lat"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textInput_name" />-->
 
     <Button
         android:id="@+id/button_cancel"

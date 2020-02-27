@@ -7,21 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <AutoCompleteTextView
-        android:id="@+id/autocomplete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Location" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInput_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        tools:layout_editor_absoluteX="0dp" />
-
-<!--    <com.google.android.material.textfield.TextInputEditText-->
+    <!--    <com.google.android.material.textfield.TextInputEditText-->
 <!--        android:id="@+id/textInput_lat"-->
 <!--        android:layout_width="0dp"-->
 <!--        android:layout_height="wrap_content"-->
@@ -41,6 +27,27 @@
 <!--        app:layout_constraintHorizontal_bias="0.0"-->
 <!--        app:layout_constraintStart_toEndOf="@+id/textInput_lat"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/textInput_name" />-->
+
+    <AutoCompleteTextView
+        android:id="@+id/autocomplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <EditText
+        android:id="@+id/travel_mode_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Travel Mode"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete" />
 
     <Button
         android:id="@+id/button_cancel"
@@ -76,8 +83,9 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

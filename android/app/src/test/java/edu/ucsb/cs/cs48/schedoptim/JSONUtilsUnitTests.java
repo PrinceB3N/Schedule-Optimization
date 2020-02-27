@@ -1,12 +1,14 @@
 package edu.ucsb.cs.cs48.schedoptim;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-
+@RunWith(JUnit4.class)
 public class JSONUtilsUnitTests {
     @Test
     public void formatLocation_FormatPerfectInput_EqualsExpected_ReturnsTrue(){

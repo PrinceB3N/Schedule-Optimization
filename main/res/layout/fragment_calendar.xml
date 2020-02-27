@@ -1,75 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/text_print"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
-    <EditText
-        android:id="@+id/text_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="ID (int)"
-        app:layout_constraintBottom_toTopOf="@+id/text_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <EditText
-        android:id="@+id/text_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Title (String)"
-        app:layout_constraintBottom_toTopOf="@+id/button_insert"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_id" />
+            <TableRow>
 
-    <Button
-        android:id="@+id/button_insert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Insert"
-        app:layout_constraintBottom_toTopOf="@+id/button_delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
-    <Button
-        android:id="@+id/button_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_insert" />
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="Time"
+                    android:textColor="#000"
+                    android:background="@color/Red"
+                    android:textSize="50dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:background="@color/Purple"
+                    android:textSize="50dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </TableRow>
+
+            <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="8AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+             <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity1"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+         </TableRow>
+            <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="9AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity2"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+         </TableRow>
+         <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="10AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity3"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            </TableRow>
+         <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="11AM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+            <TextView
+            android:layout_gravity="left"
+            android:text="12PM"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+             <TextView
+            android:layout_gravity="center"
+            android:text="Acitvity"
+            android:textColor="#000"
+            android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="1PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="2PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="3PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitv"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="4PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="5PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="6PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="left"
+                    android:text="7PM"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="Acitvity10"
+                    android:textColor="#000"
+                    android:textSize="50dp" />
+
+            </TableRow>
+
+         </TableLayout>
+    </LinearLayout>
+</ScrollView>

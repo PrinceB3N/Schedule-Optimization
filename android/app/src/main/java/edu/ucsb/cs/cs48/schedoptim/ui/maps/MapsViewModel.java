@@ -48,8 +48,13 @@ public class MapsViewModel extends ViewModel{
     public GoogleMap getGoogleMap(){
         return this.map;
     }
-    public RouteDatabase getRouteDatabase(){ return this.rdb; }
-    public MutableLiveData<ArrayList<Route>> getObservableRoutes(){ return routes; }
+    public RouteDatabase getRouteDatabase(){
+        return this.rdb; }
+    public MutableLiveData<ArrayList<Route>> getObservableRoutes(){
+        if(!routes.getValue().isEmpty()) {
+            Log.d(MainActivity.class.getName(), "ROUTEVAL:" + routes.getValue().get(0).getStart_address());
+        }
+        return routes; }
 
     public void setMap(GoogleMap map){ this.map=map; }
     public void setRdb(RouteDatabase rdb){ this.rdb=rdb; }
@@ -120,6 +125,21 @@ public class MapsViewModel extends ViewModel{
 
         map.addMarker(new MarkerOptions().position(new LatLng(route.getStart_lat(), route.getStart_long())));
         map.addMarker(new MarkerOptions().position(new LatLng(route.getEnd_lat(), route.getEnd_long())));
+    }
+    public static void drawMarkers(Route route, int markernumber){
+        if(map==null)
+            return;
+        Bitmap bitmap;
+        bitmap = iconGenerator.makeIcon(""+(markernumber));
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(route.getStart_lat(), route.getStart_long()))
+                .title(route.getStart_address())
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+        bitmap = iconGenerator.makeIcon(""+(markernumber+1));
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(route.getEnd_lat(), route.getEnd_long()))
+                .title(route.getEnd_address())
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
     }
     public static void moveCameraToWantedArea(Route route){
         if(map==null)

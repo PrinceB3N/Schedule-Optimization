@@ -59,11 +59,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         rvRoutes = (RecyclerView) root.findViewById(R.id.mapList);
         // Create adapter passing in the sample user data
         adapter = new RoutesAdapter(mapsViewModel.getObservableRoutes().getValue());
-        // Attach the adapter to the recyclerview to populate items
         rvRoutes.setAdapter(adapter);
+
         // Set layout manager to position the items
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         rvRoutes.setLayoutManager(layoutManager);
+
+
         //Set dividers between elements in list
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvRoutes.getContext(),
                 layoutManager.getOrientation());
@@ -131,7 +133,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();
-        adapter.notifyDataSetChanged();
     }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){

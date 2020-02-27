@@ -2,6 +2,7 @@ package edu.ucsb.cs.cs48.schedoptim.ui.maps;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
@@ -21,9 +23,9 @@ import edu.ucsb.cs.cs48.schedoptim.Route;
 
 public class RoutesAdapter extends
         RecyclerView.Adapter<RoutesAdapter.ViewHolder>{
-    private ArrayList<Route> routes;
+    private List<Route> routes;
     private int selected_route = -1;
-    public RoutesAdapter(ArrayList<Route> routes) {
+    public RoutesAdapter(List<Route> routes) {
             this.routes=routes;
     }
     public void setSelectedRoute(int position) {
@@ -37,15 +39,16 @@ public class RoutesAdapter extends
     }
     public void update(ArrayList<Route> routes){
         if(routes==null){
+            Log.d(MainActivity.class.getName(),"Update: routes=null");
             return;
         }
         else if(this.routes==null){
-            this.routes=new ArrayList<>(routes);
+            this.routes=routes;
             this.notifyDataSetChanged();
+            Log.d(MainActivity.class.getName(),"Update: this.routes=null"+routes.get(0).getStart_address());
             return;
         }
-        this.routes.clear();
-        this.routes.addAll(routes);
+        this.routes=routes;
         this.notifyDataSetChanged();
     }
     @NonNull
@@ -71,6 +74,7 @@ public class RoutesAdapter extends
 
         if(position == selected_route) {
             textView.setTextColor(Color.BLUE);
+
         }
         else {
             // Here, you must restore the color because the view is reused.. so, you may receive a reused view with wrong colors
@@ -83,7 +87,7 @@ public class RoutesAdapter extends
             public void onClick(View v) {
                 MapsViewModel.resetMap();
                 MapsViewModel.drawRoute(route);
-                MapsViewModel.drawMarkers(route);
+                MapsViewModel.drawMarkers(route,position+1);
                 MapsViewModel.moveCameraToWantedArea(route);
                 setBackgroundColor(position);
             }

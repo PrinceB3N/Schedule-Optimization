@@ -9,31 +9,19 @@ import edu.ucsb.cs.cs48.schedoptim.Task;
 
 public class CalendarViewModel extends ViewModel {
 
-    private MutableLiveData<String> allTasks;
-    private MutableLiveData<String> taskId;
-    private MutableLiveData<String> taskTitle;
-
-    private static MutableLiveData tasks;
+    private MutableLiveData<ArrayList<Task>> tasks;
+    private String travelMode; // TODO: how to store travel mode
 
 
     public CalendarViewModel() {
 
-        tasks  = new MutableLiveData();
-        allTasks = new MutableLiveData<>();
-        taskId = new MutableLiveData<>();
-        taskTitle = new MutableLiveData<>();
+        tasks  = new MutableLiveData<>();
+
     }
 
-    public LiveData<String> getAllTasks() {
-        return allTasks;
+    public MutableLiveData<ArrayList<Task>> getTasks() {
+        return tasks;
     }
-    public void setAllTasks(String s) { allTasks.setValue(s); }
-    public LiveData<String> getTaskId() {
-        return taskId;
-    }
-    public void setTaskId(String s) { taskId.setValue(s); }
-    public LiveData<String> getTaskTitle() {
-        return taskTitle;
-    }
-    public void setTaskTitle(String s) { taskTitle.setValue(s); }
+    public void setTasks(ArrayList<Task> t) { tasks.setValue(t); }
+
 }

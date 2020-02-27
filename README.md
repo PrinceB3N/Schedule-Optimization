@@ -1,7 +1,5 @@
 # 5pm-schedule-optimization
 
-![](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/workflows/.github/workflows/android.yml/badge.svg)
-
 **Schedule Optimization  
 Project summary**
 

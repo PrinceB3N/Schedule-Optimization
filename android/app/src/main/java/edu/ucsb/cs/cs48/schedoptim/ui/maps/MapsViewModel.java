@@ -90,6 +90,9 @@ public class MapsViewModel extends ViewModel{
         if (routes==null || map==null) {
             return;
         }
+        else if(routes.isEmpty()){
+            return;
+        }
         //Add starting marker
         Bitmap bitmap = iconGenerator.makeIcon("1");
         map.addMarker(new MarkerOptions()
@@ -147,15 +150,15 @@ public class MapsViewModel extends ViewModel{
         if(map==null)
             return;
         else if(bounds==null)
-            moveCameraToWantedArea(new LatLng(route.getStart_lat(),route.getStart_long()),
+            moveCameraSmoothlyToWantedArea(new LatLng(route.getStart_lat(),route.getStart_long()),
                     new LatLng(route.getEnd_lat(),route.getEnd_long()),BOUNDS_PADDING);
         else
-            moveCameraToWantedArea(bounds.southwest,bounds.northeast,BOUNDS_PADDING);
+            moveCameraSmoothlyToWantedArea(bounds.southwest,bounds.northeast,BOUNDS_PADDING);
     }
     /**
      * Method to move camera to wanted area.
      */
-    public static void moveCameraToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+    public static void moveCameraSmoothlyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
         final LatLng BOUND1 = bound1;
         final LatLng BOUND2 = bound2;
         final int BOUNDS_PADDING = bound_padding;
@@ -171,6 +174,26 @@ public class MapsViewModel extends ViewModel{
                         .build();
                 // Move the camera now.
                 map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, BOUNDS_PADDING));//0=BOUNDS_PADDING
+            }
+        });
+
+    }
+    public static void moveCameraImmediatelyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+        final LatLng BOUND1 = bound1;
+        final LatLng BOUND2 = bound2;
+        final int BOUNDS_PADDING = bound_padding;
+        if (map == null)
+            return;
+        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                // Set up the bounds coordinates for the area we want the user's viewpoint to be.
+                LatLngBounds bounds = new LatLngBounds.Builder()
+                        .include(BOUND1)
+                        .include(BOUND2)
+                        .build();
+                // Move the camera now.
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, BOUNDS_PADDING));
             }
         });
 
@@ -244,6 +267,12 @@ public class MapsViewModel extends ViewModel{
         return true;
     }
     public static LatLngBounds getCameraBounds(ArrayList<Route> routes){
+        if(routes==null){
+            return null;
+        }
+        else if(routes.isEmpty()){
+            return null;
+        }
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for(Route route: routes) {
             //add corners to camera bounds builder
@@ -253,7 +282,20 @@ public class MapsViewModel extends ViewModel{
         //Finally build the bounds
         return builder.build();
     }
-
+    public static void updateMapWithExistingData(){
+        if(map==null || routes==null)
+            return;
+        //Get camera bounds
+        bounds = getCameraBounds(routes.getValue());
+        //Move camera
+        if(bounds!=null) {
+            moveCameraImmediatelyToWantedArea(bounds.southwest, bounds.northeast, BOUNDS_PADDING);
+        }
+        //draw Routes
+        drawRoutes(routes.getValue());
+        //draw Markers
+        drawMarkers(routes.getValue());
+    }
     //INNER CLASSES
     private class RouteDrawer extends AsyncTask<Void, Void, Void> {
 
@@ -292,7 +334,9 @@ public class MapsViewModel extends ViewModel{
             //Get camera bounds
             bounds = getCameraBounds(routes.getValue());
             //Move camera
-            moveCameraToWantedArea(bounds.southwest, bounds.northeast, BOUNDS_PADDING);
+            if(bounds!=null){
+                moveCameraSmoothlyToWantedArea(bounds.southwest, bounds.northeast, BOUNDS_PADDING);
+            }
             //draw Routes
             drawRoutes(routes.getValue());
             //draw Markers

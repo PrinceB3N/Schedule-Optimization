@@ -1,8 +1,11 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar;
 
+import java.util.ArrayList;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import edu.ucsb.cs.cs48.schedoptim.Task;
 
 public class CalendarViewModel extends ViewModel {
 
@@ -10,7 +13,12 @@ public class CalendarViewModel extends ViewModel {
     private MutableLiveData<String> taskId;
     private MutableLiveData<String> taskTitle;
 
+    private static MutableLiveData tasks;
+
+
     public CalendarViewModel() {
+
+        tasks  = new MutableLiveData();
         allTasks = new MutableLiveData<>();
         taskId = new MutableLiveData<>();
         taskTitle = new MutableLiveData<>();

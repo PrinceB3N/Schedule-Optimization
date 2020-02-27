@@ -56,7 +56,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         //Obtain RecyclerView for routes
-        rvRoutes = (RecyclerView) root.findViewById(R.id.mapList);
+        rvRoutes = root.findViewById(R.id.mapList);
         // Create adapter passing in the sample user data
         adapter = new RoutesAdapter(mapsViewModel.getObservableRoutes().getValue());
         // Attach the adapter to the recyclerview to populate items
@@ -70,14 +70,14 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         rvRoutes.addItemDecoration(dividerItemDecoration);
 
         // Create the observer which updates the UI.
-        final Observer<ArrayList<Route>> nameObserver = new Observer<ArrayList<Route>>() {
+//        final Observer<ArrayList<Route>> nameObserver =
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        mapsViewModel.getObservableRoutes().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Route>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Route> routes) {
                 adapter.update(routes);
             }
-        };
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        mapsViewModel.getObservableRoutes().observe(getViewLifecycleOwner(), nameObserver);
+        });
 
         //Setup IconGenerator for markers
         iconGenerator=new IconGenerator(this.getContext());

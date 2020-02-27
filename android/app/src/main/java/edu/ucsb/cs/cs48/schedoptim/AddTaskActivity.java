@@ -46,19 +46,12 @@ public class AddTaskActivity extends Activity {
         Button cancel = findViewById(R.id.button_cancel);
         Button add = findViewById(R.id.button_add);
         final TextInputEditText input_name = findViewById(R.id.textInput_name);
-//        final TextInputEditText input_lat= findViewById(R.id.textInput_lat);
-//        final TextInputEditText input_lng = findViewById(R.id.textInput_lng);
         final String travel_mode = "bicycling";
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MapsViewModel.addToRequestList(input_name.getText().toString(),travel_mode);
-//                double lat = Double.valueOf(input_lat.getText().toString());
-//                double lng = Double.valueOf(input_lng.getText().toString());
-
-//                MapsController control = new MapsController();
-//                control.addToRequestList(input_name.getText().toString(),travel_mode);
                 AddTaskActivity.this.finish();
             }
         });

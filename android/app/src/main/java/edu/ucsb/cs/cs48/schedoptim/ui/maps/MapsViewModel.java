@@ -17,6 +17,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
 
+import org.mortbay.jetty.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -185,6 +187,7 @@ public class MapsViewModel extends ViewModel{
         }
         locations.add(location);
         travel_modes.add(travel_mode);
+        Log.d(MainActivity.class.getName(),"LOCATION ADDED:"+locations.get(0));
         return true;
     }
     //TODO
@@ -258,8 +261,12 @@ public class MapsViewModel extends ViewModel{
         protected Void doInBackground(Void... voids) {
             try {
                 ArrayList<Route> tmp_routes = JSONUtils.getRoutesFrom(locations,travel_modes,rdb.getrouteDao());
-                if(tmp_routes==null)
+                Log.d(MainActivity.class.getName(),"ASYNC_GET_ROUTES:");
+                if(tmp_routes==null) {
+                    Log.d(MainActivity.class.getName(),"ASYNC_ROUTES NULL_GET_ROUTES");
                     return null;
+                }
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES:"+tmp_routes.get(0).getStart_address());
                 routes.postValue(tmp_routes);
             }catch(Exception e){
                 Log.e(MainActivity.class.getName(),"Async Error",e);
@@ -269,12 +276,15 @@ public class MapsViewModel extends ViewModel{
 
         protected void onPostExecute(Void voids) {
             if(routes==null){
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES NULL");
                 return;
             }
             if(routes.getValue()==null) {
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES: NULL VALUE?!?!");
                 return;
             }
             if(routes.getValue().isEmpty()){
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES: EMPTY LIST");
                 return;
             }
             //Clear map
@@ -287,6 +297,7 @@ public class MapsViewModel extends ViewModel{
             drawRoutes(routes.getValue());
             //draw Markers
             drawMarkers(routes.getValue());
+            Log.d(MainActivity.class.getName(),"ASYNC_ROUTES SUCCESS:"+routes.getValue().get(0).getStart_address());
         }
     }
 }

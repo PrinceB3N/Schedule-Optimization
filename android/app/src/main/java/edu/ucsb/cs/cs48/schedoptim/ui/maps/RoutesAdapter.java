@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,17 +72,29 @@ public class RoutesAdapter extends
         final Route route = routes.get(position);
         // Set item views based on your views and data model
         final TextView textView = viewHolder.routeTextView;
+        TextView route_numberView = viewHolder.route_number;
+        ImageView travel_mode_img = viewHolder.travel_mode_img;
 
         if(position == selected_route) {
             textView.setTextColor(Color.BLUE);
-
+            route_numberView.setTextColor(Color.BLUE);
         }
         else {
             // Here, you must restore the color because the view is reused.. so, you may receive a reused view with wrong colors
-            textView.setTextColor(Color.BLACK);
+            textView.setTextColor(Color.GRAY);
+            route_numberView.setTextColor(Color.GRAY);
         }
-        textView.setText(route.getStart_address()+" -> "+route.getEnd_address()+"\n"+
-                            "Travel time: "+route.getTime()+"Distance: "+route.getLength()+"Travel mode: "+route.getTravel_mode());
+        String route_number =  ""+(position+1)+"->"+(position+2);
+        route_numberView.setText(route_number);
+        String text = "Travel time: "+route.getTime()+"Distance: "+route.getLength()+"Travel mode: "+route.getTravel_mode();
+        textView.setText(text);
+        if(route.getTravel_mode().equals("BICYCLING")) {
+            travel_mode_img.setImageResource(R.drawable.bicycling);
+        }
+        else{
+            travel_mode_img.setImageResource(R.drawable.walking);
+        }
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,33 +105,6 @@ public class RoutesAdapter extends
                 setBackgroundColor(position);
             }
         });
-
-
-/*
-        final CheckBox checkBox = viewHolder.showRoute;
-        checkBox.setActivated(true);
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!checkBox.isActivated()) {
-                    MapsViewModel.resetMap();
-                    MapsViewModel.drawRoute(route);
-                    MapsViewModel.drawMarkers(route);
-                    MapsViewModel.moveCameraToWantedArea(route);
-                    checkBox.setActivated(true);
-                }
-                else if(checkBox.isActivated()){
-                    MapsViewModel.resetMap();
-                    MapsViewModel.drawRoutes(routes);
-                    MapsViewModel.drawMarkers(routes);
-                    MapsViewModel.moveCameraToWantedArea();
-                    checkBox.setActivated(false);
-                }
-
-            }
-        });
-
- */
 
     }
 
@@ -133,7 +119,8 @@ public class RoutesAdapter extends
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView routeTextView;
-        public CheckBox showRoute;
+        public TextView route_number;
+        public ImageView travel_mode_img;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -142,7 +129,8 @@ public class RoutesAdapter extends
             super(itemView);
 
             routeTextView = (TextView) itemView.findViewById(R.id.contact_name);
-            showRoute = (CheckBox) itemView.findViewById(R.id.showRoute);
+            route_number = (TextView) itemView.findViewById(R.id.route_number);
+            travel_mode_img = (ImageView) itemView.findViewById(R.id.travel_mode_img);
         }
     }
 }

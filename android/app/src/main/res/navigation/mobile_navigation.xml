@@ -7,7 +7,7 @@
 
     <fragment
     android:id="@+id/navigation_left"
-    android:name="edu.ucsb.cs.cs48.schedoptim.ui.dashboard.DashboardFragment"
+    android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarFragment"
     android:label="@string/title_left"
     tools:layout="@layout/fragment_calendar" />
 

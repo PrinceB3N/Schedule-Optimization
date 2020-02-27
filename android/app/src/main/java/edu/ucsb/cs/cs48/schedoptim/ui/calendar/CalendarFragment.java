@@ -40,7 +40,7 @@ public class CalendarFragment extends Fragment {
                 .allowMainThreadQueries()
                 .build();
 
-        calendarViewModel.setAllTasks(db.taskDao().loadAllTasks().toString());
+        calendarViewModel.setAllTasks(db.taskDao().getAll().toString());
         calendarViewModel.setTaskId("ID(int)");
         calendarViewModel.setTaskTitle("Title(String)");
 
@@ -59,7 +59,7 @@ public class CalendarFragment extends Fragment {
                     t.setId(Integer.valueOf(ids));
                     t.setTitle(title);
                     db.taskDao().insert(t);
-                    calendarViewModel.setAllTasks(db.taskDao().loadAllTasks().toString());
+                    calendarViewModel.setAllTasks(db.taskDao().getAll().toString());
                     Toast.makeText(getContext(), "Successfully inserted Task with id: " + t.getId(), Toast.LENGTH_SHORT).show();
                 } catch (java.lang.NumberFormatException e){
                     Toast.makeText(getContext(), "Please enter valid int number", Toast.LENGTH_SHORT).show();
@@ -72,8 +72,8 @@ public class CalendarFragment extends Fragment {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.taskDao().deleteAll(db.taskDao().loadAllTasks());
-                calendarViewModel.setAllTasks(db.taskDao().loadAllTasks().toString());
+                db.taskDao().deleteAll(db.taskDao().getAll());
+                calendarViewModel.setAllTasks(db.taskDao().getAll().toString());
 //                Toast.makeText(getContext(), "Successfully deleted Task with id: " + t.getId(), Toast.LENGTH_SHORT).show();
             }
 

@@ -93,13 +93,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        Button b = root.findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickRequestAndDrawRoutes();
-            }
-        });
 
         return root;
     }

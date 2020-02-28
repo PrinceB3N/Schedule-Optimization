@@ -204,10 +204,6 @@ public class MapsViewModel extends ViewModel{
     }
     //Location address list manipulating functions
     public static boolean addToRequestList(String location, String travel_mode) {
-        if (locations.size() == 0) {
-            locations.add(location);
-            return true;
-        }
         locations.add(location);
         travel_modes.add(travel_mode);
         Log.d(MainActivity.class.getName(),"LOCATION ADDED:"+locations.get(0));

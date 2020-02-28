@@ -13,7 +13,8 @@
         android:id="@+id/route_number"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="right"/>
 
     <ImageView
         android:id="@+id/travel_mode_img"
@@ -26,6 +27,7 @@
         android:id="@+id/contact_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="10" />
+        android:layout_weight="10"
+        android:gravity="center"/>
     />
 </LinearLayout>

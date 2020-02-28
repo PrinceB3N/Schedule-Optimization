@@ -49,8 +49,8 @@ import com.google.gson.Gson;
 public class JSONUtils {
     private static String logname = MainActivity.class.getName();
 
-    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_mode, RouteDao rDao) throws Exception {
-        if (locations.size() < 2 || travel_mode.size() == 0 || locations.size() - 1 != travel_mode.size()) {
+    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_modes, RouteDao rDao) throws Exception {
+        if (locations.size() < 2 || travel_modes.size() == 0 || locations.size() != travel_modes.size()) {
             return null;
         }
         Locale loc = new Locale("en", "US");
@@ -59,19 +59,21 @@ public class JSONUtils {
 
         ArrayList<Route> routes = new ArrayList<>();
 
-        for (int i = 0; i < travel_mode.size(); i++) {
+        for (int i = 0; i < travel_modes.size()-1; i++) {
             //Format the location String
             String start_address = formatLocation(locations.get(i));
             String end_address = formatLocation(locations.get(i+1));
+            //Format travel mode string
+            String travel_mode = formatTravelMode(travel_modes.get(i));
             //Try getting exisiting route
-            Route route = rDao.findRouteByFields(start_address,end_address,travel_mode.get(i));
+            Route route = rDao.findRouteByFields(start_address,end_address,travel_mode);
             if(route!=null){
                 routes.add(route);
                 continue;
             }
             else {
                 InputStream is = new URL(placesToUrl(Arrays.asList(
-                        locations.get(i), locations.get(i + 1)), travel_mode.get(i)))
+                        start_address, end_address), travel_mode))
                         .openStream();
                 Reader reader = new InputStreamReader(is, "UTF-8");
                 //Get and store new route in database and list
@@ -126,7 +128,19 @@ public class JSONUtils {
     public static String formatLocation(String location){
         return location.replaceAll(" ","+").replaceAll(",","");
     }
-
+    //Formats a travel mode string into correct output, otherwise default to driving
+    public static String formatTravelMode(String travel_mode){
+        String mode=travel_mode.toLowerCase();
+        switch(mode) {
+            case "walking":
+            case "bicycling":
+            case "transit":
+            case "driving":
+                return mode;
+            default:
+                return "walking";
+        }
+    }
     public static String placesToUrl(List<String> locations, String travel_mode){
         //Formats String for URL input
         for(int i=0;i<locations.size();i++){

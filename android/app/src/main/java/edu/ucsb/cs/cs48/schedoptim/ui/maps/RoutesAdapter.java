@@ -86,15 +86,11 @@ public class RoutesAdapter extends
         }
         String route_number =  ""+(position+1)+"->"+(position+2);
         route_numberView.setText(route_number);
-        String text = "Travel time: "+route.getTime()+"Distance: "+route.getLength()+"Travel mode: "+route.getTravel_mode();
+        String text = route.getFormattedTime()+"------"+route.getFormattedLength();
         textView.setText(text);
-        if(route.getTravel_mode().equals("BICYCLING")) {
-            travel_mode_img.setImageResource(R.drawable.bicycling);
-        }
-        else{
-            travel_mode_img.setImageResource(R.drawable.walking);
-        }
-
+        //Sets Image based on travel mode in route
+        setTravelModeImg(route,travel_mode_img);
+        //Update map and item text color when recyclerview item is clicked
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +110,22 @@ public class RoutesAdapter extends
             return 0;
         return routes.size();
     }
-
+    private void setTravelModeImg(Route route,ImageView travel_mode_img){
+        switch(route.getTravel_mode()){
+            case "BICYCING":
+                travel_mode_img.setImageResource(R.drawable.bicycling);
+                return;
+            case "WALKING":
+                travel_mode_img.setImageResource(R.drawable.walking);
+                return;
+            case "TRANSIT":
+                travel_mode_img.setImageResource(R.drawable.transit);
+                return;
+            case "DRIVING":
+                travel_mode_img.setImageResource(R.drawable.driving);
+                return;
+        }
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row

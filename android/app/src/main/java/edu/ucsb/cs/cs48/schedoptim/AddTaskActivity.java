@@ -51,19 +51,12 @@ public class AddTaskActivity extends Activity {
         final EditText travel_mode_input= (EditText) findViewById(R.id.travel_mode_input);
         Button cancel = findViewById(R.id.button_cancel);
         Button add = findViewById(R.id.button_add);
-        final String default_travel_mode = "bicycling";
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!travel_mode_input.getText().toString().equals("bicycling") || !travel_mode_input.getText().toString().equals("walking")){
-                    MapsViewModel.addToRequestList(autoCompleteTextView.getText().toString(),default_travel_mode);
-                    AddTaskActivity.this.finish();
-                }
-                else {
                     MapsViewModel.addToRequestList(autoCompleteTextView.getText().toString(), travel_mode_input.getText().toString());
                     AddTaskActivity.this.finish();
-                }
             }
         });
 

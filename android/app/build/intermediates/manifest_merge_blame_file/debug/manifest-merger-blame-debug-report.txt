@@ -1,0 +1,163 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="edu.ucsb.cs.cs48.schedoptim"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+10    <!--
+11         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+12         Google Maps Android API v2, but you must specify either coarse or fine
+13         location permissions for the 'MyLocation' functionality.
+14    -->
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:9:5-79
+15-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:9:22-76
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:10:5-67
+16-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:10:22-64
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:11:5-80
+17-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:11:22-78
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:12:5-79
+18-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:12:22-76
+19    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+19-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:13:5-71
+19-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:13:22-68
+20    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+20-->[com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:30:5-76
+20-->[com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:30:22-73
+21
+22    <uses-feature
+22-->[com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
+23        android:glEsVersion="0x00020000"
+23-->[com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
+24        android:required="true" />
+24-->[com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
+25
+26    <application
+26-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:14:5-51:19
+27        android:allowBackup="true"
+27-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:15:9-35
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1402bdaa13be329273ea44182ebe0f2/core-1.1.0/AndroidManifest.xml:24:18-86
+29        android:debuggable="true"
+30        android:extractNativeLibs="false"
+31        android:icon="@mipmap/ic_launcher"
+31-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:16:9-43
+32        android:label="@string/app_name"
+32-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:17:9-41
+33        android:roundIcon="@mipmap/ic_launcher_round"
+33-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:18:9-54
+34        android:supportsRtl="true"
+34-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:19:9-35
+35        android:testOnly="true"
+36        android:theme="@style/AppTheme" >
+36-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:20:9-40
+37        <activity
+37-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:21:9-29:20
+38            android:name="edu.ucsb.cs.cs48.schedoptim.MainActivity"
+38-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:22:13-41
+39            android:label="@string/title_activity_main" >
+39-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:23:13-56
+40            <intent-filter>
+40-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:24:13-28:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:25:17-69
+41-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:25:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:27:17-77
+43-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:27:27-74
+44            </intent-filter>
+45        </activity>
+46
+47        <!--
+48             The API key for Google Maps-based APIs is defined as a string resource.
+49             (See the file "res/values/google_maps_api.xml").
+50             Note that the API key is linked to the encryption key used to sign the APK.
+51             You need a different API key for each encryption key, including the release key that is used to
+52             sign the APK for publishing.
+53             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+54        -->
+55        <meta-data
+55-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:39:9-41:54
+56            android:name="com.google.android.geo.API_KEY"
+56-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:40:13-58
+57            android:value="@string/google_maps_key" />
+57-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:41:13-52
+58
+59        <activity android:name="edu.ucsb.cs.cs48.schedoptim.AddTaskActivity" >
+59-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:43:9-45:20
+59-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:44:13-44
+60        </activity>
+61
+62        <meta-data
+62-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:47:9-49:65
+63            android:name="com.google.android.gms.version"
+63-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:48:13-58
+64            android:value="@integer/google_play_services_version" />
+64-->/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:49:9-62
+65
+66        <provider
+66-->[com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:12:9-16:40
+67            android:name="com.amitshekhar.debug.DebugDBInitProvider"
+67-->[com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:13:13-69
+68            android:authorities="edu.ucsb.cs.cs48.schedoptim.DebugDBInitProvider"
+68-->[com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:14:13-71
+69            android:enabled="true"
+69-->[com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:15:13-35
+70            android:exported="false" />
+70-->[com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:16:13-37
+71
+72        <activity
+72-->[pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:12:9-16:66
+73            android:name="pub.devrel.easypermissions.AppSettingsDialogHolderActivity"
+73-->[pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:13:13-86
+74            android:exported="false"
+74-->[pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:14:13-37
+75            android:label=""
+75-->[pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:15:13-29
+76            android:theme="@style/EasyPermissions.Transparent" />
+76-->[pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:16:13-63
+77
+78        <service
+78-->[androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:25:9-27:40
+79            android:name="androidx.room.MultiInstanceInvalidationService"
+79-->[androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:26:13-74
+80            android:exported="false" /> <!-- Needs to be explicitly declared on P+ -->
+80-->[androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:27:13-37
+81        <uses-library
+81-->[com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
+82            android:name="org.apache.http.legacy"
+82-->[com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
+83            android:required="false" />
+83-->[com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
+84
+85        <activity
+85-->[com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+86            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+86-->[com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+87            android:exported="false"
+87-->[com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+88            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+88-->[com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+89
+90        <provider
+90-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
+91            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+91-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
+92            android:authorities="edu.ucsb.cs.cs48.schedoptim.lifecycle-process"
+92-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
+93            android:exported="false"
+93-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
+94            android:multiprocess="true" />
+94-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
+95    </application>
+96
+97</manifest>

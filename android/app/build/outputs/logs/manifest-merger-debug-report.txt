@@ -1,0 +1,371 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+MERGED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:2:1-19:12
+MERGED from [androidx.navigation:navigation-ui:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/413410625e697e994ad4b3b053eec750/navigation-ui-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/377c61306b40ea376458d4e8a02459eb/material-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:2:1-19:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/94144a36c45f3be54fe4d92dcb304e04/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/e8fed1474dab090e7be88b9fcfa269f1/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b84b7b0889b6a4472e2efedaddc48fdd/lifecycle-extensions-2.2.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.navigation:navigation-fragment:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b26c7b42d718256d26aab89a01f0c382/navigation-fragment-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/1844735ba71d4e7d59178f1a1086bb5f/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/221c6acd4be20e44bfb8a8d841afafc2/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7c7be0764f52855c91fa42680e48e92/constraintlayout-1.1.3/AndroidManifest.xml:2:1-11:12
+MERGED from [com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:20:1-32:12
+MERGED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:17:1-30:12
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/maynic/.gradle/caches/transforms-2/files-2.1/97a33e41e0ea3451e252d68fefb97ce2/jetified-android-maps-utils-0.5/AndroidManifest.xml:2:1-13:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/9587121c3d07d17e36f8beb989bb6aec/jetified-appcompat-resources-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/8c9866ef2dd35a2e796440a6b8246087/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b313045cfbbf25727dee865da3dbcb2d/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/28187d766bdcad1f61789e699f344254/media-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/06013c4d43f55e44eb1d5dad75dc90a0/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a13832404f261ea64ab83b57938cc95/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c29f23cd47c369b60f667f1e88c9a486/jetified-play-services-basement-17.0.0/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.fragment:fragment:1.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/0eeede0839d6485f095e39a14064fc6a/fragment-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/f61b27fed0d1e94091ddfbde5189d670/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/37731056c68b94fa13e6edf9e8f8de11/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ac4710d0c144653a10ae682c48be11aa/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a98a85eea6e93edcc4dca7f509e1db9/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6366e485c45d44ef7de500cd604dc7da/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a98636cbea9086275573b50c91e5a283/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/19ab5715418bf0e0fb2259af124ce86f/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/5dbfa3d90c30701f5b25ede550fefb01/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/1e6941a4e1920972f7a99f43e4200db5/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/65a56b13c41b3d5904aac1e0de6ac19c/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/dc75e2d07bf145b06cee5d3fd22ef185/navigation-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3613fb46e8fd9cb839c024c3cbe0ad2e/jetified-activity-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/94e89c629f7242ce36152038cc96b39f/navigation-common-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1402bdaa13be329273ea44182ebe0f2/core-1.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/93c3c9e44a3a5269f59adbcc5de81a0f/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:17:1-32:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/41963283f75bc3a813664b647dfd7ee3/jetified-lifecycle-service-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/2d9c1a3a0865fce5469873b8558fe2d8/lifecycle-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7d15b5887c9edc338cb6c6b6b50580d/lifecycle-livedata-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/5eb86c487fb2ca878ccdce878ebfef59/jetified-lifecycle-viewmodel-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/7132cdb719179fb9da622748a9462a14/lifecycle-livedata-core-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/400b58e8952b1145ff429c54ca8511b7/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/37810677a6f7310a1ae5f5d6c45fa9b4/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/15152b1ea8e579825fa87d9cad99f162/lifecycle-viewmodel-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6f659513ac8107f41de50d54224fc6a7/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite-framework:2.0.1] /Users/maynic/.gradle/caches/transforms-2/files-2.1/9f9fe3d5eb6e7bd7c8aa88d8c3acdd76/sqlite-framework-2.0.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.0.1] /Users/maynic/.gradle/caches/transforms-2/files-2.1/592bf6362744933c654b7acac449a5a2/sqlite-2.0.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ecfd87718b07458c0c63e45dc6db5f99/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6979d3f4625f0293f758d87b49b9365e/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/15ef245ec5756b5dafa081e2755e2ed2/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/cb176b91f2c8ea6b8cd09fb567132e98/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/db842c62f8b3f6d754b57f81ad62807a/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+	package
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:3:5-42
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:1-53:12
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.INTERNET
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:10:5-67
+MERGED from [com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:29:5-67
+MERGED from [com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:29:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:10:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:11:5-80
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:11:22-78
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:12:5-79
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:12:22-76
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:13:5-71
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:13:22-68
+application
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:14:5-51:19
+MERGED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:11:5-17:19
+MERGED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:11:5-17:19
+MERGED from [com.google.android.material:material:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/377c61306b40ea376458d4e8a02459eb/material-1.1.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/377c61306b40ea376458d4e8a02459eb/material-1.1.0/AndroidManifest.xml:22:5-20
+MERGED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:11:5-17:19
+MERGED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:11:5-17:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b84b7b0889b6a4472e2efedaddc48fdd/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b84b7b0889b6a4472e2efedaddc48fdd/lifecycle-extensions-2.2.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7c7be0764f52855c91fa42680e48e92/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7c7be0764f52855c91fa42680e48e92/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:24:5-28:19
+MERGED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/maynic/.gradle/caches/transforms-2/files-2.1/97a33e41e0ea3451e252d68fefb97ce2/jetified-android-maps-utils-0.5/AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/maynic/.gradle/caches/transforms-2/files-2.1/97a33e41e0ea3451e252d68fefb97ce2/jetified-android-maps-utils-0.5/AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a13832404f261ea64ab83b57938cc95/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a13832404f261ea64ab83b57938cc95/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c29f23cd47c369b60f667f1e88c9a486/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c29f23cd47c369b60f667f1e88c9a486/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1402bdaa13be329273ea44182ebe0f2/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1402bdaa13be329273ea44182ebe0f2/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:24:5-30:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:24:5-30:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ecfd87718b07458c0c63e45dc6db5f99/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ecfd87718b07458c0c63e45dc6db5f99/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1402bdaa13be329273ea44182ebe0f2/core-1.1.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:19:9-35
+	android:label
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:17:9-41
+	android:roundIcon
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:18:9-54
+	android:icon
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:16:9-43
+	android:allowBackup
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:15:9-35
+	android:theme
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:20:9-40
+activity#edu.ucsb.cs.cs48.schedoptim.MainActivity
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:21:9-29:20
+	android:label
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:23:13-56
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:22:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:24:13-28:29
+action#android.intent.action.MAIN
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:25:17-69
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:25:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:27:17-77
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:27:27-74
+meta-data#com.google.android.geo.API_KEY
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:39:9-41:54
+	android:value
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:41:13-52
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:40:13-58
+activity#edu.ucsb.cs.cs48.schedoptim.AddTaskActivity
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:43:9-45:20
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:44:13-44
+meta-data#com.google.android.gms.version
+ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:47:9-49:65
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/maynic/.gradle/caches/transforms-2/files-2.1/97a33e41e0ea3451e252d68fefb97ce2/jetified-android-maps-utils-0.5/AndroidManifest.xml:8:9-10:69
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/maynic/.gradle/caches/transforms-2/files-2.1/97a33e41e0ea3451e252d68fefb97ce2/jetified-android-maps-utils-0.5/AndroidManifest.xml:8:9-10:69
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c29f23cd47c369b60f667f1e88c9a486/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c29f23cd47c369b60f667f1e88c9a486/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:49:9-62
+	android:name
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml:48:13-58
+uses-sdk
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+MERGED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:7:5-9:41
+MERGED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.navigation:navigation-ui:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/413410625e697e994ad4b3b053eec750/navigation-ui-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/413410625e697e994ad4b3b053eec750/navigation-ui-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/377c61306b40ea376458d4e8a02459eb/material-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/377c61306b40ea376458d4e8a02459eb/material-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:7:5-9:41
+MERGED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/94144a36c45f3be54fe4d92dcb304e04/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/94144a36c45f3be54fe4d92dcb304e04/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/e8fed1474dab090e7be88b9fcfa269f1/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/e8fed1474dab090e7be88b9fcfa269f1/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b84b7b0889b6a4472e2efedaddc48fdd/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b84b7b0889b6a4472e2efedaddc48fdd/lifecycle-extensions-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b26c7b42d718256d26aab89a01f0c382/navigation-fragment-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b26c7b42d718256d26aab89a01f0c382/navigation-fragment-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/1844735ba71d4e7d59178f1a1086bb5f/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/1844735ba71d4e7d59178f1a1086bb5f/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/221c6acd4be20e44bfb8a8d841afafc2/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/221c6acd4be20e44bfb8a8d841afafc2/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7c7be0764f52855c91fa42680e48e92/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7c7be0764f52855c91fa42680e48e92/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
+MERGED from [com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:25:5-27:41
+MERGED from [com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:25:5-27:41
+MERGED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/maynic/.gradle/caches/transforms-2/files-2.1/97a33e41e0ea3451e252d68fefb97ce2/jetified-android-maps-utils-0.5/AndroidManifest.xml:5:5-43
+MERGED from [com.google.maps.android:android-maps-utils:0.5] /Users/maynic/.gradle/caches/transforms-2/files-2.1/97a33e41e0ea3451e252d68fefb97ce2/jetified-android-maps-utils-0.5/AndroidManifest.xml:5:5-43
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/9587121c3d07d17e36f8beb989bb6aec/jetified-appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/9587121c3d07d17e36f8beb989bb6aec/jetified-appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/8c9866ef2dd35a2e796440a6b8246087/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/8c9866ef2dd35a2e796440a6b8246087/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b313045cfbbf25727dee865da3dbcb2d/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/b313045cfbbf25727dee865da3dbcb2d/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/28187d766bdcad1f61789e699f344254/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/28187d766bdcad1f61789e699f344254/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/06013c4d43f55e44eb1d5dad75dc90a0/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/06013c4d43f55e44eb1d5dad75dc90a0/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a13832404f261ea64ab83b57938cc95/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a13832404f261ea64ab83b57938cc95/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c29f23cd47c369b60f667f1e88c9a486/jetified-play-services-basement-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c29f23cd47c369b60f667f1e88c9a486/jetified-play-services-basement-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/0eeede0839d6485f095e39a14064fc6a/fragment-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/0eeede0839d6485f095e39a14064fc6a/fragment-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/f61b27fed0d1e94091ddfbde5189d670/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/f61b27fed0d1e94091ddfbde5189d670/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/37731056c68b94fa13e6edf9e8f8de11/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/37731056c68b94fa13e6edf9e8f8de11/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ac4710d0c144653a10ae682c48be11aa/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ac4710d0c144653a10ae682c48be11aa/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a98a85eea6e93edcc4dca7f509e1db9/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6a98a85eea6e93edcc4dca7f509e1db9/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6366e485c45d44ef7de500cd604dc7da/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6366e485c45d44ef7de500cd604dc7da/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a98636cbea9086275573b50c91e5a283/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a98636cbea9086275573b50c91e5a283/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/19ab5715418bf0e0fb2259af124ce86f/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/19ab5715418bf0e0fb2259af124ce86f/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/5dbfa3d90c30701f5b25ede550fefb01/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/5dbfa3d90c30701f5b25ede550fefb01/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/1e6941a4e1920972f7a99f43e4200db5/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/1e6941a4e1920972f7a99f43e4200db5/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/65a56b13c41b3d5904aac1e0de6ac19c/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/65a56b13c41b3d5904aac1e0de6ac19c/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/dc75e2d07bf145b06cee5d3fd22ef185/navigation-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/dc75e2d07bf145b06cee5d3fd22ef185/navigation-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3613fb46e8fd9cb839c024c3cbe0ad2e/jetified-activity-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3613fb46e8fd9cb839c024c3cbe0ad2e/jetified-activity-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/94e89c629f7242ce36152038cc96b39f/navigation-common-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/94e89c629f7242ce36152038cc96b39f/navigation-common-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1402bdaa13be329273ea44182ebe0f2/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1402bdaa13be329273ea44182ebe0f2/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/93c3c9e44a3a5269f59adbcc5de81a0f/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/93c3c9e44a3a5269f59adbcc5de81a0f/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-service:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/41963283f75bc3a813664b647dfd7ee3/jetified-lifecycle-service-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-service:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/41963283f75bc3a813664b647dfd7ee3/jetified-lifecycle-service-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/2d9c1a3a0865fce5469873b8558fe2d8/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/2d9c1a3a0865fce5469873b8558fe2d8/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7d15b5887c9edc338cb6c6b6b50580d/lifecycle-livedata-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/a7d15b5887c9edc338cb6c6b6b50580d/lifecycle-livedata-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/5eb86c487fb2ca878ccdce878ebfef59/jetified-lifecycle-viewmodel-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/5eb86c487fb2ca878ccdce878ebfef59/jetified-lifecycle-viewmodel-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/7132cdb719179fb9da622748a9462a14/lifecycle-livedata-core-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/7132cdb719179fb9da622748a9462a14/lifecycle-livedata-core-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/400b58e8952b1145ff429c54ca8511b7/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/400b58e8952b1145ff429c54ca8511b7/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/37810677a6f7310a1ae5f5d6c45fa9b4/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/37810677a6f7310a1ae5f5d6c45fa9b4/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/15152b1ea8e579825fa87d9cad99f162/lifecycle-viewmodel-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/15152b1ea8e579825fa87d9cad99f162/lifecycle-viewmodel-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6f659513ac8107f41de50d54224fc6a7/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6f659513ac8107f41de50d54224fc6a7/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.0.1] /Users/maynic/.gradle/caches/transforms-2/files-2.1/9f9fe3d5eb6e7bd7c8aa88d8c3acdd76/sqlite-framework-2.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.0.1] /Users/maynic/.gradle/caches/transforms-2/files-2.1/9f9fe3d5eb6e7bd7c8aa88d8c3acdd76/sqlite-framework-2.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.0.1] /Users/maynic/.gradle/caches/transforms-2/files-2.1/592bf6362744933c654b7acac449a5a2/sqlite-2.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.0.1] /Users/maynic/.gradle/caches/transforms-2/files-2.1/592bf6362744933c654b7acac449a5a2/sqlite-2.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ecfd87718b07458c0c63e45dc6db5f99/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/ecfd87718b07458c0c63e45dc6db5f99/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6979d3f4625f0293f758d87b49b9365e/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/6979d3f4625f0293f758d87b49b9365e/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/15ef245ec5756b5dafa081e2755e2ed2/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/15ef245ec5756b5dafa081e2755e2ed2/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/cb176b91f2c8ea6b8cd09fb567132e98/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/cb176b91f2c8ea6b8cd09fb567132e98/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/db842c62f8b3f6d754b57f81ad62807a/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/db842c62f8b3f6d754b57f81ad62807a/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/src/main/AndroidManifest.xml
+provider#com.amitshekhar.debug.DebugDBInitProvider
+ADDED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:12:9-16:40
+	android:enabled
+		ADDED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:15:13-35
+	android:authorities
+		ADDED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:14:13-71
+	android:exported
+		ADDED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:16:13-37
+	android:name
+		ADDED from [com.amitshekhar.android:debug-db:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/c5358daa452720cdcaf52f08cc97829e/jetified-debug-db-1.0.6/AndroidManifest.xml:13:13-69
+activity#pub.devrel.easypermissions.AppSettingsDialogHolderActivity
+ADDED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:12:9-16:66
+	android:label
+		ADDED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:15:13-29
+	android:exported
+		ADDED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:14:13-37
+	android:theme
+		ADDED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:16:13-63
+	android:name
+		ADDED from [pub.devrel:easypermissions:0.3.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/59393351c2f30f85ae1368f5065900f0/jetified-easypermissions-0.3.0/AndroidManifest.xml:13:13-86
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from [com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:30:5-76
+	android:name
+		ADDED from [com.amitshekhar.android:debug-db-base:1.0.6] /Users/maynic/.gradle/caches/transforms-2/files-2.1/354e756322f5a26abd0b585915ce93da/jetified-debug-db-base-1.0.6/AndroidManifest.xml:30:22-73
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:25:9-27:40
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.room:room-runtime:2.2.3] /Users/maynic/.gradle/caches/transforms-2/files-2.1/279273be2f5ace3a9a8fb6e46f681e4a/room-runtime-2.2.3/AndroidManifest.xml:26:13-74
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:28:9-32
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d60d22f09fecbde782af3a99f387ce36/jetified-play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/d1edfb2f3181cd5533f55c7e9524839f/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+provider#androidx.lifecycle.ProcessLifecycleOwnerInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
+	android:authorities
+		ADDED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
+	android:multiprocess
+		ADDED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
+	android:exported
+		ADDED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.2.0] /Users/maynic/.gradle/caches/transforms-2/files-2.1/3c5f727507528613c83db025200a19ba/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79

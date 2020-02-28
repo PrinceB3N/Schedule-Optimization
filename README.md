@@ -2,8 +2,6 @@
 
 [![Actions Status](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/workflows/Android%20CI/badge.svg)](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/actions)
 
-**Schedule Optimization
-
 __**Link to Documentation**__
 https://docs.google.com/document/d/1lqX9ADpm9k8lWUsylWCo2AAwucAzDUpmERm8nf_Pv3M/edit
 

@@ -10,24 +10,32 @@
     >
 
     <ImageView
-        android:id="@+id/route_color"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/color_square" />
-
-    <ImageView
-        android:id="@+id/travel_mode_img"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/bicycling" />
-
-    <TextView
-        android:id="@+id/route_info"
+        android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="10"
-        android:gravity="center"/>
+        android:layout_weight="1"
+        app:srcCompat="@drawable/marker" />
+
+    <TextView
+        android:id="@+id/ADDRESS_TEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Address"
+        android:gravity="right"/>
+
+    <TextView
+        android:id="@+id/route_number"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="right" />
+
+    <TextView
+        android:id="@+id/route_address"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="11"
+        android:gravity="center" />
     />
 </LinearLayout>

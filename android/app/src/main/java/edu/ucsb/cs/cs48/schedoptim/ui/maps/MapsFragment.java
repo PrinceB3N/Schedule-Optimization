@@ -84,14 +84,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //Setup IconGenerator for markers
         iconGenerator=new IconGenerator(this.getContext());
         //Create buttons
-        FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
-                startActivity(addLoc);
-            }
-        });
+
         Button updateMap = root.findViewById(R.id.updatemap);
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override

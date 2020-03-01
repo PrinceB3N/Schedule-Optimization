@@ -41,7 +41,10 @@
             android:value="@string/google_maps_key"/>
 
         <activity
-            android:name=".AddTaskActivity">
+            android:name=".AddTaskActivity"
+            android:theme="@style/DialogStyle">
+
+
         </activity>
 
         <meta-data

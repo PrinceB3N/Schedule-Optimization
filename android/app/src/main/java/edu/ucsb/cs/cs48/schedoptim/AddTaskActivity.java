@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,11 +45,13 @@ public class AddTaskActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_add_task);
 
         final AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autocomplete);
         autoCompleteTextView.setAdapter(new PlaceAutoSuggestAdapter(AddTaskActivity.this, android.R.layout.simple_list_item_1));
-        final EditText travel_mode_input= (EditText) findViewById(R.id.travel_mode_input);
+        final EditText travel_mode_input= findViewById(R.id.travel_mode_input);
         Button cancel = findViewById(R.id.button_cancel);
         Button add = findViewById(R.id.button_add);
         final String default_travel_mode = "bicycling";

@@ -8,7 +8,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import androidx.room.Room;
 import edu.ucsb.cs.cs48.schedoptim.adapter.PlaceAutoSuggestAdapter;
 import edu.ucsb.cs.cs48.schedoptim.ui.maps.MapsViewModel;
 
@@ -37,21 +39,39 @@ public class AddTaskActivity extends Activity {
 
         final Switch travel_mode = findViewById(R.id.switch_travel_mode);
 
+        final TaskDatabase db = Room.databaseBuilder(this,
+                TaskDatabase.class, "database-task")
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
+
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Task t = new Task();
-                t.setTitle(title.getText().toString());
 
+                if(title.getText().toString().matches("")){
+                    Toast.makeText(getApplicationContext(), "Please enter a title!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                try{ t.setBegin_time(Integer.parseInt(timeBeginHour.getText().toString())); }
+                catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Please enter a valid time (number) !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 //t.setBegin_time(Integer.parseInt(timeBeginHour.getText().toString() + timeBeginMinute.getText().toString()));
                 // Below is test version
-                t.setBegin_time(Integer.parseInt(timeBeginHour.getText().toString()));
-
-                t.setDate(Integer.parseInt(dateMonth.getText().toString() + dateDay.getText().toString() + dateYear.getText().toString()));
-
+                try{ t.setDate(Integer.parseInt(dateMonth.getText().toString() + dateDay.getText().toString() + dateYear.getText().toString())); }
+                catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Please enter a valid date (number) !", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if(travel_mode.isChecked()){ MapsViewModel.addToRequestList(autoCompleteTextView.getText().toString(), "bicycling"); }
                 else { MapsViewModel.addToRequestList(autoCompleteTextView.getText().toString(), "walking");}
+
+                db.taskDao().insert(t);
 
                 AddTaskActivity.this.finish();
             }

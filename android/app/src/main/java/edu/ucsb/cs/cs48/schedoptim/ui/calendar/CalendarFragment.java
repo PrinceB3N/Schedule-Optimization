@@ -1,4 +1,5 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar;
+//https://github.com/navi25/nestedRecycler
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,8 +42,8 @@ public class CalendarFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
-                startActivity(addLoc);
+                Intent addTask = new Intent(getContext(), AddTaskActivity.class);
+                startActivity(addTask);
             }
         });
 

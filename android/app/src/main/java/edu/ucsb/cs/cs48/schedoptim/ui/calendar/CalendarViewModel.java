@@ -19,17 +19,17 @@ public class CalendarViewModel extends ViewModel {
 
 
     public CalendarViewModel() {
-        allTasks = new MutableLiveData<>();
-        taskId = new MutableLiveData<>();
-        taskTitle = new MutableLiveData<>();
+//        allTasks = new MutableLiveData<>();
+//        taskId = new MutableLiveData<>();
+//        taskTitle = new MutableLiveData<>();
 
         tasks  = new MutableLiveData<>();
 
     }
 
 
-    public void setTasks(ArrayList<Task> t) { tasks.setValue(t); }
-    public void setTaskTitle(String s) { taskTitle.setValue(s); }
+//    public void setTasks(ArrayList<Task> t) { tasks.setValue(t); }
+//    public void setTaskTitle(String s) { taskTitle.setValue(s); }
 
     public LiveData<ArrayList<Task>> getTasks(){ return tasks; }
     public void setTasks(ArrayList<Task> t) { tasks.setValue(t);}

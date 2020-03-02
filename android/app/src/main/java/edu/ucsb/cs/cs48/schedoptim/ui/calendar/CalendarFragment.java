@@ -1,5 +1,6 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
@@ -32,6 +36,15 @@ public class CalendarFragment extends Fragment {
                 new ViewModelProvider(this).get(CalendarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
 
+
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
+                startActivity(addLoc);
+            }
+        });
 
 
         final TaskDatabase db = Room.databaseBuilder(getContext(),

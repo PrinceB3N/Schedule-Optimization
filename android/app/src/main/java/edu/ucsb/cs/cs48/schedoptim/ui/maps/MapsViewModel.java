@@ -17,6 +17,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
 
+import org.mortbay.jetty.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -48,8 +50,13 @@ public class MapsViewModel extends ViewModel{
     public GoogleMap getGoogleMap(){
         return this.map;
     }
-    public RouteDatabase getRouteDatabase(){ return this.rdb; }
-    public MutableLiveData<ArrayList<Route>> getObservableRoutes(){ return routes; }
+    public RouteDatabase getRouteDatabase(){
+        return this.rdb; }
+    public MutableLiveData<ArrayList<Route>> getObservableRoutes(){
+        if(!routes.getValue().isEmpty()) {
+            Log.d(MainActivity.class.getName(), "ROUTEVAL:" + routes.getValue().get(0).getStart_address());
+        }
+        return routes; }
 
     public void setMap(GoogleMap map){ this.map=map; }
     public void setRdb(RouteDatabase rdb){ this.rdb=rdb; }
@@ -81,6 +88,9 @@ public class MapsViewModel extends ViewModel{
     }
     public static void drawMarkers(ArrayList<Route> routes) {
         if (routes==null || map==null) {
+            return;
+        }
+        else if(routes.isEmpty()){
             return;
         }
         //Add starting marker
@@ -121,19 +131,34 @@ public class MapsViewModel extends ViewModel{
         map.addMarker(new MarkerOptions().position(new LatLng(route.getStart_lat(), route.getStart_long())));
         map.addMarker(new MarkerOptions().position(new LatLng(route.getEnd_lat(), route.getEnd_long())));
     }
+    public static void drawMarkers(Route route, int markernumber){
+        if(map==null)
+            return;
+        Bitmap bitmap;
+        bitmap = iconGenerator.makeIcon(""+(markernumber));
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(route.getStart_lat(), route.getStart_long()))
+                .title(route.getStart_address())
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+        bitmap = iconGenerator.makeIcon(""+(markernumber+1));
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(route.getEnd_lat(), route.getEnd_long()))
+                .title(route.getEnd_address())
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
+    }
     public static void moveCameraToWantedArea(Route route){
         if(map==null)
             return;
         else if(bounds==null)
-            moveCameraToWantedArea(new LatLng(route.getStart_lat(),route.getStart_long()),
+            moveCameraSmoothlyToWantedArea(new LatLng(route.getStart_lat(),route.getStart_long()),
                     new LatLng(route.getEnd_lat(),route.getEnd_long()),BOUNDS_PADDING);
         else
-            moveCameraToWantedArea(bounds.southwest,bounds.northeast,BOUNDS_PADDING);
+            moveCameraSmoothlyToWantedArea(bounds.southwest,bounds.northeast,BOUNDS_PADDING);
     }
     /**
      * Method to move camera to wanted area.
      */
-    public static void moveCameraToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+    public static void moveCameraSmoothlyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
         final LatLng BOUND1 = bound1;
         final LatLng BOUND2 = bound2;
         final int BOUNDS_PADDING = bound_padding;
@@ -153,6 +178,26 @@ public class MapsViewModel extends ViewModel{
         });
 
     }
+    public static void moveCameraImmediatelyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+        final LatLng BOUND1 = bound1;
+        final LatLng BOUND2 = bound2;
+        final int BOUNDS_PADDING = bound_padding;
+        if (map == null)
+            return;
+        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                // Set up the bounds coordinates for the area we want the user's viewpoint to be.
+                LatLngBounds bounds = new LatLngBounds.Builder()
+                        .include(BOUND1)
+                        .include(BOUND2)
+                        .build();
+                // Move the camera now.
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, BOUNDS_PADDING));
+            }
+        });
+
+    }
     public void clearRequests(){
         locations.clear();
         travel_modes.clear();
@@ -165,6 +210,7 @@ public class MapsViewModel extends ViewModel{
         }
         locations.add(location);
         travel_modes.add(travel_mode);
+        Log.d(MainActivity.class.getName(),"LOCATION ADDED:"+locations.get(0));
         return true;
     }
     //TODO
@@ -221,6 +267,12 @@ public class MapsViewModel extends ViewModel{
         return true;
     }
     public static LatLngBounds getCameraBounds(ArrayList<Route> routes){
+        if(routes==null){
+            return null;
+        }
+        else if(routes.isEmpty()){
+            return null;
+        }
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for(Route route: routes) {
             //add corners to camera bounds builder
@@ -230,7 +282,20 @@ public class MapsViewModel extends ViewModel{
         //Finally build the bounds
         return builder.build();
     }
-
+    public static void updateMapWithExistingData(){
+        if(map==null || routes==null)
+            return;
+        //Get camera bounds
+        bounds = getCameraBounds(routes.getValue());
+        //Move camera
+        if(bounds!=null) {
+            moveCameraImmediatelyToWantedArea(bounds.southwest, bounds.northeast, BOUNDS_PADDING);
+        }
+        //draw Routes
+        drawRoutes(routes.getValue());
+        //draw Markers
+        drawMarkers(routes.getValue());
+    }
     //INNER CLASSES
     private class RouteDrawer extends AsyncTask<Void, Void, Void> {
 
@@ -238,8 +303,12 @@ public class MapsViewModel extends ViewModel{
         protected Void doInBackground(Void... voids) {
             try {
                 ArrayList<Route> tmp_routes = JSONUtils.getRoutesFrom(locations,travel_modes,rdb.getrouteDao());
-                if(tmp_routes==null)
+                Log.d(MainActivity.class.getName(),"ASYNC_GET_ROUTES:");
+                if(tmp_routes==null) {
+                    Log.d(MainActivity.class.getName(),"ASYNC_ROUTES NULL_GET_ROUTES");
                     return null;
+                }
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES:"+tmp_routes.get(0).getStart_address());
                 routes.postValue(tmp_routes);
             }catch(Exception e){
                 Log.e(MainActivity.class.getName(),"Async Error",e);
@@ -249,12 +318,15 @@ public class MapsViewModel extends ViewModel{
 
         protected void onPostExecute(Void voids) {
             if(routes==null){
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES NULL");
                 return;
             }
             if(routes.getValue()==null) {
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES: NULL VALUE?!?!");
                 return;
             }
             if(routes.getValue().isEmpty()){
+                Log.d(MainActivity.class.getName(),"ASYNC_ROUTES: EMPTY LIST");
                 return;
             }
             //Clear map
@@ -262,11 +334,14 @@ public class MapsViewModel extends ViewModel{
             //Get camera bounds
             bounds = getCameraBounds(routes.getValue());
             //Move camera
-            moveCameraToWantedArea(bounds.southwest, bounds.northeast, BOUNDS_PADDING);
+            if(bounds!=null){
+                moveCameraSmoothlyToWantedArea(bounds.southwest, bounds.northeast, BOUNDS_PADDING);
+            }
             //draw Routes
             drawRoutes(routes.getValue());
             //draw Markers
             drawMarkers(routes.getValue());
+            Log.d(MainActivity.class.getName(),"ASYNC_ROUTES SUCCESS:"+routes.getValue().get(0).getStart_address());
         }
     }
 }

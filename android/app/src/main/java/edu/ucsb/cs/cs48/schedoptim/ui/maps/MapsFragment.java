@@ -41,6 +41,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private MapsViewModel mapsViewModel;
     private RecyclerView rvRoutes;
     private RoutesAdapter adapter;
+
     public static MapsFragment newInstance() {
         return new MapsFragment();
     }
@@ -54,16 +55,17 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         //Obtain RecyclerView for routes
         rvRoutes = root.findViewById(R.id.mapList);
         // Create adapter passing in the sample user data
         adapter = new RoutesAdapter(mapsViewModel.getObservableRoutes().getValue());
-        // Attach the adapter to the recyclerview to populate items
         rvRoutes.setAdapter(adapter);
+
         // Set layout manager to position the items
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         rvRoutes.setLayoutManager(layoutManager);
+
+
         //Set dividers between elements in list
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvRoutes.getContext(),
                 layoutManager.getOrientation());
@@ -82,23 +84,24 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //Setup IconGenerator for markers
         iconGenerator=new IconGenerator(this.getContext());
         //Create buttons
-        FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        Button updateMap = root.findViewById(R.id.updatemap);
+        updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
-                startActivity(addLoc);
+                onClickRequestAndDrawRoutes();
             }
         });
-
-
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setRetainInstance(true);
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
     }
     /**
      * Manipulates the map once available.
@@ -121,13 +124,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mapsViewModel.setMap(mMap);
         mapsViewModel.setRdb(routeDatabase);
         mapsViewModel.setIconGenerator(iconGenerator);
+        //re-initalize map from pre-existing mapsViewModel if possible
+        mapsViewModel.updateMapWithExistingData();
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();
-        adapter.notifyDataSetChanged();
     }
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-    }
+
 }

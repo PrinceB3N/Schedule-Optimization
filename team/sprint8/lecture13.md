@@ -2,7 +2,7 @@ Project: Schedule Optimization
 
 Mentor: Conner Daly
 
-Meeting Time: lec12
+Meeting Time: lec13
 
 Type of Meeting: Standup
 

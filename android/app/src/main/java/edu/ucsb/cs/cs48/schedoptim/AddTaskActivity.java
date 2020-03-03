@@ -68,8 +68,11 @@ public class AddTaskActivity extends Activity {
                     return;
                 }
 
+                // TODO: Integrate with map
                 if(travel_mode.isChecked()){ MapsViewModel.addToRequestList(autoCompleteTextView.getText().toString(), "bicycling"); }
                 else { MapsViewModel.addToRequestList(autoCompleteTextView.getText().toString(), "walking");}
+
+                // TODO: add notification
 
                 db.taskDao().insert(t);
 

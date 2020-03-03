@@ -11,7 +11,9 @@
         android:id="@+id/autocomplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Location" />
+        android:hint="Enter Location"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="50dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInput_name"

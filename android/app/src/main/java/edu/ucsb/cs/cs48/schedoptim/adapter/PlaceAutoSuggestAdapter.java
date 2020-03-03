@@ -1,3 +1,6 @@
+//This is an array adapter class for the AutoSuggest class.
+//It formats the JSON file returned by AutoSuggest into an array
+
 package edu.ucsb.cs.cs48.schedoptim.adapter;
 
 import android.content.Context;

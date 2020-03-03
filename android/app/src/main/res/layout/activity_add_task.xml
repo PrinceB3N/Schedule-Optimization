@@ -92,6 +92,7 @@
             android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Cancel"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toTopOf="parent" />
@@ -100,6 +101,7 @@
             android:id="@+id/button_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Save"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
             app:layout_constraintTop_toTopOf="parent" />
@@ -174,13 +176,15 @@
 
         <EditText
             android:id="@+id/time_notification_minute"
-            android:layout_width="162dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="Minutes before task begin"
             android:inputType="time"
-            tools:layout_editor_absoluteX="180dp"
-            tools:layout_editor_absoluteY="381dp" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/date_year" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
@@ -201,7 +205,7 @@
             app:layout_constraintTop_toBottomOf="@+id/autocomplete" />
 
         <Switch
-            android:id="@+id/switch_travel_mode3"
+            android:id="@+id/switch_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

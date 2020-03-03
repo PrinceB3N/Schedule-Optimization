@@ -49,6 +49,9 @@ public class Task {
     @ColumnInfo(name = "calRoute")
     private boolean calRoute;
 
+    @ColumnInfo(name = "travelMode")
+    private String travelMode;
+
     // Getters and setters are ignored for brevity,
     // but they're required for Room to work.
 
@@ -78,6 +81,8 @@ public class Task {
     public void setNotiTime (int time) { this.notiTime = time; }
     public boolean getCalRoute () { return  calRoute; }
     public void setCalRoute (boolean calRoute) { this.calRoute = calRoute; }
+    public String getTravelMode () { return travelMode; }
+    public void setTravelMode (String travelMode) {this.travelMode = travelMode; }
 
     @Ignore
     public Task(String title, String location) {
@@ -110,18 +115,5 @@ public class Task {
 //        this.lastName = lastName;
 //        this.age = age;
 //    }
-    @Override
-    public String toString() {
-        return "\n" + "Task{ " +
-                "id = " + id +
-                ", title = " + title  +
-                ", type = " + type  +
-                ", location = " + location +
-                ", begin_time = " + begin_time +
-                ", end_time = " + end_time +
-                ", date = " + date +
-                ", note = " + note +
-                " }";
-    }
 
 }

@@ -41,9 +41,11 @@ public class CalendarViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Task>> getTasks(){ return tasks; }
     public void setTasks(ArrayList<Task> t) { tasks.setValue(t);}
-    public MutableLiveData<ArrayList<String>> getTasksWithRoute() {return tasksWithRoute;}
+    public ArrayList<String> getTasksWithRoute() {return tasksWithRoute.getValue();}
+//    public MutableLiveData<ArrayList<String>> getTasksWithRoute() {return tasksWithRoute;}
     public void setTasksWithRoute(ArrayList<String> t){tasksWithRoute.setValue(t);}
-    public MutableLiveData<ArrayList<String>> getTravelMode() { return travelMode; }
+//    public MutableLiveData<ArrayList<String>> getTravelMode() { return travelMode; }
+    public ArrayList<String> getTravelMode() { return travelMode.getValue(); }
     public void setTravelMode(ArrayList<String> t) { travelMode.setValue(t); }
 
     public void updateRoute(){

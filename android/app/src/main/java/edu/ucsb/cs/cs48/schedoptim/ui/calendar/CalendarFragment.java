@@ -29,7 +29,8 @@ import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
 public class CalendarFragment extends Fragment {
 
-    private CalendarViewModel calendarViewModel;
+    CalendarViewModel calendarViewModel;
+    TaskDatabase db;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,27 +44,42 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent addTask = new Intent(getContext(), AddTaskActivity.class);
-                startActivity(addTask);
+                startActivityForResult(addTask, 1);
             }
         });
 
 
-        final TaskDatabase db = Room.databaseBuilder(getContext(),
+         db = Room.databaseBuilder(getContext(),
                 TaskDatabase.class, "database-task")
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
 
+         updateTasks();
 
 
-        calendarViewModel.getTasks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Task>>() {
-            @Override
-            public void onChanged(@Nullable ArrayList<Task> t) {
-                // TODO: Define Behaviours
-            }
-        });
+
+
+//        calendarViewModel.getTasks().observe(getViewLifecycleOwner(), new Observer<ArrayList<Task>>() {
+//            @Override
+//            public void onChanged(@Nullable ArrayList<Task> t) {
+//                // TODO: Define Behaviours
+//            }
+//        });
 
 
         return root;
     }
+
+    // TODO: for now, this method re-read all Tasks every time, later should dynamically add new Task
+    public void updateTasks(){
+        calendarViewModel.setTasks((ArrayList<Task>) db.taskDao().loadAllTasks());
+        calendarViewModel.updateRoute();
+        Toast.makeText(getActivity(), calendarViewModel.getTasks().getValue().get(1).getTitle(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { updateTasks(); } }
+
+
 }

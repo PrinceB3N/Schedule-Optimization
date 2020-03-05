@@ -12,11 +12,14 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import edu.ucsb.cs.cs48.schedoptim.adapter.PlaceAutoSuggestAdapter;
+import edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarViewModel;
 import edu.ucsb.cs.cs48.schedoptim.ui.maps.MapsViewModel;
 
 import static edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlarmCreator.createAlarm;
+import  edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarFragment;
 
 //import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getObjectFromJSON;
 
@@ -68,6 +71,8 @@ public class AddTaskActivity extends Activity {
                 if(title.getText().toString().matches("")){
                     Toast.makeText(getApplicationContext(), "Please enter a title!", Toast.LENGTH_SHORT).show();
                     return;
+                }else {
+                    t.setTitle(title.getText().toString());
                 }
 
                 // Set location

@@ -32,7 +32,7 @@ public final class TaskDao_Impl implements TaskDao {
     this.__insertionAdapterOfTask = new EntityInsertionAdapter<Task>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR REPLACE INTO `task` (`id`,`title`,`type`,`location`,`begin_time`,`end_time`,`date`,`note`,`color`,`importance`,`notification`,`calRoute`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `task` (`id`,`title`,`type`,`location`,`begin_time`,`end_time`,`date`,`note`,`color`,`importance`,`notification`,`calRoute`,`travelMode`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -71,6 +71,11 @@ public final class TaskDao_Impl implements TaskDao {
         final int _tmp;
         _tmp = value.getCalRoute() ? 1 : 0;
         stmt.bindLong(12, _tmp);
+        if (value.getTravelMode() == null) {
+          stmt.bindNull(13);
+        } else {
+          stmt.bindString(13, value.getTravelMode());
+        }
       }
     };
     this.__deletionAdapterOfTask = new EntityDeletionOrUpdateAdapter<Task>(__db) {
@@ -87,7 +92,7 @@ public final class TaskDao_Impl implements TaskDao {
     this.__updateAdapterOfTask = new EntityDeletionOrUpdateAdapter<Task>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR ABORT `task` SET `id` = ?,`title` = ?,`type` = ?,`location` = ?,`begin_time` = ?,`end_time` = ?,`date` = ?,`note` = ?,`color` = ?,`importance` = ?,`notification` = ?,`calRoute` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `task` SET `id` = ?,`title` = ?,`type` = ?,`location` = ?,`begin_time` = ?,`end_time` = ?,`date` = ?,`note` = ?,`color` = ?,`importance` = ?,`notification` = ?,`calRoute` = ?,`travelMode` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -126,7 +131,12 @@ public final class TaskDao_Impl implements TaskDao {
         final int _tmp;
         _tmp = value.getCalRoute() ? 1 : 0;
         stmt.bindLong(12, _tmp);
-        stmt.bindLong(13, value.getId());
+        if (value.getTravelMode() == null) {
+          stmt.bindNull(13);
+        } else {
+          stmt.bindString(13, value.getTravelMode());
+        }
+        stmt.bindLong(14, value.getId());
       }
     };
   }
@@ -273,6 +283,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
+      final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
       final List<Task> _result = new ArrayList<Task>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final Task _item;
@@ -315,6 +326,9 @@ public final class TaskDao_Impl implements TaskDao {
         _tmp = _cursor.getInt(_cursorIndexOfCalRoute);
         _tmpCalRoute = _tmp != 0;
         _item.setCalRoute(_tmpCalRoute);
+        final String _tmpTravelMode;
+        _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
+        _item.setTravelMode(_tmpTravelMode);
         _result.add(_item);
       }
       return _result;
@@ -356,6 +370,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
+      final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
       final List<Task> _result = new ArrayList<Task>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final Task _item_1;
@@ -398,6 +413,9 @@ public final class TaskDao_Impl implements TaskDao {
         _tmp = _cursor.getInt(_cursorIndexOfCalRoute);
         _tmpCalRoute = _tmp != 0;
         _item_1.setCalRoute(_tmpCalRoute);
+        final String _tmpTravelMode;
+        _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
+        _item_1.setTravelMode(_tmpTravelMode);
         _result.add(_item_1);
       }
       return _result;
@@ -428,6 +446,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
+      final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
       final List<Task> _result = new ArrayList<Task>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final Task _item;
@@ -470,6 +489,9 @@ public final class TaskDao_Impl implements TaskDao {
         _tmp = _cursor.getInt(_cursorIndexOfCalRoute);
         _tmpCalRoute = _tmp != 0;
         _item.setCalRoute(_tmpCalRoute);
+        final String _tmpTravelMode;
+        _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
+        _item.setTravelMode(_tmpTravelMode);
         _result.add(_item);
       }
       return _result;
@@ -500,6 +522,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfImportance = CursorUtil.getColumnIndexOrThrow(_cursor, "importance");
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
+      final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
       final Task _result;
       if(_cursor.moveToFirst()) {
         _result = new Task();
@@ -541,6 +564,9 @@ public final class TaskDao_Impl implements TaskDao {
         _tmp = _cursor.getInt(_cursorIndexOfCalRoute);
         _tmpCalRoute = _tmp != 0;
         _result.setCalRoute(_tmpCalRoute);
+        final String _tmpTravelMode;
+        _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
+        _result.setTravelMode(_tmpTravelMode);
       } else {
         _result = null;
       }

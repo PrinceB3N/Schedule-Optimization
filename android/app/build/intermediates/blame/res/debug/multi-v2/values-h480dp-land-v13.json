@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/maynic/GoogleDrive/CS48/5pm-schedule-optimization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h480dp-land-v13/values-h480dp-land-v13.xml",
+            "outputFile": "C:\\Users\\yezip\\StudioProjects\\5pm-schedule-optimization\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
             "map": [
                 {
-                    "source": "/Users/maynic/.gradle/caches/transforms-2/files-2.1/377c61306b40ea376458d4e8a02459eb/material-1.1.0/res/values-h480dp-land-v13/values-h480dp-land-v13.xml",
+                    "source": "C:\\Users\\yezip\\.gradle\\caches\\transforms-2\\files-2.1\\b3c5386337f4d780aafd4a91fa187c5a\\material-1.1.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",

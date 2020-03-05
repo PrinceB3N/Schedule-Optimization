@@ -18,19 +18,28 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
+import edu.ucsb.cs.cs48.schedoptim.Hour;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
+import edu.ucsb.cs.cs48.schedoptim.adapter.HourAdapter;
+import edu.ucsb.cs.cs48.schedoptim.adapter.TaskAdapter;
 
 public class CalendarFragment extends Fragment {
 
     CalendarViewModel calendarViewModel;
     TaskDatabase db;
+    FloatingActionButton fab;
+    RecyclerView listOfHours;
+    ArrayList<Hour> hours;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +48,11 @@ public class CalendarFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
 
 
-        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab = root.findViewById(R.id.fab);
+        listOfHours = root.findViewById(R.id.recyclerView_hours);
+        hours = new ArrayList<>();
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +67,20 @@ public class CalendarFragment extends Fragment {
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
+
+         for (int i = 0; i < 24; i ++){
+             Hour h = new Hour(i);
+             Task t = new Task();
+             t.setTitle("Test"+i);
+             t.setLocation("Lib");
+             h.getTasksInHour().add(t);
+             hours.add(h);
+         }
+
+
+         listOfHours.setLayoutManager( new LinearLayoutManager(getContext(),
+                 LinearLayoutManager.VERTICAL, false));
+         listOfHours.setAdapter(new HourAdapter(listOfHours, hours));
 
          updateTasks();
 

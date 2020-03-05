@@ -70,10 +70,12 @@ public class CalendarFragment extends Fragment {
 
          for (int i = 0; i < 24; i ++){
              Hour h = new Hour(i);
-             Task t = new Task();
-             t.setTitle("Test"+i);
-             t.setLocation("Lib");
-             h.getTasksInHour().add(t);
+             for (int j = 0; j < 10; j++){
+                 Task t = new Task();
+                 t.setTitle("Test"+i+j);
+                 t.setLocation("Lib");
+                 h.getTasksInHour().add(t);
+             }
              hours.add(h);
          }
 

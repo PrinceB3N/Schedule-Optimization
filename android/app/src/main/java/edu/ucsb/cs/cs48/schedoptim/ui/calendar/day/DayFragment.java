@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
 
@@ -100,6 +101,14 @@ public class DayFragment extends Fragment {
         int minutes = mCal.get(Calendar.MINUTE);
         return (hours * 60) + ((minutes * 60) / 100);
     }
+    private int getEventTimeFrame(int start, int end){
+        String starttime = Integer.toString(start);
+        String endtime = Integer.toString(end);
+
+        int hours = Integer.parseInt(starttime.substring(0,2));
+        int seconds;
+        return -1;
+    }
     private void displayEventSection(Date eventDate, int height, String message){
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         String displayValue = timeFormatter.format(eventDate);
@@ -113,7 +122,7 @@ public class DayFragment extends Fragment {
         createEventView(topViewMargin, height, message);
     }
     private void createEventView(int topMargin, int height, String message){
-        TextView mEventView = new TextView(this.getContext());
+        final TextView mEventView = new TextView(this.getContext());
         RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         lParam.topMargin = topMargin * 2;
@@ -126,6 +135,13 @@ public class DayFragment extends Fragment {
         mEventView.setText(message);
         mEventView.setBackgroundColor(Color.BLUE);
         mEventView.setAlpha(.6f);
+        mEventView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(MainActivity.class.getName(),"CLICKED"+mEventView);
+            }
+        });
         mLayout.addView(mEventView, eventIndex - 1);
     }
+
 }

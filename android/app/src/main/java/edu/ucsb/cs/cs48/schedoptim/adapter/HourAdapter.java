@@ -42,7 +42,9 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourHolder> {
 
     @Override
     public void onBindViewHolder(HourHolder holder, int position) {
-        holder.hour.setText(HourList.get(position).getTime());
+        int t = HourList.get(position).time;
+        if(t<10) { holder.hour.setText("0" + HourList.get(position).getTime() + ":00"); }
+        else {holder.hour.setText(HourList.get(position).getTime() + ":00");}
         holder.listOfTask.setLayoutManager(new LinearLayoutManager(holder.listOfTask.getContext(),
                 RecyclerView.HORIZONTAL, false));
         holder.listOfTask.setAdapter(new TaskAdapter(holder.listOfTask, HourList.get(position).getTasksInHour()));

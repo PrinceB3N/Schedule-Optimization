@@ -104,7 +104,7 @@ public class CalendarFragment extends Fragment {
     public void updateTasks(){
         calendarViewModel.setTasks((ArrayList<Task>) db.taskDao().loadAllTasks());
         calendarViewModel.updateRoute();
-        Toast.makeText(getActivity(), calendarViewModel.getTasks().getValue().get(1).getTitle(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), calendarViewModel.getTasks().getValue().get(1).getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

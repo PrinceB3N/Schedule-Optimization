@@ -33,6 +33,7 @@ import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -75,7 +76,7 @@ public class JSONUtils {
                 InputStream is = new URL(placesToUrl(Arrays.asList(
                         start_address, end_address), travel_mode))
                         .openStream();
-                Reader reader = new InputStreamReader(is, "UTF-8");
+                Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
                 //Get and store new route in database and list
                 route = parseToRoute(new Gson().fromJson(reader, JsonObject.class));
                 rDao.insert(route);

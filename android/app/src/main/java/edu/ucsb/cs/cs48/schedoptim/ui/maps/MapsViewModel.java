@@ -40,15 +40,15 @@ public class MapsViewModel extends ViewModel{
     private static MutableLiveData<ArrayList<Route>> routes = new MutableLiveData(new ArrayList<Route>(0));
     private static LatLngBounds bounds;
     public MapsViewModel(GoogleMap map, RouteDatabase rdb, IconGenerator iconGenerator) {
-        this.map = map;
+        MapsViewModel.map = map;
         this.rdb = rdb;
-        this.iconGenerator=iconGenerator;
+        MapsViewModel.iconGenerator =iconGenerator;
     }
     public MapsViewModel(){
 
     }
     public GoogleMap getGoogleMap(){
-        return this.map;
+        return map;
     }
     public RouteDatabase getRouteDatabase(){
         return this.rdb; }
@@ -58,13 +58,13 @@ public class MapsViewModel extends ViewModel{
         }
         return routes; }
 
-    public void setMap(GoogleMap map){ this.map=map; }
+    public void setMap(GoogleMap map){ MapsViewModel.map =map; }
     public void setRdb(RouteDatabase rdb){ this.rdb=rdb; }
-    public void setIconGenerator(IconGenerator iconGenerator) { this.iconGenerator=iconGenerator;}
+    public void setIconGenerator(IconGenerator iconGenerator) { MapsViewModel.iconGenerator =iconGenerator;}
     //DRAW ROUTES FUNCTIONS, CALL THESE TO UPDATE MAPS VIEW
     public void drawRoutes(List<String> locations, List<String> travel_modes){
-        this.locations=locations;
-        this.travel_modes=travel_modes;
+        MapsViewModel.locations =locations;
+        MapsViewModel.travel_modes =travel_modes;
         RouteDrawer rd = new RouteDrawer();
         rd.execute();
     }

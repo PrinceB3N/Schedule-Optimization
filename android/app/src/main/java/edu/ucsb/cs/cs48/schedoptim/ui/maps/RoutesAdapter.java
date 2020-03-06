@@ -124,8 +124,8 @@ public class RoutesAdapter extends
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            route_number = (TextView) itemView.findViewById(R.id.route_number);
-            route_address = (TextView) itemView.findViewById(R.id.route_address);
+            route_number = itemView.findViewById(R.id.route_number);
+            route_address = itemView.findViewById(R.id.route_address);
         }
         public void editView(String address, int position){
             // Set item views based on your views and data model
@@ -148,9 +148,9 @@ public class RoutesAdapter extends
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            route_info = (TextView) itemView.findViewById(R.id.route_info);
-            travel_mode_img = (ImageView) itemView.findViewById(R.id.travel_mode_img);
-            route_color_img = (ImageView) itemView.findViewById(R.id.route_color);
+            route_info = itemView.findViewById(R.id.route_info);
+            travel_mode_img = itemView.findViewById(R.id.travel_mode_img);
+            route_color_img = itemView.findViewById(R.id.route_color);
         }
         public void editView(final Route route, final int position){
             // Set item views based on your views and data model

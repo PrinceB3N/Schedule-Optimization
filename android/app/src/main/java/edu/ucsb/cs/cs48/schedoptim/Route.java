@@ -135,10 +135,10 @@ public class Route{
     public String getFormattedLength(){
         float meters_in_mile = 1609.34f;
         if(161f>length){
-            return Float.toString(length)+" meters";
+            return length +" meters";
         }
         else{
-            return Float.toString(length/meters_in_mile)+ "miles";
+            return length / meters_in_mile + "miles";
         }
     }
 

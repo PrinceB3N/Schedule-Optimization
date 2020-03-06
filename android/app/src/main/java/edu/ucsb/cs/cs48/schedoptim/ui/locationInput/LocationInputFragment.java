@@ -33,7 +33,7 @@ public class LocationInputFragment extends Fragment {
         final View root = inflater.inflate(R.layout.location_input_fragment, container, false);
 
         final ArrayList<String> locations = new ArrayList<>();
-        final RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.my_recycler_view);
+        final RecyclerView recyclerView = root.findViewById(R.id.my_recycler_view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         final RecyclerViewAdapter adapter = new RecyclerViewAdapter(getContext(), locations);
 

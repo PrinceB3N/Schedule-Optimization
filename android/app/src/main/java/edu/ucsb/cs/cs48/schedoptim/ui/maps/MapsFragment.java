@@ -56,7 +56,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         //Obtain RecyclerView for routes
-        rvRoutes = (RecyclerView) root.findViewById(R.id.mapList);
+        rvRoutes = root.findViewById(R.id.mapList);
         // Create adapter passing in the sample user data
         adapter = new RoutesAdapter(mapsViewModel.getObservableRoutes().getValue());
         rvRoutes.setAdapter(adapter);
@@ -132,7 +132,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mapsViewModel.setRdb(routeDatabase);
         mapsViewModel.setIconGenerator(iconGenerator);
         //re-initalize map from pre-existing mapsViewModel if possible
-        mapsViewModel.updateMapWithExistingData();
+        MapsViewModel.updateMapWithExistingData();
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();

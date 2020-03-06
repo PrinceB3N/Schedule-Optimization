@@ -386,131 +386,157 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="@color/colorDivider" />
+
             <RelativeLayout
                 android:id="@+id/left_event_column"
                 android:layout_width="0dp"
                 android:layout_height="1500dp"
                 android:layout_weight="8">
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="60dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="120dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="180dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="240dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="300dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="360dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="420dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="480dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="540dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="600dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="660dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="720dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="780dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="840dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="900dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="960dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1020dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1080dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1140dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1200dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1260dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1320dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1380dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1440dp"
                     android:background="@color/colorDivider" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"

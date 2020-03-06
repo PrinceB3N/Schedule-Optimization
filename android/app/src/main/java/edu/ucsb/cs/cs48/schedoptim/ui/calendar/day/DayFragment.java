@@ -1,4 +1,4 @@
-package edu.ucsb.cs.cs48.schedoptim.ui.calendar;
+package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +24,7 @@ import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
 
 public class DayFragment extends Fragment {
-    private static final String TAG = CalendarFragment.class.getSimpleName();
+    private static final String TAG = DayFragment.class.getSimpleName();
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
@@ -37,13 +37,13 @@ public class DayFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View root = inflater.inflate(R.layout.dayview, container, false);
-        mLayout = (RelativeLayout)root.findViewById(R.id.left_event_column);
+        mLayout = root.findViewById(R.id.left_event_column);
         eventIndex = mLayout.getChildCount();
-        currentDate = (TextView)root.findViewById(R.id.display_current_date);
+        currentDate = root.findViewById(R.id.display_current_date);
         currentDate.setText(displayDateInString(cal.getTime()));
         displayDailyEvents();
-        previousDay = (ImageView)root.findViewById(R.id.previous_day);
-        nextDay = (ImageView)root.findViewById(R.id.next_day);
+        previousDay = root.findViewById(R.id.previous_day);
+        nextDay = root.findViewById(R.id.next_day);
         previousDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

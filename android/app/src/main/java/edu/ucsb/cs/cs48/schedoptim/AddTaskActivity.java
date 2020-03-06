@@ -48,7 +48,7 @@ public class AddTaskActivity extends Activity {
 
         final AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autocomplete);
         autoCompleteTextView.setAdapter(new PlaceAutoSuggestAdapter(AddTaskActivity.this, android.R.layout.simple_list_item_1));
-        final EditText travel_mode_input= (EditText) findViewById(R.id.travel_mode_input);
+        final EditText travel_mode_input= findViewById(R.id.travel_mode_input);
         Button cancel = findViewById(R.id.button_cancel);
         Button add = findViewById(R.id.button_add);
 

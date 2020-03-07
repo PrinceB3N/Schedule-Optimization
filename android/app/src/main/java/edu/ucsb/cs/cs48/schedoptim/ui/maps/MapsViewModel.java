@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
 
-import org.mortbay.jetty.Main;
+//import org.mortbay.jetty.Main;
 
 import java.util.ArrayList;
 import java.util.List;

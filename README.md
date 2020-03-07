@@ -2,14 +2,18 @@
 
 [![Actions Status](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/workflows/Android%20CI/badge.svg)](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/actions)
 
-**Schedule Optimization  
-Project summary**
+__**Documentation**__
+https://docs.google.com/document/d/1lqX9ADpm9k8lWUsylWCo2AAwucAzDUpmERm8nf_Pv3M/edit?usp=sharing
 
-This Android app helps you get and store the fastest route between all the locations you need to go to in a given day!
+__**Project summary**__
 
-__**Additional information about the project**__
+This Android app helps you get and store the fastest route between all the locations you need to go to in a given day! If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply input your schedule with the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display it again!
 
-If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply type in the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display it again!
+__**Features**__
+
+1. A Calendar to keep track of your events for the week.
+2. A Map to track the routes between your individual events for a single day.
+3. A Friends feature to compare your schedules with your friends.
 
 __**Installation Prerequisites**__
 

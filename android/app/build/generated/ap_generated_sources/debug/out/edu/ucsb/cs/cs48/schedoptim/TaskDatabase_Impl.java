@@ -27,12 +27,12 @@ public final class TaskDatabase_Impl extends TaskDatabase {
 
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(2) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(3) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `task` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `type` TEXT, `location` TEXT, `begin_time` INTEGER NOT NULL, `end_time` INTEGER NOT NULL, `date` INTEGER NOT NULL, `note` TEXT, `color` TEXT, `importance` INTEGER NOT NULL, `notification` INTEGER NOT NULL, `calRoute` INTEGER NOT NULL, `travelMode` TEXT)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `task` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT, `type` TEXT, `location` TEXT, `begin_time` TEXT, `end_time` TEXT, `date` TEXT, `note` TEXT, `color` TEXT, `importance` TEXT, `notification` TEXT, `calRoute` INTEGER NOT NULL, `travelMode` TEXT, `duration` TEXT)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '30e017e3fb504a322e23f0fe0d223d09')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '36e9b2df0c3496159c7eb4dc384a83b0')");
       }
 
       @Override
@@ -76,20 +76,21 @@ public final class TaskDatabase_Impl extends TaskDatabase {
 
       @Override
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsTask = new HashMap<String, TableInfo.Column>(13);
+        final HashMap<String, TableInfo.Column> _columnsTask = new HashMap<String, TableInfo.Column>(14);
         _columnsTask.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTask.put("title", new TableInfo.Column("title", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTask.put("type", new TableInfo.Column("type", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTask.put("location", new TableInfo.Column("location", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsTask.put("begin_time", new TableInfo.Column("begin_time", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsTask.put("end_time", new TableInfo.Column("end_time", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsTask.put("date", new TableInfo.Column("date", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTask.put("begin_time", new TableInfo.Column("begin_time", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTask.put("end_time", new TableInfo.Column("end_time", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTask.put("date", new TableInfo.Column("date", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTask.put("note", new TableInfo.Column("note", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTask.put("color", new TableInfo.Column("color", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsTask.put("importance", new TableInfo.Column("importance", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsTask.put("notification", new TableInfo.Column("notification", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTask.put("importance", new TableInfo.Column("importance", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTask.put("notification", new TableInfo.Column("notification", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTask.put("calRoute", new TableInfo.Column("calRoute", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsTask.put("travelMode", new TableInfo.Column("travelMode", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsTask.put("duration", new TableInfo.Column("duration", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysTask = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesTask = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoTask = new TableInfo("task", _columnsTask, _foreignKeysTask, _indicesTask);
@@ -101,7 +102,7 @@ public final class TaskDatabase_Impl extends TaskDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "30e017e3fb504a322e23f0fe0d223d09", "464c77f18de40b050be9c0325c1fb335");
+    }, "36e9b2df0c3496159c7eb4dc384a83b0", "168f1d1684599776ffc1c4199b639f57");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

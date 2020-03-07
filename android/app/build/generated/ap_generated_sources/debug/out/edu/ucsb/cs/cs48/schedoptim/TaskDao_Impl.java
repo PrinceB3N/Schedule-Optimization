@@ -32,7 +32,7 @@ public final class TaskDao_Impl implements TaskDao {
     this.__insertionAdapterOfTask = new EntityInsertionAdapter<Task>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR REPLACE INTO `task` (`id`,`title`,`type`,`location`,`begin_time`,`end_time`,`date`,`note`,`color`,`importance`,`notification`,`calRoute`,`travelMode`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `task` (`id`,`title`,`type`,`location`,`begin_time`,`end_time`,`date`,`note`,`color`,`importance`,`notification`,`calRoute`,`travelMode`,`duration`) VALUES (nullif(?, 0),?,?,?,?,?,?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -53,9 +53,21 @@ public final class TaskDao_Impl implements TaskDao {
         } else {
           stmt.bindString(4, value.getLocation());
         }
-        stmt.bindLong(5, value.getBegin_time());
-        stmt.bindLong(6, value.getEnd_time());
-        stmt.bindLong(7, value.getDate());
+        if (value.getBegin_time() == null) {
+          stmt.bindNull(5);
+        } else {
+          stmt.bindString(5, value.getBegin_time());
+        }
+        if (value.getEnd_time() == null) {
+          stmt.bindNull(6);
+        } else {
+          stmt.bindString(6, value.getEnd_time());
+        }
+        if (value.getDate() == null) {
+          stmt.bindNull(7);
+        } else {
+          stmt.bindString(7, value.getDate());
+        }
         if (value.getNote() == null) {
           stmt.bindNull(8);
         } else {
@@ -66,8 +78,16 @@ public final class TaskDao_Impl implements TaskDao {
         } else {
           stmt.bindString(9, value.getColor());
         }
-        stmt.bindLong(10, value.getImportance());
-        stmt.bindLong(11, value.getNotiTime());
+        if (value.getImportance() == null) {
+          stmt.bindNull(10);
+        } else {
+          stmt.bindString(10, value.getImportance());
+        }
+        if (value.getNotiTime() == null) {
+          stmt.bindNull(11);
+        } else {
+          stmt.bindString(11, value.getNotiTime());
+        }
         final int _tmp;
         _tmp = value.getCalRoute() ? 1 : 0;
         stmt.bindLong(12, _tmp);
@@ -75,6 +95,11 @@ public final class TaskDao_Impl implements TaskDao {
           stmt.bindNull(13);
         } else {
           stmt.bindString(13, value.getTravelMode());
+        }
+        if (value.getDuration() == null) {
+          stmt.bindNull(14);
+        } else {
+          stmt.bindString(14, value.getDuration());
         }
       }
     };
@@ -92,7 +117,7 @@ public final class TaskDao_Impl implements TaskDao {
     this.__updateAdapterOfTask = new EntityDeletionOrUpdateAdapter<Task>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR ABORT `task` SET `id` = ?,`title` = ?,`type` = ?,`location` = ?,`begin_time` = ?,`end_time` = ?,`date` = ?,`note` = ?,`color` = ?,`importance` = ?,`notification` = ?,`calRoute` = ?,`travelMode` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `task` SET `id` = ?,`title` = ?,`type` = ?,`location` = ?,`begin_time` = ?,`end_time` = ?,`date` = ?,`note` = ?,`color` = ?,`importance` = ?,`notification` = ?,`calRoute` = ?,`travelMode` = ?,`duration` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -113,9 +138,21 @@ public final class TaskDao_Impl implements TaskDao {
         } else {
           stmt.bindString(4, value.getLocation());
         }
-        stmt.bindLong(5, value.getBegin_time());
-        stmt.bindLong(6, value.getEnd_time());
-        stmt.bindLong(7, value.getDate());
+        if (value.getBegin_time() == null) {
+          stmt.bindNull(5);
+        } else {
+          stmt.bindString(5, value.getBegin_time());
+        }
+        if (value.getEnd_time() == null) {
+          stmt.bindNull(6);
+        } else {
+          stmt.bindString(6, value.getEnd_time());
+        }
+        if (value.getDate() == null) {
+          stmt.bindNull(7);
+        } else {
+          stmt.bindString(7, value.getDate());
+        }
         if (value.getNote() == null) {
           stmt.bindNull(8);
         } else {
@@ -126,8 +163,16 @@ public final class TaskDao_Impl implements TaskDao {
         } else {
           stmt.bindString(9, value.getColor());
         }
-        stmt.bindLong(10, value.getImportance());
-        stmt.bindLong(11, value.getNotiTime());
+        if (value.getImportance() == null) {
+          stmt.bindNull(10);
+        } else {
+          stmt.bindString(10, value.getImportance());
+        }
+        if (value.getNotiTime() == null) {
+          stmt.bindNull(11);
+        } else {
+          stmt.bindString(11, value.getNotiTime());
+        }
         final int _tmp;
         _tmp = value.getCalRoute() ? 1 : 0;
         stmt.bindLong(12, _tmp);
@@ -136,7 +181,12 @@ public final class TaskDao_Impl implements TaskDao {
         } else {
           stmt.bindString(13, value.getTravelMode());
         }
-        stmt.bindLong(14, value.getId());
+        if (value.getDuration() == null) {
+          stmt.bindNull(14);
+        } else {
+          stmt.bindString(14, value.getDuration());
+        }
+        stmt.bindLong(15, value.getId());
       }
     };
   }
@@ -284,6 +334,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
       final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
+      final int _cursorIndexOfDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "duration");
       final List<Task> _result = new ArrayList<Task>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final Task _item;
@@ -300,14 +351,14 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpLocation;
         _tmpLocation = _cursor.getString(_cursorIndexOfLocation);
         _item.setLocation(_tmpLocation);
-        final int _tmpBegin_time;
-        _tmpBegin_time = _cursor.getInt(_cursorIndexOfBeginTime);
+        final String _tmpBegin_time;
+        _tmpBegin_time = _cursor.getString(_cursorIndexOfBeginTime);
         _item.setBegin_time(_tmpBegin_time);
-        final int _tmpEnd_time;
-        _tmpEnd_time = _cursor.getInt(_cursorIndexOfEndTime);
+        final String _tmpEnd_time;
+        _tmpEnd_time = _cursor.getString(_cursorIndexOfEndTime);
         _item.setEnd_time(_tmpEnd_time);
-        final int _tmpDate;
-        _tmpDate = _cursor.getInt(_cursorIndexOfDate);
+        final String _tmpDate;
+        _tmpDate = _cursor.getString(_cursorIndexOfDate);
         _item.setDate(_tmpDate);
         final String _tmpNote;
         _tmpNote = _cursor.getString(_cursorIndexOfNote);
@@ -315,11 +366,11 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpColor;
         _tmpColor = _cursor.getString(_cursorIndexOfColor);
         _item.setColor(_tmpColor);
-        final int _tmpImportance;
-        _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+        final String _tmpImportance;
+        _tmpImportance = _cursor.getString(_cursorIndexOfImportance);
         _item.setImportance(_tmpImportance);
-        final int _tmpNotiTime;
-        _tmpNotiTime = _cursor.getInt(_cursorIndexOfNotiTime);
+        final String _tmpNotiTime;
+        _tmpNotiTime = _cursor.getString(_cursorIndexOfNotiTime);
         _item.setNotiTime(_tmpNotiTime);
         final boolean _tmpCalRoute;
         final int _tmp;
@@ -329,6 +380,9 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpTravelMode;
         _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
         _item.setTravelMode(_tmpTravelMode);
+        final String _tmpDuration;
+        _tmpDuration = _cursor.getString(_cursorIndexOfDuration);
+        _item.setDuration(_tmpDuration);
         _result.add(_item);
       }
       return _result;
@@ -371,6 +425,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
       final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
+      final int _cursorIndexOfDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "duration");
       final List<Task> _result = new ArrayList<Task>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final Task _item_1;
@@ -387,14 +442,14 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpLocation;
         _tmpLocation = _cursor.getString(_cursorIndexOfLocation);
         _item_1.setLocation(_tmpLocation);
-        final int _tmpBegin_time;
-        _tmpBegin_time = _cursor.getInt(_cursorIndexOfBeginTime);
+        final String _tmpBegin_time;
+        _tmpBegin_time = _cursor.getString(_cursorIndexOfBeginTime);
         _item_1.setBegin_time(_tmpBegin_time);
-        final int _tmpEnd_time;
-        _tmpEnd_time = _cursor.getInt(_cursorIndexOfEndTime);
+        final String _tmpEnd_time;
+        _tmpEnd_time = _cursor.getString(_cursorIndexOfEndTime);
         _item_1.setEnd_time(_tmpEnd_time);
-        final int _tmpDate;
-        _tmpDate = _cursor.getInt(_cursorIndexOfDate);
+        final String _tmpDate;
+        _tmpDate = _cursor.getString(_cursorIndexOfDate);
         _item_1.setDate(_tmpDate);
         final String _tmpNote;
         _tmpNote = _cursor.getString(_cursorIndexOfNote);
@@ -402,11 +457,11 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpColor;
         _tmpColor = _cursor.getString(_cursorIndexOfColor);
         _item_1.setColor(_tmpColor);
-        final int _tmpImportance;
-        _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+        final String _tmpImportance;
+        _tmpImportance = _cursor.getString(_cursorIndexOfImportance);
         _item_1.setImportance(_tmpImportance);
-        final int _tmpNotiTime;
-        _tmpNotiTime = _cursor.getInt(_cursorIndexOfNotiTime);
+        final String _tmpNotiTime;
+        _tmpNotiTime = _cursor.getString(_cursorIndexOfNotiTime);
         _item_1.setNotiTime(_tmpNotiTime);
         final boolean _tmpCalRoute;
         final int _tmp;
@@ -416,6 +471,9 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpTravelMode;
         _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
         _item_1.setTravelMode(_tmpTravelMode);
+        final String _tmpDuration;
+        _tmpDuration = _cursor.getString(_cursorIndexOfDuration);
+        _item_1.setDuration(_tmpDuration);
         _result.add(_item_1);
       }
       return _result;
@@ -447,6 +505,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
       final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
+      final int _cursorIndexOfDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "duration");
       final List<Task> _result = new ArrayList<Task>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final Task _item;
@@ -463,14 +522,14 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpLocation;
         _tmpLocation = _cursor.getString(_cursorIndexOfLocation);
         _item.setLocation(_tmpLocation);
-        final int _tmpBegin_time;
-        _tmpBegin_time = _cursor.getInt(_cursorIndexOfBeginTime);
+        final String _tmpBegin_time;
+        _tmpBegin_time = _cursor.getString(_cursorIndexOfBeginTime);
         _item.setBegin_time(_tmpBegin_time);
-        final int _tmpEnd_time;
-        _tmpEnd_time = _cursor.getInt(_cursorIndexOfEndTime);
+        final String _tmpEnd_time;
+        _tmpEnd_time = _cursor.getString(_cursorIndexOfEndTime);
         _item.setEnd_time(_tmpEnd_time);
-        final int _tmpDate;
-        _tmpDate = _cursor.getInt(_cursorIndexOfDate);
+        final String _tmpDate;
+        _tmpDate = _cursor.getString(_cursorIndexOfDate);
         _item.setDate(_tmpDate);
         final String _tmpNote;
         _tmpNote = _cursor.getString(_cursorIndexOfNote);
@@ -478,11 +537,11 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpColor;
         _tmpColor = _cursor.getString(_cursorIndexOfColor);
         _item.setColor(_tmpColor);
-        final int _tmpImportance;
-        _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+        final String _tmpImportance;
+        _tmpImportance = _cursor.getString(_cursorIndexOfImportance);
         _item.setImportance(_tmpImportance);
-        final int _tmpNotiTime;
-        _tmpNotiTime = _cursor.getInt(_cursorIndexOfNotiTime);
+        final String _tmpNotiTime;
+        _tmpNotiTime = _cursor.getString(_cursorIndexOfNotiTime);
         _item.setNotiTime(_tmpNotiTime);
         final boolean _tmpCalRoute;
         final int _tmp;
@@ -492,6 +551,9 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpTravelMode;
         _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
         _item.setTravelMode(_tmpTravelMode);
+        final String _tmpDuration;
+        _tmpDuration = _cursor.getString(_cursorIndexOfDuration);
+        _item.setDuration(_tmpDuration);
         _result.add(_item);
       }
       return _result;
@@ -523,6 +585,7 @@ public final class TaskDao_Impl implements TaskDao {
       final int _cursorIndexOfNotiTime = CursorUtil.getColumnIndexOrThrow(_cursor, "notification");
       final int _cursorIndexOfCalRoute = CursorUtil.getColumnIndexOrThrow(_cursor, "calRoute");
       final int _cursorIndexOfTravelMode = CursorUtil.getColumnIndexOrThrow(_cursor, "travelMode");
+      final int _cursorIndexOfDuration = CursorUtil.getColumnIndexOrThrow(_cursor, "duration");
       final Task _result;
       if(_cursor.moveToFirst()) {
         _result = new Task();
@@ -538,14 +601,14 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpLocation;
         _tmpLocation = _cursor.getString(_cursorIndexOfLocation);
         _result.setLocation(_tmpLocation);
-        final int _tmpBegin_time;
-        _tmpBegin_time = _cursor.getInt(_cursorIndexOfBeginTime);
+        final String _tmpBegin_time;
+        _tmpBegin_time = _cursor.getString(_cursorIndexOfBeginTime);
         _result.setBegin_time(_tmpBegin_time);
-        final int _tmpEnd_time;
-        _tmpEnd_time = _cursor.getInt(_cursorIndexOfEndTime);
+        final String _tmpEnd_time;
+        _tmpEnd_time = _cursor.getString(_cursorIndexOfEndTime);
         _result.setEnd_time(_tmpEnd_time);
-        final int _tmpDate;
-        _tmpDate = _cursor.getInt(_cursorIndexOfDate);
+        final String _tmpDate;
+        _tmpDate = _cursor.getString(_cursorIndexOfDate);
         _result.setDate(_tmpDate);
         final String _tmpNote;
         _tmpNote = _cursor.getString(_cursorIndexOfNote);
@@ -553,11 +616,11 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpColor;
         _tmpColor = _cursor.getString(_cursorIndexOfColor);
         _result.setColor(_tmpColor);
-        final int _tmpImportance;
-        _tmpImportance = _cursor.getInt(_cursorIndexOfImportance);
+        final String _tmpImportance;
+        _tmpImportance = _cursor.getString(_cursorIndexOfImportance);
         _result.setImportance(_tmpImportance);
-        final int _tmpNotiTime;
-        _tmpNotiTime = _cursor.getInt(_cursorIndexOfNotiTime);
+        final String _tmpNotiTime;
+        _tmpNotiTime = _cursor.getString(_cursorIndexOfNotiTime);
         _result.setNotiTime(_tmpNotiTime);
         final boolean _tmpCalRoute;
         final int _tmp;
@@ -567,6 +630,9 @@ public final class TaskDao_Impl implements TaskDao {
         final String _tmpTravelMode;
         _tmpTravelMode = _cursor.getString(_cursorIndexOfTravelMode);
         _result.setTravelMode(_tmpTravelMode);
+        final String _tmpDuration;
+        _tmpDuration = _cursor.getString(_cursorIndexOfDuration);
+        _result.setDuration(_tmpDuration);
       } else {
         _result = null;
       }

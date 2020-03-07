@@ -56,6 +56,8 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array importance
+array travel_modes
 attr action
 attr actionBarDivider
 attr actionBarItemBackground
@@ -1601,10 +1603,7 @@ id custom
 id customPanel
 id cut
 id dark
-id date_day
-id date_month
 id date_picker_actions
-id date_year
 id decor_content_parent
 id default_activity_button
 id design_bottom_sheet
@@ -1617,6 +1616,7 @@ id dimensions
 id direct
 id disableHome
 id dropdown_menu
+id editText_note
 id edit_query
 id end
 id end_padder
@@ -1643,7 +1643,6 @@ id group_divider
 id groups
 id guideline2
 id guideline3
-id guideline4
 id guideline5
 id guideline6
 id guideline7
@@ -1780,6 +1779,8 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
+id spinner_importance
+id spinner_travel_mode
 id split_action_bar
 id spread
 id spread_inside
@@ -1792,10 +1793,10 @@ id status_bar_latest_event_content
 id stretch
 id submenuarrow
 id submit_area
+id switch_mode
 id switch_notification
-id switch_text_bike
-id switch_text_walk
-id switch_travel_mode
+id switch_text_task
+id switch_text_todo
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -1814,8 +1815,13 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView_date
+id textView_duration
 id textView_hour
 id textView_location
+id textView_time_before
+id textView_time_begin
+id textView_time_end
 id textView_title
 id text_dashboard
 id text_input_end_icon
@@ -1826,9 +1832,6 @@ id textinput_error
 id textinput_helper_text
 id textinput_title
 id time
-id time_begin_hour
-id time_begin_minute
-id time_notification_minute
 id title
 id titleDividerNoCustom
 id title_template
@@ -2117,6 +2120,8 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string prompt_importance
+string prompt_travel_mode
 string rationale_ask_again
 string search_menu_title
 string status_bar_notification_info_overflow
@@ -2360,6 +2365,7 @@ style MaterialAlertDialog_MaterialComponents_Title_Panel
 style MaterialAlertDialog_MaterialComponents_Title_Panel_CenterStacked
 style MaterialAlertDialog_MaterialComponents_Title_Text
 style MaterialAlertDialog_MaterialComponents_Title_Text_CenterStacked
+style MyDatePickerDialogTheme
 style Platform_AppCompat
 style Platform_AppCompat_Light
 style Platform_MaterialComponents

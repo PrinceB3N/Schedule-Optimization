@@ -43,8 +43,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
     @Override
     public void onBindViewHolder(TaskHolder holder, int position) {
+        int t1 = Integer.valueOf(TaskList.get(position).getBegin_time().substring(0,2));
+        int t2 = Integer.valueOf(TaskList.get(position).getBegin_time().substring(3,5));
+        int t3 = Integer.valueOf(TaskList.get(position).getEnd_time().substring(0,2));
+        int t4 = Integer.valueOf(TaskList.get(position).getEnd_time().substring(3,5));
+        int length = (t3*60)+t4 - (t1*60)-t2;
         holder.title.setText(TaskList.get(position).getTitle());
         holder.location.setText(TaskList.get(position).getLocation());
+        holder.title.setHeight(length*5);
     }
 
     @Override

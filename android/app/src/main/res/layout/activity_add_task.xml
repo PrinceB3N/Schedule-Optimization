@@ -194,8 +194,8 @@
 
         <TextView
             android:id="@+id/textView_time_before"
-            android:layout_width="119dp"
-            android:layout_height="26dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Notify Me Minutes before"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
@@ -217,8 +217,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:ems="10"
+            android:hint="Note"
             android:inputType="textPersonName"
-            android:text="Note"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/spinner_importance" />

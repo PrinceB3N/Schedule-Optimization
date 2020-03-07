@@ -42,9 +42,12 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourHolder> {
 
     @Override
     public void onBindViewHolder(HourHolder holder, int position) {
-        int t = HourList.get(position).time;
-        if(t<10) { holder.hour.setText("0" + HourList.get(position).getTime() + ":00"); }
-        else {holder.hour.setText(HourList.get(position).getTime() + ":00");}
+        String tb = HourList.get(position).getTasksInHour().get(0).getBegin_time();
+        String te = HourList.get(position).getTasksInHour().get(0).getEnd_time();
+
+
+        holder.begin_time.setText(tb);
+        holder.end_time.setText(te);
         holder.listOfTask.setLayoutManager(new LinearLayoutManager(holder.listOfTask.getContext(),
                 RecyclerView.HORIZONTAL, false));
         holder.listOfTask.setAdapter(new TaskAdapter(holder.listOfTask, HourList.get(position).getTasksInHour()));
@@ -57,12 +60,14 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourHolder> {
     }
 
     class HourHolder extends RecyclerView.ViewHolder {
-        TextView hour;
+        TextView begin_time;
+        TextView end_time;
         RecyclerView listOfTask;
 
         private HourHolder(View itemView) {
             super(itemView);
-            hour = itemView.findViewById(R.id.textView_hour);
+            begin_time = itemView.findViewById(R.id.textView_begin);
+            end_time = itemView.findViewById(R.id.textView_end);
             listOfTask = itemView.findViewById((R.id.recyclerView_tasks));
         }
     }

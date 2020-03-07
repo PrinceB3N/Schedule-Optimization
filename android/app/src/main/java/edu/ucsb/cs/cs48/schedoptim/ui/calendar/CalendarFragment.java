@@ -68,16 +68,33 @@ public class CalendarFragment extends Fragment {
                 .fallbackToDestructiveMigration()
                 .build();
 
-         for (int i = 0; i < 24; i ++){
-             Hour h = new Hour(i);
-             for (int j = 0; j < 10; j++){
-                 Task t = new Task();
-                 t.setTitle("Test"+i+j);
-                 t.setLocation("Lib");
-                 h.getTasksInHour().add(t);
-             }
-             hours.add(h);
-         }
+//         for (int i = 0; i < 24; i ++){
+//             Hour h = new Hour(i);
+//             for (int j = 0; j < 1; j++){
+//                 Task t = new Task();
+//                 t.setTitle("Test"+i+j);
+//                 t.setLocation("Lib");
+//                 h.getTasksInHour().add(t);
+//             }
+//             hours.add(h);
+//         }
+
+         Hour h1 = new Hour(1,2);
+        Task t1 = new Task();
+        t1.setTitle("Test1");
+        t1.setLocation("Lib");
+        t1.setBegin_time("01:00");
+        t1.setEnd_time("01:30");
+        h1.getTasksInHour().add(t1);
+         Hour h2 = new Hour(3,6);
+        Task t2 = new Task();
+        t2.setTitle("Test2");
+        t2.setLocation("Lib");
+        t2.setBegin_time("02:00");
+        t2.setEnd_time("04:00");
+        h2.getTasksInHour().add(t2);
+        hours.add(h1);
+        hours.add(h2);
 
 
          listOfHours.setLayoutManager( new LinearLayoutManager(getContext(),

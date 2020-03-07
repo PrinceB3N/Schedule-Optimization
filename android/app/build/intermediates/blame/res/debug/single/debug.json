@@ -60,6 +60,10 @@
         "source": "C:\\Users\\yezip\\StudioProjects\\5pm-schedule-optimization\\android\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
     },
     {
+        "merged": "C:\\Users\\yezip\\StudioProjects\\5pm-schedule-optimization\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_line.xml.flat",
+        "source": "C:\\Users\\yezip\\StudioProjects\\5pm-schedule-optimization\\android\\app\\src\\main\\res\\drawable\\line.xml"
+    },
+    {
         "merged": "C:\\Users\\yezip\\StudioProjects\\5pm-schedule-optimization\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\yezip\\StudioProjects\\5pm-schedule-optimization\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },

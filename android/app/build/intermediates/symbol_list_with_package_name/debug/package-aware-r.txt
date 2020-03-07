@@ -1466,6 +1466,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_notification
 drawable ic_notifications_black_24dp
+drawable line
 drawable mtrl_dialog_background
 drawable mtrl_dropdown_arrow
 drawable mtrl_ic_arrow_drop_down
@@ -1815,9 +1816,11 @@ id textEnd
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView_begin
 id textView_date
 id textView_duration
-id textView_hour
+id textView_end
+id textView_line
 id textView_location
 id textView_time_before
 id textView_time_begin

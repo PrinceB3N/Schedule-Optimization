@@ -33,6 +33,7 @@ import static edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlarmCreator.createAl
 public class AddTaskActivity extends Activity {
 
     Boolean isTask;
+    int taskId = -1;
 
 
     @Override
@@ -47,8 +48,8 @@ public class AddTaskActivity extends Activity {
         // Title
         final EditText title = findViewById(R.id.textinput_title);
         // Location
-        final AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autocomplete);
-        autoCompleteTextView.setAdapter(new PlaceAutoSuggestAdapter(AddTaskActivity.this, android.R.layout.simple_list_item_1));
+        final AutoCompleteTextView textinput_location = findViewById(R.id.autocomplete);
+        textinput_location.setAdapter(new PlaceAutoSuggestAdapter(AddTaskActivity.this, android.R.layout.simple_list_item_1));
         final CheckBox addToRoute = findViewById(R.id.add_to_route);
         final Spinner travelMode = findViewById(R.id.spinner_travel_mode);
         // Time
@@ -62,16 +63,49 @@ public class AddTaskActivity extends Activity {
         final TextView timeBefore= findViewById(R.id.textView_time_before);
         // Importance
         final Spinner importance = findViewById(R.id.spinner_importance);
+        importance.setSelection(1);
         // Note
         final EditText note  = findViewById(R.id.editText_note);
 
+        final TaskDatabase db = Room.databaseBuilder(this,
+                TaskDatabase.class, "database-task")
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
 
         Calendar ca = Calendar.getInstance();
+        int ch = ca.get(Calendar.HOUR_OF_DAY);
+        int cm = ca.get(Calendar.MINUTE);
         final int[] mYear = {ca.get(Calendar.YEAR)};
         final int[] mMonth = {ca.get(Calendar.MONTH)};
         final int[] mDay = {ca.get(Calendar.DAY_OF_MONTH)};
-        final int[] mHour = {ca.get(Calendar.HOUR_OF_DAY)}; // current 0; begin 1; end 2;
-        final int[] mMinute = {ca.get(Calendar.MINUTE)};    // duration 3; minuteBefore 4
+        final int[] mHour = {ch,ch+1,1,0}; // begin 0; end 1; duration 2; minuteBefore 3
+        final int[] mMinute = {cm, cm,0,30};
+
+        beginTime.setText("Begin Time: "+String.format("%02d",mHour[0])+":"+String.format("%02d",mMinute[0]));
+        endTime.setText("End Time: "+String.format("%02d",mHour[1])+":"+String.format("%02d",mMinute[1]));
+        duration.setText("Duration: "+String.format("%02d",mHour[2])+":"+String.format("%02d",mMinute[2]));
+        timeBefore.setText("Time Before: "+String.format("%02d",mHour[3])+":"+String.format("%02d",mMinute[3]));
+        date.setText("Date: "+mMonth[0]+"/"+mDay[0]+"/"+mYear[0]);
+
+        if (taskId != -1){
+            Task e = db.taskDao().findById(taskId);
+            if (e.getType().matches("task")){isTask = true;}
+            else {isTask = false;}
+            title.setText(e.getTitle());
+            if (!e.getLocation().matches(""))
+            {textinput_location.setText(e.getLocation());}
+            addToRoute.setChecked(e.getCalRoute());
+            // TODO: set travel mode
+            duration.setText("Duration: "+e.getDuration());
+            if (!e.getNotiTime().matches("")){
+                needNotification.setChecked(true);
+                timeBefore.setText("Time Before: "+e.getNotiTime());
+            }
+            // TODO:set importance
+            if (!e.getNote().matches("")){note.setText(e.getNote());}
+        }
+
 
 
         final DatePickerDialog datePickerDialog = new DatePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
@@ -81,7 +115,7 @@ public class AddTaskActivity extends Activity {
                         mYear[0] = year;
                         mMonth[0] = month;
                         mDay[0] = dayOfMonth;
-                        date.setText(month+"/"+dayOfMonth+"/"+year);
+                        date.setText("Date: "+month+"/"+dayOfMonth+"/"+year);
                     }
                 },
                 mYear[0], mMonth[0], mDay[0]);
@@ -90,47 +124,42 @@ public class AddTaskActivity extends Activity {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        mHour[1] = hourOfDay;
-                        mMinute[1] = minute;
-                        beginTime.setText(hourOfDay+":"+minute);
+                        mHour[0] = hourOfDay;
+                        mMinute[0] = minute;
+                        beginTime.setText("Begin Time: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[0], mMinute[0], true);
+                }, ch, cm, true);
 
         final TimePickerDialog endTimePickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        mHour[2] = hourOfDay;
-                        mMinute[2] = minute;
-                        endTime.setText(hourOfDay+":"+minute);
+                        mHour[1] = hourOfDay;
+                        mMinute[1] = minute;
+                        endTime.setText("End Time: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[0], mMinute[0], true);
+                }, mHour[1], mMinute[1], true);
 
         final TimePickerDialog durationPickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        mHour[3] = hourOfDay;
-                        mMinute[3] = minute;
-                        duration.setText(hourOfDay+":"+minute);
+                        mHour[2] = hourOfDay;
+                        mMinute[2] = minute;
+                        duration.setText("Duration: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[0], mMinute[0], true);
+                }, mHour[2], mMinute[2], true);
+
         final TimePickerDialog timeBeforePickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        mHour[4] = hourOfDay;
-                        mMinute[4] = minute;
-                        timeBefore.setText(hourOfDay+":"+minute);
+                        mHour[3] = hourOfDay;
+                        mMinute[3] = minute;
+                        timeBefore.setText("Time Before: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[0], mMinute[0], true);
+                }, mHour[3], mMinute[3], true);
 
-
-        final TaskDatabase db = Room.databaseBuilder(this,
-                TaskDatabase.class, "database-task")
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
 
         beginTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +199,6 @@ public class AddTaskActivity extends Activity {
             public void onClick(View v) {
                 // Create Task object
                 Task t = new Task();
-                int hour, minute, month, day, year, minuteBefore;
                 String location;
 
                 // Set title
@@ -182,7 +210,7 @@ public class AddTaskActivity extends Activity {
                 }
 
                 // Set location
-                location = autoCompleteTextView.getText().toString();
+                location = textinput_location.getText().toString();
                 t.setLocation(location);
 
                 // Set add to route
@@ -192,23 +220,36 @@ public class AddTaskActivity extends Activity {
                 // Set travel mode
                 t.setTravelMode(travelMode.getSelectedItem().toString().toUpperCase());
 
-                // Set begin time
-                try{
-                t.setBegin_time(mHour[1]+""+mMinute[1]);}catch (Exception e){}
-
+                // Set times
+                if (mHour[0]>mHour[1]){
+                    Toast.makeText(getApplicationContext(), "The task ends before begin!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (mHour[0] == mHour[1] && mMinute[0] > mMinute[1]){
+                    Toast.makeText(getApplicationContext(), "The task ends before it begins!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                t.setBegin_time(String.format("%02d",mHour[0])+":"+String.format("%02d",mMinute[0]));
+                t.setEnd_time(String.format("%02d",mHour[1])+":"+String.format("%02d",mMinute[1]));
+                t.setDuration(String.format("%02d",mHour[2])+":"+String.format("%02d",mMinute[2]));
+                t.setNotiTime(String.format("%02d",mHour[3])+":"+String.format("%02d",mMinute[3]));
 
                 // Set date
-                // For now, we assume valid input. I will change to date picker later
-//                month = Integer.parseInt(dateMonth.getText().toString());
-//                day = Integer.parseInt(dateDay.getText().toString());
-//                year = Integer.parseInt(dateYear.getText().toString());
-//                t.setDate(Integer.parseInt(dateMonth.getText().toString() + dateDay.getText().toString() + dateYear.getText().toString()));
-//
-//                // Set notification
-//                minuteBefore = Integer.parseInt(timeBeforeNotification.getText().toString());
-//                if (notification_need.isChecked())
-//                { createAlarm(getApplicationContext(), t.getId(), hour, minute, minuteBefore, location, "This is location"); }
-////                { createAlarm(getApplicationContext(), t.getId(), month, day, year, hour, minute, minuteBefore, location, "This is location"); }
+                t.setDate(mMonth[0]+"/"+mDay[0]+"/"+mYear[0]);
+
+                // Set notification
+                if (needNotification.isChecked()){
+                    createAlarm(getApplicationContext(), t.getId(), mHour[0], mMinute[0],
+                            mHour[3]+mMinute[3], location, "This is location");
+                    t.setNotiTime(String.format("%02d",mHour[3])+":"+String.format("%02d",mMinute[3]));
+                }
+//                { createAlarm(getApplicationContext(), t.getId(), mMonth[0],mDay[0],mYear[0], mHour[0], mMinute[0], mHour[3]+mMinute[3], location, "This is location"); }
+
+                // Set importance
+                t.setImportance(importance.getSelectedItem().toString());
+
+                // Set note
+                t.setNote(note.getText().toString());
 
                 db.taskDao().insert(t);
 

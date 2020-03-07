@@ -183,7 +183,7 @@ public class RoutesAdapter extends
         }
         private void setTravelModeImg(Route route,ImageView travel_mode_img){
             switch(route.getTravel_mode()){
-                case "BICYCING":
+                case "BICYCLING":
                     travel_mode_img.setImageResource(R.drawable.bicycling);
                     return;
                 case "WALKING":

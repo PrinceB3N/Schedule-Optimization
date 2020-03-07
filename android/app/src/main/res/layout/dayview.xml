@@ -48,340 +48,393 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="1500dp"
                 android:layout_weight="2">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_12am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="20dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_12am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="60dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_1am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="80dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_1am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="120dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_2am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="140dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_2am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="180dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_3am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="200dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_3am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="240dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_4am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="260dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_4am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="300dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_5am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="320dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_5am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="360dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_6am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="380dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_6am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="420dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_7am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="440dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_7am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="480dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_8am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="500dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_8am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="540dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_9am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="560dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_9am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="600dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_10am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="620dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_10am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="660dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_11am"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="680dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_11am"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="720dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_12pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="740dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_12pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="780dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_13pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="800dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_13pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="840dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_14pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="860dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_14pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="900dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_15pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="920dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_15pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="960dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_16pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="980dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_16pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1020dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_17pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1040dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_17pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1080dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_18pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1100dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_18pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1140dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_19pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1160dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_19pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1200dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_20pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1220dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_20pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1260dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_21pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1280dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_21pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1320dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_22pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1340dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_22pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1380dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_23pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1400dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_23pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1440dp"
                     android:background="@color/colorDivider" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:text="@string/time_24pm"
+                    android:layout_centerHorizontal="true"
                     android:paddingTop="1460dp"
-                    android:layout_centerHorizontal="true"/>
+                    android:text="@string/time_24pm"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="1500dp"
                     android:background="@color/colorDivider" />
             </RelativeLayout>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
@@ -545,4 +598,5 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

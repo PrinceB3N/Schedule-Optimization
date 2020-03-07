@@ -67,21 +67,21 @@ public class CalendarViewModel extends ViewModel {
     }
 
 
-    public ArrayList<ArrayList<Task>> sortByHour() {
-        ArrayList<ArrayList<Task>> sbh = new ArrayList<>();
-        ArrayList<Task> all = tasks.getValue();
-
-        for (int h = 0; h < 24; h++) {
-            sbh.add(new ArrayList<Task>());
-        }
-
-        for (int i = 0; i < all.size(); i ++) {
-            Task t = all.get(i);
-            sbh.get(t.getBegin_time()).add(t);
-        }
-
-        return  sbh;
-    }
+//    public ArrayList<ArrayList<Task>> sortByHour() {
+//        ArrayList<ArrayList<Task>> sbh = new ArrayList<>();
+//        ArrayList<Task> all = tasks.getValue();
+//
+//        for (int h = 0; h < 24; h++) {
+//            sbh.add(new ArrayList<Task>());
+//        }
+//
+//        for (int i = 0; i < all.size(); i ++) {
+//            Task t = all.get(i);
+//            sbh.get(t.getBegin_time()).add(t);
+//        }
+//
+//        return  sbh;
+//    }
 
 
 }

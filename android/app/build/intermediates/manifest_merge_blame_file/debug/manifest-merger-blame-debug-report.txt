@@ -1,0 +1,170 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="edu.ucsb.cs.cs48.schedoptim"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml
+10    <!--
+11         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+12         Google Maps Android API v2, but you must specify either coarse or fine
+13         location permissions for the 'MyLocation' functionality.
+14    -->
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:9:5-79
+15-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:9:22-76
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:10:5-67
+16-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:10:22-64
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:11:5-80
+17-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:11:22-78
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:12:5-79
+18-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:12:22-76
+19    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+19-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:13:5-71
+19-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:13:22-68
+20    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+20-->[com.amitshekhar.android:debug-db-base:1.0.6] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\3e375ceccc8de113993cdc756a0f55b8\jetified-debug-db-base-1.0.6\AndroidManifest.xml:30:5-76
+20-->[com.amitshekhar.android:debug-db-base:1.0.6] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\3e375ceccc8de113993cdc756a0f55b8\jetified-debug-db-base-1.0.6\AndroidManifest.xml:30:22-73
+21
+22    <uses-feature
+22-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\f8d089ff6afbe3b8fc20fa61e3a48656\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+23        android:glEsVersion="0x00020000"
+23-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\f8d089ff6afbe3b8fc20fa61e3a48656\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+24        android:required="true" />
+24-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\f8d089ff6afbe3b8fc20fa61e3a48656\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+25
+26    <application
+26-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:14:5-54:19
+27        android:allowBackup="true"
+27-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:15:9-35
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.1.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\c1489ca949efe28b3e19fe04776a0f4a\core-1.1.0\AndroidManifest.xml:24:18-86
+29        android:debuggable="true"
+30        android:extractNativeLibs="false"
+31        android:icon="@mipmap/ic_launcher"
+31-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:16:9-43
+32        android:label="@string/app_name"
+32-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:17:9-41
+33        android:roundIcon="@mipmap/ic_launcher_round"
+33-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:18:9-54
+34        android:supportsRtl="true"
+34-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:19:9-35
+35        android:testOnly="true"
+36        android:theme="@style/AppTheme" >
+36-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:20:9-40
+37        <activity
+37-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:21:9-29:20
+38            android:name="edu.ucsb.cs.cs48.schedoptim.MainActivity"
+38-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:22:13-41
+39            android:label="@string/title_activity_main" >
+39-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:23:13-56
+40            <intent-filter>
+40-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:24:13-28:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:25:17-69
+41-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:25:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:27:17-77
+43-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:27:27-74
+44            </intent-filter>
+45        </activity>
+46
+47        <!--
+48             The API key for Google Maps-based APIs is defined as a string resource.
+49             (See the file "res/values/google_maps_api.xml").
+50             Note that the API key is linked to the encryption key used to sign the APK.
+51             You need a different API key for each encryption key, including the release key that is used to
+52             sign the APK for publishing.
+53             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+54        -->
+55        <meta-data
+55-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:39:9-41:54
+56            android:name="com.google.android.geo.API_KEY"
+56-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:40:13-58
+57            android:value="@string/google_maps_key" />
+57-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:41:13-52
+58
+59        <activity
+59-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:43:9-48:20
+60            android:name="edu.ucsb.cs.cs48.schedoptim.AddTaskActivity"
+60-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:44:13-44
+61            android:theme="@style/DialogStyle" >
+61-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:45:13-47
+62        </activity>
+63
+64        <meta-data
+64-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:50:9-52:65
+65            android:name="com.google.android.gms.version"
+65-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:51:13-58
+66            android:value="@integer/google_play_services_version" />
+66-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:52:9-62
+67
+68        <receiver android:name="edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlertReceiver" />
+68-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:53:9-68
+68-->C:\Users\yezip\StudioProjects\5pm-schedule-optimization\android\app\src\main\AndroidManifest.xml:53:19-65
+69
+70        <provider
+70-->[com.amitshekhar.android:debug-db:1.0.6] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\cb4797d0b906baa551de231356f2762e\jetified-debug-db-1.0.6\AndroidManifest.xml:12:9-16:40
+71            android:name="com.amitshekhar.debug.DebugDBInitProvider"
+71-->[com.amitshekhar.android:debug-db:1.0.6] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\cb4797d0b906baa551de231356f2762e\jetified-debug-db-1.0.6\AndroidManifest.xml:13:13-69
+72            android:authorities="edu.ucsb.cs.cs48.schedoptim.DebugDBInitProvider"
+72-->[com.amitshekhar.android:debug-db:1.0.6] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\cb4797d0b906baa551de231356f2762e\jetified-debug-db-1.0.6\AndroidManifest.xml:14:13-71
+73            android:enabled="true"
+73-->[com.amitshekhar.android:debug-db:1.0.6] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\cb4797d0b906baa551de231356f2762e\jetified-debug-db-1.0.6\AndroidManifest.xml:15:13-35
+74            android:exported="false" />
+74-->[com.amitshekhar.android:debug-db:1.0.6] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\cb4797d0b906baa551de231356f2762e\jetified-debug-db-1.0.6\AndroidManifest.xml:16:13-37
+75
+76        <activity
+76-->[pub.devrel:easypermissions:0.3.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d13fd52c3d0d668c861a6d8f1346938e\jetified-easypermissions-0.3.0\AndroidManifest.xml:12:9-16:66
+77            android:name="pub.devrel.easypermissions.AppSettingsDialogHolderActivity"
+77-->[pub.devrel:easypermissions:0.3.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d13fd52c3d0d668c861a6d8f1346938e\jetified-easypermissions-0.3.0\AndroidManifest.xml:13:13-86
+78            android:exported="false"
+78-->[pub.devrel:easypermissions:0.3.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d13fd52c3d0d668c861a6d8f1346938e\jetified-easypermissions-0.3.0\AndroidManifest.xml:14:13-37
+79            android:label=""
+79-->[pub.devrel:easypermissions:0.3.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d13fd52c3d0d668c861a6d8f1346938e\jetified-easypermissions-0.3.0\AndroidManifest.xml:15:13-29
+80            android:theme="@style/EasyPermissions.Transparent" />
+80-->[pub.devrel:easypermissions:0.3.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d13fd52c3d0d668c861a6d8f1346938e\jetified-easypermissions-0.3.0\AndroidManifest.xml:16:13-63
+81
+82        <service
+82-->[androidx.room:room-runtime:2.2.4] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\5cdefa68f2d00a9fbc1e8d6cd08c8164\room-runtime-2.2.4\AndroidManifest.xml:25:9-27:40
+83            android:name="androidx.room.MultiInstanceInvalidationService"
+83-->[androidx.room:room-runtime:2.2.4] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\5cdefa68f2d00a9fbc1e8d6cd08c8164\room-runtime-2.2.4\AndroidManifest.xml:26:13-74
+84            android:exported="false" /> <!-- Needs to be explicitly declared on P+ -->
+84-->[androidx.room:room-runtime:2.2.4] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\5cdefa68f2d00a9fbc1e8d6cd08c8164\room-runtime-2.2.4\AndroidManifest.xml:27:13-37
+85        <uses-library
+85-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\f8d089ff6afbe3b8fc20fa61e3a48656\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+86            android:name="org.apache.http.legacy"
+86-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\f8d089ff6afbe3b8fc20fa61e3a48656\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+87            android:required="false" />
+87-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\f8d089ff6afbe3b8fc20fa61e3a48656\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+88
+89        <activity
+89-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d439984276343587038205a15ba96fe0\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+90            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+90-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d439984276343587038205a15ba96fe0\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+91            android:exported="false"
+91-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d439984276343587038205a15ba96fe0\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+92            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+92-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\d439984276343587038205a15ba96fe0\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+93
+94        <provider
+94-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\a25a790421a7dc900b8e0fbed5bc15da\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:25:9-29:43
+95            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+95-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\a25a790421a7dc900b8e0fbed5bc15da\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:26:13-79
+96            android:authorities="edu.ucsb.cs.cs48.schedoptim.lifecycle-process"
+96-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\a25a790421a7dc900b8e0fbed5bc15da\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:27:13-69
+97            android:exported="false"
+97-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\a25a790421a7dc900b8e0fbed5bc15da\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:28:13-37
+98            android:multiprocess="true" />
+98-->[androidx.lifecycle:lifecycle-process:2.2.0] C:\Users\yezip\.gradle\caches\transforms-2\files-2.1\a25a790421a7dc900b8e0fbed5bc15da\jetified-lifecycle-process-2.2.0\AndroidManifest.xml:29:13-40
+99    </application>
+100
+101</manifest>

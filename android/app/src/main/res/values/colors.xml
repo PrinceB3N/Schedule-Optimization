@@ -5,4 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="NOTselected_route">#000000</color>
     <color name="selected_route">#1B4AD8</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorDivider">#aaaaaa</color>
 </resources>

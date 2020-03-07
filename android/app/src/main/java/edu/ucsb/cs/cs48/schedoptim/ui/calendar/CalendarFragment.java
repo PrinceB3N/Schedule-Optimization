@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,9 +48,13 @@ public class CalendarFragment extends Fragment {
                 new ViewModelProvider(this).get(CalendarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
 
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.calendarContainer, new MonthFragment());
+        ft.addToBackStack(null);
+        ft.commit();
 
         fab = root.findViewById(R.id.fab);
-        listOfHours = root.findViewById(R.id.recyclerView_hours);
+        //listOfHours = root.findViewById(R.id.recyclerView_hours);
         hours = new ArrayList<>();
 
 
@@ -79,29 +84,29 @@ public class CalendarFragment extends Fragment {
 //             hours.add(h);
 //         }
 
-         Hour h1 = new Hour(1,2);
-        Task t1 = new Task();
-        t1.setTitle("Test1");
-        t1.setLocation("Lib");
-        t1.setBegin_time("01:00");
-        t1.setEnd_time("01:30");
-        h1.getTasksInHour().add(t1);
-         Hour h2 = new Hour(3,6);
-        Task t2 = new Task();
-        t2.setTitle("Test2");
-        t2.setLocation("Lib");
-        t2.setBegin_time("02:00");
-        t2.setEnd_time("04:00");
-        h2.getTasksInHour().add(t2);
-        hours.add(h1);
-        hours.add(h2);
-
-
-         listOfHours.setLayoutManager( new LinearLayoutManager(getContext(),
-                 LinearLayoutManager.VERTICAL, false));
-         listOfHours.setAdapter(new HourAdapter(listOfHours, hours));
-
-         updateTasks();
+//         Hour h1 = new Hour(1,2);
+//        Task t1 = new Task();
+//        t1.setTitle("Test1");
+//        t1.setLocation("Lib");
+//        t1.setBegin_time("01:00");
+//        t1.setEnd_time("01:30");
+//        h1.getTasksInHour().add(t1);
+//         Hour h2 = new Hour(3,6);
+//        Task t2 = new Task();
+//        t2.setTitle("Test2");
+//        t2.setLocation("Lib");
+//        t2.setBegin_time("02:00");
+//        t2.setEnd_time("04:00");
+//        h2.getTasksInHour().add(t2);
+//        hours.add(h1);
+//        hours.add(h2);
+//
+//
+//         listOfHours.setLayoutManager( new LinearLayoutManager(getContext(),
+//                 LinearLayoutManager.VERTICAL, false));
+//         listOfHours.setAdapter(new HourAdapter(listOfHours, hours));
+//
+//         updateTasks();
 
 
 

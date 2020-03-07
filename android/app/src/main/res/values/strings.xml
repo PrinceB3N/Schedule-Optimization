@@ -5,4 +5,6 @@
     <string name="title_center">Route</string>
     <string name="title_left">Calendar</string>
     <string name="title_right">Social</string>
+    <string name="prompt_importance">How important is this To-Do ?</string>
+    <string name="prompt_travel_mode">Choose a travel mode</string>
 </resources>

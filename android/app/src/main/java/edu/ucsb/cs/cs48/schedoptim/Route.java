@@ -11,6 +11,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.maps.android.PolyUtil;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -106,6 +110,36 @@ public class Route{
     }
     public float getTime() {
         return time;
+    }
+    public String getFormattedTime(){
+        long rounded_time = (long) time;
+        long secs_in_min=60;
+        long secs_in_hour=3600;
+        if(secs_in_min>rounded_time){
+            return Float.toString(rounded_time)+" secs";
+        }
+        else if(secs_in_hour>rounded_time){
+            return Float.toString(rounded_time/secs_in_min)+" mins";
+        }
+        else{
+            String hours = Float.toString(rounded_time/secs_in_hour)+" hrs";
+            long extra_mins = (rounded_time%secs_in_hour)/secs_in_min;
+            if(extra_mins!=0){
+                return hours + " "+ extra_mins +" mins";
+            }
+            else{
+                return hours;
+            }
+        }
+    }
+    public String getFormattedLength(){
+        float meters_in_mile = 1609.34f;
+        if(161f>length){
+            return length +" meters";
+        }
+        else{
+            return length / meters_in_mile + "miles";
+        }
     }
 
     public void setRoute_id(long route_id) { this.route_id = route_id; }

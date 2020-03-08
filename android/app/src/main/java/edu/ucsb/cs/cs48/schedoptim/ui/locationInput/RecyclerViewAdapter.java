@@ -29,8 +29,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(View v){
             super(v);
-            textView = (TextView)v.findViewById(R.id.location_textview);
-            removeButton = (Button) v.findViewById(R.id.removeLoc);
+            textView = v.findViewById(R.id.location_textview);
+            removeButton = v.findViewById(R.id.removeLoc);
         }
     }
 

@@ -125,7 +125,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mapsViewModel.setRdb(routeDatabase);
         mapsViewModel.setIconGenerator(iconGenerator);
         //re-initalize map from pre-existing mapsViewModel if possible
-        mapsViewModel.updateMapWithExistingData();
+        MapsViewModel.updateMapWithExistingData();
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();

@@ -1,0 +1,25 @@
+Project: Schedule Optimization
+
+Mentor: Conner Daly
+
+Meeting Time: lab08
+
+Type of Meeting: Standup
+
+Team: Samuel Chen, Maynic Ye, Benjamin Prince, Maria Pakinggan
+Absent: Martin Zhao 
+Leader: 
+
+Samuel: fix up notification feature, debug faulty notifications/not creating notifications
+Maynic: data connection, plan to finish calendar fragment
+Ben: fixing autofill bug, need to use custom textview, found a calendar view that we can use, roadblocks -- design layouts
+Maria: working on final documentation, need final screenshots, take a look at remaining unit test, user 
+
+roadblocks -- overlapping tasks
+solution -- create restrictions for overlapping tasks
+
+Need to do: 
+- Clarity on buttons and functions 
+- Popups, clearly state what buttons do, what apps do 
+- New users will understand the purpose and usage of app
+- 

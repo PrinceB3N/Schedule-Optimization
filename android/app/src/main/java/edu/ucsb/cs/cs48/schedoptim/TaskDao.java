@@ -22,7 +22,7 @@ public interface TaskDao {
     List<Task> loadAllByIds(int[] taskIds);
 
     @Query("SELECT * FROM task WHERE date = :taskDate")
-    List<Task> loadAllByDate(int taskDate);
+    List<Task> loadAllByDate(String taskDate);
 
 //    @Query("SELECT * FROM task WHERE first_name LIKE :first AND "
 //            + "last_name LIKE :last LIMIT 1")

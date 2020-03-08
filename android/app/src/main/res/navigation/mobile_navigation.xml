@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_left">
+    app:startDestination="@+id/navigation_center">
 
     <fragment
-    android:id="@+id/navigation_left"
-    android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarFragment"
-    android:label="@string/title_left"
-    tools:layout="@layout/fragment_calendar" />
+        android:id="@+id/navigation_left"
+        android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayFragment"
+        android:label="@string/title_left" >
+        <action
+            android:id="@+id/action_navigation_left_to_todoFragment"
+            app:destination="@id/todoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_center"
@@ -22,4 +25,12 @@
         android:name="edu.ucsb.cs.cs48.schedoptim.ui.notifications.NotificationsFragment"
         android:label="@string/title_right"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment"
+        android:label="@string/title_fragment_todo">
+        <action
+            android:id="@+id/action_todoFragment_to_navigation_left"
+            app:destination="@id/navigation_left" />
+    </fragment>
 </navigation>

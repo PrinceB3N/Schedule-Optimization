@@ -41,19 +41,16 @@ public class Task {
     private String color;
 
     @ColumnInfo(name = "importance")
-    private String importance;
+    private int importance;
 
     @ColumnInfo(name = "notification")
-    private String notiTime;
+    private int notiTime;
 
     @ColumnInfo(name = "calRoute")
     private boolean calRoute;
 
     @ColumnInfo(name = "travelMode")
     private String travelMode;
-
-    @ColumnInfo(name = "duration")
-    private String duration;
 
     // Getters and setters are ignored for brevity,
     // but they're required for Room to work.
@@ -78,16 +75,14 @@ public class Task {
     public void setNote (String note) {this.note = note; }
     public String getColor () { return color; }
     public void setColor (String color) {this.color = color; }
-    public String getImportance () { return  importance; }
-    public void setImportance (String importance) { this.importance = importance; }
-    public String getNotiTime () { return  notiTime; }
-    public void setNotiTime (String time) { this.notiTime = time; }
+    public int getImportance () { return  importance; }
+    public void setImportance (int importance) { this.importance = importance; }
+    public int getNotiTime () { return  notiTime; }
+    public void setNotiTime (int time) { this.notiTime = time; }
     public boolean getCalRoute () { return  calRoute; }
     public void setCalRoute (boolean calRoute) { this.calRoute = calRoute; }
     public String getTravelMode () { return travelMode; }
     public void setTravelMode (String travelMode) {this.travelMode = travelMode; }
-    public String getDuration() {return this.duration; }
-    public void setDuration(String d) {this.duration = d;}
 
     @Ignore
     public Task(String title, String location) {

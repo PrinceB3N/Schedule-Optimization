@@ -5,14 +5,12 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import edu.ucsb.cs.cs48.schedoptim.Task;
-import edu.ucsb.cs.cs48.schedoptim.TaskDao;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
 public class DayViewModel extends AndroidViewModel {
@@ -53,10 +51,11 @@ public class DayViewModel extends AndroidViewModel {
         test6.setBegin_time("0200");
         test6.setEnd_time("0300");
 
-        tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
+//        tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
+        loadDataFromDatabase("2/8/2020");
     }
     public void loadDataFromDatabase(String day){
-        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadAllByDate(day));
+        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTodoByDate(day));
     }
     public ArrayList<Task> getAndLoadDataFromDatabase(String day){
         loadDataFromDatabase(day);

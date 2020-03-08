@@ -35,7 +35,7 @@ public class DayViewModel extends AndroidViewModel {
 
         Task test2 = new Task("Task2","Embarcadero Hall");
         test2.setBegin_time("0715");
-        test2.setEnd_time("0900");
+        test2.setEnd_time("1300");
 
         Task test3 = new Task("Task3","UCEN");
         test3.setBegin_time("0000");
@@ -46,12 +46,12 @@ public class DayViewModel extends AndroidViewModel {
         test4.setEnd_time("0045");
 
         Task test5 = new Task("Task5","UCEN");
-        test5.setBegin_time("0000");
-        test5.setEnd_time("0100");
+        test5.setBegin_time("0300");
+        test5.setEnd_time("0400");
 
         Task test6 = new Task("Task6","UCEN");
-        test6.setBegin_time("0000");
-        test6.setEnd_time("0105");
+        test6.setBegin_time("0200");
+        test6.setEnd_time("0300");
 
         tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
     }

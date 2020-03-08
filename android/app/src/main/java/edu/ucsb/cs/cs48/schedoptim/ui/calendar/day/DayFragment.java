@@ -44,7 +44,7 @@ import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
 import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
 
 public class DayFragment extends Fragment {
-    private static final String TAG = DayFragment.class.getSimpleName();
+    private final int EXTRA_PADDING =5;
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
@@ -79,19 +79,28 @@ public class DayFragment extends Fragment {
         });
 
         FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                navController.navigate(R.id.action_navigation_left_to_todoFragment);
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+//                navController.navigate(R.id.action_navigation_left_to_todoFragment);
+//            }
+//        });
         dayViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Task> update_tasks) {
                 update();
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addTask = new Intent(getContext(), AddTaskActivity.class);
+                startActivityForResult(addTask, 1);
+            }
+        });
+
 
         return root;
     }
@@ -172,14 +181,17 @@ public class DayFragment extends Fragment {
 
         taskView.setLayoutParams(layoutParams);
         //set additional attributes of textview
-        taskView.setText(task.getTitle()+"\n"+task.getBegin_time()+"\n"+task.getEnd_time());
+        taskView.setText(task.getTitle()+"\n"+formatTime(task.getBegin_time())+"\n"+formatTime(task.getEnd_time())+"\n"+task.getLocation());
         taskView.setId(100+child_views);
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
         taskView.setBackgroundColor(Color.BLUE);    //TODO: replace with task color
         taskView.setAlpha(.6f);
         taskView.setTag(task.getId());              //TODO: feed id into edittask
-        taskView.setHeight(dp_height);
+        if(dp_height>5)
+            taskView.setHeight(dp_height-5);
+        else
+            taskView.setHeight(dp_height);
         taskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +201,7 @@ public class DayFragment extends Fragment {
         //add view to layout and format constraint layout
         mLayout.addView(taskView, eventIndex - 1);
         set.clone(mLayout);
-        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin);
+        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin+EXTRA_PADDING);//TODO: CHANGE
         set.connect(taskView.getId(), ConstraintSet.LEFT,mLayout.getId(),ConstraintSet.LEFT,24);
         set.applyTo(mLayout);
     }
@@ -197,6 +209,25 @@ public class DayFragment extends Fragment {
     private int pixels_to_dp(int pixels){
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (pixels * scale + 0.5f);
+    }
+    //Expects hhmm format
+    private String formatTime(String time){
+        String mins = time.substring(2);
+        int hours = Integer.parseInt(time.substring(0,2));
+        if(hours==0){
+            return "12:"+mins+" AM";
+        }
+        else if(hours<12){
+            return hours+":"+mins+" AM";
+        }
+        else if(hours==12){
+            return "12:"+mins+" PM";
+        }
+        else if(hours>12){
+            int pm_hours = hours-12;
+            return pm_hours+":"+mins+" PM";
+        }
+        return "ERROR";
     }
     //Reset tasks in view
     private void update(){

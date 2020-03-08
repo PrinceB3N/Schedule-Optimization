@@ -26,13 +26,13 @@ public class Task {
     private String location;
 
     @ColumnInfo(name = "begin_time")
-    private int begin_time;
+    private String begin_time;
 
     @ColumnInfo(name = "end_time")
-    private int end_time;
+    private String end_time;
 
     @ColumnInfo(name = "date")
-    private int date;
+    private String date;
 
     @ColumnInfo(name = "note")
     private String note;
@@ -65,12 +65,12 @@ public class Task {
     public void setType (String type) { this.type = type; }
     public String getLocation () { return location; }
     public void setLocation (String location) { this.location = location; }
-    public int getBegin_time () { return begin_time; }
-    public void setBegin_time (int begin_time) { this.begin_time = begin_time; }
-    public int getEnd_time () { return  end_time; }
-    public void setEnd_time (int end_time) { this.end_time = end_time; }
-    public int getDate() { return date; }
-    public void setDate(int date) { this.date = date; }
+    public String getBegin_time () { return begin_time; }
+    public void setBegin_time (String begin_time) { this.begin_time = begin_time; }
+    public String getEnd_time () { return  end_time; }
+    public void setEnd_time (String end_time) { this.end_time = end_time; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date = date; }
     public String getNote () { return note; }
     public void setNote (String note) {this.note = note; }
     public String getColor () { return color; }

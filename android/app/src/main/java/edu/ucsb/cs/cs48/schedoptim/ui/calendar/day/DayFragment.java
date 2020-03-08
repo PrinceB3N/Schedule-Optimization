@@ -1,4 +1,5 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +13,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.room.Room;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,11 +32,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
+import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment;
+import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
+
+import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
 
 public class DayFragment extends Fragment {
     private static final String TAG = DayFragment.class.getSimpleName();
@@ -34,28 +49,20 @@ public class DayFragment extends Fragment {
     private ImageView nextDay;
     private TextView currentDate;
     private Calendar cal = Calendar.getInstance();
-    private RelativeLayout mLayout;
+    private ConstraintLayout mLayout;
     private int eventIndex;
     private DayViewModel dayViewModel;
-    private TaskDatabase taskDatabase;
-    private int new_children=0;
-    private static final int CHILDREN = 25;
+    private int child_views =0;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View root = inflater.inflate(R.layout.dayview, container, false);
+        dayViewModel = new ViewModelProvider(DayFragment.this).get(DayViewModel.class);
         mLayout = root.findViewById(R.id.left_event_column);
-        taskDatabase = Room.databaseBuilder(getContext(),
-                TaskDatabase.class, "database-task")
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
-
         eventIndex = mLayout.getChildCount();
         currentDate = root.findViewById(R.id.display_current_date);
         currentDate.setText(displayDateInString(cal.getTime()));
-        displayDailyEvents();
         previousDay = root.findViewById(R.id.previous_day);
         nextDay = root.findViewById(R.id.next_day);
         previousDay.setOnClickListener(new View.OnClickListener() {
@@ -71,151 +78,135 @@ public class DayFragment extends Fragment {
             }
         });
 
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+                navController.navigate(R.id.action_navigation_left_to_todoFragment);
+            }
+        });
+        dayViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
+            @Override
+            public void onChanged(@Nullable final ArrayList<Task> update_tasks) {
+                update();
+            }
+        });
+
         return root;
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { update(); } }
+
     private void previousCalendarDate(){
-        mLayout.removeViewAt(eventIndex - 1);
         cal.add(Calendar.DAY_OF_MONTH, -1);
         currentDate.setText(displayDateInString(cal.getTime()));
-        displayDailyEvents();
+        update();
     }
     private void nextCalendarDate(){
-        mLayout.removeViewAt(eventIndex - 1);
         cal.add(Calendar.DAY_OF_MONTH, 1);
         currentDate.setText(displayDateInString(cal.getTime()));
-        displayDailyEvents();
+        update();
     }
     private String displayDateInString(Date mDate){
         SimpleDateFormat formatter = new SimpleDateFormat("d MMMM, yyyy", Locale.ENGLISH);
         return formatter.format(mDate);
     }
-    //TODO: Query tasks from database
-    private void displayDailyEvents(){
+    /**
+     * Grabs Tasks from database by Calendar's current date.
+     * Then, will turn them into Views.
+     */
+    public void displayDailyTasks(){
 
         int month = (cal.get(Calendar.MONTH)+1)*1000000;
         int mDay = cal.get(Calendar.DAY_OF_MONTH)*10000;
         int year = cal.get(Calendar.YEAR);
-        List<Task> todayTasks = taskDatabase.taskDao().loadAllByDate(month+mDay+year);
+        //List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(Integer.toString(month+mDay+year));
+        List<Task> todayTasks = dayViewModel.getObservableTasks().getValue();
         for(Task task: todayTasks){
-            int eventBlockHeight = getEventTimeFrame(task.getBegin_time(),task.getEnd_time());
-            displayEventSection(task.getBegin_time(),eventBlockHeight,"Test");
+            displayTask(task);
         }
-        Log.d(MainActivity.class.getName(),"CHILDREN:"+mLayout.getChildCount());
-        int eventBlockHeight = getEventTimeFrame("0515", "0615");
-        displayEventSection(new Date(2020,3,6,5,15),eventBlockHeight,"Test");
-        displayEventSection(new Date(2020,3,6,1,30),60,"Here");
     }
-    //Assume hhss format
+    /**
+     * Displays Task as a TextView in the Constraint Layout with
+     * proper formatting. Assumes task's time is in hhmm form
+     * and the task has required fields filled.
+     * @param  task  Task object from Database
+     */
+    public void displayTask(Task task){
+        int height = getEventTimeFrame(task.getBegin_time(),task.getEnd_time());
+        int topmargin = getMarginFromTop(task.getBegin_time());
+        createEventView(task, topmargin, height);
+    }
+
+    //Assume hhss format, returns height of task in pixels
     private int getEventTimeFrame(String start, String end){
 
-        int hours = Integer.parseInt(start.substring(0,2))*3600;
-        int mins = Integer.parseInt(start.substring(2))*60;
+        int hours = Integer.parseInt(start.substring(0,2))*60;
+        int mins = Integer.parseInt(start.substring(2));
 
-        int hours2 = Integer.parseInt(end.substring(0,2))*3600;
-        int mins2 = Integer.parseInt(end.substring(2))*60;
-        int difference_milli = 1000*((hours2+mins2) - (hours+mins));
+        int hours2 = Integer.parseInt(end.substring(0,2))*60;
+        int mins2 = Integer.parseInt(end.substring(2));
+        int difference_min = (hours2+mins2) - (hours+mins);
 
-        int diff_hours = difference_milli/(1000*60*60);
-        int diff_mins = difference_milli/(1000*60);
-        Log.d(MainActivity.class.getName(),""+hours/3600);
-        Log.d(MainActivity.class.getName(),""+(diff_hours*60) + ((diff_mins*60) / 100));
-        return (diff_hours*60) + ((diff_mins*60) / 100);
+        int diff_hours = difference_min/60;
+        int diff_mins = difference_min-diff_hours*60;
+        return ((diff_hours)*60) + diff_mins;
     }
-    private void displayEventSection(Task task,String start, int height, String message){
+    //returns distance from top view in pixels
+    private int getMarginFromTop(String start){
         int hours = Integer.parseInt(start.substring(0,2));
         int minutes = Integer.parseInt(start.substring(2));
         int topViewMargin = (hours * 60) + minutes;
-        createEventView(task,topViewMargin, height, message);
+        return topViewMargin;
     }
-    private void displayEventSection(String start, int height, String message){
-        int hours = Integer.parseInt(start.substring(0,2));
-        int minutes = Integer.parseInt(start.substring(2));
-        int topViewMargin = (hours * 60) + minutes;
-        createEventView(topViewMargin, height, message);
-    }
-    private void displayEventSection(Task task, Date eventDate, int height, String message){
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-        String displayValue = timeFormatter.format(eventDate);
-        String[]hourMinutes = displayValue.split(":");
-        int hours = Integer.parseInt(hourMinutes[0]);
-        int minutes = Integer.parseInt(hourMinutes[1]);
-        Log.d(TAG, "Hour value " + hours);
-        Log.d(TAG, "Minutes value " + minutes);
-        int topViewMargin = ((hours) * 60) + minutes;
-        Log.d(TAG, "Margin top " + topViewMargin);
-        createEventView(task, topViewMargin, height, message);
-    }
-    private void displayEventSection(Date eventDate, int height, String message){
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-        String displayValue = timeFormatter.format(eventDate);
-        String[]hourMinutes = displayValue.split(":");
-        int hours = Integer.parseInt(hourMinutes[0]);
-        int minutes = Integer.parseInt(hourMinutes[1]);
-        Log.d(TAG, "Hour value " + hours);
-        Log.d(TAG, "Minutes value " + minutes);
-        int topViewMargin = ((hours) * 60) + minutes;
-        Log.d(TAG, "Margin top " + topViewMargin);
-        createEventView(topViewMargin, height, message);
-    }
-    private void createEventView(Task task,int topMargin, int height, String message){
-        final TextView mEventView = new TextView(this.getContext());
-        RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        lParam.topMargin = topMargin*2;
-        lParam.leftMargin = 24;
+    private void createEventView(Task task, int topMargin, int height){
+        int dp_height = pixels_to_dp(height);
+        int dp_margin = pixels_to_dp(topMargin);
+        //Set constraints on textview
+        ConstraintSet set = new ConstraintSet();
+        TextView taskView =new TextView(getContext());
+        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.topToTop=mLayout.getId();
+        layoutParams.leftToLeft=R.id.vguideline20;
 
-        lParam.height=120;
-
-        mEventView.setLayoutParams(lParam);
-        mEventView.setPadding(24, 0, 24, 0);
-        //mEventView.setHeight(height * 2);
-        mEventView.setGravity(0x11);
-        mEventView.setTextColor(Color.parseColor("#ffffff"));
-        mEventView.setText(message);
-        mEventView.setBackgroundColor(Color.BLUE);
-        mEventView.setAlpha(.6f);
-        mEventView.setTag("taskView"+task.getId());
-        new_children++;
-        Log.d(MainActivity.class.getName(),"CHILDREN:"+mLayout.getChildCount());
-        mEventView.setOnClickListener(new View.OnClickListener() {
+        taskView.setLayoutParams(layoutParams);
+        //set additional attributes of textview
+        taskView.setText(task.getTitle()+"\n"+task.getBegin_time()+"\n"+task.getEnd_time());
+        taskView.setId(100+child_views);
+        child_views++;
+        taskView.setTextColor(Color.parseColor("#ffffff"));
+        taskView.setBackgroundColor(Color.BLUE);    //TODO: replace with task color
+        taskView.setAlpha(.6f);
+        taskView.setTag(task.getId());              //TODO: feed id into edittask
+        taskView.setHeight(dp_height);
+        taskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 update();
             }
         });
-        mLayout.addView(mEventView, eventIndex - 1);
+        //add view to layout and format constraint layout
+        mLayout.addView(taskView, eventIndex - 1);
+        set.clone(mLayout);
+        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin);
+        set.connect(taskView.getId(), ConstraintSet.LEFT,mLayout.getId(),ConstraintSet.LEFT,24);
+        set.applyTo(mLayout);
     }
-    private void createEventView(int topMargin, int height, String message){
-        final TextView mEventView = new TextView(this.getContext());
-        RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        lParam.topMargin = topMargin*2;
-        lParam.leftMargin = 24;
-
-        mEventView.setLayoutParams(lParam);
-        mEventView.setPadding(24, 0, 24, 0);
-        mEventView.setHeight(height * 3);
-        mEventView.setGravity(0x11);
-        mEventView.setTextColor(Color.parseColor("#ffffff"));
-        mEventView.setText(message);
-        mEventView.setBackgroundColor(Color.BLUE);
-        mEventView.setAlpha(.6f);
-        mEventView.setTag("taskView");
-        new_children++;
-        Log.d(MainActivity.class.getName(),"CHILDREN:"+mLayout.getChildCount());
-        mEventView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                update();
-            }
-        });
-        mLayout.addView(mEventView, eventIndex - 1);
+    //Takes pixels and return rounded length in dp
+    private int pixels_to_dp(int pixels){
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (pixels * scale + 0.5f);
     }
+    //Reset tasks in view
     private void update(){
-        mLayout.removeViewsInLayout(CHILDREN-1, new_children);
-        new_children=0;
-        displayDailyEvents();
+        mLayout.removeAllViewsInLayout();
+        child_views=0;
+        displayDailyTasks();
+    }
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        dayViewModel.getObservableTasks().removeObservers(this);
     }
 }

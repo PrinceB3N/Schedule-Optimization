@@ -79,19 +79,28 @@ public class DayFragment extends Fragment {
         });
 
         FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-                navController.navigate(R.id.action_navigation_left_to_todoFragment);
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+//                navController.navigate(R.id.action_navigation_left_to_todoFragment);
+//            }
+//        });
         dayViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Task> update_tasks) {
                 update();
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addTask = new Intent(getContext(), AddTaskActivity.class);
+                startActivityForResult(addTask, 1);
+            }
+        });
+
 
         return root;
     }

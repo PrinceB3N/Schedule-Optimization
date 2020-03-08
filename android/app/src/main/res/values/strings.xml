@@ -35,4 +35,6 @@
     <string name="current_day_date">8 October, 2016</string>
     <string name="prompt_importance">How important is this To-Do ?</string>
     <string name="prompt_travel_mode">Choose a travel mode</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

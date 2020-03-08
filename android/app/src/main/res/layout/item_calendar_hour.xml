@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView_hour"
+        android:id="@+id/textView_begin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="hour"
@@ -18,6 +18,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@+id/textView_hour"
+        app:layout_constraintStart_toEndOf="@+id/textView_begin"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_line"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView_tasks" />
+
+    <TextView
+        android:id="@+id/textView_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView_line"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

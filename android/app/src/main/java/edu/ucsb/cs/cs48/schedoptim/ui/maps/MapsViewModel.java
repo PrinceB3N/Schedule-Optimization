@@ -74,11 +74,13 @@ public class MapsViewModel extends ViewModel{
 
         for (int i = 0; i < tasks.size(); i++) {
             Task tem = tasks.get(i);
+            Log.d(MainActivity.class.getName(),"getroute?:"+tem.getCalRoute());
             if (tem.getCalRoute()){
                 twr.add(tem.getLocation());
                 tm.add(tem.getTravelMode());
             }
         }
+        Log.d(MainActivity.class.getName(),"Locations:"+twr.toString());
         locations=twr;
         travel_modes=tm;
     }

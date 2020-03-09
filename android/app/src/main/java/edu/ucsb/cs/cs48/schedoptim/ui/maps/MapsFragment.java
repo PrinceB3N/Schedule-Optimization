@@ -107,6 +107,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
         });
         mapsViewModel.loadLocationsAndTravelModesFromDatabase();
+
         return root;
     }
 

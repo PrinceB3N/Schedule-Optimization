@@ -1,6 +1,7 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -53,17 +54,17 @@ public class DayViewModel extends AndroidViewModel {
         test6.setEnd_time("0300");
 
 //        tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
-        loadDataFromDatabase("8/3/2020");
     }
     public MutableLiveData<ArrayList<Task>> getObservableTasks(){
         return tasks;
     }
-    public void loadDataFromDatabase(Date date){
-        tasks.postValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(Task.formatTaskDate(date)));
-    }
     public ArrayList<Task> getAndLoadDataFromDatabase(Date date){
+        Log.d(MainActivity.class.getName(),"Loop?");
         loadDataFromDatabase(date);
         return tasks.getValue();
+    }
+    public void loadDataFromDatabase(Date date){
+        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(Task.formatTaskDate(date)));
     }
     public void loadDataFromDatabase(String date){
         tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(date));

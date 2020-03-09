@@ -86,12 +86,6 @@ public class DayFragment extends Fragment {
 //                navController.navigate(R.id.action_navigation_left_to_todoFragment);
 //            }
 //        });
-        dayViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
-            @Override
-            public void onChanged(@Nullable final ArrayList<Task> update_tasks) {
-                update();
-            }
-        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +94,8 @@ public class DayFragment extends Fragment {
                 startActivityForResult(addTask, 1);
             }
         });
-
-
+        //Set all textviews on fragment load
+        update();
         return root;
     }
     private void previousCalendarDate(){
@@ -123,12 +117,12 @@ public class DayFragment extends Fragment {
      * Then, will turn them into Views.
      */
     public void displayDailyTasks(){
-
-        List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase("8/3/2020");
+        /*List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(cal.getTime());
         for(Task task: todayTasks){
             displayTask(task);
         }
 
+         */
     }
     /**
      * Displays Task as a TextView in the Constraint Layout with

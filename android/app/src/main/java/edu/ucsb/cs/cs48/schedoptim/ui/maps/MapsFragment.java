@@ -106,9 +106,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 onClickRequestAndDrawRoutes();
             }
         });
-        mapsViewModel.setRdb(routeDatabase);
-        mapsViewModel.setTdb(taskDatabase);
-        mapsViewModel.setIconGenerator(iconGenerator);
         mapsViewModel.loadLocationsAndTravelModesFromDatabase();
         return root;
     }
@@ -141,5 +138,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();
     }
-
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        mapsViewModel.getObservableRoutes().removeObservers(this);
+    }
 }

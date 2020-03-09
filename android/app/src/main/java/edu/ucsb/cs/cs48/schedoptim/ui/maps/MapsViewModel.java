@@ -67,7 +67,6 @@ public class MapsViewModel extends ViewModel{
         }
         return routes;
     }
-    //TODO:
     public void loadLocationsAndTravelModesFromDatabase(){
         List<Task> tasks = tdb.taskDao().loadTaskByDate(Task.formatTaskDate(MainActivity.cal.getTime()));
         ArrayList<String> twr = new ArrayList<>();

@@ -128,7 +128,7 @@ public class AddTaskActivity extends Activity {
                         mMinute[0] = minute;
                         beginTime.setText("Begin Time: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, ch, cm, true);
+                }, ch, cm, false);
 
         final TimePickerDialog endTimePickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -138,7 +138,7 @@ public class AddTaskActivity extends Activity {
                         mMinute[1] = minute;
                         endTime.setText("End Time: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[1], mMinute[1], true);
+                }, mHour[1], mMinute[1], false);
 
         final TimePickerDialog durationPickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -148,7 +148,7 @@ public class AddTaskActivity extends Activity {
                         mMinute[2] = minute;
                         duration.setText("Duration: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[2], mMinute[2], true);
+                }, mHour[2], mMinute[2], false);
 
         final TimePickerDialog timeBeforePickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -158,7 +158,7 @@ public class AddTaskActivity extends Activity {
                         mMinute[3] = minute;
                         timeBefore.setText("Time Before: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[3], mMinute[3], true);
+                }, mHour[3], mMinute[3], false);
 
 
         beginTime.setOnClickListener(new View.OnClickListener() {

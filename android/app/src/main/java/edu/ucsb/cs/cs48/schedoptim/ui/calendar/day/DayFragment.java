@@ -181,10 +181,10 @@ public class DayFragment extends Fragment {
     private int getEventTimeFrame(String start, String end){
 
         int hours = Integer.parseInt(start.substring(0,2))*60;
-        int mins = Integer.parseInt(start.substring(2));
+        int mins = Integer.parseInt(start.substring(3));
 
         int hours2 = Integer.parseInt(end.substring(0,2))*60;
-        int mins2 = Integer.parseInt(end.substring(2));
+        int mins2 = Integer.parseInt(end.substring(3));
         int difference_min = (hours2+mins2) - (hours+mins);
 
         int diff_hours = difference_min/60;
@@ -194,7 +194,7 @@ public class DayFragment extends Fragment {
     //returns distance from top view in pixels
     private int getMarginFromTop(String start){
         int hours = Integer.parseInt(start.substring(0,2));
-        int minutes = Integer.parseInt(start.substring(2));
+        int minutes = Integer.parseInt(start.substring(3));
         int topViewMargin = (hours * 60) + minutes;
         return topViewMargin;
     }

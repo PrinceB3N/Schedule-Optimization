@@ -17,12 +17,12 @@ import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
 public class DayViewModel extends AndroidViewModel {
-    private MutableLiveData<ArrayList<Task>> tasks;
+    private ArrayList<Task> tasks;
     private TaskDatabase taskDatabase;
 
     public DayViewModel(@NonNull Application application){
         super(application);
-        tasks  = new MutableLiveData<>();
+        tasks  = new ArrayList<>();
         taskDatabase = Room.databaseBuilder(application,
                 TaskDatabase.class, "database-task")
                 .allowMainThreadQueries()
@@ -55,22 +55,19 @@ public class DayViewModel extends AndroidViewModel {
 
 //        tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
     }
-    public MutableLiveData<ArrayList<Task>> getObservableTasks(){
-        return tasks;
-    }
     public ArrayList<Task> getAndLoadDataFromDatabase(Date date){
         Log.d(MainActivity.class.getName(),"Loop?");
         loadDataFromDatabase(date);
-        return tasks.getValue();
+        return tasks;
     }
     public void loadDataFromDatabase(Date date){
-        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(Task.formatTaskDate(date)));
+        tasks = ((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(Task.formatTaskDate(date)));
     }
     public void loadDataFromDatabase(String date){
-        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(date));
+        tasks=((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(date));
     }
     public ArrayList<Task> getAndLoadDataFromDatabase(String date){
         loadDataFromDatabase(date);
-        return tasks.getValue();
+        return tasks;
     }
 }

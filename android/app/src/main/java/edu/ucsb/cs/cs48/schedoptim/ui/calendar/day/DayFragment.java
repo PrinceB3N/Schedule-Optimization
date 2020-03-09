@@ -52,7 +52,6 @@ public class DayFragment extends Fragment {
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
-    private Calendar cal = Calendar.getInstance();
     private ConstraintLayout mLayout;
     private int eventIndex;
     private DayViewModel dayViewModel;
@@ -91,12 +90,6 @@ public class DayFragment extends Fragment {
 //                navController.navigate(R.id.action_navigation_left_to_todoFragment);
 //            }
 //        });
-        dayViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
-            @Override
-            public void onChanged(@Nullable final ArrayList<Task> update_tasks) {
-                update();
-            }
-        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +120,8 @@ public class DayFragment extends Fragment {
                 datePickerDialog.show();
             }
         });
+        //Set screen
+        update();
         return root;
     }
     private void previousCalendarDate(){
@@ -149,6 +144,7 @@ public class DayFragment extends Fragment {
      */
     public void displayDailyTasks(){
         List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(cal.getTime());
+        Log.d(MainActivity.class.getName(),"Tasks"+todayTasks.toString());
         for(Task task: todayTasks){
             displayTask(task);
         }
@@ -251,11 +247,6 @@ public class DayFragment extends Fragment {
         mLayout.removeAllViewsInLayout();
         child_views=0;
         displayDailyTasks();
-    }
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        dayViewModel.getObservableTasks().removeObservers(this);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { update(); } }

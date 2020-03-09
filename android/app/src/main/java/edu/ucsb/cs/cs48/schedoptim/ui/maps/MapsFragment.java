@@ -56,7 +56,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         //Obtain RecyclerView for routes
-        rvRoutes = (RecyclerView) root.findViewById(R.id.mapList);
+        rvRoutes = root.findViewById(R.id.mapList);
         // Create adapter passing in the sample user data
         adapter = new RoutesAdapter(mapsViewModel.getObservableRoutes().getValue());
         rvRoutes.setAdapter(adapter);
@@ -72,26 +72,19 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         rvRoutes.addItemDecoration(dividerItemDecoration);
 
         // Create the observer which updates the UI.
-        final Observer<ArrayList<Route>> nameObserver = new Observer<ArrayList<Route>>() {
+//        final Observer<ArrayList<Route>> nameObserver =
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        mapsViewModel.getObservableRoutes().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Route>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Route> routes) {
                 adapter.update(routes);
             }
-        };
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        mapsViewModel.getObservableRoutes().observe(getViewLifecycleOwner(), nameObserver);
+        });
 
         //Setup IconGenerator for markers
         iconGenerator=new IconGenerator(this.getContext());
         //Create buttons
-        FloatingActionButton fab = root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent addLoc = new Intent(getContext(), AddTaskActivity.class);
-                startActivity(addLoc);
-            }
-        });
+
         Button updateMap = root.findViewById(R.id.updatemap);
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +125,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mapsViewModel.setRdb(routeDatabase);
         mapsViewModel.setIconGenerator(iconGenerator);
         //re-initalize map from pre-existing mapsViewModel if possible
-        mapsViewModel.updateMapWithExistingData();
+        MapsViewModel.updateMapWithExistingData();
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();

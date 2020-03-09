@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,8 +21,11 @@ public interface TaskDao {
     @Query("SELECT * FROM task WHERE id IN (:taskIds)")
     List<Task> loadAllByIds(int[] taskIds);
 
-    @Query("SELECT * FROM task WHERE date = :taskDate")
-    List<Task> loadAllByDate(int taskDate);
+    @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'task'")
+    List<Task> loadTaskByDate(String taskDate);
+
+    @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'todo'")
+    List<Task> loadTodoByDate(String taskDate);
 
 //    @Query("SELECT * FROM task WHERE first_name LIKE :first AND "
 //            + "last_name LIKE :last LIMIT 1")

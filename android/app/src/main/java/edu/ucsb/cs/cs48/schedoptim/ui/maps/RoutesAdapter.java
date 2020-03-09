@@ -55,6 +55,7 @@ public class RoutesAdapter extends
         }
         else if(routes.isEmpty()){
             items=new ArrayList<>();
+            this.notifyDataSetChanged();
             return;
         }
         //initialize

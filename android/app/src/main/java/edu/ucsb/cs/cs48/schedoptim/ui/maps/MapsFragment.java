@@ -67,7 +67,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         iconGenerator=new IconGenerator(this.getContext());
 
         mapsViewModel = new ViewModelProvider(this, new MapsViewModelFactory(routeDatabase,taskDatabase,iconGenerator)).get(MapsViewModel.class);
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -106,7 +105,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 onClickRequestAndDrawRoutes();
             }
         });
-        mapsViewModel.loadLocationsAndTravelModesFromDatabase();
 
         return root;
     }
@@ -133,8 +131,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap){
         mMap=googleMap;
         mapsViewModel.setMap(mMap);
-        //re-initalize map from pre-existing mapsViewModel if possible
-        MapsViewModel.updateMapWithExistingData();
+        //re-initalize map from pre-existing mapsViewModel if same date, else reset
+        mapsViewModel.updateOrLoadByStoredTime();
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();

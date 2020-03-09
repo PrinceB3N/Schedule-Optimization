@@ -86,7 +86,6 @@ public class JSONUtils {
                 reader.close();
             }
         }
-
         //return schedule
         return routes;
     }

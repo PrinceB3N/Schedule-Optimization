@@ -194,11 +194,14 @@ public class DayFragment extends Fragment {
 
         taskView.setLayoutParams(layoutParams);
         //set additional attributes of textview
-        taskView.setText(task.getTitle()+"\n"+formatTime(task.getBegin_time())+"\n"+formatTime(task.getEnd_time())+"\n"+task.getLocation());
+        taskView.setLines(3);
+        taskView.setText(Html.fromHtml("<font color=\"green\"><b>Title<b><font>"+task.getTitle() +"</font color=\"blue\"></small></small></font>"+"<br/>"
+                + "<font color=\"blue\"><small>Begin Time:</small></font>"+formatTime(task.getBegin_time())+"<font color=\"blue\"><small>End time</small></font>"+formatTime(task.getEnd_time())+"<br/>"
+                +"<font color=\"purple\"><i>Location:<i><font>"+task.getLocation()));
         taskView.setId(100+child_views);
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
-        taskView.setBackgroundColor(Color.BLUE);    //TODO: replace with task color
+        taskView.setBackgroundColor(Color.LTGRAY);    //TODO: replace with task color
         taskView.setAlpha(.6f);
         taskView.setTag(task.getId());              //TODO: feed id into edittask
         if(dp_height>5)

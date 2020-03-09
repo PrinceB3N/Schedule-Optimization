@@ -107,7 +107,6 @@ public class DayFragment extends Fragment {
         });
 
         TextView date = root.findViewById(R.id.display_current_date);
-        final Calendar cal = Calendar.getInstance();
         final int[] mYear = {cal.get(Calendar.YEAR)};
         final int[] mMonth = {cal.get(Calendar.MONTH)};
         final int[] mDay = {cal.get(Calendar.DAY_OF_MONTH)};

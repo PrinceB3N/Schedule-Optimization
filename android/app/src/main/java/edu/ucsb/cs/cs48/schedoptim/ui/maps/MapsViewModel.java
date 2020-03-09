@@ -52,13 +52,12 @@ public class MapsViewModel extends ViewModel{
     private static List<Integer> colors = new ArrayList<>();
     private static MutableLiveData<ArrayList<Route>> routes = new MutableLiveData(new ArrayList<Route>(0));
     private static LatLngBounds bounds;
-    private static Calendar stored_time=Calendar.getInstance();
+    //private static Calendar stored_time=Calendar.getInstance();
 
     public MapsViewModel(RouteDatabase rdb, TaskDatabase tdb, IconGenerator iconGenerator) {
         this.rdb = rdb;
         this.tdb=tdb;
         MapsViewModel.iconGenerator =iconGenerator;
-        Log.d(MainActivity.class.getName(), "Stored time in cosntructor:" +stored_time.getTime()+"..."+cal.getTime());
     }
     public MapsViewModel(){
     }
@@ -84,15 +83,18 @@ public class MapsViewModel extends ViewModel{
         return routes;
     }
     public void updateOrLoadByStoredTime(){
-        Log.d(MainActivity.class.getName(), "Stored time:"+stored_time.getTime()+"..."+cal.getTime());
+        /*Log.d(MainActivity.class.getName(), "Stored time:"+stored_time.getTime()+"..."+cal.getTime());
         if(Task.isSameDate(MainActivity.cal,this.stored_time)) {
             boolean dataExists = updateMapWithExistingData();
             if(dataExists)
                 return;
         }
         //reset back to current time position
-        stored_time.set(cal.get(cal.YEAR),cal.get(cal.MONTH),cal.get(cal.DAY_OF_MONTH));
         Log.d(MainActivity.class.getName(), "Stored time, after set:"+stored_time.getTime()+"..."+cal.getTime());
+
+         */
+        //stored_time.set(cal.get(cal.YEAR),cal.get(cal.MONTH),cal.get(cal.DAY_OF_MONTH));
+
         //update locations and travel modes
         loadLocationsAndTravelModesFromDatabase();
         //finally update the map and list
@@ -318,7 +320,7 @@ public class MapsViewModel extends ViewModel{
         return builder.build();
     }
     private void loadLocationsAndTravelModesFromDatabase(){
-        List<Task> tasks = tdb.taskDao().loadTaskByDate(Task.formatTaskDate(stored_time.getTime()));
+        List<Task> tasks = tdb.taskDao().loadTaskByDate(Task.formatTaskDate(cal.getTime()));
         ArrayList<String> twr = new ArrayList<>();
         ArrayList<String> tm  = new ArrayList<>();
 

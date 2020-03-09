@@ -2,6 +2,7 @@ package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -126,6 +127,14 @@ public class DayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 datePickerDialog.show();
+            }
+        });
+
+        ImageView gettodo = root.findViewById(R.id.todoList);
+        gettodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.todoFragment);
             }
         });
 

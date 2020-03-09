@@ -12,15 +12,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".2" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/card_white" />
-
     <LinearLayout
         android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -51,9 +42,18 @@
             android:layout_weight="3"
             android:gravity="center"
             android:text="@string/current_day_date"
+            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/todoList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_format_list_bulleted_white_24dp" />
 
         <ImageView
             android:id="@+id/next_day"
@@ -422,6 +422,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/card_white"
+                    tools:layout_editor_absoluteX="256dp"
+                    tools:layout_editor_absoluteY="475dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

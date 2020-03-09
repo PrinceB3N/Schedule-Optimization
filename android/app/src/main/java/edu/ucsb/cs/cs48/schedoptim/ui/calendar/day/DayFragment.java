@@ -27,7 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.room.Room;
-
+import android.text.Html;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -49,14 +49,15 @@ import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
 import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
 import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
 public class DayFragment extends Fragment {
-    private final int EXTRA_PADDING =5;
+    private final int EXTRA_PADDING = 5;
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
     private ConstraintLayout mLayout;
     private int eventIndex;
     private DayViewModel dayViewModel;
-    private int child_views =0;
+    private int child_views = 0;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -99,7 +100,6 @@ public class DayFragment extends Fragment {
                 startActivityForResult(addTask, 1);
             }
         });
-
         TextView date = root.findViewById(R.id.display_current_date);
         final int[] mYear = {cal.get(Calendar.YEAR)};
         final int[] mMonth = {cal.get(Calendar.MONTH)};
@@ -111,7 +111,7 @@ public class DayFragment extends Fragment {
                         mYear[0] = year;
                         mMonth[0] = month;
                         mDay[0] = dayOfMonth;
-                        cal.set(year,month,dayOfMonth);
+                        cal.set(year, month, dayOfMonth);
                         currentDate.setText(displayDateInString(cal.getTime()));
                         update();
                     }
@@ -136,88 +136,103 @@ public class DayFragment extends Fragment {
         update();
         return root;
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { update(); } }
 
-    private void previousCalendarDate(){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            update();
+        }
+    }
+
+    private void previousCalendarDate() {
         cal.add(Calendar.DAY_OF_MONTH, -1);
         currentDate.setText(displayDateInString(cal.getTime()));
         update();
     }
-    private void nextCalendarDate(){
+
+    private void nextCalendarDate() {
         cal.add(Calendar.DAY_OF_MONTH, 1);
         currentDate.setText(displayDateInString(cal.getTime()));
         update();
     }
-    private String displayDateInString(Date mDate){
+
+    private String displayDateInString(Date mDate) {
         SimpleDateFormat formatter = new SimpleDateFormat("d MMMM, yyyy", Locale.ENGLISH);
         return formatter.format(mDate);
     }
+
     /**
      * Grabs Tasks from database by Calendar's current date.
      * Then, will turn them into Views.
      */
-    public void displayDailyTasks(){
+    public void displayDailyTasks() {
         List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(cal.getTime());
-        Log.d(MainActivity.class.getName(),"Tasks"+todayTasks.toString());
-        for(Task task: todayTasks){
+        Log.d(MainActivity.class.getName(), "Tasks" + todayTasks.toString());
+        for (Task task : todayTasks) {
             displayTask(task);
         }
     }
+
     /**
      * Displays Task as a TextView in the Constraint Layout with
      * proper formatting. Assumes task's time is in hhmm form
      * and the task has required fields filled.
-     * @param  task  Task object from Database
+     *
+     * @param task Task object from Database
      */
-    public void displayTask(Task task){
-        int height = getEventTimeFrame(task.getBegin_time(),task.getEnd_time());
+    public void displayTask(Task task) {
+        int height = getEventTimeFrame(task.getBegin_time(), task.getEnd_time());
         int topmargin = getMarginFromTop(task.getBegin_time());
         createEventView(task, topmargin, height);
     }
 
     //Assume hhss format, returns height of task in pixels
-    private int getEventTimeFrame(String start, String end){
+    private int getEventTimeFrame(String start, String end) {
 
-        int hours = Integer.parseInt(start.substring(0,2))*60;
+        int hours = Integer.parseInt(start.substring(0, 2)) * 60;
         int mins = Integer.parseInt(start.substring(3));
 
-        int hours2 = Integer.parseInt(end.substring(0,2))*60;
+        int hours2 = Integer.parseInt(end.substring(0, 2)) * 60;
         int mins2 = Integer.parseInt(end.substring(3));
-        int difference_min = (hours2+mins2) - (hours+mins);
+        int difference_min = (hours2 + mins2) - (hours + mins);
 
-        int diff_hours = difference_min/60;
-        int diff_mins = difference_min-diff_hours*60;
-        return ((diff_hours)*60) + diff_mins;
+        int diff_hours = difference_min / 60;
+        int diff_mins = difference_min - diff_hours * 60;
+        return ((diff_hours) * 60) + diff_mins;
     }
+
     //returns distance from top view in pixels
-    private int getMarginFromTop(String start){
-        int hours = Integer.parseInt(start.substring(0,2));
+    private int getMarginFromTop(String start) {
+        int hours = Integer.parseInt(start.substring(0, 2));
         int minutes = Integer.parseInt(start.substring(3));
         int topViewMargin = (hours * 60) + minutes;
         return topViewMargin;
     }
-    private void createEventView(Task task, int topMargin, int height){
+
+    private void createEventView(Task task, int topMargin, int height) {
         int dp_height = pixels_to_dp(height);
         int dp_margin = pixels_to_dp(topMargin);
         //Set constraints on textview
         ConstraintSet set = new ConstraintSet();
-        TextView taskView =new TextView(getContext());
+        TextView taskView = new TextView(getContext());
         ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.topToTop=mLayout.getId();
-        layoutParams.leftToLeft=R.id.vguideline20;
+        layoutParams.topToTop = mLayout.getId();
+        layoutParams.leftToLeft = R.id.vguideline20;
 
         taskView.setLayoutParams(layoutParams);
         //set additional attributes of textview
-        taskView.setText(task.getTitle()+"\n"+formatTime(task.getBegin_time())+"\n"+formatTime(task.getEnd_time())+"\n"+task.getLocation());
-        taskView.setId(100+child_views);
+        taskView.setLines(3);
+        taskView.setText(Html.fromHtml("<font color=\"green\"><b>Title<b><font>" + task.getTitle() + "</font color=\"blue\"></small></small></font>" + "<br/>"
+                + "<font color=\"blue\"><small>Begin Time:</small></font>" + formatTime(task.getBegin_time()) + "<font color=\"blue\"><small>End time</small></font>" + formatTime(task.getEnd_time()) + "<br/>"
+                + "<font color=\"purple\"><i>Location:<i><font>" + task.getLocation()));
+        taskView.setId(100 + child_views);
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
-        taskView.setBackgroundColor(Color.BLUE);    //TODO: replace with task color
+        taskView.setBackgroundColor(Color.LTGRAY);    //TODO: replace with task color
         taskView.setAlpha(.6f);
         taskView.setTag(task.getId());              //TODO: feed id into edittask
-        if(dp_height>5)
-            taskView.setHeight(dp_height-5);
+        if (dp_height > 5)
+            taskView.setHeight(dp_height - 5);
         else
             taskView.setHeight(dp_height);
         taskView.setOnClickListener(new View.OnClickListener() {
@@ -229,38 +244,38 @@ public class DayFragment extends Fragment {
         //add view to layout and format constraint layout
         mLayout.addView(taskView, eventIndex - 1);
         set.clone(mLayout);
-        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin+EXTRA_PADDING);//TODO: CHANGE
-        set.connect(taskView.getId(), ConstraintSet.LEFT,mLayout.getId(),ConstraintSet.LEFT,24);
+        set.connect(taskView.getId(), ConstraintSet.TOP, mLayout.getId(), ConstraintSet.TOP, dp_margin + EXTRA_PADDING);//TODO: CHANGE
+        set.connect(taskView.getId(), ConstraintSet.LEFT, mLayout.getId(), ConstraintSet.LEFT, 24);
         set.applyTo(mLayout);
     }
+
     //Takes pixels and return rounded length in dp
-    private int pixels_to_dp(int pixels){
+    private int pixels_to_dp(int pixels) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (pixels * scale + 0.5f);
     }
+
     //Expects hhmm format
-    private String formatTime(String time){
+    private String formatTime(String time) {
         String mins = time.substring(2);
-        int hours = Integer.parseInt(time.substring(0,2));
-        if(hours==0){
-            return "12:"+mins+" AM";
-        }
-        else if(hours<12){
-            return hours+":"+mins+" AM";
-        }
-        else if(hours==12){
-            return "12:"+mins+" PM";
-        }
-        else if(hours>12){
-            int pm_hours = hours-12;
-            return pm_hours+":"+mins+" PM";
+        int hours = Integer.parseInt(time.substring(0, 2));
+        if (hours == 0) {
+            return "12:" + mins + " AM";
+        } else if (hours < 12) {
+            return hours + ":" + mins + " AM";
+        } else if (hours == 12) {
+            return "12:" + mins + " PM";
+        } else if (hours > 12) {
+            int pm_hours = hours - 12;
+            return pm_hours + ":" + mins + " PM";
         }
         return "ERROR";
     }
+
     //Reset tasks in view
-    private void update(){
+    private void update() {
         mLayout.removeAllViewsInLayout();
-        child_views=0;
+        child_views = 0;
         displayDailyTasks();
     }
 }

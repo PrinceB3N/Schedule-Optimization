@@ -53,7 +53,6 @@ public class DayFragment extends Fragment {
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
-    private Calendar cal = Calendar.getInstance();
     private ConstraintLayout mLayout;
     private int eventIndex;
     private DayViewModel dayViewModel;

@@ -2,6 +2,7 @@ package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +53,7 @@ public class DayFragment extends Fragment {
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
+    private Calendar cal = Calendar.getInstance();
     private ConstraintLayout mLayout;
     private int eventIndex;
     private DayViewModel dayViewModel;
@@ -98,6 +100,7 @@ public class DayFragment extends Fragment {
                 startActivityForResult(addTask, 1);
             }
         });
+
         TextView date = root.findViewById(R.id.display_current_date);
         final int[] mYear = {cal.get(Calendar.YEAR)};
         final int[] mMonth = {cal.get(Calendar.MONTH)};
@@ -120,10 +123,23 @@ public class DayFragment extends Fragment {
                 datePickerDialog.show();
             }
         });
+
+        ImageView gettodo = root.findViewById(R.id.todoList);
+        gettodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.todoFragment);
+            }
+        });
+
+
         //Set screen
         update();
         return root;
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { update(); } }
+
     private void previousCalendarDate(){
         cal.add(Calendar.DAY_OF_MONTH, -1);
         currentDate.setText(displayDateInString(cal.getTime()));
@@ -248,6 +264,4 @@ public class DayFragment extends Fragment {
         child_views=0;
         displayDailyTasks();
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { update(); } }
 }

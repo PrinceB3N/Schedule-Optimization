@@ -42,13 +42,13 @@ import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
 
 import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
+import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
 
 public class DayFragment extends Fragment {
     private final int EXTRA_PADDING =5;
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
-    private Calendar cal = Calendar.getInstance();
     private ConstraintLayout mLayout;
     private int eventIndex;
     private DayViewModel dayViewModel;
@@ -104,9 +104,6 @@ public class DayFragment extends Fragment {
 
         return root;
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { update(); } }
-
     private void previousCalendarDate(){
         cal.add(Calendar.DAY_OF_MONTH, -1);
         currentDate.setText(displayDateInString(cal.getTime()));
@@ -126,12 +123,8 @@ public class DayFragment extends Fragment {
      * Then, will turn them into Views.
      */
     public void displayDailyTasks(){
-
-        int month = (cal.get(Calendar.MONTH)+1)*1000000;
-        int mDay = cal.get(Calendar.DAY_OF_MONTH)*10000;
-        int year = cal.get(Calendar.YEAR);
-        //List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(Integer.toString(month+mDay+year));
-        List<Task> todayTasks = dayViewModel.getObservableTasks().getValue();
+        String date = (cal.get(Calendar.MONTH)+1)+""+cal.get(Calendar.DAY_OF_MONTH)+""+cal.get(Calendar.YEAR);
+        List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(date);
         for(Task task: todayTasks){
             displayTask(task);
         }
@@ -240,4 +233,6 @@ public class DayFragment extends Fragment {
         super.onDestroyView();
         dayViewModel.getObservableTasks().removeObservers(this);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { if (requestCode == 1) { update(); } }
 }

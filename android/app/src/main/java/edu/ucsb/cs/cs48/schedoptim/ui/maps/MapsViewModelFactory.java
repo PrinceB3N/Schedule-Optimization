@@ -9,20 +9,21 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.maps.android.ui.IconGenerator;
 
 import edu.ucsb.cs.cs48.schedoptim.RouteDatabase;
+import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
 public class MapsViewModelFactory implements ViewModelProvider.Factory {
-    GoogleMap map;
     private RouteDatabase rdb;
     private IconGenerator iconGenerator;
-    public MapsViewModelFactory(GoogleMap map, RouteDatabase rdb, IconGenerator iconGenerator) {
-        this.map=map;
+    private TaskDatabase tdb;
+    public MapsViewModelFactory(RouteDatabase rdb, TaskDatabase tdb, IconGenerator iconGenerator) {
         this.rdb=rdb;
+        this.tdb=tdb;
         this.iconGenerator=iconGenerator;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new MapsViewModel(map,rdb,iconGenerator);
+        return (T) new MapsViewModel(rdb,tdb,iconGenerator);
     }
 }

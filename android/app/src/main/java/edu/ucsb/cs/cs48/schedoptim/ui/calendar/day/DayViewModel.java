@@ -16,13 +16,12 @@ import edu.ucsb.cs.cs48.schedoptim.TaskDao;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
 public class DayViewModel extends AndroidViewModel {
-    private MutableLiveData<ArrayList<Task>> tasks = new MutableLiveData<ArrayList<Task>>();
+    private MutableLiveData<ArrayList<Task>> tasks;
     private TaskDatabase taskDatabase;
-    public MutableLiveData<ArrayList<Task>> getObservableTasks(){
-        return tasks;
-    }
+
     public DayViewModel(@NonNull Application application){
         super(application);
+        tasks  = new MutableLiveData<>();
         taskDatabase = Room.databaseBuilder(application,
                 TaskDatabase.class, "database-task")
                 .allowMainThreadQueries()
@@ -54,6 +53,9 @@ public class DayViewModel extends AndroidViewModel {
         test6.setEnd_time("0300");
 
         tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
+    }
+    public MutableLiveData<ArrayList<Task>> getObservableTasks(){
+        return tasks;
     }
     public void loadDataFromDatabase(String day){
         tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadAllByDate(day));

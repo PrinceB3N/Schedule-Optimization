@@ -1,11 +1,14 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
@@ -43,16 +47,17 @@ import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
 
 import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
 import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
-
 public class DayFragment extends Fragment {
     private final int EXTRA_PADDING =5;
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
+    private Calendar cal = Calendar.getInstance();
     private ConstraintLayout mLayout;
     private int eventIndex;
     private DayViewModel dayViewModel;
     private int child_views =0;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -86,6 +91,12 @@ public class DayFragment extends Fragment {
 //                navController.navigate(R.id.action_navigation_left_to_todoFragment);
 //            }
 //        });
+        dayViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
+            @Override
+            public void onChanged(@Nullable final ArrayList<Task> update_tasks) {
+                update();
+            }
+        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +105,28 @@ public class DayFragment extends Fragment {
                 startActivityForResult(addTask, 1);
             }
         });
-        //Set all textviews on fragment load
-        update();
+        TextView date = root.findViewById(R.id.display_current_date);
+        final int[] mYear = {cal.get(Calendar.YEAR)};
+        final int[] mMonth = {cal.get(Calendar.MONTH)};
+        final int[] mDay = {cal.get(Calendar.DAY_OF_MONTH)};
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.MyDatePickerDialogTheme2,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        mYear[0] = year;
+                        mMonth[0] = month;
+                        mDay[0] = dayOfMonth;
+                        cal.set(year,month,dayOfMonth);
+                        currentDate.setText(displayDateInString(cal.getTime()));
+                        update();
+                    }
+                }, mYear[0], mMonth[0], mDay[0]);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
+            }
+        });
         return root;
     }
     private void previousCalendarDate(){
@@ -121,8 +152,6 @@ public class DayFragment extends Fragment {
         for(Task task: todayTasks){
             displayTask(task);
         }
-
-
     }
     /**
      * Displays Task as a TextView in the Constraint Layout with
@@ -173,7 +202,7 @@ public class DayFragment extends Fragment {
         taskView.setId(100+child_views);
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
-        taskView.setBackgroundColor(Color.BLUE);
+        taskView.setBackgroundColor(Color.BLUE);    //TODO: replace with task color
         taskView.setAlpha(.6f);
         taskView.setTag(task.getId());              //TODO: feed id into edittask
         if(dp_height>5)
@@ -189,7 +218,7 @@ public class DayFragment extends Fragment {
         //add view to layout and format constraint layout
         mLayout.addView(taskView, eventIndex - 1);
         set.clone(mLayout);
-        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin+EXTRA_PADDING);
+        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin+EXTRA_PADDING);//TODO: CHANGE
         set.connect(taskView.getId(), ConstraintSet.LEFT,mLayout.getId(),ConstraintSet.LEFT,24);
         set.applyTo(mLayout);
     }

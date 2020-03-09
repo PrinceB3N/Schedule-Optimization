@@ -24,6 +24,7 @@ import androidx.room.Room;
 import java.util.Calendar;
 
 import edu.ucsb.cs.cs48.schedoptim.adapter.PlaceAutoSuggestAdapter;
+import petrov.kristiyan.colorpicker.ColorPicker;
 
 
 import static edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlarmCreator.createAlarm;
@@ -64,6 +65,8 @@ public class AddTaskActivity extends Activity {
         // Importance
         final Spinner importance = findViewById(R.id.spinner_importance);
         importance.setSelection(1);
+        // Color
+        final Button colorButton = findViewById(R.id.button_color);
         // Note
         final EditText note  = findViewById(R.id.editText_note);
 
@@ -193,6 +196,25 @@ public class AddTaskActivity extends Activity {
                 Toast.makeText(getApplicationContext(), travelMode.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        colorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorPicker colorPicker = new ColorPicker(AddTaskActivity.this);
+                colorPicker.show();
+                colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
+                    @Override
+                    public void onChooseColor(int position,int color) {
+                        colorButton.setBackgroundColor(color);
+                    }
+
+                    @Override
+                    public void onCancel(){
+                        // put code
+                    }
+                });            }
+        });
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDao;
@@ -26,6 +25,6 @@ public class TodoViewModel extends ViewModel {
         tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2)));
     }
     public void loadDataFromDatabase(TaskDao taskDao, String day){
-        tasks.setValue((ArrayList<Task>)taskDao.loadAllByDate(day));
+        tasks.setValue((ArrayList<Task>)taskDao.loadTaskByDate(day));
     }
 }

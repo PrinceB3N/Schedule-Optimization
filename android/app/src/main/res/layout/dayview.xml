@@ -42,16 +42,18 @@
             android:layout_weight="1"
             android:contentDescription="@string/app_name"
             app:srcCompat="@android:drawable/ic_media_rew" />
+
         <TextView
             android:id="@+id/display_current_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/colorWhite"
-            android:text="@string/current_day_date"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
-            android:layout_weight="3"/>
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/current_day_date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/next_day"

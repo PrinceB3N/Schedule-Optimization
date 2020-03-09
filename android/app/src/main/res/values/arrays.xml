@@ -13,4 +13,8 @@
     <item>"Medium"</item>
     <item>"Low"</item>
 </array>
+
+    <array name="color">
+        <item>@drawable/dot_red</item>
+    </array>
 </resources>

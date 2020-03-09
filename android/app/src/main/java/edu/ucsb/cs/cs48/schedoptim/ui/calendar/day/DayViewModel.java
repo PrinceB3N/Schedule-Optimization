@@ -55,7 +55,7 @@ public class DayViewModel extends AndroidViewModel {
         loadDataFromDatabase("2/8/2020");
     }
     public void loadDataFromDatabase(String day){
-        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTodoByDate(day));
+        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(day));
     }
     public ArrayList<Task> getAndLoadDataFromDatabase(String day){
         loadDataFromDatabase(day);

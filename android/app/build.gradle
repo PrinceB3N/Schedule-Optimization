@@ -112,6 +112,8 @@ dependencies {
     // Monitoring Database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
+    // Color picker
+    implementation 'petrov.kristiyan:colorpicker-library:1.1.10'
 
 
 }

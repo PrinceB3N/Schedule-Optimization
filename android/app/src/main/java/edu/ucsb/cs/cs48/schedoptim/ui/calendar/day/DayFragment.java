@@ -1,11 +1,14 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
@@ -53,6 +57,7 @@ public class DayFragment extends Fragment {
     private int eventIndex;
     private DayViewModel dayViewModel;
     private int child_views =0;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -98,6 +103,30 @@ public class DayFragment extends Fragment {
             public void onClick(View view) {
                 Intent addTask = new Intent(getContext(), AddTaskActivity.class);
                 startActivityForResult(addTask, 1);
+            }
+        });
+
+        TextView date = root.findViewById(R.id.display_current_date);
+        final Calendar cal = Calendar.getInstance();
+        final int[] mYear = {cal.get(Calendar.YEAR)};
+        final int[] mMonth = {cal.get(Calendar.MONTH)};
+        final int[] mDay = {cal.get(Calendar.DAY_OF_MONTH)};
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.MyDatePickerDialogTheme2,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        mYear[0] = year;
+                        mMonth[0] = month;
+                        mDay[0] = dayOfMonth;
+                        cal.set(year,month,dayOfMonth);
+                        currentDate.setText(displayDateInString(cal.getTime()));
+                        update();
+                    }
+                }, mYear[0], mMonth[0], mDay[0]);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog.show();
             }
         });
 

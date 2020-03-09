@@ -123,13 +123,12 @@ public class DayFragment extends Fragment {
      * Then, will turn them into Views.
      */
     public void displayDailyTasks(){
-        /*
-        List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(cal.getTime());
+
+        List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase("8/3/2020");
         for(Task task: todayTasks){
             displayTask(task);
         }
 
-         */
     }
     /**
      * Displays Task as a TextView in the Constraint Layout with

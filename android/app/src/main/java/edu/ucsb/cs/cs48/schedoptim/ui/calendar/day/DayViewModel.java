@@ -53,7 +53,7 @@ public class DayViewModel extends AndroidViewModel {
         test6.setEnd_time("0300");
 
 //        tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
-        loadDataFromDatabase("3/8/2020");
+        loadDataFromDatabase("8/3/2020");
     }
     public MutableLiveData<ArrayList<Task>> getObservableTasks(){
         return tasks;
@@ -66,7 +66,7 @@ public class DayViewModel extends AndroidViewModel {
         return tasks.getValue();
     }
     public void loadDataFromDatabase(String date){
-        tasks.postValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(date));
+        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(date));
     }
     public ArrayList<Task> getAndLoadDataFromDatabase(String date){
         loadDataFromDatabase(date);

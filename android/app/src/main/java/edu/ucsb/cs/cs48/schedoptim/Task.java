@@ -8,6 +8,10 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 @Entity(tableName = "task", indices = {})
 public class Task {
@@ -93,6 +97,13 @@ public class Task {
     public Task(String title, String location) {
         this.title = title;
         this.location = location;
+    }
+    public static String formatTaskDate(int month, int day, int year){
+        return month+"/"+day+"/"+year;
+    }
+    public static String formatTaskDate(Date date){
+        SimpleDateFormat formatter = new SimpleDateFormat("L/d/yyyy", Locale.ENGLISH);
+        return formatter.format(date);
     }
 //
 //    @Ignore

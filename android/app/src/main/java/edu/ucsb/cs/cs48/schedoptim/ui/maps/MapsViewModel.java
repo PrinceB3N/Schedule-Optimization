@@ -45,6 +45,7 @@ public class MapsViewModel extends ViewModel{
     private static IconGenerator iconGenerator;
     private static List<String> locations = new ArrayList<String>();
     private static List<String> travel_modes = new ArrayList<String>();
+    private static List<Integer> colors = new ArrayList<>();
     private static MutableLiveData<ArrayList<Route>> routes = new MutableLiveData(new ArrayList<Route>(0));
     private static LatLngBounds bounds;
 
@@ -68,22 +69,19 @@ public class MapsViewModel extends ViewModel{
     }
     //TODO:
     public void loadLocationsAndTravelModesFromDatabase(){
-        /*List<Task> tasks = taskDatabase.taskDao().getTaskByDate(MainActivity.cal.getDate());
+        List<Task> tasks = tdb.taskDao().loadTaskByDate(Task.formatTaskDate(MainActivity.cal.getTime()));
         ArrayList<String> twr = new ArrayList<>();
         ArrayList<String> tm  = new ArrayList<>();
 
-        for (int i = 0; i < tmp_tasks.size(); i++) {
-            Task tem = tmp_tasks.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task tem = tasks.get(i);
             if (tem.getCalRoute()){
                 twr.add(tem.getLocation());
                 tm.add(tem.getTravelMode());
             }
         }
-        tasks.setValue(tmp_tasks);
-        locations.setValue(twr);
-        travel_modes.setValue(tm);
-
-         */
+        locations=twr;
+        travel_modes=tm;
     }
 
     public void setMap(GoogleMap map){ MapsViewModel.map =map; }

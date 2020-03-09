@@ -123,11 +123,13 @@ public class DayFragment extends Fragment {
      * Then, will turn them into Views.
      */
     public void displayDailyTasks(){
-        String date = (cal.get(Calendar.MONTH)+1)+""+cal.get(Calendar.DAY_OF_MONTH)+""+cal.get(Calendar.YEAR);
-        List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(date);
+        /*
+        List<Task> todayTasks = dayViewModel.getAndLoadDataFromDatabase(cal.getTime());
         for(Task task: todayTasks){
             displayTask(task);
         }
+
+         */
     }
     /**
      * Displays Task as a TextView in the Constraint Layout with
@@ -178,7 +180,7 @@ public class DayFragment extends Fragment {
         taskView.setId(100+child_views);
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
-        taskView.setBackgroundColor(Color.BLUE);    //TODO: replace with task color
+        taskView.setBackgroundColor(Color.BLUE);
         taskView.setAlpha(.6f);
         taskView.setTag(task.getId());              //TODO: feed id into edittask
         if(dp_height>5)
@@ -194,7 +196,7 @@ public class DayFragment extends Fragment {
         //add view to layout and format constraint layout
         mLayout.addView(taskView, eventIndex - 1);
         set.clone(mLayout);
-        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin+EXTRA_PADDING);//TODO: CHANGE
+        set.connect(taskView.getId(), ConstraintSet.TOP,mLayout.getId(),ConstraintSet.TOP,dp_margin+EXTRA_PADDING);
         set.connect(taskView.getId(), ConstraintSet.LEFT,mLayout.getId(),ConstraintSet.LEFT,24);
         set.applyTo(mLayout);
     }

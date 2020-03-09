@@ -9,7 +9,9 @@ import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
+import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
@@ -51,16 +53,23 @@ public class DayViewModel extends AndroidViewModel {
         test6.setEnd_time("0300");
 
 //        tasks.setValue(new ArrayList<Task>(Arrays.asList(test1, test2,test3,test4,test5,test6)));
-        loadDataFromDatabase("2/8/2020");
+        loadDataFromDatabase("3/8/2020");
     }
     public MutableLiveData<ArrayList<Task>> getObservableTasks(){
         return tasks;
     }
-    public void loadDataFromDatabase(String day){
-        tasks.setValue((ArrayList<Task>)taskDatabase.taskDao().loadTodoByDate(day));
+    public void loadDataFromDatabase(Date date){
+        tasks.postValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(Task.formatTaskDate(date)));
     }
-    public ArrayList<Task> getAndLoadDataFromDatabase(String day){
-        loadDataFromDatabase(day);
+    public ArrayList<Task> getAndLoadDataFromDatabase(Date date){
+        loadDataFromDatabase(date);
+        return tasks.getValue();
+    }
+    public void loadDataFromDatabase(String date){
+        tasks.postValue((ArrayList<Task>)taskDatabase.taskDao().loadTaskByDate(date));
+    }
+    public ArrayList<Task> getAndLoadDataFromDatabase(String date){
+        loadDataFromDatabase(date);
         return tasks.getValue();
     }
 }

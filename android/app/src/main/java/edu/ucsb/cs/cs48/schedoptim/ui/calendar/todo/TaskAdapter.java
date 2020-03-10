@@ -53,7 +53,7 @@ public class TaskAdapter extends
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = inflater.inflate(R.layout.item_todo_task, parent, false);
         return new ViewHolder(contactView);
@@ -88,7 +88,8 @@ public class TaskAdapter extends
         //TODO:Implement EditTodo popup on click
         public void editView(Task item, int position){
             // Set item views based on your views and data model
-            todo_info.setText(item.getTitle()+"\n"+item.getLocation()+"\n"+item.getBegin_time()+" "+item.getEnd_time());
+            todo_info.setText(item.getTitle()+"\n"+item.getLocation()+
+                    "\n"+Task.formatTaskTime(item.getBegin_time())+" "+Task.formatTaskTime(item.getEnd_time()));
             todo_info.setId(item.getId());
             todo_info.setOnClickListener(new View.OnClickListener() {
                 @Override

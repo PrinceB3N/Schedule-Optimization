@@ -222,7 +222,7 @@ public class DayFragment extends Fragment {
         //set additional attributes of textview
         taskView.setLines(3);
         taskView.setText(Html.fromHtml("<font color=\"green\"><b>Title<b><font>" + task.getTitle() + "</font color=\"blue\"></small></small></font>" + "<br/>"
-                + "<font color=\"blue\"><small>Begin Time:</small></font>" + formatTime(task.getBegin_time()) + "<font color=\"blue\"><small>End time</small></font>" + formatTime(task.getEnd_time()) + "<br/>"
+                + "<font color=\"blue\"><small>Begin Time:</small></font>" + Task.formatTaskTime(task.getBegin_time()) + "<font color=\"blue\"><small>End time</small></font>" + Task.formatTaskTime(task.getEnd_time()) + "<br/>"
                 + "<font color=\"purple\"><i>Location:<i><font>" + task.getLocation()));
         taskView.setId(task.getId());
         child_views++;
@@ -237,7 +237,10 @@ public class DayFragment extends Fragment {
         taskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update();
+                Intent editTask= new Intent(getContext(), AddTaskActivity.class);
+                editTask.putExtra("TYPE","task");
+                editTask.putExtra("ID",v.getId());
+                startActivityForResult(editTask, 1);
             }
         });
         //add view to layout and format constraint layout
@@ -252,23 +255,6 @@ public class DayFragment extends Fragment {
     private int pixels_to_dp(int pixels) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (pixels * scale + 0.5f);
-    }
-
-    //Expects hhmm format
-    private String formatTime(String time) {
-        String mins = time.substring(2);
-        int hours = Integer.parseInt(time.substring(0, 2));
-        if (hours == 0) {
-            return "12:" + mins + " AM";
-        } else if (hours < 12) {
-            return hours + ":" + mins + " AM";
-        } else if (hours == 12) {
-            return "12:" + mins + " PM";
-        } else if (hours > 12) {
-            int pm_hours = hours - 12;
-            return pm_hours + ":" + mins + " PM";
-        }
-        return "ERROR";
     }
 
     //Reset tasks in view

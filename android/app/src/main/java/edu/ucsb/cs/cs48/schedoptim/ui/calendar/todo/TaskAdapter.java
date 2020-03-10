@@ -84,7 +84,7 @@ public class TaskAdapter extends
         public void editView(Task item, int position){
             // Set item views based on your views and data model
             todo_info.setText(item.getTitle()+"\n"+item.getLocation()+"\n"+item.getBegin_time()+" "+item.getEnd_time());
-
+            todo_info.setId(item.getId());
             todo_info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

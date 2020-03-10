@@ -22,10 +22,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
@@ -78,6 +81,15 @@ public class TodoFragment extends Fragment {
 
             }
         });
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addTodo= new Intent(getContext(), AddTaskActivity.class);
+                addTodo.putExtra("type","todo");
+                startActivityForResult(addTodo, 1);
+            }
+        });
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("To Do List");
@@ -87,5 +99,9 @@ public class TodoFragment extends Fragment {
 
     public boolean onOptionsItemSelected(MenuItem item){
         return true;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) { todoViewModel.loadDataFromDatabase(db.taskDao(),MainActivity.cal.getTime()); }
     }
 }

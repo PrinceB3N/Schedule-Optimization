@@ -97,6 +97,7 @@ public class DayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent addTask = new Intent(getContext(), AddTaskActivity.class);
+                addTask.putExtra("type","task");
                 startActivityForResult(addTask, 1);
             }
         });

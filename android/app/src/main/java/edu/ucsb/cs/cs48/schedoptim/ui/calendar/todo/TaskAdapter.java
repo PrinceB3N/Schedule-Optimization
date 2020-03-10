@@ -1,6 +1,8 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -10,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Route;
 import edu.ucsb.cs.cs48.schedoptim.Task;
@@ -22,6 +26,7 @@ import edu.ucsb.cs.cs48.schedoptim.Task;
 public class TaskAdapter extends
         RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private List<Task> items;
+    private Context context;
     public TaskAdapter(List<Task> tasks) {
         if(tasks==null){
             return;
@@ -51,7 +56,7 @@ public class TaskAdapter extends
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = inflater.inflate(R.layout.item_todo_task, parent, false);
-                return new ViewHolder(contactView);
+        return new ViewHolder(contactView);
     }
 
     @Override
@@ -60,7 +65,7 @@ public class TaskAdapter extends
         Task item = items.get(position);
         ((ViewHolder)viewHolder).editView(item, position);
         return;
-        }
+    }
 
     @Override
     public int getItemCount() {
@@ -88,10 +93,12 @@ public class TaskAdapter extends
             todo_info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent addTodo= new Intent(context, AddTaskActivity.class);
+                    addTodo.putExtra("TYPE","todo");
+                    addTodo.putExtra("ID",todo_info.getId());
+                    ((Activity)context).startActivityForResult(addTodo,1);
                 }
             });
-
         }
     }
 }

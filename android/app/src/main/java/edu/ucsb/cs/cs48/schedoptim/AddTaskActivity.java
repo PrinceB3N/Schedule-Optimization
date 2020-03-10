@@ -44,6 +44,7 @@ public class AddTaskActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isTask = getIntent().getStringExtra("TYPE");
+        isTask = isTask==null ? "task" : isTask;
         taskId = getIntent().getIntExtra("ID",-1);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_add_task);

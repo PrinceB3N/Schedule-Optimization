@@ -86,7 +86,7 @@ public class TodoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent addTodo= new Intent(getContext(), AddTaskActivity.class);
-                addTodo.putExtra("type","todo");
+                addTodo.putExtra("TYPE","todo");
                 startActivityForResult(addTodo, 1);
             }
         });

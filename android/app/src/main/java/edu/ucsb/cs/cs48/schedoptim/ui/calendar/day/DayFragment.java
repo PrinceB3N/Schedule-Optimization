@@ -97,11 +97,10 @@ public class DayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent addTask = new Intent(getContext(), AddTaskActivity.class);
-                addTask.putExtra("type","task");
+                addTask.putExtra("TYPE","task");
                 startActivityForResult(addTask, 1);
             }
         });
-        TextView date = root.findViewById(R.id.display_current_date);
         final int[] mYear = {cal.get(Calendar.YEAR)};
         final int[] mMonth = {cal.get(Calendar.MONTH)};
         final int[] mDay = {cal.get(Calendar.DAY_OF_MONTH)};
@@ -117,7 +116,7 @@ public class DayFragment extends Fragment {
                         update();
                     }
                 }, mYear[0], mMonth[0], mDay[0]);
-        date.setOnClickListener(new View.OnClickListener() {
+        currentDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datePickerDialog.show();
@@ -131,7 +130,6 @@ public class DayFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.todoFragment);
             }
         });
-
 
         //Set screen
         update();
@@ -226,12 +224,12 @@ public class DayFragment extends Fragment {
         taskView.setText(Html.fromHtml("<font color=\"green\"><b>Title<b><font>" + task.getTitle() + "</font color=\"blue\"></small></small></font>" + "<br/>"
                 + "<font color=\"blue\"><small>Begin Time:</small></font>" + formatTime(task.getBegin_time()) + "<font color=\"blue\"><small>End time</small></font>" + formatTime(task.getEnd_time()) + "<br/>"
                 + "<font color=\"purple\"><i>Location:<i><font>" + task.getLocation()));
-        taskView.setId(100 + child_views);
+        taskView.setId(task.getId());
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
         taskView.setBackgroundColor(Color.LTGRAY);    //TODO: replace with task color
         taskView.setAlpha(.6f);
-        taskView.setTag(task.getId());              //TODO: feed id into edittask
+        //taskView.setTag(task.getId());              //TODO: feed id into edittask
         if (dp_height > 5)
             taskView.setHeight(dp_height - 5);
         else

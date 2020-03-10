@@ -43,7 +43,8 @@ public class AddTaskActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isTask = (String)savedInstanceState.get("type");
+        isTask = getIntent().getStringExtra("TYPE");
+        taskId = getIntent().getIntExtra("ID",-1);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_add_task);
 
@@ -171,7 +172,10 @@ public class AddTaskActivity extends Activity {
                         timeBefore.setText("Time Before: " + String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute));
                     }
                 }, mHour[3], mMinute[3], false);
-
+        //initialize mode based on where addtask was called
+        if(isTask.equals("todo"))
+            mode.setChecked(true);
+        //else default
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

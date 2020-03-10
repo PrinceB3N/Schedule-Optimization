@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="360dp"
+    android:layout_height="match_parent"
+    tools:context=".AddTaskActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_white"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <TextView
+            android:id="@+id/textView_view_travel_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You decided to walk there"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="227dp" />
+
+        <TextView
+            android:id="@+id/textView_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="title"
+            tools:layout_editor_absoluteX="37dp"
+            tools:layout_editor_absoluteY="94dp" />
+
+        <TextView
+            android:id="@+id/textView_view_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="location"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="185dp" />
+
+        <TextView
+            android:id="@+id/textView_view_importance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="highly important"
+            tools:layout_editor_absoluteX="209dp"
+            tools:layout_editor_absoluteY="94dp" />
+
+        <TextView
+            android:id="@+id/textView_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We will remind you xx minutes before"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="310dp" />
+
+        <TextView
+            android:id="@+id/textView_view_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You also mentions:"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="401dp" />
+
+        <TextView
+            android:id="@+id/textView_view_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="time / constraint"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="131dp" />
+
+        <Button
+            android:id="@+id/button_locate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="show on map"
+            tools:layout_editor_absoluteX="212dp"
+            tools:layout_editor_absoluteY="166dp" />
+
+        <TextView
+            android:id="@+id/textView_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            tools:layout_editor_absoluteX="146dp"
+            tools:layout_editor_absoluteY="22dp" />
+
+        <Button
+            android:id="@+id/button_leave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X"
+            tools:layout_editor_absoluteX="23dp"
+            tools:layout_editor_absoluteY="7dp" />
+
+        <Button
+            android:id="@+id/button_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            tools:layout_editor_absoluteX="234dp"
+            tools:layout_editor_absoluteY="9dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+

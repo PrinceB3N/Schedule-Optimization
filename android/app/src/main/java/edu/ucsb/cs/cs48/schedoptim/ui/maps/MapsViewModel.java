@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,7 +20,10 @@ import com.google.maps.android.ui.IconGenerator;
 
 //import org.mortbay.jetty.Main;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,38 +33,75 @@ import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.Route;
 import edu.ucsb.cs.cs48.schedoptim.RouteDao;
 import edu.ucsb.cs.cs48.schedoptim.RouteDatabase;
+import edu.ucsb.cs.cs48.schedoptim.Task;
+import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
+import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayFragment;
+import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
+import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
+
+import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
 
 public class MapsViewModel extends ViewModel{
     private final static int BOUNDS_PADDING = 64;
     private static GoogleMap map = null;
     private RouteDatabase rdb = null;
+    private TaskDatabase tdb = null;
     private static IconGenerator iconGenerator;
     private static List<String> locations = new ArrayList<String>();
     private static List<String> travel_modes = new ArrayList<String>();
+    private static List<Integer> colors = new ArrayList<>();
     private static MutableLiveData<ArrayList<Route>> routes = new MutableLiveData(new ArrayList<Route>(0));
     private static LatLngBounds bounds;
-    public MapsViewModel(GoogleMap map, RouteDatabase rdb, IconGenerator iconGenerator) {
-        MapsViewModel.map = map;
+    //private static Calendar stored_time=Calendar.getInstance();
+
+    public MapsViewModel(RouteDatabase rdb, TaskDatabase tdb, IconGenerator iconGenerator) {
         this.rdb = rdb;
+        this.tdb=tdb;
         MapsViewModel.iconGenerator =iconGenerator;
     }
     public MapsViewModel(){
-
     }
     public GoogleMap getGoogleMap(){
         return map;
     }
     public RouteDatabase getRouteDatabase(){
-        return this.rdb; }
+        return this.rdb;
+    }
+    public void setRdb(RouteDatabase rdb){
+        this.rdb=rdb;
+    }
+    public void setTdb(TaskDatabase tdb){
+        this.tdb=tdb;
+    }
+    public void setIconGenerator(IconGenerator gen){
+        this.iconGenerator=gen;
+    }
     public MutableLiveData<ArrayList<Route>> getObservableRoutes(){
         if(!routes.getValue().isEmpty()) {
             Log.d(MainActivity.class.getName(), "ROUTEVAL:" + routes.getValue().get(0).getStart_address());
         }
-        return routes; }
+        return routes;
+    }
+    public void updateOrLoadByStoredTime(){
+        /*Log.d(MainActivity.class.getName(), "Stored time:"+stored_time.getTime()+"..."+cal.getTime());
+        if(Task.isSameDate(MainActivity.cal,this.stored_time)) {
+            boolean dataExists = updateMapWithExistingData();
+            if(dataExists)
+                return;
+        }
+        //reset back to current time position
+        Log.d(MainActivity.class.getName(), "Stored time, after set:"+stored_time.getTime()+"..."+cal.getTime());
+
+         */
+        //stored_time.set(cal.get(cal.YEAR),cal.get(cal.MONTH),cal.get(cal.DAY_OF_MONTH));
+
+        //update locations and travel modes
+        loadLocationsAndTravelModesFromDatabase();
+        //finally update the map and list
+        drawRoutes();
+    }
 
     public void setMap(GoogleMap map){ MapsViewModel.map =map; }
-    public void setRdb(RouteDatabase rdb){ this.rdb=rdb; }
-    public void setIconGenerator(IconGenerator iconGenerator) { MapsViewModel.iconGenerator =iconGenerator;}
     //DRAW ROUTES FUNCTIONS, CALL THESE TO UPDATE MAPS VIEW
     public void drawRoutes(List<String> locations, List<String> travel_modes){
         MapsViewModel.locations =locations;
@@ -278,9 +319,26 @@ public class MapsViewModel extends ViewModel{
         //Finally build the bounds
         return builder.build();
     }
-    public static void updateMapWithExistingData(){
+    private void loadLocationsAndTravelModesFromDatabase(){
+        List<Task> tasks = tdb.taskDao().loadTaskByDate(Task.formatTaskDate(cal.getTime()));
+        ArrayList<String> twr = new ArrayList<>();
+        ArrayList<String> tm  = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task tem = tasks.get(i);
+            if (tem.getCalRoute()){
+                twr.add(tem.getLocation());
+                tm.add(tem.getTravelMode());
+            }
+        }
+        locations=twr;
+        travel_modes=tm;
+    }
+    private boolean updateMapWithExistingData(){
         if(map==null || routes==null)
-            return;
+            return false;
+        else if(locations.isEmpty() || travel_modes.isEmpty())
+            return false;
         //Get camera bounds
         bounds = getCameraBounds(routes.getValue());
         //Move camera
@@ -291,6 +349,7 @@ public class MapsViewModel extends ViewModel{
         drawRoutes(routes.getValue());
         //draw Markers
         drawMarkers(routes.getValue());
+        return true;
     }
     //INNER CLASSES
     private class RouteDrawer extends AsyncTask<Void, Void, Void> {
@@ -302,6 +361,7 @@ public class MapsViewModel extends ViewModel{
                 Log.d(MainActivity.class.getName(),"ASYNC_GET_ROUTES:");
                 if(tmp_routes==null) {
                     Log.d(MainActivity.class.getName(),"ASYNC_ROUTES NULL_GET_ROUTES");
+                    routes.postValue(new ArrayList<Route>(0));
                     return null;
                 }
                 Log.d(MainActivity.class.getName(),"ASYNC_ROUTES:"+tmp_routes.get(0).getStart_address());

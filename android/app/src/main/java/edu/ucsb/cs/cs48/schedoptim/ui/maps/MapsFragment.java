@@ -32,11 +32,14 @@ import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Route;
 import edu.ucsb.cs.cs48.schedoptim.RouteDatabase;
+import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
+import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private RouteDatabase routeDatabase;
+    private TaskDatabase taskDatabase;
     private IconGenerator iconGenerator;
     private MapsViewModel mapsViewModel;
     private RecyclerView rvRoutes;
@@ -50,7 +53,20 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_maps, container, false);
-        mapsViewModel = new ViewModelProvider(this).get(MapsViewModel.class);
+        routeDatabase = Room.databaseBuilder(getContext(),
+                RouteDatabase.class, "database-route")
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
+        taskDatabase = Room.databaseBuilder(getContext(),
+                TaskDatabase.class, "database-task")
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .build();
+        //Setup IconGenerator for markers
+        iconGenerator=new IconGenerator(this.getContext());
+
+        mapsViewModel = new ViewModelProvider(this, new MapsViewModelFactory(routeDatabase,taskDatabase,iconGenerator)).get(MapsViewModel.class);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -64,7 +80,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         // Set layout manager to position the items
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         rvRoutes.setLayoutManager(layoutManager);
-
 
         //Set dividers between elements in list
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvRoutes.getContext(),
@@ -81,10 +96,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        //Setup IconGenerator for markers
-        iconGenerator=new IconGenerator(this.getContext());
         //Create buttons
-
+        //Load locations and travel modes based on global Calendar instance
         Button updateMap = root.findViewById(R.id.updatemap);
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +105,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 onClickRequestAndDrawRoutes();
             }
         });
+
         return root;
     }
 
@@ -116,19 +130,16 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap){
         mMap=googleMap;
-        routeDatabase = Room.databaseBuilder(getContext(),
-                RouteDatabase.class, "database-task")
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
         mapsViewModel.setMap(mMap);
-        mapsViewModel.setRdb(routeDatabase);
-        mapsViewModel.setIconGenerator(iconGenerator);
-        //re-initalize map from pre-existing mapsViewModel if possible
-        MapsViewModel.updateMapWithExistingData();
+        //re-initalize map from pre-existing mapsViewModel if same date, else reset
+        mapsViewModel.updateOrLoadByStoredTime();
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();
     }
-
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        mapsViewModel.getObservableRoutes().removeObservers(this);
+    }
 }

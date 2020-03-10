@@ -8,6 +8,11 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 
 @Entity(tableName = "task", indices = {})
 public class Task {
@@ -94,5 +99,20 @@ public class Task {
         this.title = title;
         this.location = location;
     }
+    public static String formatTaskDate(int month, int day, int year){
+        return month+"/"+day+"/"+year;
+    }
+    public static String formatTaskDate(Date date){
+        SimpleDateFormat formatter = new SimpleDateFormat("L/d/yyyy", Locale.ENGLISH);
+        return formatter.format(date);
+    }
+    public static boolean isSameDate(Calendar c1, Calendar c2){
+        if(c1.get(c1.DAY_OF_MONTH)==c2.get(c2.DAY_OF_MONTH) && c1.get(c1.MONTH)==c2.get(c2.MONTH) && c1.get(c1.YEAR)==c2.get(c2.YEAR))
+            return true;
+        else
+            return false;
+        //calendar.get(Calendar.YEAR)
+    }
+
 
 }

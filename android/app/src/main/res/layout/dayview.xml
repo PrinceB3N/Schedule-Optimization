@@ -6,20 +6,27 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vguideline20"
+        android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".2" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".85" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/card_white" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vguideline20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".2" />
 
     <LinearLayout
         android:id="@+id/activity_main"
@@ -47,13 +54,21 @@
             android:id="@+id/display_current_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="0dp"
             android:layout_weight="3"
-            android:gravity="center"
             android:text="@string/current_day_date"
+            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/todoList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_format_list_bulleted_white_24dp" />
 
         <ImageView
             android:id="@+id/next_day"
@@ -411,17 +426,6 @@
                 android:layout_width="0dp"
                 android:layout_height="1500dp"
                 android:layout_weight="8">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="60dp"
-                    android:paddingTop="0dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

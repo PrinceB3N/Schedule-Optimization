@@ -12,11 +12,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.Calendar;
+
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarViewModel;
 import edu.ucsb.cs.cs48.schedoptim.ui.maps.MapsFragment;
 import edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlarmCreator;
 
 public class MainActivity extends AppCompatActivity{
+    public static Calendar cal = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +33,12 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        //Set current time
+        cal = Calendar.getInstance();
     }
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
     }
-
 }

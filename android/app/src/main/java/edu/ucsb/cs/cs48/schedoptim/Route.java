@@ -119,10 +119,10 @@ public class Route{
             return Float.toString(rounded_time)+" secs";
         }
         else if(secs_in_hour>rounded_time){
-            return Float.toString(rounded_time/secs_in_min)+" mins";
+            return Float.toString(Math.round(rounded_time/secs_in_min))+" mins";
         }
         else{
-            String hours = Float.toString(rounded_time/secs_in_hour)+" hrs";
+            String hours = Float.toString(Math.round(rounded_time/secs_in_hour))+" hrs";
             long extra_mins = (rounded_time%secs_in_hour)/secs_in_min;
             if(extra_mins!=0){
                 return hours + " "+ extra_mins +" mins";
@@ -138,7 +138,7 @@ public class Route{
             return length +" meters";
         }
         else{
-            return length / meters_in_mile + "miles";
+            return Math.round(length*100.0 / meters_in_mile)/100.0 + "miles";
         }
     }
 

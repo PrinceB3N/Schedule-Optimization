@@ -59,8 +59,7 @@ public class TodoFragment extends Fragment {
                 adapter.update( update_tasks);
             }
         });
-        //TODO: call loaded tasks
-        //todoViewModel.loadDataFromDatabase(db.taskDao(), 03072020);
+        todoViewModel.loadDataFromDatabase(db.taskDao(), MainActivity.cal.getTime());
 
         // Set layout manager to position the items
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());

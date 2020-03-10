@@ -54,7 +54,15 @@ public class TodoFragment extends Fragment {
                 .build();
 
         //Set up recyclerview intial and update process
-        adapter = new TaskAdapter(todoViewModel.getObservableTasks().getValue());
+        adapter = new TaskAdapter(todoViewModel.getObservableTasks().getValue(), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addTodo= new Intent(getContext(), AddTaskActivity.class);
+                addTodo.putExtra("TYPE","todo");
+                addTodo.putExtra("ID",v.getId());
+                startActivityForResult(addTodo, 1);
+            }
+        });
         rvTasks.setAdapter(adapter);
         todoViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
             @Override

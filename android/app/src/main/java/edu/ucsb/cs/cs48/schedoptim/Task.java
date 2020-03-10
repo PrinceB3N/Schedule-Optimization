@@ -38,7 +38,7 @@ public class Task {
     private String note;
 
     @ColumnInfo(name = "color")
-    private String color;
+    private int color;
 
     @ColumnInfo(name = "importance")
     private String importance;
@@ -76,8 +76,8 @@ public class Task {
     public void setDate(String date) { this.date = date; }
     public String getNote () { return note; }
     public void setNote (String note) {this.note = note; }
-    public String getColor () { return color; }
-    public void setColor (String color) {this.color = color; }
+    public int getColor () { return color; }
+    public void setColor (int color) {this.color = color; }
     public String getImportance () { return  importance; }
     public void setImportance (String importance) { this.importance = importance; }
     public String getNotiTime () { return  notiTime; }
@@ -94,31 +94,5 @@ public class Task {
         this.title = title;
         this.location = location;
     }
-//
-//    @Ignore
-//    public User(int uid) {
-//        this.uid = uid;
-//    }
-//
-//    @Ignore
-//    public User(int uid, String firstName, String lastName) {
-//        this.uid = uid;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//    }
-//    @Ignore
-//    public User(String firstName, String lastName, int age) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.age = age;
-//    }
-//
-//    @Ignore
-//    public User(int uid, String firstName, String lastName, int age) {
-//        this.uid = uid;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.age = age;
-//    }
 
 }

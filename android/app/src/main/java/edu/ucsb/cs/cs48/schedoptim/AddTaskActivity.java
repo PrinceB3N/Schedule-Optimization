@@ -92,7 +92,7 @@ public class AddTaskActivity extends Activity {
         endTime.setText("End Time: "+String.format("%02d",mHour[1])+":"+String.format("%02d",mMinute[1]));
         duration.setText("Duration: "+String.format("%02d",mHour[2])+":"+String.format("%02d",mMinute[2]));
         timeBefore.setText("Time Before: "+String.format("%02d",mHour[3])+":"+String.format("%02d",mMinute[3]));
-        date.setText("Date: "+mMonth[0]+"/"+mDay[0]+"/"+mYear[0]);
+        date.setText("Date: "+(mMonth[0]+1)+"/"+mDay[0]+"/"+mYear[0]);
 
         if (taskId != -1){
             Task e = db.taskDao().findById(taskId);
@@ -121,7 +121,7 @@ public class AddTaskActivity extends Activity {
                         mYear[0] = year;
                         mMonth[0] = month;
                         mDay[0] = dayOfMonth;
-                        date.setText("Date: "+month+"/"+dayOfMonth+"/"+year);
+                        date.setText("Date: "+(month+1)+"/"+dayOfMonth+"/"+year);
                     }
                 },
                 mYear[0], mMonth[0], mDay[0]);

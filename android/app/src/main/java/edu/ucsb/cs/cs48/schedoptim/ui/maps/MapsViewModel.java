@@ -330,7 +330,7 @@ public class MapsViewModel extends ViewModel{
                 twr.add(tem.getLocation());
                 tm.add(tem.getTravelMode());
                 Integer tmp_color = tem.getColor();
-                if(tmp_color==null)
+                if(tmp_color==0)
                     colors.add(Color.BLUE);//DEFAULT
                 else
                     colors.add(tmp_color);

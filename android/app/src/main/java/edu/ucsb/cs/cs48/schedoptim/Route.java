@@ -141,6 +141,19 @@ public class Route{
             return Math.round(length*100.0 / meters_in_mile)/100.0 + "miles";
         }
     }
+    //Formats a travel mode string into correct output, otherwise default to driving
+    public static String formatTravelModeForURL(String travel_mode){
+        String mode=travel_mode.toLowerCase();
+        switch(mode) {
+            case "walking":
+            case "bicycling":
+            case "transit":
+            case "driving":
+                return mode;
+            default:
+                return "walking";
+        }
+    }
 
     public void setRoute_id(long route_id) { this.route_id = route_id; }
     public void setEncoded_polylines(String encoded_polylines) { this.encoded_polylines = encoded_polylines; }

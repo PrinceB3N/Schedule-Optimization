@@ -22,7 +22,7 @@ public interface TaskDao {
     @Query("SELECT * FROM task WHERE id IN (:taskIds)")
     List<Task> loadAllByIds(int[] taskIds);
 
-    @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'task'")
+    @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'task'" + "ORDER BY begin_time")
     List<Task> loadTaskByDate(String taskDate);
 
     @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'todo'")

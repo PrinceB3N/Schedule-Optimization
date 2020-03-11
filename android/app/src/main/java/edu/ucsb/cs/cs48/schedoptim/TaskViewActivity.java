@@ -110,7 +110,6 @@ public class TaskViewActivity extends Activity {
                 .build();
 
         id = getIntent().getIntExtra("ID",-1);
-
         update();
 
         button_leave.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +125,7 @@ public class TaskViewActivity extends Activity {
             public void onClick(View v) {
                 Intent editTask= new Intent(getApplicationContext(), AddTaskActivity.class);
                 editTask.putExtra("ID",id);
+                editTask.putExtra("TYPE",(isTask)?"task":"todo");
                 startActivityForResult(editTask, 1);
             }
         });

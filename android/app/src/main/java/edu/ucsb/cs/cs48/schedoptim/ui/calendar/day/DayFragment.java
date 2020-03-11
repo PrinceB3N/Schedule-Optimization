@@ -41,14 +41,12 @@ import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
-import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 import edu.ucsb.cs.cs48.schedoptim.TaskViewActivity;
-import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
-import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment;
-import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
+
 
 import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
 import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
+
 public class DayFragment extends Fragment {
     private final int EXTRA_PADDING = 5;
     private ImageView previousDay;

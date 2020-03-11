@@ -2,8 +2,10 @@ package edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -34,11 +37,12 @@ import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 
-public class TodoFragment extends Fragment {
+public class TodoFragment extends Fragment{
     private RecyclerView rvTasks;
     private TaskAdapter adapter;
     private TaskDatabase db;
     private TodoViewModel todoViewModel;
+    private ItemTouchHelper touchHelper;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -52,18 +56,27 @@ public class TodoFragment extends Fragment {
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
-
         //Set up recyclerview intial and update process
-        adapter = new TaskAdapter(todoViewModel.getObservableTasks().getValue(), new View.OnClickListener() {
+        adapter = new TaskAdapter(todoViewModel.getObservableTasks().getValue(), new StartDragListener() {
             @Override
-            public void onClick(View v) {
+            public void requestDrag(RecyclerView.ViewHolder viewHolder) {
+                touchHelper.startDrag(viewHolder);
+            }
+            @Override
+            public void onSingleTapUp(View v, MotionEvent event) {
                 Intent addTodo= new Intent(getContext(), AddTaskActivity.class);
                 addTodo.putExtra("TYPE","todo");
                 addTodo.putExtra("ID",v.getId());
                 startActivityForResult(addTodo, 1);
             }
         });
+        //Add drag-drop helper
+        ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
+        touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(rvTasks);
+        //finally add adapter to recyclerview
         rvTasks.setAdapter(adapter);
+        //Attach observer
         todoViewModel.getObservableTasks().observe(getViewLifecycleOwner(),  new Observer<ArrayList<Task>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<Task> update_tasks) {
@@ -112,4 +125,5 @@ public class TodoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) { todoViewModel.loadDataFromDatabase(db.taskDao(),MainActivity.cal.getTime()); }
     }
+
 }

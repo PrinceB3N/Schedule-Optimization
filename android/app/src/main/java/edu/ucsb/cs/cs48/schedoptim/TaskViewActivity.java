@@ -3,8 +3,11 @@ package edu.ucsb.cs.cs48.schedoptim;
 // DatePicker: https://www.jianshu.com/p/d3744c2b480a
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -124,6 +127,22 @@ public class TaskViewActivity extends Activity {
                 Intent editTask= new Intent(getApplicationContext(), AddTaskActivity.class);
                 editTask.putExtra("ID",id);
                 startActivityForResult(editTask, 1);
+            }
+        });
+
+        button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(TaskViewActivity.this)
+                        .setTitle("Are you sure?")
+                        .setMessage("Do you really want to delete this " + t.getType() + "?")
+                        .setIcon(R.drawable.outline_notification_important_24)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                db.taskDao().delete(t);
+                                TaskViewActivity.this.finish();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 

@@ -1,10 +1,15 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.maps;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -133,6 +139,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mapsViewModel.setMap(mMap);
         //re-initalize map from pre-existing mapsViewModel if same date, else reset
         mapsViewModel.updateOrLoadByStoredTime();
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
     }
     public void onClickRequestAndDrawRoutes(){
         mapsViewModel.drawRoutes();
@@ -142,4 +155,5 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         super.onDestroyView();
         mapsViewModel.getObservableRoutes().removeObservers(this);
     }
+
 }

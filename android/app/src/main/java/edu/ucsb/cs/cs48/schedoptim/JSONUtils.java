@@ -50,7 +50,7 @@ import com.google.gson.Gson;
 public class JSONUtils {
     private static String logname = MainActivity.class.getName();
 
-    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_modes, RouteDao rDao) throws Exception {
+    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_modes, List<Integer> colors,RouteDao rDao) throws Exception {
         if (locations.size() < 2 || travel_modes.size() == 0 || locations.size() != travel_modes.size()) {
             return null;
         }
@@ -69,8 +69,9 @@ public class JSONUtils {
             //Try getting exisiting route
             Route route = rDao.findRouteByFields(start_address,end_address,travel_mode);
             if(route!=null){
+                route.setLine_color(colors.get(i));
+                rDao.update(route);
                 routes.add(route);
-                continue;
             }
             else {
                 InputStream is = new URL(placesToUrl(Arrays.asList(
@@ -79,6 +80,7 @@ public class JSONUtils {
                 Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
                 //Get and store new route in database and list
                 route = parseToRoute(new Gson().fromJson(reader, JsonObject.class));
+                route.setLine_color(colors.get(i));
                 rDao.insert(route);
                 routes.add(route);
                 //Finish up

@@ -19,6 +19,8 @@ public class AutoComplete {
         StringBuilder jsonResult=new StringBuilder();
         try {
             StringBuilder sb=new StringBuilder("https://maps.googleapis.com/maps/api/place/autocomplete/json?");
+            String temp = input.replaceAll(" ", "%20");
+            input = temp;
             sb.append("input="+input);
             sb.append("&key=AIzaSyBU0R1Yy4LZaCibhNy0CnUdneImzRmBSG8");
             URL url=new URL(sb.toString());

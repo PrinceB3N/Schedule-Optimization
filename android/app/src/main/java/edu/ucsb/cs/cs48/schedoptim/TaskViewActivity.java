@@ -188,8 +188,7 @@ public class TaskViewActivity extends Activity {
                 text_travel_mode.setText(tm);
             }
         }
-
-        if (t.getNotiTime().matches("")){
+        if (t.getNotiTime() == null){
             icon_notification.setImageResource(R.drawable.outline_notifications_off_24);
             text_notification.setText("Don't notify");
         }else {

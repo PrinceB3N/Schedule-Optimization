@@ -92,7 +92,7 @@ public class AddTaskActivity extends Activity {
         endTime.setText("End Time: "+String.format("%02d",mHour[1])+":"+String.format("%02d",mMinute[1]));
         duration.setText("Duration: "+String.format("%02d",mHour[2])+":"+String.format("%02d",mMinute[2]));
         timeBefore.setText("Time Before: "+String.format("%02d",mHour[3])+":"+String.format("%02d",mMinute[3]));
-        date.setText("Date: "+mMonth[0]+"/"+mDay[0]+"/"+mYear[0]);
+        date.setText("Date: "+ (mMonth[0] + 1) +"/"+mDay[0]+"/"+mYear[0]);
 
         if (taskId != -1){
             Task e = db.taskDao().findById(taskId);
@@ -121,7 +121,7 @@ public class AddTaskActivity extends Activity {
                         mYear[0] = year;
                         mMonth[0] = month;
                         mDay[0] = dayOfMonth;
-                        date.setText("Date: "+month+"/"+dayOfMonth+"/"+year);
+                        date.setText("Date: "+ (month + 1) +"/"+dayOfMonth+"/"+year);
                     }
                 },
                 mYear[0], mMonth[0], mDay[0]);
@@ -164,7 +164,7 @@ public class AddTaskActivity extends Activity {
                         mMinute[3] = minute;
                         timeBefore.setText("Time Before: "+String.format("%02d",hourOfDay)+":"+String.format("%02d",minute));
                     }
-                }, mHour[3], mMinute[3], false);
+                }, mHour[3], mMinute[3], true);
 
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -275,8 +275,8 @@ public class AddTaskActivity extends Activity {
 
                 // Set notification
                 if (needNotification.isChecked()){
-                    createAlarm(getApplicationContext(), t.getId(), mHour[0], mMinute[0],
-                            mHour[3]+mMinute[3], location, "This is location");
+                    //createAlarm(getApplicationContext(), t.getId(), mHour[0], mMinute[0], (mHour[3] * 60) +mMinute[3], location, "This is location");
+                    createAlarm(getApplicationContext(), t.getId(), mMonth[0],mDay[0],mYear[0], mHour[0], mMinute[0], mHour[3]+mMinute[3], location, title.getText().toString());
                     t.setNotiTime(String.format("%02d",mHour[3])+":"+String.format("%02d",mMinute[3]));
                 }
 //                { createAlarm(getApplicationContext(), t.getId(), mMonth[0],mDay[0],mYear[0], mHour[0], mMinute[0], mHour[3]+mMinute[3], location, "This is location"); }

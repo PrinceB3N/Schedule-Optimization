@@ -102,7 +102,7 @@ public class Task {
     public static String formatTaskDate(Date date){
         SimpleDateFormat formatter = new SimpleDateFormat("L/d/yyyy", Locale.ENGLISH);
         String format = formatter.format(date);
-        int tmp = Integer.parseInt(format.split("/")[0])-1;
+        int tmp = Integer.parseInt(format.split("/")[0]);
         return tmp+format.substring(format.indexOf("/"));
     }
     //Expects hh:mm format

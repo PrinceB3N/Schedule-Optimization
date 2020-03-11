@@ -88,7 +88,7 @@ public class AlarmCreator {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DATE, day);
         calendar.set(Calendar.MILLISECOND, 0);
 

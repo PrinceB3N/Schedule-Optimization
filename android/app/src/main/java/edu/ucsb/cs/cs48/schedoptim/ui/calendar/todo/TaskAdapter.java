@@ -1,6 +1,8 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -10,11 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Route;
 import edu.ucsb.cs.cs48.schedoptim.Task;
@@ -22,7 +28,9 @@ import edu.ucsb.cs.cs48.schedoptim.Task;
 public class TaskAdapter extends
         RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private List<Task> items;
-    public TaskAdapter(List<Task> tasks) {
+    private Context context;
+    private View.OnClickListener clickListener;
+    public TaskAdapter(List<Task> tasks, View.OnClickListener listener) {
         if(tasks==null){
             return;
         }
@@ -32,6 +40,7 @@ public class TaskAdapter extends
         }
         //initialize
         items=tasks;
+        clickListener=listener;
     }
     public void update(ArrayList<Task> tasks){
         if(tasks==null){
@@ -48,10 +57,10 @@ public class TaskAdapter extends
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View contactView = inflater.inflate(R.layout.item_todo_task, parent, false);
-                return new ViewHolder(contactView);
+        return new ViewHolder(contactView);
     }
 
     @Override
@@ -60,7 +69,7 @@ public class TaskAdapter extends
         Task item = items.get(position);
         ((ViewHolder)viewHolder).editView(item, position);
         return;
-        }
+    }
 
     @Override
     public int getItemCount() {
@@ -83,15 +92,10 @@ public class TaskAdapter extends
         //TODO:Implement EditTodo popup on click
         public void editView(Task item, int position){
             // Set item views based on your views and data model
-            todo_info.setText(item.getTitle()+"\n"+item.getLocation()+"\n"+item.getBegin_time()+" "+item.getEnd_time());
-
-            todo_info.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
+            todo_info.setText(item.getTitle()+"\n"+item.getLocation()+
+                    "\n"+Task.formatTaskTime(item.getBegin_time())+" "+Task.formatTaskTime(item.getEnd_time()));
+            todo_info.setId(item.getId());
+            todo_info.setOnClickListener(clickListener);
         }
     }
 }

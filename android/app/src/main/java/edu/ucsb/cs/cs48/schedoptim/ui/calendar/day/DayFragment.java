@@ -42,6 +42,7 @@ import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
+import edu.ucsb.cs.cs48.schedoptim.TaskViewActivity;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
@@ -97,10 +98,10 @@ public class DayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent addTask = new Intent(getContext(), AddTaskActivity.class);
+                addTask.putExtra("TYPE","task");
                 startActivityForResult(addTask, 1);
             }
         });
-        TextView date = root.findViewById(R.id.display_current_date);
         final int[] mYear = {cal.get(Calendar.YEAR)};
         final int[] mMonth = {cal.get(Calendar.MONTH)};
         final int[] mDay = {cal.get(Calendar.DAY_OF_MONTH)};
@@ -116,7 +117,7 @@ public class DayFragment extends Fragment {
                         update();
                     }
                 }, mYear[0], mMonth[0], mDay[0]);
-        date.setOnClickListener(new View.OnClickListener() {
+        currentDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datePickerDialog.show();
@@ -130,7 +131,6 @@ public class DayFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.todoFragment);
             }
         });
-
 
         //Set screen
         update();
@@ -223,24 +223,29 @@ public class DayFragment extends Fragment {
         //set additional attributes of textview
         taskView.setLines(3);
         taskView.setText(Html.fromHtml("<font color=\"green\"><b>Title<b><font>" + task.getTitle() + "</font color=\"blue\"></small></small></font>" + "<br/>"
-                + "<font color=\"blue\"><small>Begin Time:</small></font>" + formatTime(task.getBegin_time()) + "<font color=\"blue\"><small>End time</small></font>" + formatTime(task.getEnd_time()) + "<br/>"
+                + "<font color=\"blue\"><small>Begin Time:</small></font>" + Task.formatTaskTime(task.getBegin_time()) + "<font color=\"blue\"><small>End time</small></font>" + Task.formatTaskTime(task.getEnd_time()) + "<br/>"
                 + "<font color=\"purple\"><i>Location:<i><font>" + task.getLocation()));
-        taskView.setId(100 + child_views);
+        taskView.setId(task.getId());
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
         taskView.setBackgroundColor(Color.LTGRAY);    //TODO: replace with task color
         taskView.setAlpha(.6f);
-        taskView.setTag(task.getId());              //TODO: feed id into edittask
+        //taskView.setTag(task.getId());              //TODO: feed id into edittask
         if (dp_height > 5)
             taskView.setHeight(dp_height - 5);
         else
             taskView.setHeight(dp_height);
+
         taskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update();
+                Intent viewTask= new Intent(getContext(), TaskViewActivity.class);
+//                editTask.putExtra("TYPE","task");
+                viewTask.putExtra("ID",v.getId());
+                startActivityForResult(viewTask, 1);
             }
         });
+
         //add view to layout and format constraint layout
         mLayout.addView(taskView, eventIndex - 1);
         set.clone(mLayout);
@@ -253,23 +258,6 @@ public class DayFragment extends Fragment {
     private int pixels_to_dp(int pixels) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (pixels * scale + 0.5f);
-    }
-
-    //Expects hhmm format
-    private String formatTime(String time) {
-        String mins = time.substring(2);
-        int hours = Integer.parseInt(time.substring(0, 2));
-        if (hours == 0) {
-            return "12:" + mins + " AM";
-        } else if (hours < 12) {
-            return hours + ":" + mins + " AM";
-        } else if (hours == 12) {
-            return "12:" + mins + " PM";
-        } else if (hours > 12) {
-            int pm_hours = hours - 12;
-            return pm_hours + ":" + mins + " PM";
-        }
-        return "ERROR";
     }
 
     //Reset tasks in view

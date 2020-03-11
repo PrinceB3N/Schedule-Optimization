@@ -99,12 +99,28 @@ public class Task {
         this.title = title;
         this.location = location;
     }
-    public static String formatTaskDate(int month, int day, int year){
-        return month+"/"+day+"/"+year;
-    }
     public static String formatTaskDate(Date date){
         SimpleDateFormat formatter = new SimpleDateFormat("L/d/yyyy", Locale.ENGLISH);
-        return formatter.format(date);
+        String format = formatter.format(date);
+        int tmp = Integer.parseInt(format.split("/")[0])-1;
+        return tmp+format.substring(format.indexOf("/"));
+    }
+    //Expects hh:mm format
+    public static String formatTaskTime(String time) {
+        String[] split = time.split(":");
+        String mins = split[1];
+        int hours = Integer.parseInt(split[0]);
+        if (hours == 0) {
+            return "12:" + mins + " AM";
+        } else if (hours < 12) {
+            return hours + ":" + mins + " AM";
+        } else if (hours == 12) {
+            return "12:" + mins + " PM";
+        } else if (hours > 12) {
+            int pm_hours = hours - 12;
+            return pm_hours + ":" + mins + " PM";
+        }
+        return "ERROR";
     }
     public static boolean isSameDate(Calendar c1, Calendar c2){
         if(c1.get(c1.DAY_OF_MONTH)==c2.get(c2.DAY_OF_MONTH) && c1.get(c1.MONTH)==c2.get(c2.MONTH) && c1.get(c1.YEAR)==c2.get(c2.YEAR))

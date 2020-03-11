@@ -136,7 +136,7 @@ public class AddTaskActivity extends Activity {
             else if (tm.matches("DRIVING")){ travelMode.setSelection(2); }
             else if (tm.matches("TRANSIT")){ travelMode.setSelection(3); }
 
-            if (!t.getNotiTime().matches("")) {
+            if (!(t.getNotiTime() == null)) {
                 timeBefore.setVisibility(View.VISIBLE);
                 needNotification.setChecked(true);
                 timeBefore.setText("Time Before: " + t.getNotiTime());
@@ -152,13 +152,13 @@ public class AddTaskActivity extends Activity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         mYear[0] = year;
-                        mMonth[0] = month;
+                        mMonth[0] = month+1;
                         mDay[0] = dayOfMonth;
-                        date.setText("Date: " + (month + 1) + "/" + dayOfMonth + "/" + year);
+                        date.setText("Date: " + mMonth[0] + "/" + dayOfMonth + "/" + year);
 
                     }
                 },
-                mYear[0], mMonth[0], mDay[0]);
+                mYear[0], mMonth[0]-1, mDay[0]);
 
         final TimePickerDialog beginTimePickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {

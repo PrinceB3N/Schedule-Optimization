@@ -155,6 +155,7 @@ public class AddTaskActivity extends Activity {
                         mMonth[0] = month;
                         mDay[0] = dayOfMonth;
                         date.setText("Date: " + (month + 1) + "/" + dayOfMonth + "/" + year);
+
                     }
                 },
                 mYear[0], mMonth[0], mDay[0]);
@@ -316,11 +317,10 @@ public class AddTaskActivity extends Activity {
                 t.setDate(mMonth[0] + "/" + mDay[0] + "/" + mYear[0]);
 
                 // Set notification
-                if (needNotification.isChecked()) {
-                    createAlarm(getApplicationContext(), t.getId(), mHour[0], mMinute[0],
-                            mHour[3] + mMinute[3], location, "This is location");
-//                    Toast.makeText(getApplicationContext(), String.valueOf(needNotification.isChecked()), Toast.LENGTH_SHORT).show();
-                    t.setNotiTime(String.format("%02d", mHour[3]) + ":" + String.format("%02d", mMinute[3]));
+                if (needNotification.isChecked()){
+                    //createAlarm(getApplicationContext(), t.getId(), mHour[0], mMinute[0], (mHour[3] * 60) +mMinute[3], location, "This is location");
+                    createAlarm(getApplicationContext(), t.getId(), mMonth[0],mDay[0],mYear[0], mHour[0], mMinute[0], mHour[3]+mMinute[3], location, title.getText().toString());
+                    t.setNotiTime(String.format("%02d",mHour[3])+":"+String.format("%02d",mMinute[3]));
                 }
 //                { createAlarm(getApplicationContext(), t.getId(), mMonth[0],mDay[0],mYear[0], mHour[0], mMinute[0], mHour[3]+mMinute[3], location, "This is location"); }
 

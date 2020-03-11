@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.room.Room;
 
+import java.security.PublicKey;
 import java.util.Calendar;
 
 import edu.ucsb.cs.cs48.schedoptim.adapter.PlaceAutoSuggestAdapter;
@@ -33,8 +35,9 @@ import static edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlarmCreator.createAl
 
 public class AddTaskActivity extends Activity {
 
-    Boolean isTask;
+    String isTask = "task";
     int taskId = -1;
+    int colorNumber;
 
 
     @Override
@@ -93,8 +96,8 @@ public class AddTaskActivity extends Activity {
 
         if (taskId != -1){
             Task e = db.taskDao().findById(taskId);
-            if (e.getType().matches("task")){isTask = true;}
-            else {isTask = false;}
+            if (e.getType().matches("task")){mode.setChecked(false);}
+            else {mode.setChecked(true);}
             title.setText(e.getTitle());
             if (!e.getLocation().matches(""))
             {textinput_location.setText(e.getLocation());}
@@ -163,6 +166,14 @@ public class AddTaskActivity extends Activity {
                     }
                 }, mHour[3], mMinute[3], false);
 
+        mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){ isTask = "todo"; }
+                else { isTask = "task"; }
+            }
+        });
+
 
         beginTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,12 +216,12 @@ public class AddTaskActivity extends Activity {
                 colorPicker.setOnChooseColorListener(new ColorPicker.OnChooseColorListener() {
                     @Override
                     public void onChooseColor(int position,int color) {
+                        colorNumber = color;
                         colorButton.setBackgroundColor(color);
                     }
 
                     @Override
                     public void onCancel(){
-                        // put code
                     }
                 });            }
         });
@@ -222,6 +233,9 @@ public class AddTaskActivity extends Activity {
                 // Create Task object
                 Task t = new Task();
                 String location;
+
+                // Set type
+                t.setType(isTask);
 
                 // Set title
                 if(title.getText().toString().matches("")){
@@ -269,6 +283,9 @@ public class AddTaskActivity extends Activity {
 
                 // Set importance
                 t.setImportance(importance.getSelectedItem().toString());
+
+                // Set color
+                t.setColor(colorNumber);
 
                 // Set note
                 t.setNote(note.getText().toString());

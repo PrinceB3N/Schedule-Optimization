@@ -44,12 +44,13 @@ import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
 public class MapsViewModel extends ViewModel{
     private final static int BOUNDS_PADDING = 64;
     private static GoogleMap map = null;
-    private RouteDatabase rdb = null;
-    private TaskDatabase tdb = null;
+    private static RouteDatabase rdb = null;
+    private static TaskDatabase tdb = null;
     private static IconGenerator iconGenerator;
     private static List<String> locations = new ArrayList<String>();
     private static List<String> travel_modes = new ArrayList<String>();
     private static List<Integer> colors = new ArrayList<>();
+    private static List<String> end_times = new ArrayList<>();
     private static MutableLiveData<ArrayList<Route>> routes = new MutableLiveData(new ArrayList<Route>(0));
     private static LatLngBounds bounds;
     //private static Calendar stored_time=Calendar.getInstance();
@@ -82,19 +83,7 @@ public class MapsViewModel extends ViewModel{
         }
         return routes;
     }
-    public void updateOrLoadByStoredTime(){
-        /*Log.d(MainActivity.class.getName(), "Stored time:"+stored_time.getTime()+"..."+cal.getTime());
-        if(Task.isSameDate(MainActivity.cal,this.stored_time)) {
-            boolean dataExists = updateMapWithExistingData();
-            if(dataExists)
-                return;
-        }
-        //reset back to current time position
-        Log.d(MainActivity.class.getName(), "Stored time, after set:"+stored_time.getTime()+"..."+cal.getTime());
-
-         */
-        //stored_time.set(cal.get(cal.YEAR),cal.get(cal.MONTH),cal.get(cal.DAY_OF_MONTH));
-
+    public void loadAndDraw(){
         //update locations and travel modes
         loadLocationsAndTravelModesFromDatabase();
         //finally update the map and list
@@ -188,8 +177,7 @@ public class MapsViewModel extends ViewModel{
                 .icon(BitmapDescriptorFactory.fromBitmap(bitmap)));
     }
     public static void moveCameraToWantedArea(Route route){
-        if(map==null)
-            return;
+        if(map==null);
         else if(bounds==null)
             moveCameraSmoothlyToWantedArea(new LatLng(route.getStart_lat(),route.getStart_long()),
                     new LatLng(route.getEnd_lat(),route.getEnd_long()),BOUNDS_PADDING);
@@ -199,7 +187,7 @@ public class MapsViewModel extends ViewModel{
     /**
      * Method to move camera to wanted area.
      */
-    public static void moveCameraSmoothlyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+    private static void moveCameraSmoothlyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
         final LatLng BOUND1 = bound1;
         final LatLng BOUND2 = bound2;
         final int BOUNDS_PADDING = bound_padding;
@@ -219,7 +207,7 @@ public class MapsViewModel extends ViewModel{
         });
 
     }
-    public static void moveCameraImmediatelyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
+    private static void moveCameraImmediatelyToWantedArea(LatLng bound1, LatLng bound2, int bound_padding) {
         final LatLng BOUND1 = bound1;
         final LatLng BOUND2 = bound2;
         final int BOUNDS_PADDING = bound_padding;
@@ -239,71 +227,8 @@ public class MapsViewModel extends ViewModel{
         });
 
     }
-    public void clearRequests(){
-        locations.clear();
-        travel_modes.clear();
-    }
-    //Location address list manipulating functions
-    public static boolean addToRequestList(String location, String travel_mode) {
-        locations.add(location);
-        travel_modes.add(travel_mode);
-        Log.d(MainActivity.class.getName(),"LOCATION ADDED:"+locations.get(0));
-        return true;
-    }
-    //TODO
-    public boolean removeFromRequestList(String location, String travel_mode) {
-        return false;
-    }
-    //TODO
-    private int findRequest(String location, String travel_mode){
-        return -1;
-    }
-    //TODO
-    public boolean swapRequestOrder(String order1, String order2) {
-        if (!locations.contains(order1) || !locations.contains(order2))
-            return false;
-        int tmp = -1;
-        for (int i = 0; i < locations.size(); i++) {
-            if (locations.get(i).equals(order1)) {
-                locations.set(i, order2);
-                if (tmp == -1)
-                    tmp = i + 1;
-                else {
-                    String s = travel_modes.get(i);
-                    travel_modes.set(i, travel_modes.get(tmp));
-                    travel_modes.set(tmp, s);
-                    break;
-                }
-            } else if (locations.get(i).equals(order2)) {
-                locations.set(i, order1);
-                if (tmp == -1)
-                    tmp = i + 1;
-                else {
-                    String s = travel_modes.get(i);
-                    travel_modes.set(i, travel_modes.get(tmp));
-                    travel_modes.set(tmp, s);
-                    break;
-                }
-            }
-        }
 
-        return true;
-    }
-
-    public boolean swapRequestOrder(int index1, int index2) {
-        if (index1 < 0 || index2 < 0 || index1 > locations.size() || index2 > locations.size())
-            return false;
-        String tmp = locations.get(index1);
-        locations.set(index1, locations.get(index2));
-        locations.set(index2, tmp);
-
-        String tmp2 = travel_modes.get(index1 + 1);
-        travel_modes.set(index1 + 1, travel_modes.get(index2 + 1));
-        travel_modes.set(index2 + 1, tmp2);
-
-        return true;
-    }
-    public static LatLngBounds getCameraBounds(ArrayList<Route> routes){
+    private static LatLngBounds getCameraBounds(ArrayList<Route> routes){
         if(routes==null){
             return null;
         }
@@ -324,6 +249,7 @@ public class MapsViewModel extends ViewModel{
         ArrayList<String> twr = new ArrayList<>();
         ArrayList<String> tm  = new ArrayList<>();
         ArrayList<Integer> colors = new ArrayList<>();
+        ArrayList<String> end_times = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task tem = tasks.get(i);
             if (tem.getCalRoute()){
@@ -334,11 +260,14 @@ public class MapsViewModel extends ViewModel{
                     colors.add(Color.BLUE);//DEFAULT
                 else
                     colors.add(tmp_color);
+                if(i!=0)
+                    end_times.add(tem.getBegin_time());
             }
         }
         this.locations=twr;
         this.travel_modes=tm;
         this.colors=colors;
+        this.end_times=end_times;
     }
     private boolean updateMapWithExistingData(){
         if(map==null || routes==null)
@@ -358,12 +287,12 @@ public class MapsViewModel extends ViewModel{
         return true;
     }
     //INNER CLASSES
-    private class RouteDrawer extends AsyncTask<Void, Void, Void> {
+    static class RouteDrawer extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                ArrayList<Route> tmp_routes = JSONUtils.getRoutesFrom(locations,travel_modes,colors, rdb.getrouteDao());
+                ArrayList<Route> tmp_routes = JSONUtils.getRoutesFrom(locations,travel_modes,colors, end_times,rdb.getrouteDao());
                 Log.d(MainActivity.class.getName(),"ASYNC_GET_ROUTES:");
                 if(tmp_routes==null) {
                     Log.d(MainActivity.class.getName(),"ASYNC_ROUTES NULL_GET_ROUTES");

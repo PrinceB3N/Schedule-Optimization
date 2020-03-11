@@ -50,7 +50,8 @@ import com.google.gson.Gson;
 public class JSONUtils {
     private static String logname = MainActivity.class.getName();
 
-    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_modes, List<Integer> colors,RouteDao rDao) throws Exception {
+    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_modes,
+                                                 List<Integer> colors, List<String> end_times,RouteDao rDao) throws Exception {
         if (locations.size() < 2 || travel_modes.size() == 0 || locations.size() != travel_modes.size()) {
             return null;
         }
@@ -59,16 +60,22 @@ public class JSONUtils {
         String date = dateFormat.format(new Date());
 
         ArrayList<Route> routes = new ArrayList<>();
-
+        String latest_end_time;
         for (int i = 0; i < travel_modes.size()-1; i++) {
             String start_address = locations.get(i);
             String end_address = locations.get(i+1);
             //Format travel mode string
             String travel_mode = travel_modes.get(i);
+            latest_end_time = end_times.get(i);
+            //Edge case: if start and end are equal, skip
+            if(start_address.equals(end_address)){
+                continue;
+            }
             //Try getting exisiting route
             Route route = rDao.findRouteByFields(start_address,end_address, travel_mode);
             if(route!=null){
                 route.setLine_color(colors.get(i));
+                route.setEnd_time(latest_end_time);
                 rDao.update(route);
                 routes.add(route);
             }
@@ -88,17 +95,20 @@ public class JSONUtils {
                         tmp_route.setStart_address(start_address);
                         tmp_route.setEnd_address(end_address);
                         tmp_route.setTravel_mode(travel_mode);
+                        tmp_route.setEnd_time(latest_end_time);
                         rDao.insert(tmp_route);
                         routes.add(tmp_route);
                     }
                     else{   //Same route
                         route.setLine_color(colors.get(i));
+                        route.setEnd_time(latest_end_time);
                         rDao.update(route);
                         routes.add(route);
                     }
                 }
                 else{   //Entirely new route
                     route.setLine_color(colors.get(i));
+                    route.setEnd_time(latest_end_time);
                     rDao.insert(route);
                     routes.add(route);
                 }

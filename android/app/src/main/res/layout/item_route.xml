@@ -27,7 +27,7 @@
         android:id="@+id/route_info"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="10"
-        android:gravity="center"/>
+        android:layout_weight="11"
+        android:gravity="center" />
     />
 </LinearLayout>

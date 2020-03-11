@@ -226,9 +226,8 @@ public class DayFragment extends Fragment {
         taskView.setId(task.getId());
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
-        taskView.setBackgroundColor(Color.LTGRAY);    //TODO: replace with task color
+        taskView.setBackgroundColor(task.getColor());
         taskView.setAlpha(.6f);
-        //taskView.setTag(task.getId());              //TODO: feed id into edittask
         if (dp_height > 5)
             taskView.setHeight(dp_height - 5);
         else

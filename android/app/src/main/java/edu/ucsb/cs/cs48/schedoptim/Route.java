@@ -1,5 +1,7 @@
 package edu.ucsb.cs.cs48.schedoptim;
 
+import android.icu.text.Collator;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -14,6 +16,7 @@ import com.google.maps.android.PolyUtil;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +49,8 @@ public class Route{
     private float length;
     @ColumnInfo(name = "time")
     private float time;
+    @ColumnInfo(name = "end_time")
+    private String end_time;
 
     public Route(){
 
@@ -111,6 +116,8 @@ public class Route{
     public float getTime() {
         return time;
     }
+    public String getEnd_time() { return end_time; }
+
     public String getFormattedTime(){
         long rounded_time = (long) time;
         long secs_in_min=60;
@@ -131,6 +138,32 @@ public class Route{
                 return hours;
             }
         }
+    }
+    public String getTimeToLeave(){
+        int leave_hours = Integer.parseInt(end_time.substring(0, 2));
+        int leave_mins = Integer.parseInt(end_time.substring(3));
+
+        Calendar c = MainActivity.cal.getInstance();
+        c.set(Calendar.HOUR_OF_DAY,leave_hours);
+        c.set(Calendar.MINUTE, leave_mins);
+        c.set(Calendar.SECOND,0);
+        c.add(Calendar.SECOND,(int)this.time*-1);
+        int hours = c.get(Calendar.HOUR_OF_DAY);
+        int mins = c.get(Calendar.MINUTE);
+        if(c.DAY_OF_YEAR!=MainActivity.cal.DAY_OF_YEAR){
+            return "INVALID END TIME";
+        }
+        if (hours == 0) {
+            return "12:" + mins + " AM";
+        } else if (hours < 12) {
+            return hours + ":" + mins + " AM";
+        } else if (hours == 12) {
+            return "12:" + mins + " PM";
+        } else if (hours > 12) {
+            int pm_hours = hours - 12;
+            return pm_hours + ":" + mins + " PM";
+        }
+        return "ERROR";
     }
     public String getFormattedLength(){
         float meters_in_mile = 1609.34f;
@@ -169,4 +202,5 @@ public class Route{
     public void setTime(float time){
         this.time=time;
     }
+    public void setEnd_time(String end_time) { this.end_time=end_time; }
 }

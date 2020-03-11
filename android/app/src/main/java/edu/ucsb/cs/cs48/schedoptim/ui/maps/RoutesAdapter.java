@@ -56,6 +56,7 @@ public class RoutesAdapter extends
         }
         else if(routes.isEmpty()){
             items=new ArrayList<>();
+            selected_route=-1;
             this.notifyDataSetChanged();
             return;
         }
@@ -68,6 +69,7 @@ public class RoutesAdapter extends
             items.add(routes.get(i));
             items.add(routes.get(i).getEnd_address());
         }
+        selected_route=-1;
         //finally notify change
         this.notifyDataSetChanged();
     }
@@ -158,14 +160,19 @@ public class RoutesAdapter extends
             // Set item views based on your views and data model
 
             if(position == selected_route) {
-                route_info.setTextColor(Color.RED);
+                route_info.setBackgroundColor(Color.LTGRAY);
+                travel_mode_img.setBackgroundColor(Color.LTGRAY);
+                route_color_img.setBackgroundColor(Color.LTGRAY);
             }
             else {
                 // Here, you must restore the color because the view is reused.. so, you may receive a reused view with wrong colors
-                route_info.setTextColor(Color.BLUE);
+                route_info.setBackgroundColor(Color.WHITE);
+                travel_mode_img.setBackgroundColor(Color.WHITE);
+                route_color_img.setBackgroundColor(Color.WHITE);
             }
             String text = "Depart before: "+route.getTimeToLeave()+"   "+route.getFormattedTime()+"------"+route.getFormattedLength();
             route_info.setText(text);
+            route_info.setTextColor(Color.BLUE);
             //Sets Image based on travel mode in route
             setTravelModeImg(route,travel_mode_img);
             //Set route color box

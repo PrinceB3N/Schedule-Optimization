@@ -137,7 +137,6 @@ public class TaskAdapter extends
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if(gestureDetector.onTouchEvent(event)){
-                        Log.d(MainActivity.class.getName(),"Clicked:");
                         listener.onSingleTapUp(v, event);
                         return true;
                     }

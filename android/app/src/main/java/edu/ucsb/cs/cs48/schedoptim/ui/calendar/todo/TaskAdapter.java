@@ -55,10 +55,6 @@ public class TaskAdapter extends
         if(tasks==null){
             return;
         }
-        else if(tasks.isEmpty()){
-            items=new ArrayList<>();
-            return;
-        }
         this.items = tasks;
         //finally notify change
         this.notifyDataSetChanged();
@@ -131,7 +127,8 @@ public class TaskAdapter extends
         public void editView(Task item, int position){
             // Set item views based on your views and data model
             todo_info.setText(item.getTitle()+"\n"+item.getLocation()+
-                    "\n"+Task.formatTaskTime(item.getBegin_time())+" "+Task.formatTaskTime(item.getEnd_time()));
+                    "\n"+Task.formatTaskTime(item.getBegin_time())+" "+Task.formatTaskTime(item.getEnd_time())+
+                    "\nDuration:"+item.getDuration());
             todo_info.setId(item.getId());
             todo_info.setOnTouchListener(new View.OnTouchListener() {
                 @Override

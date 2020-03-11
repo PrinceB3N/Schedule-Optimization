@@ -164,8 +164,11 @@ public class TaskViewActivity extends Activity {
             if (im.matches("Medium")){ text_importance.setBackgroundResource(R.drawable.card_green); }
             if (im.matches("Low")){ text_importance.setBackgroundResource(R.drawable.card_blue); }
         }
-        text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time()));
-
+        if(isTask)
+            text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time()));
+        else
+            text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time())+"\n"+
+                                "Duration: "+t.getDuration());
         if (!hasLoc){
             icon_location.setImageResource(R.drawable.outline_location_off_24);
             text_location.setText("No specified location");

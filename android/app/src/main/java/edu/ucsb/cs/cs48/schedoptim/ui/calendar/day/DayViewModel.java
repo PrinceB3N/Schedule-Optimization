@@ -48,4 +48,9 @@ public class DayViewModel extends AndroidViewModel {
         loadDataFromDatabase(date);
         return tasks;
     }
+    @Override
+    public void onCleared(){
+        if(taskDatabase!=null)
+            taskDatabase.close();
+    }
 }

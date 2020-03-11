@@ -42,7 +42,7 @@ import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
 import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
 
 public class MapsViewModel extends ViewModel{
-    private final static int BOUNDS_PADDING = 64;
+    private final static int BOUNDS_PADDING = 128;
     private static GoogleMap map = null;
     private static RouteDatabase rdb = null;
     private static TaskDatabase tdb = null;
@@ -178,11 +178,11 @@ public class MapsViewModel extends ViewModel{
     }
     public static void moveCameraToWantedArea(Route route){
         if(map==null);
-        else if(bounds==null)
+        //else if(bounds==null)
             moveCameraSmoothlyToWantedArea(new LatLng(route.getStart_lat(),route.getStart_long()),
                     new LatLng(route.getEnd_lat(),route.getEnd_long()),BOUNDS_PADDING);
-        else
-            moveCameraSmoothlyToWantedArea(bounds.southwest,bounds.northeast,BOUNDS_PADDING);
+        //else
+            //moveCameraSmoothlyToWantedArea(bounds.southwest,bounds.northeast,BOUNDS_PADDING);
     }
     /**
      * Method to move camera to wanted area.
@@ -285,6 +285,13 @@ public class MapsViewModel extends ViewModel{
         //draw Markers
         drawMarkers(routes.getValue());
         return true;
+    }
+    @Override
+    public void onCleared(){
+        if(rdb!=null)
+            rdb.close();
+        if(tdb!=null)
+            tdb.close();
     }
     //INNER CLASSES
     static class RouteDrawer extends AsyncTask<Void, Void, Void> {

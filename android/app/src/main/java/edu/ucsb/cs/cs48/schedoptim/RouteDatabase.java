@@ -17,7 +17,7 @@ public abstract class RouteDatabase extends RoomDatabase {
     public abstract RouteDao getrouteDao();
     private static RouteDatabase INSTANCE;//创建单例
 
-    static RouteDatabase getDatabase(final Context context) {
+    public static RouteDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (RouteDatabase.class) {
                 if (INSTANCE == null)    {

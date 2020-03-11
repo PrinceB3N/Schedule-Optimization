@@ -18,7 +18,7 @@ public abstract class TaskDatabase extends RoomDatabase {
     private static TaskDatabase INSTANCE;//创建单例
 
 
-    static TaskDatabase getDatabase(final Context context) {
+    public static TaskDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (TaskDatabase.class) {
                 if (INSTANCE == null)    {

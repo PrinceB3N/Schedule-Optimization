@@ -42,6 +42,7 @@ import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
+import edu.ucsb.cs.cs48.schedoptim.TaskViewActivity;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment;
 import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
@@ -234,15 +235,17 @@ public class DayFragment extends Fragment {
             taskView.setHeight(dp_height - 5);
         else
             taskView.setHeight(dp_height);
+
         taskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent editTask= new Intent(getContext(), AddTaskActivity.class);
-                editTask.putExtra("TYPE","task");
-                editTask.putExtra("ID",v.getId());
-                startActivityForResult(editTask, 1);
+                Intent viewTask= new Intent(getContext(), TaskViewActivity.class);
+//                editTask.putExtra("TYPE","task");
+                viewTask.putExtra("ID",v.getId());
+                startActivityForResult(viewTask, 1);
             }
         });
+
         //add view to layout and format constraint layout
         mLayout.addView(taskView, eventIndex - 1);
         set.clone(mLayout);

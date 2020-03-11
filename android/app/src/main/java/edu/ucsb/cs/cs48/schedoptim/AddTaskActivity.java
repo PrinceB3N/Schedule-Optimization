@@ -99,7 +99,7 @@ public class AddTaskActivity extends Activity {
         int ch = ca.get(Calendar.HOUR_OF_DAY);
         int cm = ca.get(Calendar.MINUTE);
         final int[] mYear = {ca.get(Calendar.YEAR)};
-        final int[] mMonth = {ca.get(Calendar.MONTH)};
+        final int[] mMonth = {ca.get(Calendar.MONTH)+1};
         final int[] mDay = {ca.get(Calendar.DAY_OF_MONTH)};
         final int[] mHour = {ch, ch + 1, 1, 0}; // begin 0; end 1; duration 2; minuteBefore 3
         final int[] mMinute = {cm, cm, 0, 30};
@@ -109,7 +109,7 @@ public class AddTaskActivity extends Activity {
 
         duration.setText("Duration: " + String.format("%02d", mHour[2]) + ":" + String.format("%02d", mMinute[2]));
         timeBefore.setText("Time Before: " + String.format("%02d", mHour[3]) + ":" + String.format("%02d", mMinute[3]));
-        date.setText("Date: " + (mMonth[0] + 1) + "/" + mDay[0] + "/" + mYear[0]);
+        date.setText("Date: " + (mMonth[0]) + "/" + mDay[0] + "/" + mYear[0]);
 
         if (taskId != -1) {
             t = db.taskDao().findById(taskId);
@@ -245,7 +245,7 @@ public class AddTaskActivity extends Activity {
             @Override
             public void onClick(View v) {
                 datePickerDialog.show();
-                Toast.makeText(getApplicationContext(), travelMode.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), travelMode.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 

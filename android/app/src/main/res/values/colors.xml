@@ -9,4 +9,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDivider">#aaaaaa</color>
+
+    <color name="colorButton">#ffffff</color>
+
 </resources>

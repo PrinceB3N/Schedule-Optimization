@@ -323,16 +323,22 @@ public class MapsViewModel extends ViewModel{
         List<Task> tasks = tdb.taskDao().loadTaskByDate(Task.formatTaskDate(cal.getTime()));
         ArrayList<String> twr = new ArrayList<>();
         ArrayList<String> tm  = new ArrayList<>();
-
+        ArrayList<Integer> colors = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task tem = tasks.get(i);
             if (tem.getCalRoute()){
                 twr.add(tem.getLocation());
                 tm.add(tem.getTravelMode());
+                Integer tmp_color = tem.getColor();
+                if(tmp_color==null)
+                    colors.add(Color.BLUE);//DEFAULT
+                else
+                    colors.add(tmp_color);
             }
         }
-        locations=twr;
-        travel_modes=tm;
+        this.locations=twr;
+        this.travel_modes=tm;
+        this.colors=colors;
     }
     private boolean updateMapWithExistingData(){
         if(map==null || routes==null)
@@ -357,7 +363,7 @@ public class MapsViewModel extends ViewModel{
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                ArrayList<Route> tmp_routes = JSONUtils.getRoutesFrom(locations,travel_modes,rdb.getrouteDao());
+                ArrayList<Route> tmp_routes = JSONUtils.getRoutesFrom(locations,travel_modes,colors, rdb.getrouteDao());
                 Log.d(MainActivity.class.getName(),"ASYNC_GET_ROUTES:");
                 if(tmp_routes==null) {
                     Log.d(MainActivity.class.getName(),"ASYNC_ROUTES NULL_GET_ROUTES");

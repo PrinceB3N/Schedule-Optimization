@@ -25,7 +25,7 @@ public class TodoViewModel extends ViewModel {
     public TodoViewModel(){
     }
     public void loadDataFromDatabase(TaskDao taskDao, Date day){
-        todos.setValue((ArrayList<Task>)taskDao.loadTodoByDate(Task.formatTaskDate(day)));
+        todos.postValue((ArrayList<Task>)taskDao.loadTodoByDate(Task.formatTaskDate(day)));
     }
     public void moveTodosToTasks(TaskDao taskDao, Date day){
 //        List<Task> tasks = taskDao.loadTaskByDateEnd(Task.formatTaskDate(day));

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -116,6 +117,7 @@ public class TodoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 todoViewModel.moveTodosToTasks(db.taskDao(),MainActivity.cal.getTime());
+                Toast.makeText(getContext(), "To-Dos are added to first available time!", Toast.LENGTH_SHORT).show();
             }
         });
         FloatingActionButton fab = root.findViewById(R.id.fab);

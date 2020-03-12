@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#508da3</color>
     <color name="NOTselected_route">#000000</color>
     <color name="selected_route">#1B4AD8</color>
 
@@ -21,6 +21,7 @@
     <color name="colorD">#5b7fa7</color>
     <color name="colorM">#508da3</color>
     <color name="colorL">#a5def1</color>
+    <color name="colorO">#ffd180</color>
 
 
 </resources>

@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 
-@Database(entities = { Route.class}, version = 2,exportSchema = false)
+@Database(entities = { Route.class}, version = 4,exportSchema = false)
 public abstract class RouteDatabase extends RoomDatabase {
 
     //    private static final String DB_NAME = "RouteDatabase.db";
@@ -17,7 +17,7 @@ public abstract class RouteDatabase extends RoomDatabase {
     public abstract RouteDao getrouteDao();
     private static RouteDatabase INSTANCE;//创建单例
 
-    static RouteDatabase getDatabase(final Context context) {
+    public static RouteDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (RouteDatabase.class) {
                 if (INSTANCE == null)    {

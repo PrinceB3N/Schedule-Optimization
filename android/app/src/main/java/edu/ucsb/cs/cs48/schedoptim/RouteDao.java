@@ -29,9 +29,12 @@ public interface RouteDao {
     @Query("SELECT * FROM route WHERE route_id = :route_id")
     Route findByRouteId(long route_id);
 
-    @Query("SELECT * FROM route WHERE start_address = :start_address AND end_address=:end_address AND travel_mode =:travel_mode")
+    @Query("SELECT * FROM route WHERE start_address =:start_address AND" + " end_address =:end_address AND" + " travel_mode =:travel_mode")
     Route findRouteByFields(String start_address, String end_address, String travel_mode);
 
+    @Query("SELECT * FROM route WHERE encoded_polylines = :encoded_polylines")
+
+    Route findRouteByEncodedPolylines(String encoded_polylines);
     //-----------------------insert----------------------
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insert(Route route);

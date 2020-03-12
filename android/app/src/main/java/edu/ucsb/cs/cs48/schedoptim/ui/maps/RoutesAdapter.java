@@ -17,6 +17,7 @@ import java.util.List;
 
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Route;
+import edu.ucsb.cs.cs48.schedoptim.Task;
 
 public class RoutesAdapter extends
         RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -55,6 +56,7 @@ public class RoutesAdapter extends
         }
         else if(routes.isEmpty()){
             items=new ArrayList<>();
+            selected_route=-1;
             this.notifyDataSetChanged();
             return;
         }
@@ -67,6 +69,7 @@ public class RoutesAdapter extends
             items.add(routes.get(i));
             items.add(routes.get(i).getEnd_address());
         }
+        selected_route=-1;
         //finally notify change
         this.notifyDataSetChanged();
     }
@@ -116,8 +119,8 @@ public class RoutesAdapter extends
     public class ViewHolder0 extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView route_number;
         public TextView route_address;
+        public TextView address_number;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder0(View itemView) {
@@ -125,15 +128,15 @@ public class RoutesAdapter extends
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            route_number = itemView.findViewById(R.id.route_number);
             route_address = itemView.findViewById(R.id.route_address);
+            address_number = itemView.findViewById(R.id.address_number);
         }
         public void editView(String address, int position){
             // Set item views based on your views and data model
             String route_number = ""+(position/2+1);
 
-            this.route_number.setText(route_number);
             this.route_address.setText(address);
+            this.address_number.setText("Address "+route_number+":");
         }
     }
     public class ViewHolder1 extends RecyclerView.ViewHolder {
@@ -157,14 +160,19 @@ public class RoutesAdapter extends
             // Set item views based on your views and data model
 
             if(position == selected_route) {
-                route_info.setTextColor(Color.RED);
+                route_info.setBackgroundColor(Color.LTGRAY);
+                travel_mode_img.setBackgroundColor(Color.LTGRAY);
+                route_color_img.setBackgroundColor(Color.LTGRAY);
             }
             else {
                 // Here, you must restore the color because the view is reused.. so, you may receive a reused view with wrong colors
-                route_info.setTextColor(Color.BLUE);
+                route_info.setBackgroundColor(Color.WHITE);
+                travel_mode_img.setBackgroundColor(Color.WHITE);
+                route_color_img.setBackgroundColor(Color.WHITE);
             }
-            String text = route.getFormattedTime()+"------"+route.getFormattedLength();
+            String text = "Depart before: "+route.getTimeToLeave()+"   "+route.getFormattedTime()+"------"+route.getFormattedLength();
             route_info.setText(text);
+            route_info.setTextColor(Color.BLUE);
             //Sets Image based on travel mode in route
             setTravelModeImg(route,travel_mode_img);
             //Set route color box

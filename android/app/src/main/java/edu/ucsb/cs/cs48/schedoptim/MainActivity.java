@@ -14,10 +14,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.util.Calendar;
 
-import edu.ucsb.cs.cs48.schedoptim.ui.calendar.CalendarViewModel;
-import edu.ucsb.cs.cs48.schedoptim.ui.maps.MapsFragment;
-import edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlarmCreator;
-
 public class MainActivity extends AppCompatActivity{
     public static Calendar cal = Calendar.getInstance();
     @Override

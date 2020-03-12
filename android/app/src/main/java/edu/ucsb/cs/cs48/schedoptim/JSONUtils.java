@@ -50,7 +50,8 @@ import com.google.gson.Gson;
 public class JSONUtils {
     private static String logname = MainActivity.class.getName();
 
-    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_modes, List<Integer> colors,RouteDao rDao) throws Exception {
+    public static ArrayList<Route> getRoutesFrom(List<String> locations, List<String> travel_modes,
+                                                 List<Integer> colors, List<String> end_times,RouteDao rDao) throws Exception {
         if (locations.size() < 2 || travel_modes.size() == 0 || locations.size() != travel_modes.size()) {
             return null;
         }
@@ -59,30 +60,58 @@ public class JSONUtils {
         String date = dateFormat.format(new Date());
 
         ArrayList<Route> routes = new ArrayList<>();
-
+        String latest_end_time;
         for (int i = 0; i < travel_modes.size()-1; i++) {
-            //Format the location String
-            String start_address = formatLocation(locations.get(i));
-            String end_address = formatLocation(locations.get(i+1));
+            String start_address = locations.get(i);
+            String end_address = locations.get(i+1);
             //Format travel mode string
-            String travel_mode = formatTravelMode(travel_modes.get(i));
+            String travel_mode = travel_modes.get(i);
+            latest_end_time = end_times.get(i);
+            //Edge case: if start and end are equal, skip
+            if(start_address.equals(end_address)){
+                continue;
+            }
             //Try getting exisiting route
-            Route route = rDao.findRouteByFields(start_address,end_address,travel_mode);
+            Route route = rDao.findRouteByFields(start_address,end_address, travel_mode);
             if(route!=null){
                 route.setLine_color(colors.get(i));
+                route.setEnd_time(latest_end_time);
                 rDao.update(route);
                 routes.add(route);
             }
             else {
                 InputStream is = new URL(placesToUrl(Arrays.asList(
-                        start_address, end_address), travel_mode))
+                        formatLocation(start_address), formatLocation(end_address)), Route.formatTravelModeForURL(travel_mode)))
                         .openStream();
                 Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
                 //Get and store new route in database and list
                 route = parseToRoute(new Gson().fromJson(reader, JsonObject.class));
-                route.setLine_color(colors.get(i));
-                rDao.insert(route);
-                routes.add(route);
+                //Edge case: addresses are different but encoded polylines are already in database
+                Route equal_route = rDao.findRouteByEncodedPolylines(route.getEncoded_polylines());
+                if(equal_route!=null){
+                    if(!equal_route.getStart_address().equals(start_address) || !equal_route.getEnd_address().equals(end_address)) {
+                        Route tmp_route = equal_route;
+                        tmp_route.setLine_color(colors.get(i));
+                        tmp_route.setStart_address(start_address);
+                        tmp_route.setEnd_address(end_address);
+                        tmp_route.setTravel_mode(travel_mode);
+                        tmp_route.setEnd_time(latest_end_time);
+                        rDao.insert(tmp_route);
+                        routes.add(tmp_route);
+                    }
+                    else{   //Same route
+                        route.setLine_color(colors.get(i));
+                        route.setEnd_time(latest_end_time);
+                        rDao.update(route);
+                        routes.add(route);
+                    }
+                }
+                else{   //Entirely new route
+                    route.setLine_color(colors.get(i));
+                    route.setEnd_time(latest_end_time);
+                    rDao.insert(route);
+                    routes.add(route);
+                }
                 //Finish up
                 is.close();
                 reader.close();
@@ -129,19 +158,6 @@ public class JSONUtils {
 
     public static String formatLocation(String location){
         return location.replaceAll(" ","+").replaceAll(",","");
-    }
-    //Formats a travel mode string into correct output, otherwise default to driving
-    public static String formatTravelMode(String travel_mode){
-        String mode=travel_mode.toLowerCase();
-        switch(mode) {
-            case "walking":
-            case "bicycling":
-            case "transit":
-            case "driving":
-                return mode;
-            default:
-                return "walking";
-        }
     }
     public static String placesToUrl(List<String> locations, String travel_mode){
         //Formats String for URL input

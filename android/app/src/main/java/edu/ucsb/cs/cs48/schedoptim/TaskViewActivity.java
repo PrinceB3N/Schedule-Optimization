@@ -110,7 +110,6 @@ public class TaskViewActivity extends Activity {
                 .build();
 
         id = getIntent().getIntExtra("ID",-1);
-
         update();
 
         button_leave.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +125,7 @@ public class TaskViewActivity extends Activity {
             public void onClick(View v) {
                 Intent editTask= new Intent(getApplicationContext(), AddTaskActivity.class);
                 editTask.putExtra("ID",id);
+                editTask.putExtra("TYPE",(isTask)?"task":"todo");
                 startActivityForResult(editTask, 1);
             }
         });
@@ -156,15 +156,22 @@ public class TaskViewActivity extends Activity {
         if (isTask){ type.setText("Task");}
         else { type.setText("To-Do");}
         text_title.setText(t.getTitle());
-        text_importance.setVisibility(View.GONE);
-        if (!isTask){
+
+        if(isTask){
+            text_importance.setVisibility(View.GONE);
+            text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time()));
+        }
+        else {
+            text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time())+"\n"+
+                                "Duration: "+t.getDuration());
             String im = t.getImportance();
             text_importance.setText(im);
             if (im.matches("High")){ text_importance.setBackgroundResource(R.drawable.card_red); }
             if (im.matches("Medium")){ text_importance.setBackgroundResource(R.drawable.card_green); }
             if (im.matches("Low")){ text_importance.setBackgroundResource(R.drawable.card_blue); }
+            text_importance.setVisibility(View.VISIBLE);
         }
-        text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time()));
+
 
         if (!hasLoc){
             icon_location.setImageResource(R.drawable.outline_location_off_24);
@@ -188,8 +195,7 @@ public class TaskViewActivity extends Activity {
                 text_travel_mode.setText(tm);
             }
         }
-
-        if (t.getNotiTime().matches("")){
+        if (t.getNotiTime() == null){
             icon_notification.setImageResource(R.drawable.outline_notifications_off_24);
             text_notification.setText("Don't notify");
         }else {

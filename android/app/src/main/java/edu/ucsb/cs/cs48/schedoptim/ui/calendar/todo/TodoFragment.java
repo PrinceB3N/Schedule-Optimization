@@ -2,6 +2,7 @@ package edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -34,6 +35,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,7 +50,7 @@ import edu.ucsb.cs.cs48.schedoptim.TaskViewActivity;
 
 import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
 
-public class TodoFragment extends Fragment{
+public class TodoFragment extends Fragment {
     private RecyclerView rvTasks;
     private TaskAdapter adapter;
     private TaskDatabase db;
@@ -69,9 +72,9 @@ public class TodoFragment extends Fragment{
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
-        //Set up recyclerview intial and update process
+
+
         adapter = new TaskAdapter(todoViewModel.getObservableTasks().getValue(), new StartDragListener() {
-            @Override
             public void requestDrag(RecyclerView.ViewHolder viewHolder) {
                 touchHelper.startDrag(viewHolder);
             }
@@ -81,8 +84,6 @@ public class TodoFragment extends Fragment{
                 editTodo.putExtra("TYPE","todo");
                 editTodo.putExtra("ID",v.getId());
                 startActivityForResult(editTodo, 1);
-            }
-        });
         //Add drag-drop helper
         ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
         touchHelper = new ItemTouchHelper(callback);
@@ -203,5 +204,74 @@ public class TodoFragment extends Fragment{
         if(db!=null){
             db.close();
         }
+    }
+
+
+    //Assume:   tasks are all in a given day, are sorted by their endTime()
+    //          todos are all in a given day, are sorted by their importance level, high to low
+    //          start is the earliest time that a todos item can be inserted, by 24 hour time
+    //          end is the latest time that a todos item can be inserted, by 24 hour time
+    public static List<Task> addTodos(List<Task> tasks, List<Task> todos, int start, int end) {
+        List<Task> updatedTasks = tasks;
+        for(int i = 0; i < todos.size(); i++) {
+            Task currentTodo = todos.get(i);
+            boolean notIncluded = true;
+            //if -- Check if updatedTasks is empty
+            if(updatedTasks.isEmpty()) {
+                if(currentTodo.getDuration_int() < end - start) {
+                    currentTodo.setBegin_time_int(start);
+                    currentTodo.setEnd_time_int(start + currentTodo.getDuration_int());
+                    updatedTasks.add(currentTodo);
+                    notIncluded = false;
+                }
+            }
+            //else -- Check between start and first item in tasks
+            if(notIncluded) {
+                if(start + currentTodo.getDuration_int() <= updatedTasks.get(0).getBegin_time_int()){
+                    currentTodo.setBegin_time_int(start);
+                    currentTodo.setEnd_time_int(start + currentTodo.getDuration_int());
+                    updatedTasks.add(currentTodo);
+                    notIncluded = false;
+                }
+            }
+            //else -- Check between items in tasks
+            if(notIncluded) {
+                if(updatedTasks.size() > 1){
+                    for(int j = 1; j < updatedTasks.size(); j++) {
+                        if(currentTodo.getDuration_int() <= updatedTasks.get(j).getBegin_time_int() - updatedTasks.get(j-1).getEnd_time_int()) {
+                            currentTodo.setBegin_time_int(updatedTasks.get(j-1).getEnd_time_int());
+                            currentTodo.setEnd_time_int(updatedTasks.get(j).getBegin_time_int());
+                            updatedTasks.add(currentTodo);
+                            j = updatedTasks.size();
+                            notIncluded = false;
+                        }
+                    }
+                }
+            }
+            //else -- Check between last item in tasks and end
+            if(notIncluded) {
+                if(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int() + currentTodo.getDuration_int() <= end){
+                    //System.out.println(updatedTasks.size() - 1);
+                    currentTodo.setBegin_time_int(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int());
+                    currentTodo.setEnd_time_int(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int() + currentTodo.getDuration_int());
+                    updatedTasks.add(currentTodo);
+                }
+            }
+        }
+        class Compare implements Comparator<Task> {
+
+            @Override
+            public int compare(Task o1, Task o2) {
+                return o1.getEnd_time_int() - o2.getEnd_time_int();
+            }
+
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            updatedTasks.sort(new Compare());
+        }else{
+            Collections.sort(updatedTasks, new Compare());
+        }
+
+        return updatedTasks;
     }
 }

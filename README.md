@@ -43,16 +43,12 @@ Running on development environment (Android Studio):
 
 1. Run the app on an emulator or real Android device.
 2. Add events to your schedule in the calendar by clicking the (+) button.
-3. Enter the information of the event in their fields.
-   a. If you want this event to be routed, check the "Add to my routes" checkbox.
-   b. Select your travel mode for this event. The default is set to "Walking".
+3. Enter the information of the event in their fields. If you want this event to be routed, check the "Add to my routes" checkbox. Select your travel mode for this event. The default is set to "Walking".
 4. Click the (✓) to add the event, or the (x) to go back to the calendar.
 5. Click the list symbol, next to the date, to see your todo list.
-6. Add events to your todo list by clicking the (+) button.
-   a. Select the priority of the event.
+6. Add events to your todo list by clicking the (+) button. Select the priority of the event.
 7. Add the todo list events to your calendar by clicking the "Add ToDo List to Schedule" button.
-8. If there are at least two events in your calendar for the selected day, click the map button and the map will move to your routes and location.
-   a. If permit the app to access your location data, click the top-right button on the map will move the map to your schedule.
+8. If there are at least two events in your calendar for the selected day, click the map button and the map will move to your routes and location. If permit the app to access your location data, click the top-right button on the map will move the map to your schedule.
   
 **Known Problems**
 - No options to store a subset of locations, nor advanced modification.

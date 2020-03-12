@@ -133,9 +133,8 @@ public class TodoViewModel extends ViewModel {
             }
             //else -- Check between start and first item in tasks
             if(notIncluded) {
-                if((start + currentTodo.getDuration_int()) <= updatedTasks.get(0).getBegin_time_int()){
-                    currentTodo.setBegin_time_int(start);
-                    currentTodo.setEnd_time_int(start + currentTodo.getDuration_int());
+                if((start + duration) <= updatedTasks.get(0).getBegin_time_int()){
+                    currentTodo.setEnd_time_int(start + duration);
                     currentTodo.setType("task");
                     updatedTasks.add(currentTodo);
                     notIncluded = false;
@@ -145,21 +144,42 @@ public class TodoViewModel extends ViewModel {
             if(notIncluded) {
                 if(updatedTasks.size() > 1){
                     for(int j = 1; j < updatedTasks.size(); j++) {
-                        if(currentTodo.getBegin_time_int() > updatedTasks.get(j-1).getEnd_time_int() && (currentTodo.getBegin_time_int() + currentTodo.getDuration_int()) < (updatedTasks.get(j).getBegin_time_int())) {
-                            currentTodo.setBegin_time_int(updatedTasks.get(j-1).getEnd_time_int());
-                            currentTodo.setEnd_time_int(updatedTasks.get(j-1).getEnd_time_int() + currentTodo.getDuration_int());
-                            currentTodo.setType("task");
-                            updatedTasks.add(currentTodo);
-                            j = updatedTasks.size();
-                            notIncluded = false;
+                        if(updatedTasks.get(j).getBegin_time_int() - updatedTasks.get(j-1).getEnd_time_int() >= duration){
+                            if(start <= updatedTasks.get(j-1).getEnd_time_int()) {
+                                if(updatedTasks.get(j-1).getEnd_time_int() + duration < end) {
+                                    currentTodo.setBegin_time_int(updatedTasks.get(j-1).getEnd_time_int());
+                                    currentTodo.setEnd_time_int(updatedTasks.get(j-1).getEnd_time_int() + duration);
+                                    currentTodo.setType("task");
+                                    updatedTasks.add(currentTodo);
+                                    j = updatedTasks.size();
+                                    notIncluded = false;
+                                }
+                            }
+                            if(start >= updatedTasks.get(j-1).getEnd_time_int()){
+                                if(start + duration <= updatedTasks.get(j).getBegin_time_int() && start + duration <= end) {
+                                    currentTodo.setBegin_time_int(start);
+                                    currentTodo.setEnd_time_int(start + duration);
+                                    currentTodo.setType("task");
+                                    updatedTasks.add(currentTodo);
+                                    j = updatedTasks.size();
+                                    notIncluded = false;
+                                }
+                            }
                         }
                     }
                 }
             }
             //else -- Check between last item in tasks and end
             if(notIncluded) {
-                if(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int() < currentTodo.getBegin_time_int()){
-                    //System.out.println(updatedTasks.size() - 1);
+                if(start <= updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int()) {
+                    if(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int() + duration <= end) {
+                        currentTodo.setBegin_time_int(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int());
+                        currentTodo.setEnd_time_int(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int() +duration);
+                        currentTodo.setType("task");
+                        updatedTasks.add(currentTodo);
+                    }
+                }
+                else {
                     currentTodo.setBegin_time_int(start);
                     currentTodo.setEnd_time_int(start + currentTodo.getDuration_int());
                     currentTodo.setType("task");

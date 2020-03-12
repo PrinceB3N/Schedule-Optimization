@@ -5,7 +5,9 @@ package edu.ucsb.cs.cs48.schedoptim;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AutoCompleteTextView;
@@ -30,6 +32,7 @@ import edu.ucsb.cs.cs48.schedoptim.adapter.PlaceAutoSuggestAdapter;
 import petrov.kristiyan.colorpicker.ColorPicker;
 
 
+import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
 import static edu.ucsb.cs.cs48.schedoptim.ui.notifications.AlarmCreator.createAlarm;
 
 //import static edu.ucsb.cs.cs48.schedoptim.JSONUtils.getObjectFromJSON;
@@ -95,22 +98,6 @@ public class AddTaskActivity extends Activity {
         updateMode();
         timeBefore.setVisibility(View.GONE);
 
-        Calendar ca = Calendar.getInstance();
-        int ch = ca.get(Calendar.HOUR_OF_DAY);
-        int cm = ca.get(Calendar.MINUTE);
-        final int[] mYear = {ca.get(Calendar.YEAR)};
-        final int[] mMonth = {ca.get(Calendar.MONTH)+1};
-        final int[] mDay = {ca.get(Calendar.DAY_OF_MONTH)};
-        final int[] mHour = {ch, ch + 1, 1, 0}; // begin 0; end 1; duration 2; minuteBefore 3
-        final int[] mMinute = {cm, cm, 0, 30};
-
-        beginTime.setText("Begin Time: " + Task.formatTaskTime(String.format("%02d", mHour[0]) + ":" + String.format("%02d", mMinute[0])));
-        endTime.setText("End Time: " + Task.formatTaskTime(String.format("%02d", mHour[1]) + ":" + String.format("%02d", mMinute[1])));
-
-        duration.setText("Duration: " + String.format("%02d", mHour[2]) + ":" + String.format("%02d", mMinute[2]));
-        timeBefore.setText("Time Before: " + String.format("%02d", mHour[3]) + ":" + String.format("%02d", mMinute[3]));
-        date.setText("Date: " + (mMonth[0]) + "/" + mDay[0] + "/" + mYear[0]);
-
         if (taskId != -1) {
             t = db.taskDao().findById(taskId);
             if (t.getType().matches("todo")) {
@@ -144,8 +131,23 @@ public class AddTaskActivity extends Activity {
             if (!t.getNote().matches("")) {
                 note.setText(t.getNote());
             }
-        }else { t = new Task();}
+        }else {
+            t = new Task();
+        }
+        int ch = cal.get(cal.HOUR_OF_DAY);
+        int cm = cal.get(cal.MINUTE);
+        final int[] mYear = {cal.get(cal.YEAR)};
+        final int[] mMonth = {cal.get(cal.MONTH)+1};
+        final int[] mDay = {cal.get(cal.DAY_OF_MONTH)};
+        final int[] mHour = (taskId != -1) ? new int[]{t.getBegin_TimeHours(),t.getEnd_TimeHours(),t.getDurationHours(),0}:new int[]{ch, ch + 1, 1, 0};
+        final int[] mMinute = (taskId != -1) ? new int[]{t.getBegin_TimeMinutes(),t.getEnd_TimeMinutes(),t.getDurationMinutes(),30}:new int[]{cm, cm, 0, 30};;
 
+        beginTime.setText("Begin Time: " + Task.formatTaskTime(String.format("%02d", mHour[0]) + ":" + String.format("%02d", mMinute[0])));
+        endTime.setText("End Time: " + Task.formatTaskTime(String.format("%02d", mHour[1]) + ":" + String.format("%02d", mMinute[1])));
+
+        duration.setText("Duration: " + String.format("%02d", mHour[2]) + ":" + String.format("%02d", mMinute[2]));
+        timeBefore.setText("Time Before: " + String.format("%02d", mHour[3]) + ":" + String.format("%02d", mMinute[3]));
+        date.setText("Date: " + (mMonth[0]) + "/" + mDay[0] + "/" + mYear[0]);
 
         final DatePickerDialog datePickerDialog = new DatePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new DatePickerDialog.OnDateSetListener() {
@@ -168,7 +170,7 @@ public class AddTaskActivity extends Activity {
                         mMinute[0] = minute;
                         beginTime.setText("Begin Time: " + Task.formatTaskTime(String.format("%02d", mHour[0]) + ":" + String.format("%02d", mMinute[0])));
                     }
-                }, ch, cm, false);
+                }, mHour[0], mMinute[0], false);
 
         final TimePickerDialog endTimePickerDialog = new TimePickerDialog(AddTaskActivity.this, R.style.MyDatePickerDialogTheme,
                 new TimePickerDialog.OnTimeSetListener() {
@@ -340,7 +342,10 @@ public class AddTaskActivity extends Activity {
 
 
                 // Set color
-                t.setColor(colorNumber);
+                if(colorNumber==0)
+                    t.setColor(Color.BLUE);
+                else
+                    t.setColor(colorNumber);
 
                 // Set note
                 t.setNote(note.getText().toString());

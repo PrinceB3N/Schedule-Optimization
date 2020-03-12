@@ -94,26 +94,46 @@ public class Task {
     public String getDuration() {return this.duration; }
     public void setDuration(String d) {this.duration = d;}
 
+    public int getBegin_TimeHours(){
+        return Integer.parseInt(this.begin_time.split(":")[0]);
+    }
+    public int getBegin_TimeMinutes(){
+        return Integer.parseInt(this.begin_time.split(":")[1]);
+    }
+    public int getEnd_TimeHours(){
+        return Integer.parseInt(this.end_time.split(":")[0]);
+    }
+    public int getEnd_TimeMinutes(){
+        return Integer.parseInt(this.end_time.split(":")[1]);
+    }
     public int getDuration_int() {
-        String durString = getDuration();
-        return 44; //place holder;
+        return formatTaskTimetoMinutes(this.duration);
+    }
+    public int getDurationHours(){
+        if(this.duration==null)
+            return 0;
+        return Integer.parseInt(this.duration.split(":")[0]);
+    }
+    public int getDurationMinutes(){
+        if(this.duration==null)
+            return 0;
+        return Integer.parseInt(this.duration.split(":")[1]);
     }
     public void setDuration_int(int time) {
-        //place holder
+        this.duration = formatMinutesToTaskTime(time);
     }
     public int getBegin_time_int() {
-        return 44; //place holder;
+        return formatTaskTimetoMinutes(this.begin_time);
     }
     public void setBegin_time_int(int time) {
-        //place holder
+        this.begin_time = formatMinutesToTaskTime(time);
     }
     public int getEnd_time_int() {
-        return 44; //place holder
+        return formatTaskTimetoMinutes(this.end_time);
     }
     public void setEnd_time_int(int time) {
-        //place holder
+        this.end_time = formatMinutesToTaskTime(time);
     }
-
 
     @Ignore
     public Task(String title, String location) {
@@ -142,6 +162,13 @@ public class Task {
             return pm_hours + ":" + mins + " PM";
         }
         return "ERROR";
+    }
+    private int formatTaskTimetoMinutes(String time){
+        String[] split = this.duration.split(":");
+        return Integer.parseInt(split[0])*60+Integer.parseInt(split[1]);
+    }
+    private String formatMinutesToTaskTime(int mins){
+        return Integer.toString((int)mins/60)+":"+(mins%60);
     }
     public static boolean isSameDate(Calendar c1, Calendar c2){
         if(c1.get(c1.DAY_OF_MONTH)==c2.get(c2.DAY_OF_MONTH) && c1.get(c1.MONTH)==c2.get(c2.MONTH) && c1.get(c1.YEAR)==c2.get(c2.YEAR))

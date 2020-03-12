@@ -110,7 +110,6 @@ public class TaskViewActivity extends Activity {
                 .build();
 
         id = getIntent().getIntExtra("ID",-1);
-
         update();
 
         button_leave.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +125,7 @@ public class TaskViewActivity extends Activity {
             public void onClick(View v) {
                 Intent editTask= new Intent(getApplicationContext(), AddTaskActivity.class);
                 editTask.putExtra("ID",id);
+                editTask.putExtra("TYPE",(isTask)?"task":"todo");
                 startActivityForResult(editTask, 1);
             }
         });
@@ -164,8 +164,11 @@ public class TaskViewActivity extends Activity {
             if (im.matches("Medium")){ text_importance.setBackgroundResource(R.drawable.card_green); }
             if (im.matches("Low")){ text_importance.setBackgroundResource(R.drawable.card_blue); }
         }
-        text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time()));
-
+        if(isTask)
+            text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time()));
+        else
+            text_time.setText( t.getDate() + " · " + t.formatTaskTime(t.getBegin_time()) + " - " + t.formatTaskTime(t.getEnd_time())+"\n"+
+                                "Duration: "+t.getDuration());
         if (!hasLoc){
             icon_location.setImageResource(R.drawable.outline_location_off_24);
             text_location.setText("No specified location");

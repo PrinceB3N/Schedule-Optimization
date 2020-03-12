@@ -138,7 +138,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         mMap=googleMap;
         mapsViewModel.setMap(mMap);
         //re-initalize map from pre-existing mapsViewModel if same date, else reset
-        mapsViewModel.updateOrLoadByStoredTime();
+        mapsViewModel.loadAndDraw();
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);

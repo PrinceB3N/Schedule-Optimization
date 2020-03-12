@@ -41,14 +41,12 @@ import edu.ucsb.cs.cs48.schedoptim.AddTaskActivity;
 import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.R;
 import edu.ucsb.cs.cs48.schedoptim.Task;
-import edu.ucsb.cs.cs48.schedoptim.TaskDatabase;
 import edu.ucsb.cs.cs48.schedoptim.TaskViewActivity;
-import edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayViewModel;
-import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment;
-import edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoViewModel;
+
 
 import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
 import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
+
 public class DayFragment extends Fragment {
     private final int EXTRA_PADDING = 5;
     private ImageView previousDay;
@@ -86,14 +84,6 @@ public class DayFragment extends Fragment {
         });
 
         FloatingActionButton fab = root.findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-//                navController.navigate(R.id.action_navigation_left_to_todoFragment);
-//            }
-//        });
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -222,25 +212,23 @@ public class DayFragment extends Fragment {
         taskView.setLayoutParams(layoutParams);
         //set additional attributes of textview
         taskView.setLines(3);
-        taskView.setText(Html.fromHtml("<font color=\"green\"><b>Title<b><font>" + task.getTitle() + "</font color=\"blue\"></small></small></font>" + "<br/>"
-                + "<font color=\"blue\"><small>Begin Time:</small></font>" + Task.formatTaskTime(task.getBegin_time()) + "<font color=\"blue\"><small>End time</small></font>" + Task.formatTaskTime(task.getEnd_time()) + "<br/>"
-                + "<font color=\"purple\"><i>Location:<i><font>" + task.getLocation()));
+        taskView.setText(Html.fromHtml("<font color=\"black\"><b>Title<b><font>" + task.getTitle() + "<br/>"
+                + "<font color=\"black\"><i><i><font>" + task.getLocation()));
         taskView.setId(task.getId());
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));
-        taskView.setBackgroundColor(Color.LTGRAY);    //TODO: replace with task color
+        taskView.setBackgroundColor(task.getColor());
         taskView.setAlpha(.6f);
-        //taskView.setTag(task.getId());              //TODO: feed id into edittask
         if (dp_height > 5)
             taskView.setHeight(dp_height - 5);
         else
-            taskView.setHeight(dp_height);
+            taskView.setHeight(5);
 
         taskView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent viewTask= new Intent(getContext(), TaskViewActivity.class);
-//                editTask.putExtra("TYPE","task");
+                viewTask.putExtra("TYPE","task");
                 viewTask.putExtra("ID",v.getId());
                 startActivityForResult(viewTask, 1);
             }
@@ -249,7 +237,7 @@ public class DayFragment extends Fragment {
         //add view to layout and format constraint layout
         mLayout.addView(taskView, eventIndex - 1);
         set.clone(mLayout);
-        set.connect(taskView.getId(), ConstraintSet.TOP, mLayout.getId(), ConstraintSet.TOP, dp_margin + EXTRA_PADDING);//TODO: CHANGE
+        set.connect(taskView.getId(), ConstraintSet.TOP, mLayout.getId(), ConstraintSet.TOP, dp_margin + EXTRA_PADDING);
         set.connect(taskView.getId(), ConstraintSet.LEFT, mLayout.getId(), ConstraintSet.LEFT, 24);
         set.applyTo(mLayout);
     }

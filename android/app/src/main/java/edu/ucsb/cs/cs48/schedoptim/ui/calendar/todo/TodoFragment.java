@@ -119,8 +119,8 @@ public class TodoFragment extends Fragment {
 
     //Assume:   tasks are all in a given day, are sorted by their endTime()
     //          todos are all in a given day, are sorted by their importance level, high to low
-    //          start is the earliest time that a todos item can be inserted, by 24 hour time
-    //          end is the latest time that a todos item can be inserted, by 24 hour time
+    //          start is the earliest time that a todos item can be inserted, using minutes from 12:00 AM ex. 12:30 AM == 30
+    //          end is the latest time that a todos item can be inserted, using minutes from 12:00 AM ex. 12:30 AM == 30
     public static List<Task> addTodos(List<Task> tasks, List<Task> todos, int start, int end) {
         List<Task> updatedTasks = tasks;
         for(int i = 0; i < todos.size(); i++) {

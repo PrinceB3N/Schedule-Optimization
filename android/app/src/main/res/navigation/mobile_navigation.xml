@@ -23,9 +23,9 @@
 
     <fragment
         android:id="@+id/navigation_right"
-        android:name="edu.ucsb.cs.cs48.schedoptim.ui.notifications.NotificationsFragment"
+        android:name="edu.ucsb.cs.cs48.schedoptim.ui.setting.SettingFragment"
         android:label="@string/title_right"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/todoFragment"
         android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo.TodoFragment"

@@ -1,19 +1,32 @@
 # 5pm-schedule-optimization
 
-![Android CI](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/workflows/Android%20CI/badge.svg?branch=master)
+![Android CI](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/workflows/Android%20CI/badge.svg?event=push)
 
 __**Documentation**__
 https://docs.google.com/document/d/1lqX9ADpm9k8lWUsylWCo2AAwucAzDUpmERm8nf_Pv3M/edit?usp=sharing
 
 __**Project summary**__
 
-This Android app helps you get and store the fastest route between all the locations you need to go to in a given day! If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply input your schedule with the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display it again!
+This Android app helps you store events and gets the route between all the locations you need to go to in a given day! If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply input your schedule with the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display the routes of the current day!
 
 __**Features**__
 
-1. A Calendar to keep track of your events for the week.
-2. A Map to track the routes between your individual events for a single day.
-3. A Friends feature to compare your schedules with your friends.
+- When the application starts for the first time, there is a tutorial highlighting the features of the application.
+- The application has a bottom navigation bar between the Calendar, Map and Settings.
+- In the Calendar,
+  - The user can add events for a particular day, specifying the time, location, and color label.
+  - If the user wants the event to be routed in the map, they should check the “Add to my routes” checkbox and choose the travel mode for the event.
+  - If they user wants to be notified of the event, they check the “Notify me!” switch.
+  - The user can change the date of the calendar by clicking the date and choosing the date from the popup. The user could go to the previous and next day through the left and right arrow buttons.
+  - Next to the date is the ToDo List button, which would allow the user to add events to the calendar with set duration parameters based on priority.
+- In the Map,
+  - The user could route their events for the day specified in the Calendar (i.e. if the Calendar is set to March 12, the Map will the route the events of March 12).
+  - The user could show their current location on the map by pressing the upper left button.
+  - The Map displays the locations of the events with the routes color coded in a list below the map. The list includes information like when the user should begin traveling in order to arrive to their event on time.
+- In the Settings,
+  - The user could delete all the tasks and todos for the current day.
+  - The user could delete all the application data from the device.
+  - The user could review the contents of the tutorial again.
 
 __**Installation Prerequisites**__
 
@@ -43,22 +56,16 @@ Running on development environment (Android Studio):
 **Functionality**
 
 1. Run the app on an emulator or real Android device.
-2. Add new locations that you want routes between by clicking on the (+) button.
-3. Enter the address of the place in the top text box.
-4. Click "Add" to add the location, and "Cancel" to just go back to the map.
-5. Repeat 2,3, and 4 as necessary.
-6. Click the button under the map and the map will move to your routes and locations.
-7. Done!
-Note: The app stores your locations after you do #6, so if you reboot the app, you may jump to #6.
-  
+2. Add events to your schedule in the calendar by clicking the (+) button.
+3. Enter the information of the event in their fields. If you want this event to be routed, check the "Add to my routes" checkbox. Select your travel mode for this event. The default is set to "Walking".
+4. Click the (✓) to add the event, or the (x) to go back to the calendar.
+5. Click the list symbol, next to the date, to see your todo list.
+6. Add events to your todo list by clicking the (+) button. Select the priority of the event.
+7. Add the todo list events to your calendar by clicking the "Add ToDo List to Schedule" button.
+8. If there are at least two events in your calendar for the selected day, click the map button and the map will move to your routes and location. If permit the app to access your location data, click the top-right button on the map will move the map to your schedule.
+
 **Known Problems**
-- No options to store a subset of locations, nor advanced modification.
-- Can only store one Schedule at a time.
-- No way to only display locations, nor change their color.
-- No way to customize these locations and routes.
-- Accidentally putting a wrong address will mean you have to restart the process.
-- File management: Views must specify the file locations + Multiple instances of the Controller which store those file locations 
-  might mean bad news if we decide to store more Schedules...
+- Algorithm for the ToDo List
   
 **Contributing**
 

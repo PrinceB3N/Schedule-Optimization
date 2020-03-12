@@ -25,6 +25,9 @@ public interface TaskDao {
     @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'task'" + "ORDER BY begin_time")
     List<Task> loadTaskByDate(String taskDate);
 
+    @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'task'" + "ORDER BY end_time")
+    List<Task> loadTaskByDateEnd(String taskDate);
+
     @Query("SELECT * FROM task WHERE date = :taskDate AND" + " type LIKE 'todo'" + "ORDER BY begin_time")
     List<Task> loadTodoByDate(String taskDate);
 

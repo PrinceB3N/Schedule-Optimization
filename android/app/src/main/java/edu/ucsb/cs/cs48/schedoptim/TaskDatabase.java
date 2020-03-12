@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 
-@Database(entities = { Task.class }, version = 8,exportSchema = false)
+@Database(entities = { Task.class }, version = 11,exportSchema = false)
 public abstract class TaskDatabase extends RoomDatabase {
 
 //    private static final String DB_NAME = "TaskDatabase.db";
@@ -18,7 +18,7 @@ public abstract class TaskDatabase extends RoomDatabase {
     private static TaskDatabase INSTANCE;//创建单例
 
 
-    static TaskDatabase getDatabase(final Context context) {
+    public static TaskDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (TaskDatabase.class) {
                 if (INSTANCE == null)    {

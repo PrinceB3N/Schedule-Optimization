@@ -6,6 +6,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/previous_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@android:drawable/ic_media_rew" />
+
+        <TextView
+            android:id="@+id/display_current_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_weight="3"
+            android:text="@string/current_day_date"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/todoList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+        <ImageView
+            android:id="@+id/next_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@android:drawable/ic_media_ff" />
+    </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -29,7 +79,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todo_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/add_todo_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"

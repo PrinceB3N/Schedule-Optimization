@@ -94,6 +94,27 @@ public class Task {
     public String getDuration() {return this.duration; }
     public void setDuration(String d) {this.duration = d;}
 
+    public int getDuration_int() {
+        String durString = getDuration();
+        return 44; //place holder;
+    }
+    public void setDuration_int(int time) {
+        //place holder
+    }
+    public int getBegin_time_int() {
+        return 44; //place holder;
+    }
+    public void setBegin_time_int(int time) {
+        //place holder
+    }
+    public int getEnd_time_int() {
+        return 44; //place holder
+    }
+    public void setEnd_time_int(int time) {
+        //place holder
+    }
+
+
     @Ignore
     public Task(String title, String location) {
         this.title = title;

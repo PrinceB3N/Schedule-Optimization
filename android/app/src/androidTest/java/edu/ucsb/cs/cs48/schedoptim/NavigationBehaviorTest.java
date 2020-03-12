@@ -36,7 +36,7 @@ public class NavigationBehaviorTest {
     }
 
     @Test
-    public void navigateSocial() {
+    public void navigateSettings() {
         onView(withId(R.id.navigation_right)).perform(ViewActions.click());
         onView(allOf(withId(R.id.navigation_right),withEffectiveVisibility(VISIBLE))).
                 check(matches(isDisplayed()));

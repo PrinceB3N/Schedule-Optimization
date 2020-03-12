@@ -34,52 +34,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:background="@color/colorAccent"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/previous_day"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@android:drawable/ic_media_rew" />
+            android:background="@drawable/day_bar_white"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-        <TextView
-            android:id="@+id/display_current_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_weight="3"
-            android:text="@string/current_day_date"
-            android:textAlignment="textEnd"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/previous_day"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@android:drawable/ic_media_rew" />
 
-        <ImageView
-            android:id="@+id/todoList"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_format_list_bulleted_white_24dp" />
+            <TextView
+                android:id="@+id/display_current_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_weight="3"
+                android:text="@string/current_day_date"
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/next_day"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@android:drawable/ic_media_ff" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/todoList"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_format_list_bulleted_white_24dp" />
+
+            <ImageView
+                android:id="@+id/next_day"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@android:drawable/ic_media_ff" />
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDao;
 
@@ -47,7 +48,7 @@ public class TodoViewModel extends ViewModel {
             boolean notIncluded = true;
             //if -- Check if updatedTasks is empty
             if(updatedTasks.isEmpty()) {
-                if(currentTodo.getDuration_int() < (end - start)) {
+                if(currentTodo.getDuration_int() <= (end - start)) {
                     currentTodo.setBegin_time_int(start);
                     currentTodo.setEnd_time_int(start + currentTodo.getDuration_int());
                     currentTodo.setType("task");
@@ -69,7 +70,7 @@ public class TodoViewModel extends ViewModel {
             if(notIncluded) {
                 if(updatedTasks.size() > 1){
                     for(int j = 1; j < updatedTasks.size(); j++) {
-                        if(currentTodo.getBegin_time_int() > updatedTasks.get(j-1).getEnd_time_int() && (currentTodo.getBegin_time_int() + currentTodo.getDuration_int()) < (updatedTasks.get(j).getBegin_time_int())) {
+                        if(currentTodo.getBegin_time_int() >= updatedTasks.get(j-1).getEnd_time_int() && (currentTodo.getBegin_time_int() + currentTodo.getDuration_int()) <= (updatedTasks.get(j).getBegin_time_int())) {
                             currentTodo.setBegin_time_int(updatedTasks.get(j-1).getEnd_time_int());
                             currentTodo.setEnd_time_int(updatedTasks.get(j-1).getEnd_time_int() + currentTodo.getDuration_int());
                             currentTodo.setType("task");
@@ -82,7 +83,7 @@ public class TodoViewModel extends ViewModel {
             }
             //else -- Check between last item in tasks and end
             if(notIncluded) {
-                if(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int() < currentTodo.getBegin_time_int()){
+                if(updatedTasks.get(updatedTasks.size() - 1).getEnd_time_int() <= currentTodo.getBegin_time_int()){
                     //System.out.println(updatedTasks.size() - 1);
                     currentTodo.setBegin_time_int(start);
                     currentTodo.setEnd_time_int(start + currentTodo.getDuration_int());
@@ -91,7 +92,6 @@ public class TodoViewModel extends ViewModel {
                 }
             }
         }
-
         class Compare implements Comparator<Task> {
 
             @Override

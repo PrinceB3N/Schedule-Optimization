@@ -4,7 +4,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_center">Route</string>
     <string name="title_left">Calendar</string>
-    <string name="title_right">Social</string>
+    <string name="title_right">Setting</string>
     <string name="title_fragment_todo">To-do List</string>string>
     <string name="time_12am">12 am</string>
     <string name="time_1am">1 am</string>

@@ -20,7 +20,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/outline_add_24" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vguideline20"

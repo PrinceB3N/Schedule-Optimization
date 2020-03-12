@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import edu.ucsb.cs.cs48.schedoptim.MainActivity;
 import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDao;
 
@@ -36,9 +37,12 @@ public class TodoViewModel extends ViewModel {
     //          start is the earliest time that a todos item can be inserted, by 24 hour time
     //          end is the latest time that a todos item can be inserted, by 24 hour time
     private List<Task> addTodos(List<Task> tasks, List<Task> todos, int start, int end) {
+        if(todos==null)
+            return null;
         List<Task> updatedTasks = tasks;
         for(int i = 0; i < todos.size(); i++) {
             Task currentTodo = todos.get(i);
+            currentTodo.setType("task");
             boolean notIncluded = true;
             //if -- Check if updatedTasks is empty
             if(updatedTasks.isEmpty()) {

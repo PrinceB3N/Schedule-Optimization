@@ -78,12 +78,15 @@ public class TodoFragment extends Fragment {
             public void requestDrag(RecyclerView.ViewHolder viewHolder) {
                 touchHelper.startDrag(viewHolder);
             }
+
             @Override
             public void onSingleTapUp(View v, MotionEvent event) {
-                Intent editTodo= new Intent(getContext(), TaskViewActivity.class);
-                editTodo.putExtra("TYPE","todo");
-                editTodo.putExtra("ID",v.getId());
+                Intent editTodo = new Intent(getContext(), TaskViewActivity.class);
+                editTodo.putExtra("TYPE", "todo");
+                editTodo.putExtra("ID", v.getId());
                 startActivityForResult(editTodo, 1);
+            }
+        });
         //Add drag-drop helper
         ItemTouchHelper.Callback callback = new ItemMoveCallback(adapter);
         touchHelper = new ItemTouchHelper(callback);

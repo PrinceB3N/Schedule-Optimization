@@ -164,11 +164,11 @@ public class Task {
         return "ERROR";
     }
     private int formatTaskTimetoMinutes(String time){
-        String[] split = this.duration.split(":");
+        String[] split = time.split(":");
         return Integer.parseInt(split[0])*60+Integer.parseInt(split[1]);
     }
     private String formatMinutesToTaskTime(int mins){
-        return Integer.toString((int)mins/60)+":"+(mins%60);
+        return String.format("%02d", mins/60) + ":" + String.format("%02d", mins%60);
     }
     public static boolean isSameDate(Calendar c1, Calendar c2){
         if(c1.get(c1.DAY_OF_MONTH)==c2.get(c2.DAY_OF_MONTH) && c1.get(c1.MONTH)==c2.get(c2.MONTH) && c1.get(c1.YEAR)==c2.get(c2.YEAR))

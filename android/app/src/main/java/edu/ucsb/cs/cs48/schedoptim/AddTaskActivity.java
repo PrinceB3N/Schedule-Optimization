@@ -48,7 +48,7 @@ public class AddTaskActivity extends Activity {
 
     String thisType;
     int taskId;
-    int colorNumber;
+    int colorNumber = -11419154; // Light Blue
     Task t;
 
 
@@ -86,6 +86,7 @@ public class AddTaskActivity extends Activity {
         importance.setSelection(1);
         // Color
         final ImageButton colorButton = findViewById(R.id.button_color);
+        colorButton.setBackgroundColor(colorNumber);
         // Note
         final EditText note = findViewById(R.id.editText_note);
 
@@ -342,10 +343,7 @@ public class AddTaskActivity extends Activity {
 
 
                 // Set color
-                if(colorNumber==0)
-                    t.setColor(Color.BLUE);
-                else
-                    t.setColor(colorNumber);
+                t.setColor(colorNumber);
 
                 // Set note
                 t.setNote(note.getText().toString());

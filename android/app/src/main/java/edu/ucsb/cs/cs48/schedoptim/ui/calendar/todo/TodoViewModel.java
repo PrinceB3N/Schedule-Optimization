@@ -1,6 +1,7 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.todo;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,6 +18,7 @@ import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskDao;
 
 public class TodoViewModel extends ViewModel {
+    private static final String TAG = "Check stuff";
     private static MutableLiveData<ArrayList<Task>> todos = new MutableLiveData(new ArrayList<Task>(0));
 
     public MutableLiveData<ArrayList<Task>> getObservableTasks(){
@@ -38,7 +40,7 @@ public class TodoViewModel extends ViewModel {
     //          start is the earliest time that a todos item can be inserted, by 24 hour time
     //          end is the latest time that a todos item can be inserted, by 24 hour time
 //    private List<Task> addTodos(List<Task> tasks, List<Task> todos, int start, int end) {
-    private List<Task> addTodos(List<Task> todos, TaskDao taskDao, Date day) {
+    private List<Task> addTodosTemp(List<Task> todos, TaskDao taskDao, Date day) {
         List<Task> updatedTasks = taskDao.loadTaskByDateEnd(Task.formatTaskDate(day));;
         for(int i = 0; i < todos.size(); i++) {
             updatedTasks = taskDao.loadTaskByDateEnd(Task.formatTaskDate(day));
@@ -114,11 +116,14 @@ public class TodoViewModel extends ViewModel {
     //          start is the earliest time that a todos item can be inserted, by 24 hour time
     //          end is the latest time that a todos item can be inserted, by 24 hour time
 //    private List<Task> addTodos(List<Task> tasks, List<Task> todos, int start, int end) {
-    private List<Task> addTodosTemp(List<Task> todos, TaskDao taskDao, Date day) {
-        List<Task> updatedTasks = taskDao.loadTaskByDateEnd(Task.formatTaskDate(day));;
-        for(int i = 0; i < todos.size(); i++) {
+    private List<Task> addTodos(List<Task> todos, TaskDao taskDao, Date day) {
+        List<Task> updatedTasks = taskDao.loadTaskByDateEnd(Task.formatTaskDate(day));
+        List<Task> tempTodo = todos;
+        Log.d(TAG, "addTodosTemp: " + updatedTasks.get(0).getBegin_time_int());
+        for(int i = tempTodo.size() - 1; i >= 0; i--) {
+            Log.d(TAG, "addTodos: " + (tempTodo.size() - 1));
             updatedTasks = taskDao.loadTaskByDateEnd(Task.formatTaskDate(day));
-            Task currentTodo = todos.get(i);
+            Task currentTodo = tempTodo.get(i);
             int start = currentTodo.getBegin_time_int();
             int end = currentTodo.getEnd_time_int();
             int duration = currentTodo.getDuration_int();
@@ -146,7 +151,7 @@ public class TodoViewModel extends ViewModel {
                     for(int j = 1; j < updatedTasks.size(); j++) {
                         if(updatedTasks.get(j).getBegin_time_int() - updatedTasks.get(j-1).getEnd_time_int() >= duration){
                             if(start <= updatedTasks.get(j-1).getEnd_time_int()) {
-                                if(updatedTasks.get(j-1).getEnd_time_int() + duration < end) {
+                                if(updatedTasks.get(j-1).getEnd_time_int() + duration <= end) {
                                     currentTodo.setBegin_time_int(updatedTasks.get(j-1).getEnd_time_int());
                                     currentTodo.setEnd_time_int(updatedTasks.get(j-1).getEnd_time_int() + duration);
                                     currentTodo.setType("task");
@@ -186,22 +191,20 @@ public class TodoViewModel extends ViewModel {
                     updatedTasks.add(currentTodo);
                 }
             }
-        }
+            class Compare implements Comparator<Task> {
 
-        class Compare implements Comparator<Task> {
+                @Override
+                public int compare(Task o1, Task o2) {
+                    return o1.getEnd_time_int() - o2.getEnd_time_int();
+                }
 
-            @Override
-            public int compare(Task o1, Task o2) {
-                return o1.getEnd_time_int() - o2.getEnd_time_int();
             }
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                updatedTasks.sort(new Compare());
+            }else{
+                Collections.sort(updatedTasks, new Compare());
+            }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            updatedTasks.sort(new Compare());
-        }else{
-            Collections.sort(updatedTasks, new Compare());
-        }
-
         return updatedTasks;
     }
 }

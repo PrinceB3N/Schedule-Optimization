@@ -53,4 +53,5 @@ public class DayViewModel extends AndroidViewModel {
         if(taskDatabase!=null)
             taskDatabase.close();
     }
+
 }

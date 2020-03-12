@@ -50,13 +50,6 @@ Running on development environment (Android Studio):
 7. Add the todo list events to your calendar by clicking the "Add ToDo List to Schedule" button.
 8. If there are at least two events in your calendar for the selected day, click the map button and the map will move to your routes and location. If permit the app to access your location data, click the top-right button on the map will move the map to your schedule.
   
-**Known Problems**
-- No options to store a subset of locations, nor advanced modification.
-- Can only store one Schedule at a time.
-- No way to customize these locations and routes.
-- File management: Views must specify the file locations + Multiple instances of the Controller which store those file locations 
-  might mean bad news if we decide to store more Schedules...
-  
 **Contributing**
 
 Fork it!

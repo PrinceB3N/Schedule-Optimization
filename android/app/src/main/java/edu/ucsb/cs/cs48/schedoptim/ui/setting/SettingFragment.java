@@ -87,7 +87,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        text_clear_all.setText("Delete all previous tasks and to-dos to free device storage");
+        text_clear_all.setText("Delete all data to free device storage");
         text_clear_all.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 new AlertDialog.Builder(getContext())

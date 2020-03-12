@@ -212,8 +212,9 @@ public class DayFragment extends Fragment {
         taskView.setLayoutParams(layoutParams);
         //set additional attributes of textview
         taskView.setLines(3);
-        taskView.setText(Html.fromHtml("<font color=\"black\"><b>Title<b><font>" + task.getTitle() + "<br/>"
+        taskView.setText(Html.fromHtml("<font color=\"black\"><font>" + task.getTitle() + "<br/>"
                 + "<font color=\"black\"><i><i><font>" + task.getLocation()));
+        taskView.setMinWidth(128);
         taskView.setId(task.getId());
         child_views++;
         taskView.setTextColor(Color.parseColor("#ffffff"));

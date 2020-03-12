@@ -166,7 +166,7 @@ public class AddTaskActivity extends Activity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mHour[0] = hourOfDay;
                         mMinute[0] = minute;
-                        beginTime.setText("Begin Time: " + String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute));
+                        beginTime.setText("Begin Time: " + Task.formatTaskTime(String.format("%02d", mHour[0]) + ":" + String.format("%02d", mMinute[0])));
                     }
                 }, ch, cm, false);
 
@@ -176,7 +176,7 @@ public class AddTaskActivity extends Activity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         mHour[1] = hourOfDay;
                         mMinute[1] = minute;
-                        endTime.setText("End Time: " + String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute));
+                        endTime.setText("End Time: " + Task.formatTaskTime(String.format("%02d", mHour[1]) + ":" + String.format("%02d", mMinute[1])));
                     }
                 }, mHour[1], mMinute[1], false);
 
@@ -302,14 +302,15 @@ public class AddTaskActivity extends Activity {
                 t.setTravelMode(travelMode.getSelectedItem().toString().toUpperCase());
 
                 // Set times
-                if (mHour[0] > mHour[1]) {
-                    Toast.makeText(getApplicationContext(), "The task ends before begin!", Toast.LENGTH_SHORT).show();
+                if (((mHour[1] * 60 + mMinute[1]) - (mHour[0] * 60 + mMinute[0])) < 0) {
+                    Toast.makeText(getApplicationContext(), "The task ends before begins!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (mHour[0] == mHour[1] && mMinute[0] > mMinute[1]) {
-                    Toast.makeText(getApplicationContext(), "The task ends before it begins!", Toast.LENGTH_SHORT).show();
+                if (((mHour[1] * 60 + mMinute[1]) - (mHour[0] * 60 + mMinute[0])) < 15) {
+                    Toast.makeText(getApplicationContext(), "Sorry! For now, we only support task or todo that lasts more than 15 minutes!", Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 t.setBegin_time(String.format("%02d", mHour[0]) + ":" + String.format("%02d", mMinute[0]));
                 t.setEnd_time(String.format("%02d", mHour[1]) + ":" + String.format("%02d", mMinute[1]));
 
@@ -324,9 +325,18 @@ public class AddTaskActivity extends Activity {
                 }
 //                { createAlarm(getApplicationContext(), t.getId(), mMonth[0],mDay[0],mYear[0], mHour[0], mMinute[0], mHour[3]+mMinute[3], location, "This is location"); }
 
-                // Set importance
-                t.setImportance(importance.getSelectedItem().toString());
-                //                t.setDuration(String.format("%02d", mHour[2]) + ":" + String.format("%02d", mMinute[2]));
+
+                if (thisType.matches("todo")){
+                    // Set importance
+                    t.setImportance(importance.getSelectedItem().toString());
+
+                    // Set duration
+                    if ((mHour[2] * 60 + mMinute[2])  - ((mHour[1] * 60 + mMinute[1]) - (mHour[0] * 60 + mMinute[0])) < 0) {
+                        Toast.makeText(getApplicationContext(), "The duration should be longer than the time between begin time and end time!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    t.setDuration(String.format("%02d", mHour[2]) + ":" + String.format("%02d", mMinute[2]));
+                }
 
 
                 // Set color

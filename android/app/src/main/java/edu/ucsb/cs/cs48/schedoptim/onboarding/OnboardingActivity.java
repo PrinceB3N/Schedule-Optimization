@@ -79,17 +79,25 @@ public class OnboardingActivity extends AppCompatActivity {
         List<OnboardingItem> onboardingItems = new ArrayList<>();
 
         OnboardingItem firstItem = new OnboardingItem();
-        firstItem.setImage(R.drawable.temp_1);
+        firstItem.setImage(R.drawable.calendar_tutorial);
 
         OnboardingItem secondItem = new OnboardingItem();
-        secondItem.setImage(R.drawable.temp_1);
+        secondItem.setImage(R.drawable.addtask_tutorial);
 
         OnboardingItem thirdItem = new OnboardingItem();
-        thirdItem.setImage(R.drawable.temp_1);
+        thirdItem.setImage(R.drawable.taskview_tutorial);
+
+        OnboardingItem fourthItem = new OnboardingItem();
+        fourthItem.setImage(R.drawable.tutorial_todo);
+
+        OnboardingItem fifthItem = new OnboardingItem();
+        fifthItem.setImage(R.drawable.tutorial_map);
 
         onboardingItems.add(firstItem);
         onboardingItems.add(secondItem);
         onboardingItems.add(thirdItem);
+        onboardingItems.add(fourthItem);
+        onboardingItems.add(fifthItem);
 
         onboardingAdapter = new OnboardingAdapter(onboardingItems);
     }

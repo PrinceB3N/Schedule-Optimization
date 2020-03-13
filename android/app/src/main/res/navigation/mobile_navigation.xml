@@ -9,7 +9,7 @@
         android:id="@+id/navigation_left"
         android:name="edu.ucsb.cs.cs48.schedoptim.ui.calendar.day.DayFragment"
         android:label="@string/title_left"
-        tools:layout="@layout/dayview">
+        tools:layout="@layout/fragment_day">
         <action
             android:id="@+id/action_navigation_left_to_todoFragment"
             app:destination="@id/todoFragment" />

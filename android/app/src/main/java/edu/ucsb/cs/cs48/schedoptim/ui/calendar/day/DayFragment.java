@@ -1,11 +1,8 @@
 package edu.ucsb.cs.cs48.schedoptim.ui.calendar.day;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,17 +21,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.room.Room;
+
 import android.text.Html;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -48,8 +41,9 @@ import edu.ucsb.cs.cs48.schedoptim.Task;
 import edu.ucsb.cs.cs48.schedoptim.TaskViewActivity;
 
 
-import static androidx.constraintlayout.widget.ConstraintSet.WRAP_CONTENT;
 import static edu.ucsb.cs.cs48.schedoptim.MainActivity.cal;
+import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.MINUTE;
 
 public class DayFragment extends Fragment {
     private final int EXTRA_PADDING = 5;
@@ -60,13 +54,14 @@ public class DayFragment extends Fragment {
     private int eventIndex;
     private DayViewModel dayViewModel;
     private int child_views = 0;
+    private ScrollView sv;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View root = inflater.inflate(R.layout.dayview, container, false);
+        View root = inflater.inflate(R.layout.fragment_day, container, false);
         dayViewModel = new ViewModelProvider(DayFragment.this).get(DayViewModel.class);
         mLayout = root.findViewById(R.id.left_event_column);
         eventIndex = mLayout.getChildCount();
@@ -86,7 +81,8 @@ public class DayFragment extends Fragment {
                 nextCalendarDate();
             }
         });
-
+        sv = root.findViewById(R.id.sv);
+        final int s = getMarginFromTop(String.format("%02d", cal.get(HOUR_OF_DAY)) + ":" + String.format("%02d", cal.get(MINUTE))) + 1200;
         FloatingActionButton fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +124,14 @@ public class DayFragment extends Fragment {
 
         //Set screen
         update();
+
+        sv.post(new Runnable() {
+            @Override
+            public void run() {
+                sv.scrollTo(0, s);//0 is x position
+            }
+        });
+
         return root;
     }
 

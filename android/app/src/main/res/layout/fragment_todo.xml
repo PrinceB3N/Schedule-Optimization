@@ -76,7 +76,7 @@
         android:background="@drawable/card_light_blue"
         android:text="  Add To-do list to schedule  "
         app:layout_constraintBottom_toBottomOf="@+id/guideline10"
-        app:layout_constraintEnd_toStartOf="@+id/fab"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 

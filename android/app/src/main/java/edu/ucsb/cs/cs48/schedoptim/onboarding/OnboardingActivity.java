@@ -78,6 +78,9 @@ public class OnboardingActivity extends AppCompatActivity {
     private void setupOnboardingItems() {
         List<OnboardingItem> onboardingItems = new ArrayList<>();
 
+        OnboardingItem welcomeItem = new OnboardingItem();
+        welcomeItem.setImage(R.drawable.welcome_img);
+
         OnboardingItem firstItem = new OnboardingItem();
         firstItem.setImage(R.drawable.calendar_tutorial);
 
@@ -93,6 +96,7 @@ public class OnboardingActivity extends AppCompatActivity {
         OnboardingItem fifthItem = new OnboardingItem();
         fifthItem.setImage(R.drawable.tutorial_map);
 
+        onboardingItems.add(welcomeItem);
         onboardingItems.add(firstItem);
         onboardingItems.add(secondItem);
         onboardingItems.add(thirdItem);

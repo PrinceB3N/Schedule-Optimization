@@ -56,11 +56,13 @@
             android:contentDescription="@string/app_name"
             app:srcCompat="@android:drawable/ic_media_ff" />
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,9 +72,11 @@
         android:id="@+id/add_todo_list"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:text="Add To-do list to schedule"
-        app:layout_constraintBottom_toTopOf="@+id/guideline10"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/card_light_blue"
+        android:text="  Add To-do list to schedule  "
+        app:layout_constraintBottom_toBottomOf="@+id/guideline10"
+        app:layout_constraintEnd_toStartOf="@+id/fab"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -80,7 +84,7 @@
         android:id="@+id/todo_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/add_todo_list"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -90,6 +94,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent=".85" />
+        app:layout_constraintGuide_percent="0.93" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

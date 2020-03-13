@@ -106,14 +106,14 @@ public class TaskAdapter extends
 
     @Override
     public void onRowClear(ViewHolder myViewHolder) {
-        myViewHolder.rowView.setBackgroundColor(Color.WHITE);
-
+        myViewHolder.rowView.setBackgroundColor(myViewHolder.t.getColor());
     }
     class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView todo_info;
         public View rowView;
+        Task t;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -122,6 +122,7 @@ public class TaskAdapter extends
             super(itemView);
             todo_info = itemView.findViewById(R.id.todo_info);
             this.rowView=itemView;
+
         }
         @SuppressLint("ClickableViewAccessibility")
         public void editView(Task item, int position){
@@ -130,6 +131,8 @@ public class TaskAdapter extends
                     "\n"+Task.formatTaskTime(item.getBegin_time())+" "+Task.formatTaskTime(item.getEnd_time())+
                     "\nDuration:"+item.getDuration());
             todo_info.setId(item.getId());
+            t = item;
+            rowView.setBackgroundColor(item.getColor());
             todo_info.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -137,11 +140,14 @@ public class TaskAdapter extends
                         listener.onSingleTapUp(v, event);
                         return true;
                     }
-                    else if(event.getAction()==MotionEvent.ACTION_DOWN) {
-                        listener.requestDrag(ViewHolder.this);
-                        return true;
-                    }
                     return false;
+                }
+            });
+            todo_info.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.requestDrag(ViewHolder.this);
+                    return true;
                 }
             });
         }

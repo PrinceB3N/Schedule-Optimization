@@ -91,10 +91,10 @@ public class OnboardingActivity extends AppCompatActivity {
         thirdItem.setImage(R.drawable.taskview_tutorial);
 
         OnboardingItem fourthItem = new OnboardingItem();
-        fourthItem.setImage(R.drawable.tutorial_todo);
+        fourthItem.setImage(R.drawable.todo_tutorial);
 
         OnboardingItem fifthItem = new OnboardingItem();
-        fifthItem.setImage(R.drawable.tutorial_map);
+        fifthItem.setImage(R.drawable.map_tutorial);
 
         onboardingItems.add(welcomeItem);
         onboardingItems.add(firstItem);

@@ -2,9 +2,6 @@
 
 ![Android CI](https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/workflows/Android%20CI/badge.svg?event=push)
 
-__**Documentation**__
-https://docs.google.com/document/d/1lqX9ADpm9k8lWUsylWCo2AAwucAzDUpmERm8nf_Pv3M/edit?usp=sharing
-
 __**Project summary**__
 
 This Android app helps you store events and gets the route between all the locations you need to go to in a given day! If you are a user that is new to the area, forgetful, or just want to optimize your travel, this app is perfect for you! Simply input your schedule with the addresses you need to go to in order, which will then display the routes between them in an adjustable map. The best part is that the app saves those routes, so all you have to do is click the "Get Routes" button again to display the routes of the current day!
@@ -63,9 +60,6 @@ Running on development environment (Android Studio):
 6. Add events to your todo list by clicking the (+) button. Select the priority of the event.
 7. Add the todo list events to your calendar by clicking the "Add ToDo List to Schedule" button.
 8. If there are at least two events in your calendar for the selected day, click the map button and the map will move to your routes and location. If permit the app to access your location data, click the top-right button on the map will move the map to your schedule.
-
-**Known Problems**
-- Algorithm for the ToDo List
   
 **Contributing**
 

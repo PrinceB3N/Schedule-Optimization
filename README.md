@@ -63,9 +63,6 @@ Running on development environment (Android Studio):
 6. Add events to your todo list by clicking the (+) button. Select the priority of the event.
 7. Add the todo list events to your calendar by clicking the "Add ToDo List to Schedule" button.
 8. If there are at least two events in your calendar for the selected day, click the map button and the map will move to your routes and location. If permit the app to access your location data, click the top-right button on the map will move the map to your schedule.
-
-**Known Problems**
-- Algorithm for the ToDo List
   
 **Contributing**
 

@@ -39,7 +39,7 @@ __**Installation Steps**__
 
 Running on real devices or standalone emulator (not in Android Studio):  
 1. Download the latest version of our APK file from  
-`GitHub release:`https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/releases/download/v1.1/ScheduleOptimiztion-final.apk  
+`GitHub release:`https://github.com/ucsb-cs48-w20/5pm-schedule-optimization/releases/download/v1.1/ScheduleOptimization.apk 
 or  
 `Google Drive link:` https://drive.google.com/file/d/12UpLTgH5u6mfCoCGoJT2a__983JNLdxo/view?usp=sharing
 2. Find the APK file in Download application

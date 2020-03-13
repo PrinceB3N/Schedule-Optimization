@@ -31,20 +31,20 @@ public class NavigationBehaviorTest {
     @Test
     public void navigateCalendar() {
         onView(withId(R.id.navigation_left)).perform(ViewActions.click());
-        onView(allOf(withId(R.id.navigation_left),withEffectiveVisibility(VISIBLE))).
+        onView(allOf(withId(R.id.fab),withEffectiveVisibility(VISIBLE))).
                 check(matches(isDisplayed()));
     }
 
     @Test
     public void navigateSettings() {
         onView(withId(R.id.navigation_right)).perform(ViewActions.click());
-        onView(allOf(withId(R.id.navigation_right),withEffectiveVisibility(VISIBLE))).
+        onView(allOf(withId(R.id.text_clear_today),withEffectiveVisibility(VISIBLE))).
                 check(matches(isDisplayed()));
     }
     @Test
     public void navigateMap() {
         onView(withId(R.id.navigation_center)).perform(ViewActions.click());
-        onView(allOf(withId(R.id.navigation_center),withEffectiveVisibility(VISIBLE))).
+        onView(allOf(withId(R.id.constraintLayout),withEffectiveVisibility(VISIBLE))).
                 check(matches(isDisplayed()));
     }
 }

@@ -141,7 +141,7 @@ public class AddTaskActivity extends Activity {
         final int[] mMonth = {cal.get(cal.MONTH)+1};
         final int[] mDay = {cal.get(cal.DAY_OF_MONTH)};
         final int[] mHour = (taskId != -1) ? new int[]{t.getBegin_TimeHours(),t.getEnd_TimeHours(),t.getDurationHours(),0}:new int[]{ch, ch + 1, 1, 0};
-        final int[] mMinute = (taskId != -1) ? new int[]{t.getBegin_TimeMinutes(),t.getEnd_TimeMinutes(),t.getDurationMinutes(),30}:new int[]{cm, cm, 0, 30};;
+        final int[] mMinute = (taskId != -1) ? new int[]{t.getBegin_TimeMinutes(),t.getEnd_TimeMinutes(),t.getDurationMinutes(),30}:new int[]{cm, cm, 0, 30};
 
         beginTime.setText("Begin Time: " + Task.formatTaskTime(String.format("%02d", mHour[0]) + ":" + String.format("%02d", mMinute[0])));
         endTime.setText("End Time: " + Task.formatTaskTime(String.format("%02d", mHour[1]) + ":" + String.format("%02d", mMinute[1])));

@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Icon;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +107,23 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //Create buttons
         //Load locations and travel modes based on global Calendar instance
         Button updateMap = root.findViewById(R.id.updatemap);
+        //获取80dp转换后的设备pix值。
+        int mTextViewWidth = dip2px(getContext(), 80);
+        //计算所有文本占有的屏幕宽度(pix)
+        float textWidth = updateMap.getPaint().measureText(updateMap.getText().toString());
+
+        while (textWidth > mTextViewWidth) {
+
+            textWidth = updateMap.getPaint().measureText(updateMap.getText().toString());
+
+            //如果所有文本的宽度超过TextView自身限定的宽度，那么就尝试迭代的减小字体的textSize，直到不超过TextView的宽度为止。
+            if (textWidth > mTextViewWidth) {
+                int textSize = (int) updateMap.getTextSize();
+                textSize = textSize - 2;
+                updateMap.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+            }
+
+        }
         updateMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,5 +174,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         super.onDestroyView();
         mapsViewModel.getObservableRoutes().removeObservers(this);
     }
-
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 }

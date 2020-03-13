@@ -201,7 +201,10 @@ public class TodoFragment extends Fragment {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) { todoViewModel.loadDataFromDatabase(db.taskDao(),MainActivity.cal.getTime()); }
+        if (requestCode == 1) {
+            todoViewModel.loadDataFromDatabase(db.taskDao(),MainActivity.cal.getTime());
+            adapter.notifyDataSetChanged();
+        }
     }
     @Override
     public void onDestroy() {

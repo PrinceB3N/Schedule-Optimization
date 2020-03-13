@@ -334,8 +334,8 @@ public class AddTaskActivity extends Activity {
                     t.setImportance(importance.getSelectedItem().toString());
 
                     // Set duration
-                    if ((mHour[2] * 60 + mMinute[2])  - ((mHour[1] * 60 + mMinute[1]) - (mHour[0] * 60 + mMinute[0])) < 0) {
-                        Toast.makeText(getApplicationContext(), "The duration should be longer than the time between begin time and end time!", Toast.LENGTH_LONG).show();
+                    if (((mHour[1] * 60 + mMinute[1]) - (mHour[0] * 60 + mMinute[0]))-(mHour[2] * 60 + mMinute[2]) < 0) {
+                        Toast.makeText(getApplicationContext(), "The duration should be shorter than the time between begin time and end time!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     t.setDuration(String.format("%02d", mHour[2]) + ":" + String.format("%02d", mMinute[2]));
